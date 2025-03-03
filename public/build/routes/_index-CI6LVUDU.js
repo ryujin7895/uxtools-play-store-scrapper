@@ -7,12 +7,12 @@ import {
   ReferenceArea,
   ReferenceLine,
   ResponsiveContainer,
+  Sidebar,
   Tooltip,
   XAxis,
   YAxis
-} from "/build/_shared/chunk-HGR44WP5.js";
+} from "/build/_shared/chunk-7F7SCLCC.js";
 import {
-  Link,
   useFetcher,
   useLocation
 } from "/build/_shared/chunk-QBKGA7TD.js";
@@ -1807,7 +1807,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/_index.tsx"
   );
-  import.meta.hot.lastModified = "1741008078120.6267";
+  import.meta.hot.lastModified = "1741012623723.88";
 }
 function InsightItem({
   change,
@@ -1840,7 +1840,7 @@ function InsightItem({
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-2", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: `flex-shrink-0 w-4 h-4 mt-0.5 rounded-full ${change.isIncrease ? change.metric === "negative" || change.metric === "bugReports" ? "bg-red-500" : "bg-green-500" : change.metric === "negative" || change.metric === "bugReports" ? "bg-green-500" : "bg-red-500"}` }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 58,
+      lineNumber: 59,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300", children: [
@@ -1850,7 +1850,7 @@ function InsightItem({
         changeText
       ] }, void 0, true, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 60,
+        lineNumber: 61,
         columnNumber: 9
       }, this),
       " in ",
@@ -1860,17 +1860,17 @@ function InsightItem({
       ".",
       isNearRelease && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "ml-1 text-blue-600 dark:text-blue-400", children: "May be related to recent app update." }, void 0, false, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 61,
+        lineNumber: 62,
         columnNumber: 27
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 59,
+      lineNumber: 60,
       columnNumber: 7
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/_index.tsx",
-    lineNumber: 57,
+    lineNumber: 58,
     columnNumber: 10
   }, this);
 }
@@ -2198,177 +2198,30 @@ function Index() {
   const bugReportCount = fetcher.data?.intentions?.bug_report?.length ?? 0;
   const positivePercentage = totalComments > 0 ? (positiveCount / totalComments * 100).toFixed(1) : "0.0";
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex min-h-screen bg-gray-100 dark:bg-gray-900", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("aside", { className: "fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg z-30", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-col h-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-4", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-2 mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-8 h-8 text-blue-600", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 434,
-          columnNumber: 17
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 433,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xl font-bold text-gray-800 dark:text-white", children: "Comment Analyzer" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 436,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 432,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("nav", { className: "space-y-2", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 441,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 440,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "Dashboard" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 443,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 439,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/comparison", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/comparison" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 447,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 446,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "Comparison" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 449,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 445,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Link, { to: "/history", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/history" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 453,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 452,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "History" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 455,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 451,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 438,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 431,
-      columnNumber: 11
-    }, this) }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 430,
-      columnNumber: 9
-    }, this) }, void 0, false, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Sidebar, {}, void 0, false, {
       fileName: "app/routes/_index.tsx",
       lineNumber: 429,
       columnNumber: 7
     }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("main", { className: "flex-1 ml-64", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-8", children: [
-      exportNotification.show && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "fixed top-4 right-4 z-50 max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-6 w-6 text-green-500", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 13l4 4L19 7" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 470,
-          columnNumber: 21
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 469,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 468,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "ml-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm font-medium text-gray-900 dark:text-white", children: exportNotification.message }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 474,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 473,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "ml-auto pl-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setExportNotification({
-          show: false,
-          message: ""
-        }), className: "inline-flex text-gray-400 hover:text-gray-500 focus:outline-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-5 w-5", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", clipRule: "evenodd" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 484,
-          columnNumber: 23
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 483,
-          columnNumber: 21
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 479,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 478,
-          columnNumber: 17
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 467,
-        columnNumber: 15
-      }, this) }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 466,
-        columnNumber: 39
-      }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("main", { className: "ml-64 flex-1 min-h-screen bg-gray-100 dark:bg-gray-900", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "container mx-auto px-6 py-8", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-8", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: "Overview" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 494,
+            lineNumber: 435,
             columnNumber: 15
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-gray-600 dark:text-gray-400", children: "Analyze app reviews and get insights" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 497,
+            lineNumber: 438,
             columnNumber: 15
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 493,
+          lineNumber: 434,
           columnNumber: 13
         }, this),
-        location.pathname === "/" && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
+        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "relative", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "search", className: "w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "Search in comments...", value: searchTerm, onChange: (e) => {
               setSearchTerm(e.target.value);
@@ -2384,114 +2237,114 @@ function Index() {
               }
             } }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 503,
-              columnNumber: 19
+              lineNumber: 444,
+              columnNumber: 17
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5 text-gray-500 absolute left-3 top-2.5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 518,
-              columnNumber: 21
+              lineNumber: 459,
+              columnNumber: 19
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 517,
-              columnNumber: 19
+              lineNumber: 458,
+              columnNumber: 17
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 502,
-            columnNumber: 17
+            lineNumber: 443,
+            columnNumber: 15
           }, this),
           hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "relative", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { ref: exportButtonRef, onClick: () => setShowExportDropdown(!showExportDropdown), disabled: isExporting, className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center", children: isExporting ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "animate-spin -ml-1 mr-2 h-4 w-4 text-white", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 527,
-                  columnNumber: 29
+                  lineNumber: 468,
+                  columnNumber: 27
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 528,
-                  columnNumber: 29
+                  lineNumber: 469,
+                  columnNumber: 27
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 526,
-                columnNumber: 27
+                lineNumber: 467,
+                columnNumber: 25
               }, this),
               "Exporting..."
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 525,
-              columnNumber: 38
+              lineNumber: 466,
+              columnNumber: 36
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-4 h-4 mr-2", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 101.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z", clipRule: "evenodd" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 533,
-                columnNumber: 29
+                lineNumber: 474,
+                columnNumber: 27
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 532,
-                columnNumber: 27
+                lineNumber: 473,
+                columnNumber: 25
               }, this),
               "Export"
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 531,
-              columnNumber: 31
+              lineNumber: 472,
+              columnNumber: 29
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 524,
-              columnNumber: 21
+              lineNumber: 465,
+              columnNumber: 19
             }, this),
             showExportDropdown && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { ref: exportDropdownRef, className: "absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "py-1", role: "menu", "aria-orientation": "vertical", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "px-4 py-2 text-sm text-gray-700 dark:text-gray-200 font-medium border-b border-gray-200 dark:border-gray-700", children: "Export Format" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 542,
-                columnNumber: 27
+                lineNumber: 483,
+                columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("csv", "all"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "CSV - All Data" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 545,
-                columnNumber: 27
+                lineNumber: 486,
+                columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("csv", "filtered"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "CSV - Filtered Data" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 548,
-                columnNumber: 27
+                lineNumber: 489,
+                columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("json", "all"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "JSON - All Data" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 551,
-                columnNumber: 27
+                lineNumber: 492,
+                columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("json", "filtered"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "JSON - Filtered Data" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 554,
-                columnNumber: 27
+                lineNumber: 495,
+                columnNumber: 25
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 541,
-              columnNumber: 25
+              lineNumber: 482,
+              columnNumber: 23
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 540,
-              columnNumber: 44
+              lineNumber: 481,
+              columnNumber: 42
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 523,
-            columnNumber: 29
+            lineNumber: 464,
+            columnNumber: 27
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 501,
-          columnNumber: 43
+          lineNumber: 442,
+          columnNumber: 13
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 492,
+        lineNumber: 433,
         columnNumber: 11
       }, this),
       location.pathname === "/" ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
@@ -2500,126 +2353,126 @@ function Index() {
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "col-span-2", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2", children: "Play Store URL" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 569,
+                lineNumber: 510,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "url", className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "https://play.google.com/store/apps/details?id=...", required: true, value: url, onChange: (e) => setUrl(e.target.value) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 572,
+                lineNumber: 513,
                 columnNumber: 21
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 568,
+              lineNumber: 509,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2", children: "Filter by Year" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 575,
+                lineNumber: 516,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: year, onChange: (e) => setYear(e.target.value), children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Years" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 579,
+                  lineNumber: 520,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2024", children: "2024" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 580,
+                  lineNumber: 521,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2023", children: "2023" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 581,
+                  lineNumber: 522,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2022", children: "2022" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 582,
+                  lineNumber: 523,
                   columnNumber: 23
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2021", children: "2021" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 583,
+                  lineNumber: 524,
                   columnNumber: 23
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 578,
+                lineNumber: 519,
                 columnNumber: 21
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 574,
+              lineNumber: 515,
               columnNumber: 19
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 567,
+            lineNumber: 508,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "mt-6", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { type: "submit", disabled: isLoading, className: "px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center", children: isLoading ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "animate-spin -ml-1 mr-3 h-5 w-5 text-white", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 591,
+                lineNumber: 532,
                 columnNumber: 27
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 592,
+                lineNumber: 533,
                 columnNumber: 27
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 590,
+              lineNumber: 531,
               columnNumber: 25
             }, this),
             "Processing..."
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 589,
+            lineNumber: 530,
             columnNumber: 34
           }, this) : "Analyze Comments" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 588,
+            lineNumber: 529,
             columnNumber: 19
           }, this) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 587,
+            lineNumber: 528,
             columnNumber: 17
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 566,
+          lineNumber: 507,
           columnNumber: 15
         }, this),
         error && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-red-50 dark:bg-red-900/50 text-red-800 dark:text-red-200 p-4 rounded-lg mb-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-5 w-5 text-red-400 mr-2", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z", clipRule: "evenodd" }, void 0, false, {
+          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-5 w-5 text-red-400 mr-2", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z", clipRule: "evenodd" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 603,
+            lineNumber: 544,
             columnNumber: 23
           }, this) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 602,
+            lineNumber: 543,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "font-medium", children: "Error!" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 605,
+            lineNumber: 546,
             columnNumber: 21
           }, this),
           "\xA0",
           error
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 601,
+          lineNumber: 542,
           columnNumber: 19
         }, this) }, void 0, false, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 600,
+          lineNumber: 541,
           columnNumber: 25
         }, this),
         hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-6", children: [
@@ -2628,38 +2481,38 @@ function Index() {
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Total Comments" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 614,
+                  lineNumber: 555,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "Since last week" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 615,
+                  lineNumber: 556,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 613,
+                lineNumber: 554,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: totalComments }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 620,
+                lineNumber: 561,
                 columnNumber: 25
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 619,
+                lineNumber: 560,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 612,
+              lineNumber: 553,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Positive Sentiment" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 628,
+                  lineNumber: 569,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: [
@@ -2667,100 +2520,100 @@ function Index() {
                   "%"
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 629,
+                  lineNumber: 570,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 627,
+                lineNumber: 568,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: positiveCount }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 634,
+                lineNumber: 575,
                 columnNumber: 25
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 633,
+                lineNumber: 574,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 626,
+              lineNumber: 567,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Feature Requests" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 642,
+                  lineNumber: 583,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-purple-600 bg-purple-100 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "New" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 643,
+                  lineNumber: 584,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 641,
+                lineNumber: 582,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: featureRequestCount }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 648,
+                lineNumber: 589,
                 columnNumber: 25
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 647,
+                lineNumber: 588,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 640,
+              lineNumber: 581,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Bug Reports" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 656,
+                  lineNumber: 597,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "Critical" }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 657,
+                  lineNumber: 598,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 655,
+                lineNumber: 596,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: bugReportCount }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 662,
+                lineNumber: 603,
                 columnNumber: 25
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 661,
+                lineNumber: 602,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 654,
+              lineNumber: 595,
               columnNumber: 21
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 611,
+            lineNumber: 552,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid md:grid-cols-2 gap-6", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white mb-4", children: "Top Keywords" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 672,
+                lineNumber: 613,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-wrap gap-2", children: fetcher.data?.keywords?.map(({
@@ -2773,107 +2626,107 @@ function Index() {
                 ")"
               ] }, word, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 677,
+                lineNumber: 618,
                 columnNumber: 25
               }, this)) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 673,
+                lineNumber: 614,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 671,
+              lineNumber: 612,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white mb-4", children: "Sentiment Distribution" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 684,
+                lineNumber: 625,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid grid-cols-3 gap-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-green-600", children: positiveCount }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 687,
+                    lineNumber: 628,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Positive" }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 690,
+                    lineNumber: 631,
                     columnNumber: 27
                   }, this)
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 686,
+                  lineNumber: 627,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-yellow-600", children: neutralCount }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 695,
+                    lineNumber: 636,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Neutral" }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 698,
+                    lineNumber: 639,
                     columnNumber: 27
                   }, this)
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 694,
+                  lineNumber: 635,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-red-600", children: negativeCount }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 703,
+                    lineNumber: 644,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Negative" }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 706,
+                    lineNumber: 647,
                     columnNumber: 27
                   }, this)
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 702,
+                  lineNumber: 643,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 685,
+                lineNumber: 626,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 683,
+              lineNumber: 624,
               columnNumber: 21
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 670,
+            lineNumber: 611,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white", children: "Trend Analysis" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 717,
+                lineNumber: 658,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm", value: timeGranularity, onChange: (e) => setTimeGranularity(e.target.value), children: timeframeOptions.map((option) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: option.value, children: option.label }, option.value, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 722,
+                  lineNumber: 663,
                   columnNumber: 61
                 }, this)) }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 721,
+                  lineNumber: 662,
                   columnNumber: 27
                 }, this) }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 720,
+                  lineNumber: 661,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-2", children: [
@@ -2885,12 +2738,12 @@ function Index() {
                     setShowAllTime(false);
                   }, disabled: showAllTime }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 730,
+                    lineNumber: 671,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-gray-500 dark:text-gray-400", children: "to" }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 737,
+                    lineNumber: 678,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "date", className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm", value: dateRange.end || "", onChange: (e) => {
@@ -2901,27 +2754,27 @@ function Index() {
                     setShowAllTime(false);
                   }, disabled: showAllTime }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 738,
+                    lineNumber: 679,
                     columnNumber: 27
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-2 rounded-lg text-sm ${showAllTime ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"}`, onClick: () => setShowAllTime(!showAllTime), children: "All Time" }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 745,
+                    lineNumber: 686,
                     columnNumber: 27
                   }, this)
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 729,
+                  lineNumber: 670,
                   columnNumber: 25
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 718,
+                lineNumber: 659,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 716,
+              lineNumber: 657,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-wrap gap-2 mb-4", children: [
@@ -2930,7 +2783,7 @@ function Index() {
                 positive: !prev.positive
               })), children: "Positive Sentiment" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 754,
+                lineNumber: 695,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.negative ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
@@ -2938,7 +2791,7 @@ function Index() {
                 negative: !prev.negative
               })), children: "Negative Sentiment" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 760,
+                lineNumber: 701,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.neutral ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
@@ -2946,7 +2799,7 @@ function Index() {
                 neutral: !prev.neutral
               })), children: "Neutral Sentiment" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 766,
+                lineNumber: 707,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.total ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
@@ -2954,7 +2807,7 @@ function Index() {
                 total: !prev.total
               })), children: "Total Comments" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 772,
+                lineNumber: 713,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.featureRequests ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
@@ -2962,7 +2815,7 @@ function Index() {
                 featureRequests: !prev.featureRequests
               })), children: "Feature Requests" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 778,
+                lineNumber: 719,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.bugReports ? "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
@@ -2970,12 +2823,12 @@ function Index() {
                 bugReports: !prev.bugReports
               })), children: "Bug Reports" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 784,
+                lineNumber: 725,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 753,
+              lineNumber: 694,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "h-80 mt-6", children: trendData.length > 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(LineChart, { data: trendData, margin: {
@@ -2986,21 +2839,21 @@ function Index() {
             }, children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CartesianGrid, { strokeDasharray: "3 3", stroke: "#374151", opacity: 0.1 }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 801,
+                lineNumber: 742,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(XAxis, { dataKey: "date", stroke: "#6B7280", tick: {
                 fill: "#6B7280"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 802,
+                lineNumber: 743,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(YAxis, { stroke: "#6B7280", tick: {
                 fill: "#6B7280"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 805,
+                lineNumber: 746,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Tooltip, { contentStyle: {
@@ -3020,7 +2873,7 @@ function Index() {
                 return [value, formattedName];
               }, labelFormatter: (label) => `Period: ${label}` }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 808,
+                lineNumber: 749,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Legend, { formatter: (value) => {
@@ -3036,17 +2889,17 @@ function Index() {
                   color: "#6B7280"
                 }, children: formattedValues[value] || value }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 833,
+                  lineNumber: 774,
                   columnNumber: 30
                 }, this);
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 824,
+                lineNumber: 765,
                 columnNumber: 29
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Brush, { dataKey: "date", height: 30, stroke: "#8884d8", fill: "rgba(136, 132, 216, 0.1)" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 837,
+                lineNumber: 778,
                 columnNumber: 29
               }, this),
               appReleases.map((release, index) => {
@@ -3070,7 +2923,7 @@ function Index() {
                   fontSize: 12
                 } }, index, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 855,
+                  lineNumber: 796,
                   columnNumber: 30
                 }, this);
               }),
@@ -3092,7 +2945,7 @@ function Index() {
                 }
                 return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ReferenceArea, { x1: point.date, x2: point.date, strokeOpacity: 0.3, fill: color, fillOpacity: 0.2 }, `${change.period}-${change.metric}-${index}`, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 882,
+                  lineNumber: 823,
                   columnNumber: 30
                 }, this);
               }),
@@ -3104,7 +2957,7 @@ function Index() {
                 fill: "#10B981"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 886,
+                lineNumber: 827,
                 columnNumber: 57
               }, this),
               visibleMetrics.negative && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "negative", stroke: "#EF4444", strokeWidth: 2, dot: {
@@ -3115,7 +2968,7 @@ function Index() {
                 fill: "#EF4444"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 893,
+                lineNumber: 834,
                 columnNumber: 57
               }, this),
               visibleMetrics.neutral && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "neutral", stroke: "#F59E0B", strokeWidth: 2, dot: {
@@ -3126,7 +2979,7 @@ function Index() {
                 fill: "#F59E0B"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 900,
+                lineNumber: 841,
                 columnNumber: 56
               }, this),
               visibleMetrics.total && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "total", stroke: "#3B82F6", strokeWidth: 2, dot: {
@@ -3137,7 +2990,7 @@ function Index() {
                 fill: "#3B82F6"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 907,
+                lineNumber: 848,
                 columnNumber: 54
               }, this),
               visibleMetrics.featureRequests && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "featureRequests", stroke: "#8B5CF6", strokeWidth: 2, dot: {
@@ -3148,7 +3001,7 @@ function Index() {
                 fill: "#8B5CF6"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 914,
+                lineNumber: 855,
                 columnNumber: 64
               }, this),
               visibleMetrics.bugReports && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "bugReports", stroke: "#F97316", strokeWidth: 2, dot: {
@@ -3159,172 +3012,172 @@ function Index() {
                 fill: "#F97316"
               } }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 921,
+                lineNumber: 862,
                 columnNumber: 59
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 795,
+              lineNumber: 736,
               columnNumber: 27
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 794,
+              lineNumber: 735,
               columnNumber: 47
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "h-full flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-gray-500 dark:text-gray-400", children: hasData ? "Not enough data to display trends. Try analyzing more comments." : "Analyze comments to see trend data." }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 930,
+              lineNumber: 871,
               columnNumber: 27
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 929,
+              lineNumber: 870,
               columnNumber: 50
             }, this) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 793,
+              lineNumber: 734,
               columnNumber: 21
             }, this),
             trendData.length > 0 && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "mt-6 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-700 dark:text-gray-300 mb-3", children: "Key Insights" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 938,
+                lineNumber: 879,
                 columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-2", children: significantChanges.length > 0 ? significantChanges.slice(0, 3).map((change, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(InsightItem, { change, appReleases }, index, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 942,
+                lineNumber: 883,
                 columnNumber: 114
               }, this)) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-400", children: "No significant changes detected in the current time period." }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 942,
+                lineNumber: 883,
                 columnNumber: 187
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 941,
+                lineNumber: 882,
                 columnNumber: 25
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 937,
+              lineNumber: 878,
               columnNumber: 46
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 715,
+            lineNumber: 656,
             columnNumber: 19
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-6", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white", children: "Recent Comments" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 952,
+                lineNumber: 893,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setShowAllComments(true), className: "text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400", children: "View all" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 953,
+                lineNumber: 894,
                 columnNumber: 23
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 951,
+              lineNumber: 892,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-4", children: fetcher.data?.comments?.slice(0, 5).map((comment) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 dark:text-blue-200 font-medium", children: comment.userName.charAt(0) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 961,
+                lineNumber: 902,
                 columnNumber: 31
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 960,
+                lineNumber: 901,
                 columnNumber: 29
               }, this) }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 959,
+                lineNumber: 900,
                 columnNumber: 27
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1 min-w-0", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-1", children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-900 dark:text-white", children: comment.userName }, void 0, false, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 968,
+                    lineNumber: 909,
                     columnNumber: 31
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center", children: [
                     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-yellow-400 mr-1", children: "\u2605" }, void 0, false, {
                       fileName: "app/routes/_index.tsx",
-                      lineNumber: 972,
+                      lineNumber: 913,
                       columnNumber: 33
                     }, this),
                     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: comment.score }, void 0, false, {
                       fileName: "app/routes/_index.tsx",
-                      lineNumber: 973,
+                      lineNumber: 914,
                       columnNumber: 33
                     }, this)
                   ] }, void 0, true, {
                     fileName: "app/routes/_index.tsx",
-                    lineNumber: 971,
+                    lineNumber: 912,
                     columnNumber: 31
                   }, this)
                 ] }, void 0, true, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 967,
+                  lineNumber: 908,
                   columnNumber: 29
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300 mb-1", children: comment.content }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 978,
+                  lineNumber: 919,
                   columnNumber: 29
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: new Date(comment.date).toLocaleDateString() }, void 0, false, {
                   fileName: "app/routes/_index.tsx",
-                  lineNumber: 981,
+                  lineNumber: 922,
                   columnNumber: 29
                 }, this)
               ] }, void 0, true, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 966,
+                lineNumber: 907,
                 columnNumber: 27
               }, this)
             ] }, comment.id, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 958,
+              lineNumber: 899,
               columnNumber: 75
             }, this)) }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 957,
+              lineNumber: 898,
               columnNumber: 21
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 950,
+            lineNumber: 891,
             columnNumber: 19
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 609,
+          lineNumber: 550,
           columnNumber: 27
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 564,
+        lineNumber: 505,
         columnNumber: 40
       }, this) : location.pathname === "/history" ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-gray-600 dark:text-gray-400", children: "History feature coming soon..." }, void 0, false, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 990,
+        lineNumber: 931,
         columnNumber: 15
       }, this) }, void 0, false, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 989,
+        lineNumber: 930,
         columnNumber: 54
       }, this) : null
     ] }, void 0, true, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 464,
+      lineNumber: 431,
       columnNumber: 9
     }, this) }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 463,
+      lineNumber: 430,
       columnNumber: 7
     }, this),
     showAllComments && hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col", children: [
@@ -3332,160 +3185,160 @@ function Index() {
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-4", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-xl font-semibold text-gray-900 dark:text-white", children: "All Comments" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1e3,
+            lineNumber: 941,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setShowAllComments(false), className: "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M6 18L18 6M6 6l12 12" }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1003,
+            lineNumber: 944,
             columnNumber: 21
           }, this) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1002,
+            lineNumber: 943,
             columnNumber: 19
           }, this) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1001,
+            lineNumber: 942,
             columnNumber: 17
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 999,
+          lineNumber: 940,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "search", className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "Search in comments...", value: modalSearchTerm, onChange: (e) => setModalSearchTerm(e.target.value) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1009,
+            lineNumber: 950,
             columnNumber: 19
           }, this) }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1008,
+            lineNumber: 949,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: sentimentFilter, onChange: (e) => setSentimentFilter(e.target.value), children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Sentiments" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1012,
+              lineNumber: 953,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "positive", children: "Positive" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1013,
+              lineNumber: 954,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "neutral", children: "Neutral" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1014,
+              lineNumber: 955,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "negative", children: "Negative" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1015,
+              lineNumber: 956,
               columnNumber: 19
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1011,
+            lineNumber: 952,
             columnNumber: 17
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: ratingFilter, onChange: (e) => setRatingFilter(e.target.value), children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Ratings" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1018,
+              lineNumber: 959,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "5", children: "\u2B50\u2B50\u2B50\u2B50\u2B50 (5)" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1019,
+              lineNumber: 960,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "4", children: "\u2B50\u2B50\u2B50\u2B50 (4)" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1020,
+              lineNumber: 961,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "3", children: "\u2B50\u2B50\u2B50 (3)" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1021,
+              lineNumber: 962,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2", children: "\u2B50\u2B50 (2)" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1022,
+              lineNumber: 963,
               columnNumber: 19
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "1", children: "\u2B50 (1)" }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1023,
+              lineNumber: 964,
               columnNumber: 19
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1017,
+            lineNumber: 958,
             columnNumber: 17
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 1007,
+          lineNumber: 948,
           columnNumber: 15
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 998,
+        lineNumber: 939,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-6 overflow-y-auto flex-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-4", children: getFilteredComments().map((comment) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 dark:text-blue-200 font-medium", children: comment.userName.charAt(0) }, void 0, false, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 1032,
+          lineNumber: 973,
           columnNumber: 25
         }, this) }, void 0, false, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 1031,
+          lineNumber: 972,
           columnNumber: 23
         }, this) }, void 0, false, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 1030,
+          lineNumber: 971,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1 min-w-0", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-1", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-900 dark:text-white", children: comment.userName }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1039,
+              lineNumber: 980,
               columnNumber: 25
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-yellow-400 mr-1", children: "\u2605" }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 1043,
+                lineNumber: 984,
                 columnNumber: 27
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: comment.score }, void 0, false, {
                 fileName: "app/routes/_index.tsx",
-                lineNumber: 1044,
+                lineNumber: 985,
                 columnNumber: 27
               }, this)
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1042,
+              lineNumber: 983,
               columnNumber: 25
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1038,
+            lineNumber: 979,
             columnNumber: 23
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300 mb-1", children: comment.content }, void 0, false, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1049,
+            lineNumber: 990,
             columnNumber: 23
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: new Date(comment.date).toLocaleDateString() }, void 0, false, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1053,
+              lineNumber: 994,
               columnNumber: 25
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
@@ -3493,44 +3346,44 @@ function Index() {
               comment.thumbsUp
             ] }, void 0, true, {
               fileName: "app/routes/_index.tsx",
-              lineNumber: 1056,
+              lineNumber: 997,
               columnNumber: 25
             }, this)
           ] }, void 0, true, {
             fileName: "app/routes/_index.tsx",
-            lineNumber: 1052,
+            lineNumber: 993,
             columnNumber: 23
           }, this)
         ] }, void 0, true, {
           fileName: "app/routes/_index.tsx",
-          lineNumber: 1037,
+          lineNumber: 978,
           columnNumber: 21
         }, this)
       ] }, comment.id, true, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 1029,
+        lineNumber: 970,
         columnNumber: 55
       }, this)) }, void 0, false, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 1028,
+        lineNumber: 969,
         columnNumber: 15
       }, this) }, void 0, false, {
         fileName: "app/routes/_index.tsx",
-        lineNumber: 1027,
+        lineNumber: 968,
         columnNumber: 13
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 997,
+      lineNumber: 938,
       columnNumber: 11
     }, this) }, void 0, false, {
       fileName: "app/routes/_index.tsx",
-      lineNumber: 996,
+      lineNumber: 937,
       columnNumber: 38
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/_index.tsx",
-    lineNumber: 427,
+    lineNumber: 428,
     columnNumber: 10
   }, this);
 }
@@ -3548,4 +3401,4 @@ export {
   Index as default,
   meta
 };
-//# sourceMappingURL=/build/routes/_index-3JZ5HC4A.js.map
+//# sourceMappingURL=/build/routes/_index-CI6LVUDU.js.map

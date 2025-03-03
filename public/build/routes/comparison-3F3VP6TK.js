@@ -7,14 +7,12 @@ import {
   Line,
   LineChart,
   ResponsiveContainer,
+  Sidebar,
   Tooltip,
   XAxis,
   YAxis
-} from "/build/_shared/chunk-HGR44WP5.js";
-import {
-  Link,
-  useLocation
-} from "/build/_shared/chunk-QBKGA7TD.js";
+} from "/build/_shared/chunk-7F7SCLCC.js";
+import "/build/_shared/chunk-QBKGA7TD.js";
 import {
   createHotContext
 } from "/build/_shared/chunk-QOPQF3MU.js";
@@ -1216,13 +1214,12 @@ if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
 }
 var prevRefreshReg;
 var prevRefreshSig;
-var _s4 = $RefreshSig$();
 if (import.meta) {
   import.meta.hot = createHotContext(
     //@ts-expect-error
     "app/routes/comparison.tsx"
   );
-  import.meta.hot.lastModified = "1741011177368.7979";
+  import.meta.hot.lastModified = "1741012125241.9756";
 }
 var meta = () => {
   return [{
@@ -1233,153 +1230,53 @@ var meta = () => {
   }];
 };
 function Comparison() {
-  _s4();
-  const location = useLocation();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "flex min-h-screen bg-gray-100 dark:bg-gray-900", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("aside", { className: "fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg z-30", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "flex flex-col h-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "p-4", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "flex items-center space-x-2 mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { className: "w-8 h-8 text-blue-600", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { d: "M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" }, void 0, false, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 42,
-          columnNumber: 17
-        }, this) }, void 0, false, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 41,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { className: "text-xl font-bold text-gray-800 dark:text-white", children: "Comment Analyzer" }, void 0, false, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 44,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/comparison.tsx",
-        lineNumber: 40,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("nav", { className: "space-y-2", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: "/", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 49,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 48,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "Dashboard" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 51,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 47,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: "/comparison", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/comparison" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { d: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 55,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 54,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "Comparison" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 57,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 53,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Link, { to: "/history", className: `flex w-full items-center space-x-2 p-2 rounded-lg ${location.pathname === "/history" ? "bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200" : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"}`, children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("path", { d: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 61,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 60,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("span", { children: "History" }, void 0, false, {
-            fileName: "app/routes/comparison.tsx",
-            lineNumber: 63,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/comparison.tsx",
-          lineNumber: 59,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/comparison.tsx",
-        lineNumber: 46,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, true, {
+    /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(Sidebar, {}, void 0, false, {
       fileName: "app/routes/comparison.tsx",
-      lineNumber: 39,
-      columnNumber: 11
-    }, this) }, void 0, false, {
-      fileName: "app/routes/comparison.tsx",
-      lineNumber: 38,
-      columnNumber: 9
-    }, this) }, void 0, false, {
-      fileName: "app/routes/comparison.tsx",
-      lineNumber: 37,
+      lineNumber: 33,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("main", { className: "ml-64 flex-1 min-h-screen bg-gray-100 dark:bg-gray-900", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "container mx-auto px-6 py-8", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { className: "flex justify-between items-center mb-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("div", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("h1", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: "App Comparison" }, void 0, false, {
           fileName: "app/routes/comparison.tsx",
-          lineNumber: 75,
+          lineNumber: 38,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)("p", { className: "text-gray-600 dark:text-gray-400", children: "Compare your app with competitors" }, void 0, false, {
           fileName: "app/routes/comparison.tsx",
-          lineNumber: 78,
+          lineNumber: 41,
           columnNumber: 15
         }, this)
       ] }, void 0, true, {
         fileName: "app/routes/comparison.tsx",
-        lineNumber: 74,
+        lineNumber: 37,
         columnNumber: 13
       }, this) }, void 0, false, {
         fileName: "app/routes/comparison.tsx",
-        lineNumber: 73,
+        lineNumber: 36,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime5.jsxDEV)(ComparisonDashboard, {}, void 0, false, {
         fileName: "app/routes/comparison.tsx",
-        lineNumber: 83,
+        lineNumber: 46,
         columnNumber: 11
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/comparison.tsx",
-      lineNumber: 72,
+      lineNumber: 35,
       columnNumber: 9
     }, this) }, void 0, false, {
       fileName: "app/routes/comparison.tsx",
-      lineNumber: 71,
+      lineNumber: 34,
       columnNumber: 7
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/comparison.tsx",
-    lineNumber: 35,
+    lineNumber: 32,
     columnNumber: 10
   }, this);
 }
-_s4(Comparison, "pkHmaVRPskBaU4tMJuJJpV42k1I=", false, function() {
-  return [useLocation];
-});
 _c5 = Comparison;
 var _c5;
 $RefreshReg$(_c5, "Comparison");
@@ -1389,4 +1286,4 @@ export {
   Comparison as default,
   meta
 };
-//# sourceMappingURL=/build/routes/comparison-MTESTDUS.js.map
+//# sourceMappingURL=/build/routes/comparison-3F3VP6TK.js.map
