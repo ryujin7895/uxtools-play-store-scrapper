@@ -1807,7 +1807,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/_index.tsx"
   );
-  import.meta.hot.lastModified = "1741008017283.5166";
+  import.meta.hot.lastModified = "1741008078120.6267";
 }
 function InsightItem({
   change,
@@ -3548,4 +3548,4 @@ export {
   Index as default,
   meta
 };
-//# sourceMappingURL=/build/routes/_index-Y3WSHKOH.js.map
+//# sourceMappingURL=/build/routes/_index-3JZ5HC4A.js.map

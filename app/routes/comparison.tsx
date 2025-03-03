@@ -1,10 +1,10 @@
 import { type MetaFunction } from "@remix-run/node";
 import { Link, useLocation } from "@remix-run/react";
-import ComparisonDashboard from "~/components/ComparisonDashboard";
+import ComparisonDashboard from "~/components/comparison/ComparisonDashboard";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "App Comparison - UX Tools Play Store Scraper" },
+    { title: "App Comparison - Play Store Comment Analyzer" },
     { name: "description", content: "Compare your app with competitors" },
   ];
 };
@@ -60,7 +60,7 @@ export default function Comparison() {
                 }`}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <span>History</span>
               </Link>
@@ -87,4 +87,4 @@ export default function Comparison() {
       </main>
     </div>
   );
-} 
+}
