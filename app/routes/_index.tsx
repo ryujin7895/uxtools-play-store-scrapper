@@ -1,12 +1,13 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { useFetcher } from "@remix-run/react";
+import { useFetcher, Link, useLocation } from "@remix-run/react";
 import natural from "natural";
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   ReferenceLine, ReferenceArea, Brush
 } from "recharts";
 import { format, parseISO, startOfDay, startOfWeek, startOfMonth, startOfQuarter, isSameDay, isSameWeek, isSameMonth, isSameQuarter } from "date-fns";
+import ComparisonDashboard from "~/components/ComparisonDashboard";
 
 interface Comment {
   id: string;
@@ -19,7 +20,7 @@ interface Comment {
   sentiment: 'positive' | 'negative' | 'neutral';
 }
 
-interface AnalysisResult {
+export interface AnalysisResult {
   comments?: Comment[];
   sentiment?: {
     positive: number;
@@ -127,6 +128,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const location = useLocation();
   const [url, setUrl] = useState("");
   const [year, setYear] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -539,25 +541,45 @@ export default function Index() {
               <span className="text-xl font-bold text-gray-800 dark:text-white">Comment Analyzer</span>
             </div>
             <nav className="space-y-2">
-              <a href="#" className="flex items-center space-x-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200">
+              <Link
+                to="/"
+                className={`flex w-full items-center space-x-2 p-2 rounded-lg ${
+                  location.pathname === '/' 
+                    ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                }`}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
                 <span>Dashboard</span>
-              </a>
-              <a href="#" className="flex items-center space-x-2 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
+              </Link>
+              <Link
+                to="/comparison"
+                className={`flex w-full items-center space-x-2 p-2 rounded-lg ${
+                  location.pathname === '/comparison'
+                    ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                }`}
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                <span>Comparison</span>
+              </Link>
+              <Link
+                to="/history"
+                className={`flex w-full items-center space-x-2 p-2 rounded-lg ${
+                  location.pathname === '/history'
+                    ? 'bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                }`}
+              >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                 </svg>
                 <span>History</span>
-              </a>
-              <a href="#" className="flex items-center space-x-2 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                  <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>Settings</span>
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
@@ -597,675 +619,690 @@ export default function Index() {
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Overview</h1>
-              <p className="text-gray-600 dark:text-gray-400">Analyze app reviews and get insights</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                Overview
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400">
+                Analyze app reviews and get insights
+              </p>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <input
-                  type="search"
-                  className="w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="Search in comments..."
-                  value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    if (fetcher.data && url) {
-                      // Resubmit the form with the new search term
-                      const formData = new FormData();
-                      formData.append("url", url);
-                      formData.append("year", year);
-                      formData.append("searchTerm", e.target.value);
-                      fetcher.submit(formData, {
-                        method: "POST",
-                        action: "/api/comments",
-                      });
-                    }
-                  }}
-                />
-                <svg className="w-5 h-5 text-gray-500 absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-              </div>
-              
-              {/* Export Button */}
-              {hasData && (
+            {location.pathname === '/' && (
+              <div className="flex items-center space-x-4">
                 <div className="relative">
+                  <input
+                    type="search"
+                    className="w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="Search in comments..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      if (fetcher.data && url) {
+                        // Resubmit the form with the new search term
+                        const formData = new FormData();
+                        formData.append("url", url);
+                        formData.append("year", year);
+                        formData.append("searchTerm", e.target.value);
+                        fetcher.submit(formData, {
+                          method: "POST",
+                          action: "/api/comments",
+                        });
+                      }
+                    }}
+                  />
+                  <svg className="w-5 h-5 text-gray-500 absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                </div>
+                
+                {/* Export Button */}
+                {hasData && (
+                  <div className="relative">
+                    <button
+                      ref={exportButtonRef}
+                      onClick={() => setShowExportDropdown(!showExportDropdown)}
+                      disabled={isExporting}
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
+                    >
+                      {isExporting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Exporting...
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 101.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                          Export
+                        </>
+                      )}
+                    </button>
+                    
+                    {/* Export Dropdown */}
+                    {showExportDropdown && (
+                      <div 
+                        ref={exportDropdownRef}
+                        className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
+                      >
+                        <div className="py-1" role="menu" aria-orientation="vertical">
+                          <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-200 font-medium border-b border-gray-200 dark:border-gray-700">
+                            Export Format
+                          </div>
+                          <button
+                            onClick={() => handleExport('csv', 'all')}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            role="menuitem"
+                          >
+                            CSV - All Data
+                          </button>
+                          <button
+                            onClick={() => handleExport('csv', 'filtered')}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            role="menuitem"
+                          >
+                            CSV - Filtered Data
+                          </button>
+                          <button
+                            onClick={() => handleExport('json', 'all')}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            role="menuitem"
+                          >
+                            JSON - All Data
+                          </button>
+                          <button
+                            onClick={() => handleExport('json', 'filtered')}
+                            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            role="menuitem"
+                          >
+                            JSON - Filtered Data
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Content based on active tab */}
+          {location.pathname === '/' ? (
+            <>
+              {/* URL Input Form */}
+              <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Play Store URL
+                    </label>
+                    <input
+                      type="url"
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      placeholder="https://play.google.com/store/apps/details?id=..."
+                      required
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Filter by Year
+                    </label>
+                    <select
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                      value={year}
+                      onChange={(e) => setYear(e.target.value)}
+                    >
+                      <option value="all">All Years</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                    </select>
+                  </div>
+                </div>
+                <div className="mt-6">
                   <button
-                    ref={exportButtonRef}
-                    onClick={() => setShowExportDropdown(!showExportDropdown)}
-                    disabled={isExporting}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
+                    type="submit"
+                    disabled={isLoading}
+                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
                   >
-                    {isExporting ? (
+                    {isLoading ? (
                       <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Exporting...
+                        Processing...
                       </>
                     ) : (
-                      <>
-                        <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 101.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                        Export
-                      </>
+                      'Analyze Comments'
                     )}
                   </button>
-                  
-                  {/* Export Dropdown */}
-                  {showExportDropdown && (
-                    <div 
-                      ref={exportDropdownRef}
-                      className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
-                    >
-                      <div className="py-1" role="menu" aria-orientation="vertical">
-                        <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-200 font-medium border-b border-gray-200 dark:border-gray-700">
-                          Export Format
-                        </div>
-                        <button
-                          onClick={() => handleExport('csv', 'all')}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          role="menuitem"
-                        >
-                          CSV - All Data
-                        </button>
-                        <button
-                          onClick={() => handleExport('csv', 'filtered')}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          role="menuitem"
-                        >
-                          CSV - Filtered Data
-                        </button>
-                        <button
-                          onClick={() => handleExport('json', 'all')}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          role="menuitem"
-                        >
-                          JSON - All Data
-                        </button>
-                        <button
-                          onClick={() => handleExport('json', 'filtered')}
-                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                          role="menuitem"
-                        >
-                          JSON - Filtered Data
-                        </button>
-                      </div>
-                    </div>
-                  )}
+                </div>
+              </form>
+
+              {error && (
+                <div className="bg-red-50 dark:bg-red-900/50 text-red-800 dark:text-red-200 p-4 rounded-lg mb-8">
+                  <div className="flex">
+                    <svg className="h-5 w-5 text-red-400 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"/>
+                    </svg>
+                    <span className="font-medium">Error!</span>&nbsp;{error}
+                  </div>
                 </div>
               )}
-            </div>
-          </div>
 
-          {/* URL Input Form */}
-          <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="col-span-2">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Play Store URL
-                </label>
-                <input
-                  type="url"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="https://play.google.com/store/apps/details?id=..."
-                  required
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Filter by Year
-                </label>
-                <select
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                >
-                  <option value="all">All Years</option>
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                </select>
-              </div>
-            </div>
-            <div className="mt-6">
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
-              >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Processing...
-                  </>
-                ) : (
-                  'Analyze Comments'
-                )}
-              </button>
-            </div>
-          </form>
-
-          {error && (
-            <div className="bg-red-50 dark:bg-red-900/50 text-red-800 dark:text-red-200 p-4 rounded-lg mb-8">
-              <div className="flex">
-                <svg className="h-5 w-5 text-red-400 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"/>
-                </svg>
-                <span className="font-medium">Error!</span>&nbsp;{error}
-              </div>
-            </div>
-          )}
-
-          {hasData && (
-            <div className="space-y-6">
-              {/* Stats Grid */}
-              <div className="grid md:grid-cols-4 gap-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Comments</h3>
-                    <span className="text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      Since last week
-                    </span>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {totalComments}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Positive Sentiment</h3>
-                    <span className="text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      {positivePercentage}%
-                    </span>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {positiveCount}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Feature Requests</h3>
-                    <span className="text-purple-600 bg-purple-100 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      New
-                    </span>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {featureRequestCount}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Bug Reports</h3>
-                    <span className="text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                      Critical
-                    </span>
-                  </div>
-                  <div className="flex items-baseline">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {bugReportCount}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Keywords and Sentiment Analysis */}
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Keywords</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {fetcher.data?.keywords?.map(({ word, count }) => (
-                      <span
-                        key={word}
-                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900 dark:text-blue-200"
-                      >
-                        {word} ({count})
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Sentiment Distribution</h2>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">
-                        {positiveCount}
+              {hasData && (
+                <div className="space-y-6">
+                  {/* Stats Grid */}
+                  <div className="grid md:grid-cols-4 gap-6">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Comments</h3>
+                        <span className="text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                          Since last week
+                        </span>
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Positive
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-yellow-600">
-                        {neutralCount}
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Neutral
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-red-600">
-                        {negativeCount}
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Negative
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Trend Analysis Section */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Trend Analysis</h2>
-                  <div className="flex items-center space-x-4">
-                    {/* Time Granularity Dropdown */}
-                    <div>
-                      <select
-                        className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                        value={timeGranularity}
-                        onChange={(e) => setTimeGranularity(e.target.value as any)}
-                      >
-                        {timeframeOptions.map(option => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    
-                    {/* Date Range Controls */}
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="date"
-                        className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                        value={dateRange.start || ''}
-                        onChange={(e) => {
-                          setDateRange(prev => ({ ...prev, start: e.target.value }));
-                          setShowAllTime(false);
-                        }}
-                        disabled={showAllTime}
-                      />
-                      <span className="text-gray-500 dark:text-gray-400">to</span>
-                      <input
-                        type="date"
-                        className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                        value={dateRange.end || ''}
-                        onChange={(e) => {
-                          setDateRange(prev => ({ ...prev, end: e.target.value }));
-                          setShowAllTime(false);
-                        }}
-                        disabled={showAllTime}
-                      />
-                      <button
-                        className={`px-3 py-2 rounded-lg text-sm ${
-                          showAllTime 
-                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' 
-                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200'
-                        }`}
-                        onClick={() => setShowAllTime(!showAllTime)}
-                      >
-                        All Time
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Metrics Toggle */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.positive 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, positive: !prev.positive }))}
-                  >
-                    Positive Sentiment
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.negative 
-                        ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, negative: !prev.negative }))}
-                  >
-                    Negative Sentiment
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.neutral 
-                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, neutral: !prev.neutral }))}
-                  >
-                    Neutral Sentiment
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.total 
-                        ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, total: !prev.total }))}
-                  >
-                    Total Comments
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.featureRequests 
-                        ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, featureRequests: !prev.featureRequests }))}
-                  >
-                    Feature Requests
-                  </button>
-                  <button
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      visibleMetrics.bugReports 
-                        ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' 
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}
-                    onClick={() => setVisibleMetrics(prev => ({ ...prev, bugReports: !prev.bugReports }))}
-                  >
-                    Bug Reports
-                  </button>
-                </div>
-                
-                {/* Chart */}
-                <div className="h-80 mt-6">
-                  {trendData.length > 0 ? (
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart
-                        data={trendData}
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.1} />
-                        <XAxis 
-                          dataKey="date" 
-                          stroke="#6B7280"
-                          tick={{ fill: '#6B7280' }}
-                        />
-                        <YAxis 
-                          stroke="#6B7280"
-                          tick={{ fill: '#6B7280' }}
-                        />
-                        <Tooltip 
-                          contentStyle={{ 
-                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                            borderColor: '#E5E7EB',
-                            borderRadius: '0.5rem',
-                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-                          }}
-                          formatter={(value, name) => {
-                            const formattedName = {
-                              positive: 'Positive Sentiment',
-                              negative: 'Negative Sentiment',
-                              neutral: 'Neutral Sentiment',
-                              total: 'Total Comments',
-                              featureRequests: 'Feature Requests',
-                              bugReports: 'Bug Reports'
-                            }[name] || name;
-                            
-                            return [value, formattedName];
-                          }}
-                          labelFormatter={(label) => `Period: ${label}`}
-                        />
-                        <Legend 
-                          formatter={(value) => {
-                            const formattedValue = {
-                              positive: 'Positive Sentiment',
-                              negative: 'Negative Sentiment',
-                              neutral: 'Neutral Sentiment',
-                              total: 'Total Comments',
-                              featureRequests: 'Feature Requests',
-                              bugReports: 'Bug Reports'
-                            }[value] || value;
-                            
-                            return <span style={{ color: '#6B7280' }}>{formattedValue}</span>;
-                          }}
-                        />
-                        <Brush 
-                          dataKey="date" 
-                          height={30} 
-                          stroke="#8884d8"
-                          fill="rgba(136, 132, 216, 0.1)"
-                        />
-                        
-                        {/* App Release Reference Lines */}
-                        {appReleases.map((release, index) => {
-                          // Find the closest data point to this release date
-                          const releaseDate = parseISO(release.date);
-                          let closestPoint = null;
-                          let minDiff = Infinity;
-                          
-                          for (const point of trendData) {
-                            // This is a simplification - in a real app, you'd parse the date properly
-                            const pointDate = new Date(point.date);
-                            const diff = Math.abs(pointDate.getTime() - releaseDate.getTime());
-                            
-                            if (diff < minDiff) {
-                              minDiff = diff;
-                              closestPoint = point;
-                            }
-                          }
-                          
-                          if (!closestPoint) return null;
-                          
-                          return (
-                            <ReferenceLine
-                              key={index}
-                              x={closestPoint.date}
-                              stroke="#10B981"
-                              strokeDasharray="3 3"
-                              label={{
-                                value: `v${release.version}`,
-                                position: 'insideTopRight',
-                                fill: '#10B981',
-                                fontSize: 12
-                              }}
-                            />
-                          );
-                        })}
-                        
-                        {/* Significant Changes Highlights */}
-                        {significantChanges.map((change, index) => {
-                          // Find the data point for this period
-                          const point = trendData.find(p => p.date === change.period);
-                          if (!point) return null;
-                          
-                          // Determine color based on metric and direction
-                          let color;
-                          if (change.metric === 'positive') {
-                            color = change.isIncrease ? '#10B981' : '#EF4444';
-                          } else if (change.metric === 'negative') {
-                            color = change.isIncrease ? '#EF4444' : '#10B981';
-                          } else if (change.metric === 'total') {
-                            color = '#3B82F6';
-                          } else if (change.metric === 'featureRequests') {
-                            color = '#8B5CF6';
-                          } else if (change.metric === 'bugReports') {
-                            color = '#F97316';
-                          }
-                          
-                          return (
-                            <ReferenceArea
-                              key={`${change.period}-${change.metric}-${index}`}
-                              x1={point.date}
-                              x2={point.date}
-                              strokeOpacity={0.3}
-                              fill={color}
-                              fillOpacity={0.2}
-                            />
-                          );
-                        })}
-                        
-                        {/* Chart Lines */}
-                        {visibleMetrics.positive && (
-                          <Line
-                            type="monotone"
-                            dataKey="positive"
-                            stroke="#10B981"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#10B981' }}
-                            activeDot={{ r: 6, fill: '#10B981' }}
-                          />
-                        )}
-                        {visibleMetrics.negative && (
-                          <Line
-                            type="monotone"
-                            dataKey="negative"
-                            stroke="#EF4444"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#EF4444' }}
-                            activeDot={{ r: 6, fill: '#EF4444' }}
-                          />
-                        )}
-                        {visibleMetrics.neutral && (
-                          <Line
-                            type="monotone"
-                            dataKey="neutral"
-                            stroke="#F59E0B"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#F59E0B' }}
-                            activeDot={{ r: 6, fill: '#F59E0B' }}
-                          />
-                        )}
-                        {visibleMetrics.total && (
-                          <Line
-                            type="monotone"
-                            dataKey="total"
-                            stroke="#3B82F6"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#3B82F6' }}
-                            activeDot={{ r: 6, fill: '#3B82F6' }}
-                          />
-                        )}
-                        {visibleMetrics.featureRequests && (
-                          <Line
-                            type="monotone"
-                            dataKey="featureRequests"
-                            stroke="#8B5CF6"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#8B5CF6' }}
-                            activeDot={{ r: 6, fill: '#8B5CF6' }}
-                          />
-                        )}
-                        {visibleMetrics.bugReports && (
-                          <Line
-                            type="monotone"
-                            dataKey="bugReports"
-                            stroke="#F97316"
-                            strokeWidth={2}
-                            dot={{ r: 4, fill: '#F97316' }}
-                            activeDot={{ r: 6, fill: '#F97316' }}
-                          />
-                        )}
-                      </LineChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    <div className="h-full flex items-center justify-center">
-                      <p className="text-gray-500 dark:text-gray-400">
-                        {hasData 
-                          ? "Not enough data to display trends. Try analyzing more comments."
-                          : "Analyze comments to see trend data."}
-                      </p>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Insights Panel */}
-                {trendData.length > 0 && (
-                  <div className="mt-6 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-                    <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-                      Key Insights
-                    </h3>
-                    <div className="space-y-2">
-                      {significantChanges.length > 0 ? (
-                        significantChanges.slice(0, 3).map((change, index) => (
-                          <InsightItem key={index} change={change} appReleases={appReleases} />
-                        ))
-                      ) : (
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          No significant changes detected in the current time period.
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Recent Comments */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Comments</h2>
-                  <button 
-                    onClick={() => setShowAllComments(true)}
-                    className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                  >
-                    View all
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {fetcher.data?.comments?.slice(0, 5).map((comment) => (
-                    <div
-                      key={comment.id}
-                      className="flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50"
-                    >
-                      <div className="flex-shrink-0">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                          <span className="text-blue-600 dark:text-blue-200 font-medium">
-                            {comment.userName.charAt(0)}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                            {comment.userName}
-                          </h3>
-                          <div className="flex items-center">
-                            <span className="text-yellow-400 mr-1">★</span>
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                              {comment.score}
-                            </span>
-                          </div>
-                        </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
-                          {comment.content}
-                        </p>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {new Date(comment.date).toLocaleDateString()}
+                      <div className="flex items-baseline">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {totalComments}
                         </span>
                       </div>
                     </div>
-                  ))}
+
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Positive Sentiment</h3>
+                        <span className="text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                          {positivePercentage}%
+                        </span>
+                      </div>
+                      <div className="flex items-baseline">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {positiveCount}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Feature Requests</h3>
+                        <span className="text-purple-600 bg-purple-100 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                          New
+                        </span>
+                      </div>
+                      <div className="flex items-baseline">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {featureRequestCount}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Bug Reports</h3>
+                        <span className="text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                          Critical
+                        </span>
+                      </div>
+                      <div className="flex items-baseline">
+                        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                          {bugReportCount}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Keywords and Sentiment Analysis */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Keywords</h2>
+                      <div className="flex flex-wrap gap-2">
+                        {fetcher.data?.keywords?.map(({ word, count }) => (
+                          <span
+                            key={word}
+                            className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900 dark:text-blue-200"
+                          >
+                            {word} ({count})
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Sentiment Distribution</h2>
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">
+                            {positiveCount}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            Positive
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-yellow-600">
+                            {neutralCount}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            Neutral
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-red-600">
+                            {negativeCount}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            Negative
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trend Analysis Section */}
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6">
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Trend Analysis</h2>
+                      <div className="flex items-center space-x-4">
+                        {/* Time Granularity Dropdown */}
+                        <div>
+                          <select
+                            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                            value={timeGranularity}
+                            onChange={(e) => setTimeGranularity(e.target.value as any)}
+                          >
+                            {timeframeOptions.map(option => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        
+                        {/* Date Range Controls */}
+                        <div className="flex items-center space-x-2">
+                          <input
+                            type="date"
+                            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                            value={dateRange.start || ''}
+                            onChange={(e) => {
+                              setDateRange(prev => ({ ...prev, start: e.target.value }));
+                              setShowAllTime(false);
+                            }}
+                            disabled={showAllTime}
+                          />
+                          <span className="text-gray-500 dark:text-gray-400">to</span>
+                          <input
+                            type="date"
+                            className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                            value={dateRange.end || ''}
+                            onChange={(e) => {
+                              setDateRange(prev => ({ ...prev, end: e.target.value }));
+                              setShowAllTime(false);
+                            }}
+                            disabled={showAllTime}
+                          />
+                          <button
+                            className={`px-3 py-2 rounded-lg text-sm ${
+                              showAllTime 
+                                ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200' 
+                                : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200'
+                            }`}
+                            onClick={() => setShowAllTime(!showAllTime)}
+                          >
+                            All Time
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Metrics Toggle */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.positive 
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, positive: !prev.positive }))}
+                      >
+                        Positive Sentiment
+                      </button>
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.negative 
+                            ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, negative: !prev.negative }))}
+                      >
+                        Negative Sentiment
+                      </button>
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.neutral 
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, neutral: !prev.neutral }))}
+                      >
+                        Neutral Sentiment
+                      </button>
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.total 
+                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, total: !prev.total }))}
+                      >
+                        Total Comments
+                      </button>
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.featureRequests 
+                            ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, featureRequests: !prev.featureRequests }))}
+                      >
+                        Feature Requests
+                      </button>
+                      <button
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          visibleMetrics.bugReports 
+                            ? 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200' 
+                            : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                        }`}
+                        onClick={() => setVisibleMetrics(prev => ({ ...prev, bugReports: !prev.bugReports }))}
+                      >
+                        Bug Reports
+                      </button>
+                    </div>
+                    
+                    {/* Chart */}
+                    <div className="h-80 mt-6">
+                      {trendData.length > 0 ? (
+                        <ResponsiveContainer width="100%" height="100%">
+                          <LineChart
+                            data={trendData}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                          >
+                            <CartesianGrid strokeDasharray="3 3" stroke="#374151" opacity={0.1} />
+                            <XAxis 
+                              dataKey="date" 
+                              stroke="#6B7280"
+                              tick={{ fill: '#6B7280' }}
+                            />
+                            <YAxis 
+                              stroke="#6B7280"
+                              tick={{ fill: '#6B7280' }}
+                            />
+                            <Tooltip 
+                              contentStyle={{ 
+                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                borderColor: '#E5E7EB',
+                                borderRadius: '0.5rem',
+                                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+                              }}
+                              formatter={(value, name) => {
+                                const formattedName = {
+                                  positive: 'Positive Sentiment',
+                                  negative: 'Negative Sentiment',
+                                  neutral: 'Neutral Sentiment',
+                                  total: 'Total Comments',
+                                  featureRequests: 'Feature Requests',
+                                  bugReports: 'Bug Reports'
+                                }[name] || name;
+                                
+                                return [value, formattedName];
+                              }}
+                              labelFormatter={(label) => `Period: ${label}`}
+                            />
+                            <Legend 
+                              formatter={(value: string) => {
+                                const formattedValues: Record<string, string> = {
+                                  positive: 'Positive Sentiment',
+                                  negative: 'Negative Sentiment',
+                                  neutral: 'Neutral Sentiment',
+                                  total: 'Total Comments',
+                                  featureRequests: 'Feature Requests',
+                                  bugReports: 'Bug Reports'
+                                };
+                                
+                                return <span style={{ color: '#6B7280' }}>{formattedValues[value] || value}</span>;
+                              }}
+                            />
+                            <Brush 
+                              dataKey="date" 
+                              height={30} 
+                              stroke="#8884d8"
+                              fill="rgba(136, 132, 216, 0.1)"
+                            />
+                            
+                            {/* App Release Reference Lines */}
+                            {appReleases.map((release, index) => {
+                              // Find the closest data point to this release date
+                              const releaseDate = parseISO(release.date);
+                              let closestPoint = null;
+                              let minDiff = Infinity;
+                              
+                              for (const point of trendData) {
+                                // This is a simplification - in a real app, you'd parse the date properly
+                                const pointDate = new Date(point.date);
+                                const diff = Math.abs(pointDate.getTime() - releaseDate.getTime());
+                                
+                                if (diff < minDiff) {
+                                  minDiff = diff;
+                                  closestPoint = point;
+                                }
+                              }
+                              
+                              if (!closestPoint) return null;
+                              
+                              return (
+                                <ReferenceLine
+                                  key={index}
+                                  x={closestPoint.date}
+                                  stroke="#10B981"
+                                  strokeDasharray="3 3"
+                                  label={{
+                                    value: `v${release.version}`,
+                                    position: 'insideTopRight',
+                                    fill: '#10B981',
+                                    fontSize: 12
+                                  }}
+                                />
+                              );
+                            })}
+                            
+                            {/* Significant Changes Highlights */}
+                            {significantChanges.map((change, index) => {
+                              // Find the data point for this period
+                              const point = trendData.find(p => p.date === change.period);
+                              if (!point) return null;
+                              
+                              // Determine color based on metric and direction
+                              let color;
+                              if (change.metric === 'positive') {
+                                color = change.isIncrease ? '#10B981' : '#EF4444';
+                              } else if (change.metric === 'negative') {
+                                color = change.isIncrease ? '#EF4444' : '#10B981';
+                              } else if (change.metric === 'total') {
+                                color = '#3B82F6';
+                              } else if (change.metric === 'featureRequests') {
+                                color = '#8B5CF6';
+                              } else if (change.metric === 'bugReports') {
+                                color = '#F97316';
+                              }
+                              
+                              return (
+                                <ReferenceArea
+                                  key={`${change.period}-${change.metric}-${index}`}
+                                  x1={point.date}
+                                  x2={point.date}
+                                  strokeOpacity={0.3}
+                                  fill={color}
+                                  fillOpacity={0.2}
+                                />
+                              );
+                            })}
+                            
+                            {/* Chart Lines */}
+                            {visibleMetrics.positive && (
+                              <Line
+                                type="monotone"
+                                dataKey="positive"
+                                stroke="#10B981"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#10B981' }}
+                                activeDot={{ r: 6, fill: '#10B981' }}
+                              />
+                            )}
+                            {visibleMetrics.negative && (
+                              <Line
+                                type="monotone"
+                                dataKey="negative"
+                                stroke="#EF4444"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#EF4444' }}
+                                activeDot={{ r: 6, fill: '#EF4444' }}
+                              />
+                            )}
+                            {visibleMetrics.neutral && (
+                              <Line
+                                type="monotone"
+                                dataKey="neutral"
+                                stroke="#F59E0B"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#F59E0B' }}
+                                activeDot={{ r: 6, fill: '#F59E0B' }}
+                              />
+                            )}
+                            {visibleMetrics.total && (
+                              <Line
+                                type="monotone"
+                                dataKey="total"
+                                stroke="#3B82F6"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#3B82F6' }}
+                                activeDot={{ r: 6, fill: '#3B82F6' }}
+                              />
+                            )}
+                            {visibleMetrics.featureRequests && (
+                              <Line
+                                type="monotone"
+                                dataKey="featureRequests"
+                                stroke="#8B5CF6"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#8B5CF6' }}
+                                activeDot={{ r: 6, fill: '#8B5CF6' }}
+                              />
+                            )}
+                            {visibleMetrics.bugReports && (
+                              <Line
+                                type="monotone"
+                                dataKey="bugReports"
+                                stroke="#F97316"
+                                strokeWidth={2}
+                                dot={{ r: 4, fill: '#F97316' }}
+                                activeDot={{ r: 6, fill: '#F97316' }}
+                              />
+                            )}
+                          </LineChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <div className="h-full flex items-center justify-center">
+                          <p className="text-gray-500 dark:text-gray-400">
+                            {hasData 
+                              ? "Not enough data to display trends. Try analyzing more comments."
+                              : "Analyze comments to see trend data."}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Insights Panel */}
+                    {trendData.length > 0 && (
+                      <div className="mt-6 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                          Key Insights
+                        </h3>
+                        <div className="space-y-2">
+                          {significantChanges.length > 0 ? (
+                            significantChanges.slice(0, 3).map((change, index) => (
+                              <InsightItem key={index} change={change} appReleases={appReleases} />
+                            ))
+                          ) : (
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              No significant changes detected in the current time period.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Recent Comments */}
+                  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Comments</h2>
+                      <button 
+                        onClick={() => setShowAllComments(true)}
+                        className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                      >
+                        View all
+                      </button>
+                    </div>
+                    <div className="space-y-4">
+                      {fetcher.data?.comments?.slice(0, 5).map((comment) => (
+                        <div
+                          key={comment.id}
+                          className="flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50"
+                        >
+                          <div className="flex-shrink-0">
+                            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                              <span className="text-blue-600 dark:text-blue-200 font-medium">
+                                {comment.userName.charAt(0)}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between mb-1">
+                              <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                                {comment.userName}
+                              </h3>
+                              <div className="flex items-center">
+                                <span className="text-yellow-400 mr-1">★</span>
+                                <span className="text-sm text-gray-600 dark:text-gray-400">
+                                  {comment.score}
+                                </span>
+                              </div>
+                            </div>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
+                              {comment.content}
+                            </p>
+                            <span className="text-xs text-gray-500 dark:text-gray-400">
+                              {new Date(comment.date).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
+            </>
+          ) : location.pathname === '/history' ? (
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <p className="text-gray-600 dark:text-gray-400">History feature coming soon...</p>
             </div>
-          )}
+          ) : null}
         </div>
       </main>
 

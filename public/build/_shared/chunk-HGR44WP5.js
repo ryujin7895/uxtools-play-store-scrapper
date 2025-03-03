@@ -1,15 +1,4 @@
 import {
-  useFetcher
-} from "/build/_shared/chunk-ULAN4GLF.js";
-import "/build/_shared/chunk-U4FRFQSK.js";
-import {
-  require_jsx_dev_runtime
-} from "/build/_shared/chunk-XGOTYLZ5.js";
-import {
-  createHotContext
-} from "/build/_shared/chunk-QOPQF3MU.js";
-import "/build/_shared/chunk-UWV35TSL.js";
-import {
   require_react
 } from "/build/_shared/chunk-7M6SC7J5.js";
 import {
@@ -17,14 +6,6 @@ import {
   __export,
   __toESM
 } from "/build/_shared/chunk-PNG5AS42.js";
-
-// node_modules/lodash/isArray.js
-var require_isArray = __commonJS({
-  "node_modules/lodash/isArray.js"(exports, module) {
-    var isArray2 = Array.isArray;
-    module.exports = isArray2;
-  }
-});
 
 // node_modules/lodash/_freeGlobal.js
 var require_freeGlobal = __commonJS({
@@ -113,6 +94,45 @@ var require_baseGetTag = __commonJS({
   }
 });
 
+// node_modules/lodash/isObject.js
+var require_isObject = __commonJS({
+  "node_modules/lodash/isObject.js"(exports, module) {
+    function isObject5(value) {
+      var type = typeof value;
+      return value != null && (type == "object" || type == "function");
+    }
+    module.exports = isObject5;
+  }
+});
+
+// node_modules/lodash/isFunction.js
+var require_isFunction = __commonJS({
+  "node_modules/lodash/isFunction.js"(exports, module) {
+    var baseGetTag = require_baseGetTag();
+    var isObject5 = require_isObject();
+    var asyncTag = "[object AsyncFunction]";
+    var funcTag = "[object Function]";
+    var genTag = "[object GeneratorFunction]";
+    var proxyTag = "[object Proxy]";
+    function isFunction19(value) {
+      if (!isObject5(value)) {
+        return false;
+      }
+      var tag = baseGetTag(value);
+      return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+    }
+    module.exports = isFunction19;
+  }
+});
+
+// node_modules/lodash/isArray.js
+var require_isArray = __commonJS({
+  "node_modules/lodash/isArray.js"(exports, module) {
+    var isArray2 = Array.isArray;
+    module.exports = isArray2;
+  }
+});
+
 // node_modules/lodash/isObjectLike.js
 var require_isObjectLike = __commonJS({
   "node_modules/lodash/isObjectLike.js"(exports, module) {
@@ -154,37 +174,6 @@ var require_isKey = __commonJS({
       return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
     }
     module.exports = isKey;
-  }
-});
-
-// node_modules/lodash/isObject.js
-var require_isObject = __commonJS({
-  "node_modules/lodash/isObject.js"(exports, module) {
-    function isObject5(value) {
-      var type = typeof value;
-      return value != null && (type == "object" || type == "function");
-    }
-    module.exports = isObject5;
-  }
-});
-
-// node_modules/lodash/isFunction.js
-var require_isFunction = __commonJS({
-  "node_modules/lodash/isFunction.js"(exports, module) {
-    var baseGetTag = require_baseGetTag();
-    var isObject5 = require_isObject();
-    var asyncTag = "[object AsyncFunction]";
-    var funcTag = "[object Function]";
-    var genTag = "[object GeneratorFunction]";
-    var proxyTag = "[object Proxy]";
-    function isFunction19(value) {
-      if (!isObject5(value)) {
-        return false;
-      }
-      var tag = baseGetTag(value);
-      return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
-    }
-    module.exports = isFunction19;
   }
 });
 
@@ -699,8 +688,8 @@ var require_stringToPath = __commonJS({
       if (string.charCodeAt(0) === 46) {
         result.push("");
       }
-      string.replace(rePropName, function(match2, number4, quote, subString) {
-        result.push(quote ? subString.replace(reEscapeChar, "$1") : number4 || match2);
+      string.replace(rePropName, function(match, number4, quote, subString) {
+        result.push(quote ? subString.replace(reEscapeChar, "$1") : number4 || match);
       });
       return result;
     });
@@ -931,7 +920,7 @@ var require_react_is_development = __commonJS({
         var ContextProvider = REACT_PROVIDER_TYPE;
         var Element = REACT_ELEMENT_TYPE;
         var ForwardRef = REACT_FORWARD_REF_TYPE;
-        var Fragment2 = REACT_FRAGMENT_TYPE;
+        var Fragment = REACT_FRAGMENT_TYPE;
         var Lazy = REACT_LAZY_TYPE;
         var Memo = REACT_MEMO_TYPE;
         var Portal = REACT_PORTAL_TYPE;
@@ -999,7 +988,7 @@ var require_react_is_development = __commonJS({
         exports.ContextProvider = ContextProvider;
         exports.Element = Element;
         exports.ForwardRef = ForwardRef;
-        exports.Fragment = Fragment2;
+        exports.Fragment = Fragment;
         exports.Lazy = Lazy;
         exports.Memo = Memo;
         exports.Portal = Portal;
@@ -3140,6 +3129,79 @@ var require_throttle = __commonJS({
   }
 });
 
+// node_modules/lodash/_baseRange.js
+var require_baseRange = __commonJS({
+  "node_modules/lodash/_baseRange.js"(exports, module) {
+    var nativeCeil = Math.ceil;
+    var nativeMax = Math.max;
+    function baseRange(start, end, step, fromRight) {
+      var index = -1, length = nativeMax(nativeCeil((end - start) / (step || 1)), 0), result = Array(length);
+      while (length--) {
+        result[fromRight ? length : ++index] = start;
+        start += step;
+      }
+      return result;
+    }
+    module.exports = baseRange;
+  }
+});
+
+// node_modules/lodash/toFinite.js
+var require_toFinite = __commonJS({
+  "node_modules/lodash/toFinite.js"(exports, module) {
+    var toNumber = require_toNumber();
+    var INFINITY = 1 / 0;
+    var MAX_INTEGER = 17976931348623157e292;
+    function toFinite(value) {
+      if (!value) {
+        return value === 0 ? value : 0;
+      }
+      value = toNumber(value);
+      if (value === INFINITY || value === -INFINITY) {
+        var sign2 = value < 0 ? -1 : 1;
+        return sign2 * MAX_INTEGER;
+      }
+      return value === value ? value : 0;
+    }
+    module.exports = toFinite;
+  }
+});
+
+// node_modules/lodash/_createRange.js
+var require_createRange = __commonJS({
+  "node_modules/lodash/_createRange.js"(exports, module) {
+    var baseRange = require_baseRange();
+    var isIterateeCall = require_isIterateeCall();
+    var toFinite = require_toFinite();
+    function createRange(fromRight) {
+      return function(start, end, step) {
+        if (step && typeof step != "number" && isIterateeCall(start, end, step)) {
+          end = step = void 0;
+        }
+        start = toFinite(start);
+        if (end === void 0) {
+          end = start;
+          start = 0;
+        } else {
+          end = toFinite(end);
+        }
+        step = step === void 0 ? start < end ? 1 : -1 : toFinite(step);
+        return baseRange(start, end, step, fromRight);
+      };
+    }
+    module.exports = createRange;
+  }
+});
+
+// node_modules/lodash/range.js
+var require_range = __commonJS({
+  "node_modules/lodash/range.js"(exports, module) {
+    var createRange = require_createRange();
+    var range6 = createRange();
+    module.exports = range6;
+  }
+});
+
 // node_modules/lodash/_baseExtremum.js
 var require_baseExtremum = __commonJS({
   "node_modules/lodash/_baseExtremum.js"(exports, module) {
@@ -4334,14 +4396,127 @@ var require_decimal = __commonJS({
   }
 });
 
-// node_modules/lodash/last.js
-var require_last = __commonJS({
-  "node_modules/lodash/last.js"(exports, module) {
-    function last2(array) {
-      var length = array == null ? 0 : array.length;
-      return length ? array[length - 1] : void 0;
+// node_modules/lodash/_baseSome.js
+var require_baseSome = __commonJS({
+  "node_modules/lodash/_baseSome.js"(exports, module) {
+    var baseEach = require_baseEach();
+    function baseSome(collection, predicate) {
+      var result;
+      baseEach(collection, function(value, index, collection2) {
+        result = predicate(value, index, collection2);
+        return !result;
+      });
+      return !!result;
     }
-    module.exports = last2;
+    module.exports = baseSome;
+  }
+});
+
+// node_modules/lodash/some.js
+var require_some = __commonJS({
+  "node_modules/lodash/some.js"(exports, module) {
+    var arraySome = require_arraySome();
+    var baseIteratee = require_baseIteratee();
+    var baseSome = require_baseSome();
+    var isArray2 = require_isArray();
+    var isIterateeCall = require_isIterateeCall();
+    function some2(collection, predicate, guard) {
+      var func = isArray2(collection) ? arraySome : baseSome;
+      if (guard && isIterateeCall(collection, predicate, guard)) {
+        predicate = void 0;
+      }
+      return func(collection, baseIteratee(predicate, 3));
+    }
+    module.exports = some2;
+  }
+});
+
+// node_modules/lodash/_baseAssignValue.js
+var require_baseAssignValue = __commonJS({
+  "node_modules/lodash/_baseAssignValue.js"(exports, module) {
+    var defineProperty = require_defineProperty();
+    function baseAssignValue(object, key, value) {
+      if (key == "__proto__" && defineProperty) {
+        defineProperty(object, key, {
+          "configurable": true,
+          "enumerable": true,
+          "value": value,
+          "writable": true
+        });
+      } else {
+        object[key] = value;
+      }
+    }
+    module.exports = baseAssignValue;
+  }
+});
+
+// node_modules/lodash/mapValues.js
+var require_mapValues = __commonJS({
+  "node_modules/lodash/mapValues.js"(exports, module) {
+    var baseAssignValue = require_baseAssignValue();
+    var baseForOwn = require_baseForOwn();
+    var baseIteratee = require_baseIteratee();
+    function mapValues2(object, iteratee) {
+      var result = {};
+      iteratee = baseIteratee(iteratee, 3);
+      baseForOwn(object, function(value, key, object2) {
+        baseAssignValue(result, key, iteratee(value, key, object2));
+      });
+      return result;
+    }
+    module.exports = mapValues2;
+  }
+});
+
+// node_modules/lodash/_arrayEvery.js
+var require_arrayEvery = __commonJS({
+  "node_modules/lodash/_arrayEvery.js"(exports, module) {
+    function arrayEvery(array, predicate) {
+      var index = -1, length = array == null ? 0 : array.length;
+      while (++index < length) {
+        if (!predicate(array[index], index, array)) {
+          return false;
+        }
+      }
+      return true;
+    }
+    module.exports = arrayEvery;
+  }
+});
+
+// node_modules/lodash/_baseEvery.js
+var require_baseEvery = __commonJS({
+  "node_modules/lodash/_baseEvery.js"(exports, module) {
+    var baseEach = require_baseEach();
+    function baseEvery(collection, predicate) {
+      var result = true;
+      baseEach(collection, function(value, index, collection2) {
+        result = !!predicate(value, index, collection2);
+        return result;
+      });
+      return result;
+    }
+    module.exports = baseEvery;
+  }
+});
+
+// node_modules/lodash/every.js
+var require_every = __commonJS({
+  "node_modules/lodash/every.js"(exports, module) {
+    var arrayEvery = require_arrayEvery();
+    var baseEvery = require_baseEvery();
+    var baseIteratee = require_baseIteratee();
+    var isArray2 = require_isArray();
+    var isIterateeCall = require_isIterateeCall();
+    function every3(collection, predicate, guard) {
+      var func = isArray2(collection) ? arrayEvery : baseEvery;
+      if (guard && isIterateeCall(collection, predicate, guard)) {
+        predicate = void 0;
+      }
+      return func(collection, baseIteratee(predicate, 3));
+    }
+    module.exports = every3;
   }
 });
 
@@ -4414,7 +4589,7 @@ var require_react_is_development2 = __commonJS({
         var ContextProvider = REACT_PROVIDER_TYPE;
         var Element = REACT_ELEMENT_TYPE;
         var ForwardRef = REACT_FORWARD_REF_TYPE;
-        var Fragment2 = REACT_FRAGMENT_TYPE;
+        var Fragment = REACT_FRAGMENT_TYPE;
         var Lazy = REACT_LAZY_TYPE;
         var Memo = REACT_MEMO_TYPE;
         var Portal = REACT_PORTAL_TYPE;
@@ -4473,7 +4648,7 @@ var require_react_is_development2 = __commonJS({
         exports.ContextProvider = ContextProvider;
         exports.Element = Element;
         exports.ForwardRef = ForwardRef;
-        exports.Fragment = Fragment2;
+        exports.Fragment = Fragment;
         exports.Lazy = Lazy;
         exports.Memo = Memo;
         exports.Portal = Portal;
@@ -4609,12 +4784,12 @@ var require_checkPropTypes = __commonJS({
       loggedTypeFailures = {};
       has = require_has();
       printWarning = function(text) {
-        var message2 = "Warning: " + text;
+        var message = "Warning: " + text;
         if (typeof console !== "undefined") {
-          console.error(message2);
+          console.error(message);
         }
         try {
-          throw new Error(message2);
+          throw new Error(message);
         } catch (x2) {
         }
       };
@@ -4677,12 +4852,12 @@ var require_factoryWithTypeCheckers = __commonJS({
     };
     if (true) {
       printWarning = function(text) {
-        var message2 = "Warning: " + text;
+        var message = "Warning: " + text;
         if (typeof console !== "undefined") {
-          console.error(message2);
+          console.error(message);
         }
         try {
-          throw new Error(message2);
+          throw new Error(message);
         } catch (x2) {
         }
       };
@@ -4728,8 +4903,8 @@ var require_factoryWithTypeCheckers = __commonJS({
           return x2 !== x2 && y2 !== y2;
         }
       }
-      function PropTypeError(message2, data) {
-        this.message = message2;
+      function PropTypeError(message, data) {
+        this.message = message;
         this.data = data && typeof data === "object" ? data : {};
         this.stack = "";
       }
@@ -5122,6 +5297,17 @@ var require_prop_types = __commonJS({
   }
 });
 
+// node_modules/lodash/last.js
+var require_last = __commonJS({
+  "node_modules/lodash/last.js"(exports, module) {
+    function last2(array) {
+      var length = array == null ? 0 : array.length;
+      return length ? array[length - 1] : void 0;
+    }
+    module.exports = last2;
+  }
+});
+
 // node_modules/lodash/_getPrototype.js
 var require_getPrototype = __commonJS({
   "node_modules/lodash/_getPrototype.js"(exports, module) {
@@ -5171,203 +5357,6 @@ var require_isBoolean = __commonJS({
   }
 });
 
-// node_modules/lodash/_baseRange.js
-var require_baseRange = __commonJS({
-  "node_modules/lodash/_baseRange.js"(exports, module) {
-    var nativeCeil = Math.ceil;
-    var nativeMax = Math.max;
-    function baseRange(start, end, step, fromRight) {
-      var index = -1, length = nativeMax(nativeCeil((end - start) / (step || 1)), 0), result = Array(length);
-      while (length--) {
-        result[fromRight ? length : ++index] = start;
-        start += step;
-      }
-      return result;
-    }
-    module.exports = baseRange;
-  }
-});
-
-// node_modules/lodash/toFinite.js
-var require_toFinite = __commonJS({
-  "node_modules/lodash/toFinite.js"(exports, module) {
-    var toNumber = require_toNumber();
-    var INFINITY = 1 / 0;
-    var MAX_INTEGER = 17976931348623157e292;
-    function toFinite(value) {
-      if (!value) {
-        return value === 0 ? value : 0;
-      }
-      value = toNumber(value);
-      if (value === INFINITY || value === -INFINITY) {
-        var sign2 = value < 0 ? -1 : 1;
-        return sign2 * MAX_INTEGER;
-      }
-      return value === value ? value : 0;
-    }
-    module.exports = toFinite;
-  }
-});
-
-// node_modules/lodash/_createRange.js
-var require_createRange = __commonJS({
-  "node_modules/lodash/_createRange.js"(exports, module) {
-    var baseRange = require_baseRange();
-    var isIterateeCall = require_isIterateeCall();
-    var toFinite = require_toFinite();
-    function createRange(fromRight) {
-      return function(start, end, step) {
-        if (step && typeof step != "number" && isIterateeCall(start, end, step)) {
-          end = step = void 0;
-        }
-        start = toFinite(start);
-        if (end === void 0) {
-          end = start;
-          start = 0;
-        } else {
-          end = toFinite(end);
-        }
-        step = step === void 0 ? start < end ? 1 : -1 : toFinite(step);
-        return baseRange(start, end, step, fromRight);
-      };
-    }
-    module.exports = createRange;
-  }
-});
-
-// node_modules/lodash/range.js
-var require_range = __commonJS({
-  "node_modules/lodash/range.js"(exports, module) {
-    var createRange = require_createRange();
-    var range6 = createRange();
-    module.exports = range6;
-  }
-});
-
-// node_modules/lodash/_baseSome.js
-var require_baseSome = __commonJS({
-  "node_modules/lodash/_baseSome.js"(exports, module) {
-    var baseEach = require_baseEach();
-    function baseSome(collection, predicate) {
-      var result;
-      baseEach(collection, function(value, index, collection2) {
-        result = predicate(value, index, collection2);
-        return !result;
-      });
-      return !!result;
-    }
-    module.exports = baseSome;
-  }
-});
-
-// node_modules/lodash/some.js
-var require_some = __commonJS({
-  "node_modules/lodash/some.js"(exports, module) {
-    var arraySome = require_arraySome();
-    var baseIteratee = require_baseIteratee();
-    var baseSome = require_baseSome();
-    var isArray2 = require_isArray();
-    var isIterateeCall = require_isIterateeCall();
-    function some2(collection, predicate, guard) {
-      var func = isArray2(collection) ? arraySome : baseSome;
-      if (guard && isIterateeCall(collection, predicate, guard)) {
-        predicate = void 0;
-      }
-      return func(collection, baseIteratee(predicate, 3));
-    }
-    module.exports = some2;
-  }
-});
-
-// node_modules/lodash/_baseAssignValue.js
-var require_baseAssignValue = __commonJS({
-  "node_modules/lodash/_baseAssignValue.js"(exports, module) {
-    var defineProperty = require_defineProperty();
-    function baseAssignValue(object, key, value) {
-      if (key == "__proto__" && defineProperty) {
-        defineProperty(object, key, {
-          "configurable": true,
-          "enumerable": true,
-          "value": value,
-          "writable": true
-        });
-      } else {
-        object[key] = value;
-      }
-    }
-    module.exports = baseAssignValue;
-  }
-});
-
-// node_modules/lodash/mapValues.js
-var require_mapValues = __commonJS({
-  "node_modules/lodash/mapValues.js"(exports, module) {
-    var baseAssignValue = require_baseAssignValue();
-    var baseForOwn = require_baseForOwn();
-    var baseIteratee = require_baseIteratee();
-    function mapValues2(object, iteratee) {
-      var result = {};
-      iteratee = baseIteratee(iteratee, 3);
-      baseForOwn(object, function(value, key, object2) {
-        baseAssignValue(result, key, iteratee(value, key, object2));
-      });
-      return result;
-    }
-    module.exports = mapValues2;
-  }
-});
-
-// node_modules/lodash/_arrayEvery.js
-var require_arrayEvery = __commonJS({
-  "node_modules/lodash/_arrayEvery.js"(exports, module) {
-    function arrayEvery(array, predicate) {
-      var index = -1, length = array == null ? 0 : array.length;
-      while (++index < length) {
-        if (!predicate(array[index], index, array)) {
-          return false;
-        }
-      }
-      return true;
-    }
-    module.exports = arrayEvery;
-  }
-});
-
-// node_modules/lodash/_baseEvery.js
-var require_baseEvery = __commonJS({
-  "node_modules/lodash/_baseEvery.js"(exports, module) {
-    var baseEach = require_baseEach();
-    function baseEvery(collection, predicate) {
-      var result = true;
-      baseEach(collection, function(value, index, collection2) {
-        result = !!predicate(value, index, collection2);
-        return result;
-      });
-      return result;
-    }
-    module.exports = baseEvery;
-  }
-});
-
-// node_modules/lodash/every.js
-var require_every = __commonJS({
-  "node_modules/lodash/every.js"(exports, module) {
-    var arrayEvery = require_arrayEvery();
-    var baseEvery = require_baseEvery();
-    var baseIteratee = require_baseIteratee();
-    var isArray2 = require_isArray();
-    var isIterateeCall = require_isIterateeCall();
-    function every3(collection, predicate, guard) {
-      var func = isArray2(collection) ? arrayEvery : baseEvery;
-      if (guard && isIterateeCall(collection, predicate, guard)) {
-        predicate = void 0;
-      }
-      return func(collection, baseIteratee(predicate, 3));
-    }
-    module.exports = every3;
-  }
-});
-
 // node_modules/lodash/_createFind.js
 var require_createFind = __commonJS({
   "node_modules/lodash/_createFind.js"(exports, module) {
@@ -5411,7 +5400,7 @@ var require_findIndex = __commonJS({
     var baseIteratee = require_baseIteratee();
     var toInteger = require_toInteger();
     var nativeMax = Math.max;
-    function findIndex2(array, predicate, fromIndex) {
+    function findIndex(array, predicate, fromIndex) {
       var length = array == null ? 0 : array.length;
       if (!length) {
         return -1;
@@ -5422,7 +5411,7 @@ var require_findIndex = __commonJS({
       }
       return baseFindIndex(array, baseIteratee(predicate, 3), index);
     }
-    module.exports = findIndex2;
+    module.exports = findIndex;
   }
 });
 
@@ -5430,8 +5419,8 @@ var require_findIndex = __commonJS({
 var require_find = __commonJS({
   "node_modules/lodash/find.js"(exports, module) {
     var createFind = require_createFind();
-    var findIndex2 = require_findIndex();
-    var find2 = createFind(findIndex2);
+    var findIndex = require_findIndex();
+    var find2 = createFind(findIndex);
     module.exports = find2;
   }
 });
@@ -5618,11 +5607,12 @@ var require_eventemitter3 = __commonJS({
   }
 });
 
-// app/routes/_index.tsx
-var import_react39 = __toESM(require_react(), 1);
+// node_modules/recharts/es6/component/Legend.js
+var import_react6 = __toESM(require_react());
 
-// node_modules/recharts/es6/container/Surface.js
-var import_react3 = __toESM(require_react());
+// node_modules/recharts/es6/component/DefaultLegendContent.js
+var import_react5 = __toESM(require_react());
+var import_isFunction2 = __toESM(require_isFunction());
 
 // node_modules/clsx/dist/clsx.mjs
 function r(e) {
@@ -5645,6 +5635,32 @@ function clsx() {
   return n;
 }
 var clsx_default = clsx;
+
+// node_modules/recharts/es6/util/LogUtils.js
+var isDev = true;
+var warn = function warn2(condition, format2) {
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+  if (isDev && typeof console !== "undefined" && console.warn) {
+    if (format2 === void 0) {
+      console.warn("LogUtils requires an error message argument");
+    }
+    if (!condition) {
+      if (format2 === void 0) {
+        console.warn("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");
+      } else {
+        var argIndex = 0;
+        console.warn(format2.replace(/%s/g, function() {
+          return args[argIndex++];
+        }));
+      }
+    }
+  }
+};
+
+// node_modules/recharts/es6/container/Surface.js
+var import_react3 = __toESM(require_react());
 
 // node_modules/recharts/es6/util/ReactUtils.js
 var import_get2 = __toESM(require_get());
@@ -6424,96 +6440,8 @@ function Surface(props) {
   }), /* @__PURE__ */ import_react3.default.createElement("title", null, title), /* @__PURE__ */ import_react3.default.createElement("desc", null, desc), children);
 }
 
-// node_modules/recharts/es6/container/Layer.js
-var import_react4 = __toESM(require_react());
-var _excluded4 = ["children", "className"];
-function _extends2() {
-  _extends2 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends2.apply(this, arguments);
-}
-function _objectWithoutProperties3(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose3(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose3(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-var Layer = /* @__PURE__ */ import_react4.default.forwardRef(function(props, ref) {
-  var children = props.children, className = props.className, others = _objectWithoutProperties3(props, _excluded4);
-  var layerClass = clsx_default("recharts-layer", className);
-  return /* @__PURE__ */ import_react4.default.createElement("g", _extends2({
-    className: layerClass
-  }, filterProps(others, true), {
-    ref
-  }), children);
-});
-
-// node_modules/recharts/es6/component/Legend.js
-var import_react7 = __toESM(require_react());
-
-// node_modules/recharts/es6/component/DefaultLegendContent.js
-var import_react6 = __toESM(require_react());
-var import_isFunction2 = __toESM(require_isFunction());
-
-// node_modules/recharts/es6/util/LogUtils.js
-var isDev = true;
-var warn = function warn2(condition, format3) {
-  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    args[_key - 2] = arguments[_key];
-  }
-  if (isDev && typeof console !== "undefined" && console.warn) {
-    if (format3 === void 0) {
-      console.warn("LogUtils requires an error message argument");
-    }
-    if (!condition) {
-      if (format3 === void 0) {
-        console.warn("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");
-      } else {
-        var argIndex = 0;
-        console.warn(format3.replace(/%s/g, function() {
-          return args[argIndex++];
-        }));
-      }
-    }
-  }
-};
-
 // node_modules/recharts/es6/shape/Symbols.js
-var import_react5 = __toESM(require_react());
+var import_react4 = __toESM(require_react());
 var import_upperFirst = __toESM(require_upperFirst());
 
 // node_modules/d3-shape/src/constant.js
@@ -7537,9 +7465,9 @@ function _typeof3(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof3(o);
 }
-var _excluded5 = ["type", "size", "sizeType"];
-function _extends3() {
-  _extends3 = Object.assign ? Object.assign.bind() : function(target) {
+var _excluded4 = ["type", "size", "sizeType"];
+function _extends2() {
+  _extends2 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -7550,7 +7478,7 @@ function _extends3() {
     }
     return target;
   };
-  return _extends3.apply(this, arguments);
+  return _extends2.apply(this, arguments);
 }
 function ownKeys(e, r2) {
   var t = Object.keys(e);
@@ -7598,10 +7526,10 @@ function _toPrimitive(t, r2) {
   }
   return ("string" === r2 ? String : Number)(t);
 }
-function _objectWithoutProperties4(source, excluded) {
+function _objectWithoutProperties3(source, excluded) {
   if (source == null)
     return {};
-  var target = _objectWithoutPropertiesLoose4(source, excluded);
+  var target = _objectWithoutPropertiesLoose3(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -7616,7 +7544,7 @@ function _objectWithoutProperties4(source, excluded) {
   }
   return target;
 }
-function _objectWithoutPropertiesLoose4(source, excluded) {
+function _objectWithoutPropertiesLoose3(source, excluded) {
   if (source == null)
     return {};
   var target = {};
@@ -7670,7 +7598,7 @@ var registerSymbol = function registerSymbol2(key, factory) {
   symbolFactories["symbol".concat((0, import_upperFirst.default)(key))] = factory;
 };
 var Symbols = function Symbols2(_ref) {
-  var _ref$type = _ref.type, type = _ref$type === void 0 ? "circle" : _ref$type, _ref$size = _ref.size, size = _ref$size === void 0 ? 64 : _ref$size, _ref$sizeType = _ref.sizeType, sizeType = _ref$sizeType === void 0 ? "area" : _ref$sizeType, rest = _objectWithoutProperties4(_ref, _excluded5);
+  var _ref$type = _ref.type, type = _ref$type === void 0 ? "circle" : _ref$type, _ref$size = _ref.size, size = _ref$size === void 0 ? 64 : _ref$size, _ref$sizeType = _ref.sizeType, sizeType = _ref$sizeType === void 0 ? "area" : _ref$sizeType, rest = _objectWithoutProperties3(_ref, _excluded4);
   var props = _objectSpread(_objectSpread({}, rest), {}, {
     type,
     size,
@@ -7684,7 +7612,7 @@ var Symbols = function Symbols2(_ref) {
   var className = props.className, cx = props.cx, cy = props.cy;
   var filteredProps = filterProps(props, true);
   if (cx === +cx && cy === +cy && size === +size) {
-    return /* @__PURE__ */ import_react5.default.createElement("path", _extends3({}, filteredProps, {
+    return /* @__PURE__ */ import_react4.default.createElement("path", _extends2({}, filteredProps, {
       className: clsx_default("recharts-symbols", className),
       transform: "translate(".concat(cx, ", ").concat(cy, ")"),
       d: getPath5()
@@ -7703,8 +7631,8 @@ function _typeof4(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof4(o);
 }
-function _extends4() {
-  _extends4 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends3() {
+  _extends3 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -7715,7 +7643,7 @@ function _extends4() {
     }
     return target;
   };
-  return _extends4.apply(this, arguments);
+  return _extends3.apply(this, arguments);
 }
 function ownKeys2(e, r2) {
   var t = Object.keys(e);
@@ -7857,7 +7785,7 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
         var thirdSize = SIZE / 3;
         var color2 = data.inactive ? inactiveColor : data.color;
         if (data.type === "plainline") {
-          return /* @__PURE__ */ import_react6.default.createElement("line", {
+          return /* @__PURE__ */ import_react5.default.createElement("line", {
             strokeWidth: 4,
             fill: "none",
             stroke: color2,
@@ -7870,7 +7798,7 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
           });
         }
         if (data.type === "line") {
-          return /* @__PURE__ */ import_react6.default.createElement("path", {
+          return /* @__PURE__ */ import_react5.default.createElement("path", {
             strokeWidth: 4,
             fill: "none",
             stroke: color2,
@@ -7879,19 +7807,19 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
           });
         }
         if (data.type === "rect") {
-          return /* @__PURE__ */ import_react6.default.createElement("path", {
+          return /* @__PURE__ */ import_react5.default.createElement("path", {
             stroke: "none",
             fill: color2,
             d: "M0,".concat(SIZE / 8, "h").concat(SIZE, "v").concat(SIZE * 3 / 4, "h").concat(-SIZE, "z"),
             className: "recharts-legend-icon"
           });
         }
-        if (/* @__PURE__ */ import_react6.default.isValidElement(data.legendIcon)) {
+        if (/* @__PURE__ */ import_react5.default.isValidElement(data.legendIcon)) {
           var iconProps = _objectSpread2({}, data);
           delete iconProps.legendIcon;
-          return /* @__PURE__ */ import_react6.default.cloneElement(data.legendIcon, iconProps);
+          return /* @__PURE__ */ import_react5.default.cloneElement(data.legendIcon, iconProps);
         }
-        return /* @__PURE__ */ import_react6.default.createElement(Symbols, {
+        return /* @__PURE__ */ import_react5.default.createElement(Symbols, {
           fill: color2,
           cx: halfSize,
           cy: halfSize,
@@ -7940,16 +7868,16 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
           // eslint-disable-line max-len
         );
         var color2 = entry.inactive ? inactiveColor : entry.color;
-        return /* @__PURE__ */ import_react6.default.createElement("li", _extends4({
+        return /* @__PURE__ */ import_react5.default.createElement("li", _extends3({
           className,
           style: itemStyle,
           key: "legend-item-".concat(i)
-        }, adaptEventsOfChild(_this.props, entry, i)), /* @__PURE__ */ import_react6.default.createElement(Surface, {
+        }, adaptEventsOfChild(_this.props, entry, i)), /* @__PURE__ */ import_react5.default.createElement(Surface, {
           width: iconSize,
           height: iconSize,
           viewBox,
           style: svgStyle
-        }, _this.renderIcon(entry)), /* @__PURE__ */ import_react6.default.createElement("span", {
+        }, _this.renderIcon(entry)), /* @__PURE__ */ import_react5.default.createElement("span", {
           className: "recharts-legend-item-text",
           style: {
             color: color2
@@ -7969,13 +7897,13 @@ var DefaultLegendContent = /* @__PURE__ */ function(_PureComponent) {
         margin: 0,
         textAlign: layout === "horizontal" ? align : "left"
       };
-      return /* @__PURE__ */ import_react6.default.createElement("ul", {
+      return /* @__PURE__ */ import_react5.default.createElement("ul", {
         className: "recharts-default-legend",
         style: finalStyle
       }, this.renderItems());
     }
   }]);
-}(import_react6.PureComponent);
+}(import_react5.PureComponent);
 _defineProperty2(DefaultLegendContent, "displayName", "Legend");
 _defineProperty2(DefaultLegendContent, "defaultProps", {
   iconSize: 14,
@@ -8007,7 +7935,7 @@ function _typeof5(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof5(o);
 }
-var _excluded6 = ["ref"];
+var _excluded5 = ["ref"];
 function ownKeys3(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -8126,10 +8054,10 @@ function _toPrimitive3(t, r2) {
   }
   return ("string" === r2 ? String : Number)(t);
 }
-function _objectWithoutProperties5(source, excluded) {
+function _objectWithoutProperties4(source, excluded) {
   if (source == null)
     return {};
-  var target = _objectWithoutPropertiesLoose5(source, excluded);
+  var target = _objectWithoutPropertiesLoose4(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -8144,7 +8072,7 @@ function _objectWithoutProperties5(source, excluded) {
   }
   return target;
 }
-function _objectWithoutPropertiesLoose5(source, excluded) {
+function _objectWithoutPropertiesLoose4(source, excluded) {
   if (source == null)
     return {};
   var target = {};
@@ -8161,14 +8089,14 @@ function defaultUniqBy(entry) {
   return entry.value;
 }
 function renderContent(content, props) {
-  if (/* @__PURE__ */ import_react7.default.isValidElement(content)) {
-    return /* @__PURE__ */ import_react7.default.cloneElement(content, props);
+  if (/* @__PURE__ */ import_react6.default.isValidElement(content)) {
+    return /* @__PURE__ */ import_react6.default.cloneElement(content, props);
   }
   if (typeof content === "function") {
-    return /* @__PURE__ */ import_react7.default.createElement(content, props);
+    return /* @__PURE__ */ import_react6.default.createElement(content, props);
   }
-  var ref = props.ref, otherProps = _objectWithoutProperties5(props, _excluded6);
-  return /* @__PURE__ */ import_react7.default.createElement(DefaultLegendContent, otherProps);
+  var ref = props.ref, otherProps = _objectWithoutProperties4(props, _excluded5);
+  return /* @__PURE__ */ import_react6.default.createElement(DefaultLegendContent, otherProps);
 }
 var EPS = 1;
 var Legend = /* @__PURE__ */ function(_PureComponent) {
@@ -8284,7 +8212,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
         width: width || "auto",
         height: height || "auto"
       }, this.getDefaultPosition(wrapperStyle)), wrapperStyle);
-      return /* @__PURE__ */ import_react7.default.createElement("div", {
+      return /* @__PURE__ */ import_react6.default.createElement("div", {
         className: "recharts-legend-wrapper",
         style: outerStyle,
         ref: function ref(node) {
@@ -8311,7 +8239,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
       return null;
     }
   }]);
-}(import_react7.PureComponent);
+}(import_react6.PureComponent);
 _defineProperty3(Legend, "displayName", "Legend");
 _defineProperty3(Legend, "defaultProps", {
   iconSize: 14,
@@ -8321,10 +8249,10 @@ _defineProperty3(Legend, "defaultProps", {
 });
 
 // node_modules/recharts/es6/component/Tooltip.js
-var import_react10 = __toESM(require_react());
+var import_react9 = __toESM(require_react());
 
 // node_modules/recharts/es6/component/DefaultTooltipContent.js
-var import_react8 = __toESM(require_react());
+var import_react7 = __toESM(require_react());
 var import_sortBy = __toESM(require_sortBy());
 var import_isNil2 = __toESM(require_isNil());
 function _typeof6(o) {
@@ -8335,8 +8263,8 @@ function _typeof6(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof6(o);
 }
-function _extends5() {
-  _extends5 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends4() {
+  _extends4 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -8347,7 +8275,7 @@ function _extends5() {
     }
     return target;
   };
-  return _extends5.apply(this, arguments);
+  return _extends4.apply(this, arguments);
 }
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
@@ -8488,22 +8416,22 @@ var DefaultTooltipContent = function DefaultTooltipContent2(props) {
         }
         return (
           // eslint-disable-next-line react/no-array-index-key
-          /* @__PURE__ */ import_react8.default.createElement("li", {
+          /* @__PURE__ */ import_react7.default.createElement("li", {
             className: "recharts-tooltip-item",
             key: "tooltip-item-".concat(i),
             style: finalItemStyle
-          }, isNumOrStr(finalName) ? /* @__PURE__ */ import_react8.default.createElement("span", {
+          }, isNumOrStr(finalName) ? /* @__PURE__ */ import_react7.default.createElement("span", {
             className: "recharts-tooltip-item-name"
-          }, finalName) : null, isNumOrStr(finalName) ? /* @__PURE__ */ import_react8.default.createElement("span", {
+          }, finalName) : null, isNumOrStr(finalName) ? /* @__PURE__ */ import_react7.default.createElement("span", {
             className: "recharts-tooltip-item-separator"
-          }, separator) : null, /* @__PURE__ */ import_react8.default.createElement("span", {
+          }, separator) : null, /* @__PURE__ */ import_react7.default.createElement("span", {
             className: "recharts-tooltip-item-value"
-          }, finalValue), /* @__PURE__ */ import_react8.default.createElement("span", {
+          }, finalValue), /* @__PURE__ */ import_react7.default.createElement("span", {
             className: "recharts-tooltip-item-unit"
           }, entry.unit || ""))
         );
       });
-      return /* @__PURE__ */ import_react8.default.createElement("ul", {
+      return /* @__PURE__ */ import_react7.default.createElement("ul", {
         className: "recharts-tooltip-item-list",
         style: listStyle
       }, items);
@@ -8531,17 +8459,17 @@ var DefaultTooltipContent = function DefaultTooltipContent2(props) {
     role: "status",
     "aria-live": "assertive"
   } : {};
-  return /* @__PURE__ */ import_react8.default.createElement("div", _extends5({
+  return /* @__PURE__ */ import_react7.default.createElement("div", _extends4({
     className: wrapperCN,
     style: finalStyle
-  }, accessibilityAttributes), /* @__PURE__ */ import_react8.default.createElement("p", {
+  }, accessibilityAttributes), /* @__PURE__ */ import_react7.default.createElement("p", {
     className: labelCN,
     style: finalLabelStyle
-  }, /* @__PURE__ */ import_react8.default.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), renderContent3());
+  }, /* @__PURE__ */ import_react7.default.isValidElement(finalLabel) ? finalLabel : "".concat(finalLabel)), renderContent3());
 };
 
 // node_modules/recharts/es6/component/TooltipBoundingBox.js
-var import_react9 = __toESM(require_react());
+var import_react8 = __toESM(require_react());
 
 // node_modules/recharts/es6/util/tooltip/translate.js
 function _typeof7(o) {
@@ -8896,7 +8824,7 @@ var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
       return (
         // This element allow listening to the `Escape` key.
         // See https://github.com/recharts/recharts/pull/2925
-        /* @__PURE__ */ import_react9.default.createElement("div", {
+        /* @__PURE__ */ import_react8.default.createElement("div", {
           tabIndex: -1,
           className: cssClasses,
           style: outerStyle,
@@ -8907,7 +8835,7 @@ var TooltipBoundingBox = /* @__PURE__ */ function(_PureComponent) {
       );
     }
   }]);
-}(import_react9.PureComponent);
+}(import_react8.PureComponent);
 
 // node_modules/recharts/es6/util/Global.js
 var parseIsSsrByDefault = function parseIsSsrByDefault2() {
@@ -9063,13 +8991,13 @@ function defaultUniqBy2(entry) {
   return entry.dataKey;
 }
 function renderContent2(content, props) {
-  if (/* @__PURE__ */ import_react10.default.isValidElement(content)) {
-    return /* @__PURE__ */ import_react10.default.cloneElement(content, props);
+  if (/* @__PURE__ */ import_react9.default.isValidElement(content)) {
+    return /* @__PURE__ */ import_react9.default.cloneElement(content, props);
   }
   if (typeof content === "function") {
-    return /* @__PURE__ */ import_react10.default.createElement(content, props);
+    return /* @__PURE__ */ import_react9.default.createElement(content, props);
   }
-  return /* @__PURE__ */ import_react10.default.createElement(DefaultTooltipContent, props);
+  return /* @__PURE__ */ import_react9.default.createElement(DefaultTooltipContent, props);
 }
 var Tooltip = /* @__PURE__ */ function(_PureComponent) {
   function Tooltip2() {
@@ -9089,7 +9017,7 @@ var Tooltip = /* @__PURE__ */ function(_PureComponent) {
         }), payloadUniqBy, defaultUniqBy2);
       }
       var hasPayload = finalPayload.length > 0;
-      return /* @__PURE__ */ import_react10.default.createElement(TooltipBoundingBox, {
+      return /* @__PURE__ */ import_react9.default.createElement(TooltipBoundingBox, {
         allowEscapeViewBox,
         animationDuration,
         animationEasing,
@@ -9108,7 +9036,7 @@ var Tooltip = /* @__PURE__ */ function(_PureComponent) {
       })));
     }
   }]);
-}(import_react10.PureComponent);
+}(import_react9.PureComponent);
 _defineProperty7(Tooltip, "displayName", "Tooltip");
 _defineProperty7(Tooltip, "defaultProps", {
   accessibilityLayer: false,
@@ -9147,7 +9075,7 @@ _defineProperty7(Tooltip, "defaultProps", {
 });
 
 // node_modules/recharts/es6/component/ResponsiveContainer.js
-var import_react11 = __toESM(require_react());
+var import_react10 = __toESM(require_react());
 var import_throttle = __toESM(require_throttle());
 function _typeof10(o) {
   "@babel/helpers - typeof";
@@ -9259,15 +9187,15 @@ function _arrayWithHoles2(arr) {
   if (Array.isArray(arr))
     return arr;
 }
-var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(function(_ref, ref) {
+var ResponsiveContainer = /* @__PURE__ */ (0, import_react10.forwardRef)(function(_ref, ref) {
   var aspect = _ref.aspect, _ref$initialDimension = _ref.initialDimension, initialDimension = _ref$initialDimension === void 0 ? {
     width: -1,
     height: -1
   } : _ref$initialDimension, _ref$width = _ref.width, width = _ref$width === void 0 ? "100%" : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? "100%" : _ref$height, _ref$minWidth = _ref.minWidth, minWidth = _ref$minWidth === void 0 ? 0 : _ref$minWidth, minHeight = _ref.minHeight, maxHeight = _ref.maxHeight, children = _ref.children, _ref$debounce = _ref.debounce, debounce = _ref$debounce === void 0 ? 0 : _ref$debounce, id = _ref.id, className = _ref.className, onResize = _ref.onResize, _ref$style = _ref.style, style = _ref$style === void 0 ? {} : _ref$style;
-  var containerRef = (0, import_react11.useRef)(null);
-  var onResizeRef = (0, import_react11.useRef)();
+  var containerRef = (0, import_react10.useRef)(null);
+  var onResizeRef = (0, import_react10.useRef)();
   onResizeRef.current = onResize;
-  (0, import_react11.useImperativeHandle)(ref, function() {
+  (0, import_react10.useImperativeHandle)(ref, function() {
     return Object.defineProperty(containerRef.current, "current", {
       get: function get7() {
         console.warn("The usage of ref.current.current is deprecated and will no longer be supported.");
@@ -9276,11 +9204,11 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
       configurable: true
     });
   });
-  var _useState = (0, import_react11.useState)({
+  var _useState = (0, import_react10.useState)({
     containerWidth: initialDimension.width,
     containerHeight: initialDimension.height
   }), _useState2 = _slicedToArray2(_useState, 2), sizes = _useState2[0], setSizes = _useState2[1];
-  var setContainerSize = (0, import_react11.useCallback)(function(newWidth, newHeight) {
+  var setContainerSize = (0, import_react10.useCallback)(function(newWidth, newHeight) {
     setSizes(function(prevState) {
       var roundedWidth = Math.round(newWidth);
       var roundedHeight = Math.round(newHeight);
@@ -9293,7 +9221,7 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
       };
     });
   }, []);
-  (0, import_react11.useEffect)(function() {
+  (0, import_react10.useEffect)(function() {
     var callback = function callback2(entries) {
       var _onResizeRef$current;
       var _entries$0$contentRec = entries[0].contentRect, containerWidth2 = _entries$0$contentRec.width, containerHeight2 = _entries$0$contentRec.height;
@@ -9314,7 +9242,7 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
       observer.disconnect();
     };
   }, [setContainerSize, debounce]);
-  var chartContent = (0, import_react11.useMemo)(function() {
+  var chartContent = (0, import_react10.useMemo)(function() {
     var containerWidth = sizes.containerWidth, containerHeight = sizes.containerHeight;
     if (containerWidth < 0 || containerHeight < 0) {
       return null;
@@ -9335,9 +9263,9 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
     }
     warn(calculatedWidth > 0 || calculatedHeight > 0, "The width(%s) and height(%s) of chart should be greater than 0,\n       please check the style of container, or the props width(%s) and height(%s),\n       or add a minWidth(%s) or minHeight(%s) or use aspect(%s) to control the\n       height and width.", calculatedWidth, calculatedHeight, width, height, minWidth, minHeight, aspect);
     var isCharts = !Array.isArray(children) && getDisplayName(children.type).endsWith("Chart");
-    return import_react11.default.Children.map(children, function(child) {
-      if (/* @__PURE__ */ import_react11.default.isValidElement(child)) {
-        return /* @__PURE__ */ (0, import_react11.cloneElement)(child, _objectSpread7({
+    return import_react10.default.Children.map(children, function(child) {
+      if (/* @__PURE__ */ import_react10.default.isValidElement(child)) {
+        return /* @__PURE__ */ (0, import_react10.cloneElement)(child, _objectSpread7({
           width: calculatedWidth,
           height: calculatedHeight
         }, isCharts ? {
@@ -9352,7 +9280,7 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
       return child;
     });
   }, [aspect, children, height, maxHeight, minHeight, minWidth, sizes, width]);
-  return /* @__PURE__ */ import_react11.default.createElement("div", {
+  return /* @__PURE__ */ import_react10.default.createElement("div", {
     id: id ? "".concat(id) : void 0,
     className: clsx_default("recharts-responsive-container", className),
     style: _objectSpread7(_objectSpread7({}, style), {}, {
@@ -9366,699 +9294,8 @@ var ResponsiveContainer = /* @__PURE__ */ (0, import_react11.forwardRef)(functio
   }, chartContent);
 });
 
-// node_modules/recharts/es6/component/Cell.js
-var Cell = function Cell2(_props) {
-  return null;
-};
-Cell.displayName = "Cell";
-
-// node_modules/recharts/es6/component/Text.js
-var import_react12 = __toESM(require_react());
-var import_isNil3 = __toESM(require_isNil());
-
-// node_modules/recharts/es6/util/DOMUtils.js
-function _typeof11(o) {
-  "@babel/helpers - typeof";
-  return _typeof11 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof11(o);
-}
-function ownKeys8(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread8(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys8(Object(t), true).forEach(function(r3) {
-      _defineProperty9(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys8(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty9(obj, key, value) {
-  key = _toPropertyKey9(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey9(t) {
-  var i = _toPrimitive9(t, "string");
-  return "symbol" == _typeof11(i) ? i : i + "";
-}
-function _toPrimitive9(t, r2) {
-  if ("object" != _typeof11(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof11(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var stringCache = {
-  widthCache: {},
-  cacheCount: 0
-};
-var MAX_CACHE_NUM = 2e3;
-var SPAN_STYLE = {
-  position: "absolute",
-  top: "-20000px",
-  left: 0,
-  padding: 0,
-  margin: 0,
-  border: "none",
-  whiteSpace: "pre"
-};
-var MEASUREMENT_SPAN_ID = "recharts_measurement_span";
-function removeInvalidKeys(obj) {
-  var copyObj = _objectSpread8({}, obj);
-  Object.keys(copyObj).forEach(function(key) {
-    if (!copyObj[key]) {
-      delete copyObj[key];
-    }
-  });
-  return copyObj;
-}
-var getStringSize = function getStringSize2(text) {
-  var style = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
-  if (text === void 0 || text === null || Global.isSsr) {
-    return {
-      width: 0,
-      height: 0
-    };
-  }
-  var copyStyle = removeInvalidKeys(style);
-  var cacheKey = JSON.stringify({
-    text,
-    copyStyle
-  });
-  if (stringCache.widthCache[cacheKey]) {
-    return stringCache.widthCache[cacheKey];
-  }
-  try {
-    var measurementSpan = document.getElementById(MEASUREMENT_SPAN_ID);
-    if (!measurementSpan) {
-      measurementSpan = document.createElement("span");
-      measurementSpan.setAttribute("id", MEASUREMENT_SPAN_ID);
-      measurementSpan.setAttribute("aria-hidden", "true");
-      document.body.appendChild(measurementSpan);
-    }
-    var measurementSpanStyle = _objectSpread8(_objectSpread8({}, SPAN_STYLE), copyStyle);
-    Object.assign(measurementSpan.style, measurementSpanStyle);
-    measurementSpan.textContent = "".concat(text);
-    var rect = measurementSpan.getBoundingClientRect();
-    var result = {
-      width: rect.width,
-      height: rect.height
-    };
-    stringCache.widthCache[cacheKey] = result;
-    if (++stringCache.cacheCount > MAX_CACHE_NUM) {
-      stringCache.cacheCount = 0;
-      stringCache.widthCache = {};
-    }
-    return result;
-  } catch (e) {
-    return {
-      width: 0,
-      height: 0
-    };
-  }
-};
-var getOffset = function getOffset2(rect) {
-  return {
-    top: rect.top + window.scrollY - document.documentElement.clientTop,
-    left: rect.left + window.scrollX - document.documentElement.clientLeft
-  };
-};
-
-// node_modules/recharts/es6/util/ReduceCSSCalc.js
-function _typeof12(o) {
-  "@babel/helpers - typeof";
-  return _typeof12 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof12(o);
-}
-function _slicedToArray3(arr, i) {
-  return _arrayWithHoles3(arr) || _iterableToArrayLimit3(arr, i) || _unsupportedIterableToArray3(arr, i) || _nonIterableRest3();
-}
-function _nonIterableRest3() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray3(o, minLen) {
-  if (!o)
-    return;
-  if (typeof o === "string")
-    return _arrayLikeToArray3(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor)
-    n = o.constructor.name;
-  if (n === "Map" || n === "Set")
-    return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray3(o, minLen);
-}
-function _arrayLikeToArray3(arr, len) {
-  if (len == null || len > arr.length)
-    len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++)
-    arr2[i] = arr[i];
-  return arr2;
-}
-function _iterableToArrayLimit3(r2, l) {
-  var t = null == r2 ? null : "undefined" != typeof Symbol && r2[Symbol.iterator] || r2["@@iterator"];
-  if (null != t) {
-    var e, n, i, u, a2 = [], f = true, o = false;
-    try {
-      if (i = (t = t.call(r2)).next, 0 === l) {
-        if (Object(t) !== t)
-          return;
-        f = false;
-      } else
-        for (; !(f = (e = i.call(t)).done) && (a2.push(e.value), a2.length !== l); f = true)
-          ;
-    } catch (r3) {
-      o = true, n = r3;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u))
-          return;
-      } finally {
-        if (o)
-          throw n;
-      }
-    }
-    return a2;
-  }
-}
-function _arrayWithHoles3(arr) {
-  if (Array.isArray(arr))
-    return arr;
-}
-function _classCallCheck5(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _defineProperties5(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey10(descriptor.key), descriptor);
-  }
-}
-function _createClass5(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties5(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties5(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", { writable: false });
-  return Constructor;
-}
-function _toPropertyKey10(t) {
-  var i = _toPrimitive10(t, "string");
-  return "symbol" == _typeof12(i) ? i : i + "";
-}
-function _toPrimitive10(t, r2) {
-  if ("object" != _typeof12(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof12(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var MULTIPLY_OR_DIVIDE_REGEX = /(-?\d+(?:\.\d+)?[a-zA-Z%]*)([*/])(-?\d+(?:\.\d+)?[a-zA-Z%]*)/;
-var ADD_OR_SUBTRACT_REGEX = /(-?\d+(?:\.\d+)?[a-zA-Z%]*)([+-])(-?\d+(?:\.\d+)?[a-zA-Z%]*)/;
-var CSS_LENGTH_UNIT_REGEX = /^px|cm|vh|vw|em|rem|%|mm|in|pt|pc|ex|ch|vmin|vmax|Q$/;
-var NUM_SPLIT_REGEX = /(-?\d+(?:\.\d+)?)([a-zA-Z%]+)?/;
-var CONVERSION_RATES = {
-  cm: 96 / 2.54,
-  mm: 96 / 25.4,
-  pt: 96 / 72,
-  pc: 96 / 6,
-  "in": 96,
-  Q: 96 / (2.54 * 40),
-  px: 1
-};
-var FIXED_CSS_LENGTH_UNITS = Object.keys(CONVERSION_RATES);
-var STR_NAN = "NaN";
-function convertToPx(value, unit2) {
-  return value * CONVERSION_RATES[unit2];
-}
-var DecimalCSS = /* @__PURE__ */ function() {
-  function DecimalCSS2(num, unit2) {
-    _classCallCheck5(this, DecimalCSS2);
-    this.num = num;
-    this.unit = unit2;
-    this.num = num;
-    this.unit = unit2;
-    if (Number.isNaN(num)) {
-      this.unit = "";
-    }
-    if (unit2 !== "" && !CSS_LENGTH_UNIT_REGEX.test(unit2)) {
-      this.num = NaN;
-      this.unit = "";
-    }
-    if (FIXED_CSS_LENGTH_UNITS.includes(unit2)) {
-      this.num = convertToPx(num, unit2);
-      this.unit = "px";
-    }
-  }
-  return _createClass5(DecimalCSS2, [{
-    key: "add",
-    value: function add(other) {
-      if (this.unit !== other.unit) {
-        return new DecimalCSS2(NaN, "");
-      }
-      return new DecimalCSS2(this.num + other.num, this.unit);
-    }
-  }, {
-    key: "subtract",
-    value: function subtract(other) {
-      if (this.unit !== other.unit) {
-        return new DecimalCSS2(NaN, "");
-      }
-      return new DecimalCSS2(this.num - other.num, this.unit);
-    }
-  }, {
-    key: "multiply",
-    value: function multiply(other) {
-      if (this.unit !== "" && other.unit !== "" && this.unit !== other.unit) {
-        return new DecimalCSS2(NaN, "");
-      }
-      return new DecimalCSS2(this.num * other.num, this.unit || other.unit);
-    }
-  }, {
-    key: "divide",
-    value: function divide(other) {
-      if (this.unit !== "" && other.unit !== "" && this.unit !== other.unit) {
-        return new DecimalCSS2(NaN, "");
-      }
-      return new DecimalCSS2(this.num / other.num, this.unit || other.unit);
-    }
-  }, {
-    key: "toString",
-    value: function toString() {
-      return "".concat(this.num).concat(this.unit);
-    }
-  }, {
-    key: "isNaN",
-    value: function isNaN2() {
-      return Number.isNaN(this.num);
-    }
-  }], [{
-    key: "parse",
-    value: function parse(str) {
-      var _NUM_SPLIT_REGEX$exec;
-      var _ref = (_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [], _ref2 = _slicedToArray3(_ref, 3), numStr = _ref2[1], unit2 = _ref2[2];
-      return new DecimalCSS2(parseFloat(numStr), unit2 !== null && unit2 !== void 0 ? unit2 : "");
-    }
-  }]);
-}();
-function calculateArithmetic(expr) {
-  if (expr.includes(STR_NAN)) {
-    return STR_NAN;
-  }
-  var newExpr = expr;
-  while (newExpr.includes("*") || newExpr.includes("/")) {
-    var _MULTIPLY_OR_DIVIDE_R;
-    var _ref3 = (_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [], _ref4 = _slicedToArray3(_ref3, 4), leftOperand = _ref4[1], operator = _ref4[2], rightOperand = _ref4[3];
-    var lTs = DecimalCSS.parse(leftOperand !== null && leftOperand !== void 0 ? leftOperand : "");
-    var rTs = DecimalCSS.parse(rightOperand !== null && rightOperand !== void 0 ? rightOperand : "");
-    var result = operator === "*" ? lTs.multiply(rTs) : lTs.divide(rTs);
-    if (result.isNaN()) {
-      return STR_NAN;
-    }
-    newExpr = newExpr.replace(MULTIPLY_OR_DIVIDE_REGEX, result.toString());
-  }
-  while (newExpr.includes("+") || /.-\d+(?:\.\d+)?/.test(newExpr)) {
-    var _ADD_OR_SUBTRACT_REGE;
-    var _ref5 = (_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [], _ref6 = _slicedToArray3(_ref5, 4), _leftOperand = _ref6[1], _operator = _ref6[2], _rightOperand = _ref6[3];
-    var _lTs = DecimalCSS.parse(_leftOperand !== null && _leftOperand !== void 0 ? _leftOperand : "");
-    var _rTs = DecimalCSS.parse(_rightOperand !== null && _rightOperand !== void 0 ? _rightOperand : "");
-    var _result = _operator === "+" ? _lTs.add(_rTs) : _lTs.subtract(_rTs);
-    if (_result.isNaN()) {
-      return STR_NAN;
-    }
-    newExpr = newExpr.replace(ADD_OR_SUBTRACT_REGEX, _result.toString());
-  }
-  return newExpr;
-}
-var PARENTHESES_REGEX = /\(([^()]*)\)/;
-function calculateParentheses(expr) {
-  var newExpr = expr;
-  while (newExpr.includes("(")) {
-    var _PARENTHESES_REGEX$ex = PARENTHESES_REGEX.exec(newExpr), _PARENTHESES_REGEX$ex2 = _slicedToArray3(_PARENTHESES_REGEX$ex, 2), parentheticalExpression = _PARENTHESES_REGEX$ex2[1];
-    newExpr = newExpr.replace(PARENTHESES_REGEX, calculateArithmetic(parentheticalExpression));
-  }
-  return newExpr;
-}
-function evaluateExpression(expression) {
-  var newExpr = expression.replace(/\s+/g, "");
-  newExpr = calculateParentheses(newExpr);
-  newExpr = calculateArithmetic(newExpr);
-  return newExpr;
-}
-function safeEvaluateExpression(expression) {
-  try {
-    return evaluateExpression(expression);
-  } catch (e) {
-    return STR_NAN;
-  }
-}
-function reduceCSSCalc(expression) {
-  var result = safeEvaluateExpression(expression.slice(5, -1));
-  if (result === STR_NAN) {
-    return "";
-  }
-  return result;
-}
-
-// node_modules/recharts/es6/component/Text.js
-var _excluded7 = ["x", "y", "lineHeight", "capHeight", "scaleToFit", "textAnchor", "verticalAnchor", "fill"];
-var _excluded22 = ["dx", "dy", "angle", "className", "breakAll"];
-function _extends6() {
-  _extends6 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends6.apply(this, arguments);
-}
-function _objectWithoutProperties6(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose6(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose6(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _slicedToArray4(arr, i) {
-  return _arrayWithHoles4(arr) || _iterableToArrayLimit4(arr, i) || _unsupportedIterableToArray4(arr, i) || _nonIterableRest4();
-}
-function _nonIterableRest4() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray4(o, minLen) {
-  if (!o)
-    return;
-  if (typeof o === "string")
-    return _arrayLikeToArray4(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor)
-    n = o.constructor.name;
-  if (n === "Map" || n === "Set")
-    return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray4(o, minLen);
-}
-function _arrayLikeToArray4(arr, len) {
-  if (len == null || len > arr.length)
-    len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++)
-    arr2[i] = arr[i];
-  return arr2;
-}
-function _iterableToArrayLimit4(r2, l) {
-  var t = null == r2 ? null : "undefined" != typeof Symbol && r2[Symbol.iterator] || r2["@@iterator"];
-  if (null != t) {
-    var e, n, i, u, a2 = [], f = true, o = false;
-    try {
-      if (i = (t = t.call(r2)).next, 0 === l) {
-        if (Object(t) !== t)
-          return;
-        f = false;
-      } else
-        for (; !(f = (e = i.call(t)).done) && (a2.push(e.value), a2.length !== l); f = true)
-          ;
-    } catch (r3) {
-      o = true, n = r3;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u))
-          return;
-      } finally {
-        if (o)
-          throw n;
-      }
-    }
-    return a2;
-  }
-}
-function _arrayWithHoles4(arr) {
-  if (Array.isArray(arr))
-    return arr;
-}
-var BREAKING_SPACES = /[ \f\n\r\t\v\u2028\u2029]+/;
-var calculateWordWidths = function calculateWordWidths2(_ref) {
-  var children = _ref.children, breakAll = _ref.breakAll, style = _ref.style;
-  try {
-    var words = [];
-    if (!(0, import_isNil3.default)(children)) {
-      if (breakAll) {
-        words = children.toString().split("");
-      } else {
-        words = children.toString().split(BREAKING_SPACES);
-      }
-    }
-    var wordsWithComputedWidth = words.map(function(word) {
-      return {
-        word,
-        width: getStringSize(word, style).width
-      };
-    });
-    var spaceWidth = breakAll ? 0 : getStringSize("\xA0", style).width;
-    return {
-      wordsWithComputedWidth,
-      spaceWidth
-    };
-  } catch (e) {
-    return null;
-  }
-};
-var calculateWordsByLines = function calculateWordsByLines2(_ref2, initialWordsWithComputedWith, spaceWidth, lineWidth, scaleToFit) {
-  var maxLines = _ref2.maxLines, children = _ref2.children, style = _ref2.style, breakAll = _ref2.breakAll;
-  var shouldLimitLines = isNumber(maxLines);
-  var text = children;
-  var calculate = function calculate2() {
-    var words = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
-    return words.reduce(function(result2, _ref3) {
-      var word = _ref3.word, width = _ref3.width;
-      var currentLine = result2[result2.length - 1];
-      if (currentLine && (lineWidth == null || scaleToFit || currentLine.width + width + spaceWidth < Number(lineWidth))) {
-        currentLine.words.push(word);
-        currentLine.width += width + spaceWidth;
-      } else {
-        var newLine = {
-          words: [word],
-          width
-        };
-        result2.push(newLine);
-      }
-      return result2;
-    }, []);
-  };
-  var originalResult = calculate(initialWordsWithComputedWith);
-  var findLongestLine = function findLongestLine2(words) {
-    return words.reduce(function(a2, b) {
-      return a2.width > b.width ? a2 : b;
-    });
-  };
-  if (!shouldLimitLines) {
-    return originalResult;
-  }
-  var suffix = "\u2026";
-  var checkOverflow = function checkOverflow2(index) {
-    var tempText = text.slice(0, index);
-    var words = calculateWordWidths({
-      breakAll,
-      style,
-      children: tempText + suffix
-    }).wordsWithComputedWidth;
-    var result2 = calculate(words);
-    var doesOverflow = result2.length > maxLines || findLongestLine(result2).width > Number(lineWidth);
-    return [doesOverflow, result2];
-  };
-  var start = 0;
-  var end = text.length - 1;
-  var iterations = 0;
-  var trimmedResult;
-  while (start <= end && iterations <= text.length - 1) {
-    var middle = Math.floor((start + end) / 2);
-    var prev = middle - 1;
-    var _checkOverflow = checkOverflow(prev), _checkOverflow2 = _slicedToArray4(_checkOverflow, 2), doesPrevOverflow = _checkOverflow2[0], result = _checkOverflow2[1];
-    var _checkOverflow3 = checkOverflow(middle), _checkOverflow4 = _slicedToArray4(_checkOverflow3, 1), doesMiddleOverflow = _checkOverflow4[0];
-    if (!doesPrevOverflow && !doesMiddleOverflow) {
-      start = middle + 1;
-    }
-    if (doesPrevOverflow && doesMiddleOverflow) {
-      end = middle - 1;
-    }
-    if (!doesPrevOverflow && doesMiddleOverflow) {
-      trimmedResult = result;
-      break;
-    }
-    iterations++;
-  }
-  return trimmedResult || originalResult;
-};
-var getWordsWithoutCalculate = function getWordsWithoutCalculate2(children) {
-  var words = !(0, import_isNil3.default)(children) ? children.toString().split(BREAKING_SPACES) : [];
-  return [{
-    words
-  }];
-};
-var getWordsByLines = function getWordsByLines2(_ref4) {
-  var width = _ref4.width, scaleToFit = _ref4.scaleToFit, children = _ref4.children, style = _ref4.style, breakAll = _ref4.breakAll, maxLines = _ref4.maxLines;
-  if ((width || scaleToFit) && !Global.isSsr) {
-    var wordsWithComputedWidth, spaceWidth;
-    var wordWidths = calculateWordWidths({
-      breakAll,
-      children,
-      style
-    });
-    if (wordWidths) {
-      var wcw = wordWidths.wordsWithComputedWidth, sw = wordWidths.spaceWidth;
-      wordsWithComputedWidth = wcw;
-      spaceWidth = sw;
-    } else {
-      return getWordsWithoutCalculate(children);
-    }
-    return calculateWordsByLines({
-      breakAll,
-      children,
-      maxLines,
-      style
-    }, wordsWithComputedWidth, spaceWidth, width, scaleToFit);
-  }
-  return getWordsWithoutCalculate(children);
-};
-var DEFAULT_FILL = "#808080";
-var Text = function Text2(_ref5) {
-  var _ref5$x = _ref5.x, propsX = _ref5$x === void 0 ? 0 : _ref5$x, _ref5$y = _ref5.y, propsY = _ref5$y === void 0 ? 0 : _ref5$y, _ref5$lineHeight = _ref5.lineHeight, lineHeight = _ref5$lineHeight === void 0 ? "1em" : _ref5$lineHeight, _ref5$capHeight = _ref5.capHeight, capHeight = _ref5$capHeight === void 0 ? "0.71em" : _ref5$capHeight, _ref5$scaleToFit = _ref5.scaleToFit, scaleToFit = _ref5$scaleToFit === void 0 ? false : _ref5$scaleToFit, _ref5$textAnchor = _ref5.textAnchor, textAnchor = _ref5$textAnchor === void 0 ? "start" : _ref5$textAnchor, _ref5$verticalAnchor = _ref5.verticalAnchor, verticalAnchor = _ref5$verticalAnchor === void 0 ? "end" : _ref5$verticalAnchor, _ref5$fill = _ref5.fill, fill = _ref5$fill === void 0 ? DEFAULT_FILL : _ref5$fill, props = _objectWithoutProperties6(_ref5, _excluded7);
-  var wordsByLines = (0, import_react12.useMemo)(function() {
-    return getWordsByLines({
-      breakAll: props.breakAll,
-      children: props.children,
-      maxLines: props.maxLines,
-      scaleToFit,
-      style: props.style,
-      width: props.width
-    });
-  }, [props.breakAll, props.children, props.maxLines, scaleToFit, props.style, props.width]);
-  var dx = props.dx, dy = props.dy, angle = props.angle, className = props.className, breakAll = props.breakAll, textProps = _objectWithoutProperties6(props, _excluded22);
-  if (!isNumOrStr(propsX) || !isNumOrStr(propsY)) {
-    return null;
-  }
-  var x2 = propsX + (isNumber(dx) ? dx : 0);
-  var y2 = propsY + (isNumber(dy) ? dy : 0);
-  var startDy;
-  switch (verticalAnchor) {
-    case "start":
-      startDy = reduceCSSCalc("calc(".concat(capHeight, ")"));
-      break;
-    case "middle":
-      startDy = reduceCSSCalc("calc(".concat((wordsByLines.length - 1) / 2, " * -").concat(lineHeight, " + (").concat(capHeight, " / 2))"));
-      break;
-    default:
-      startDy = reduceCSSCalc("calc(".concat(wordsByLines.length - 1, " * -").concat(lineHeight, ")"));
-      break;
-  }
-  var transforms = [];
-  if (scaleToFit) {
-    var lineWidth = wordsByLines[0].width;
-    var width = props.width;
-    transforms.push("scale(".concat((isNumber(width) ? width / lineWidth : 1) / lineWidth, ")"));
-  }
-  if (angle) {
-    transforms.push("rotate(".concat(angle, ", ").concat(x2, ", ").concat(y2, ")"));
-  }
-  if (transforms.length) {
-    textProps.transform = transforms.join(" ");
-  }
-  return /* @__PURE__ */ import_react12.default.createElement("text", _extends6({}, filterProps(textProps, true), {
-    x: x2,
-    y: y2,
-    className: clsx_default("recharts-text", className),
-    textAnchor,
-    fill: fill.includes("url") ? DEFAULT_FILL : fill
-  }), wordsByLines.map(function(line, index) {
-    var words = line.words.join(breakAll ? "" : " ");
-    return (
-      // duplicate words will cause duplicate keys
-      // eslint-disable-next-line react/no-array-index-key
-      /* @__PURE__ */ import_react12.default.createElement("tspan", {
-        x: x2,
-        dy: index === 0 ? startDy : lineHeight,
-        key: "".concat(words, "-").concat(index)
-      }, words)
-    );
-  }));
-};
-
-// node_modules/recharts/es6/component/Label.js
-var import_react15 = __toESM(require_react());
-var import_isNil6 = __toESM(require_isNil());
-var import_isFunction6 = __toESM(require_isFunction());
-var import_isObject3 = __toESM(require_isObject());
-
-// node_modules/recharts/es6/util/PolarUtils.js
-var import_isNil5 = __toESM(require_isNil());
+// node_modules/recharts/es6/cartesian/Brush.js
 var import_react14 = __toESM(require_react());
-var import_isFunction5 = __toESM(require_isFunction());
 
 // node_modules/victory-vendor/es/d3-scale.js
 var d3_scale_exports = {};
@@ -10776,10 +10013,10 @@ function color_formatHsl() {
 function color_formatRgb() {
   return this.rgb().formatRgb();
 }
-function color(format3) {
+function color(format2) {
   var m, l;
-  format3 = (format3 + "").trim().toLowerCase();
-  return (m = reHex.exec(format3)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format3)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format3)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format3)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format3)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format3)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format3)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format3) ? rgbn(named[format3]) : format3 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+  format2 = (format2 + "").trim().toLowerCase();
+  return (m = reHex.exec(format2)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format2)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format2)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format2)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format2)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format2)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format2) ? rgbn(named[format2]) : format2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
 }
 function rgbn(n) {
   return new Rgb(n >> 16 & 255, n >> 8 & 255, n & 255, 1);
@@ -11308,20 +10545,20 @@ function formatNumerals_default(numerals) {
 // node_modules/d3-format/src/formatSpecifier.js
 var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
 function formatSpecifier(specifier) {
-  if (!(match2 = re.exec(specifier)))
+  if (!(match = re.exec(specifier)))
     throw new Error("invalid format: " + specifier);
-  var match2;
+  var match;
   return new FormatSpecifier({
-    fill: match2[1],
-    align: match2[2],
-    sign: match2[3],
-    symbol: match2[4],
-    zero: match2[5],
-    width: match2[6],
-    comma: match2[7],
-    precision: match2[8] && match2[8].slice(1),
-    trim: match2[9],
-    type: match2[10]
+    fill: match[1],
+    align: match[2],
+    sign: match[3],
+    symbol: match[4],
+    zero: match[5],
+    width: match[6],
+    comma: match[7],
+    precision: match[8] && match[8].slice(1),
+    trim: match[9],
+    type: match[10]
   });
 }
 formatSpecifier.prototype = FormatSpecifier.prototype;
@@ -11423,7 +10660,7 @@ function locale_default(locale3) {
     var prefix2 = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "", suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : "";
     var formatType = formatTypes_default[type], maybeSuffix = /[defgprs%]/.test(type);
     precision = precision === void 0 ? 6 : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
-    function format3(value) {
+    function format2(value) {
       var valuePrefix = prefix2, valueSuffix = suffix, i, n, c2;
       if (type === "c") {
         valueSuffix = formatType(value) + valueSuffix;
@@ -11470,10 +10707,10 @@ function locale_default(locale3) {
       }
       return numerals(value);
     }
-    format3.toString = function() {
+    format2.toString = function() {
       return specifier + "";
     };
-    return format3;
+    return format2;
   }
   function formatPrefix2(specifier, value) {
     var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k2 = Math.pow(10, -e), prefix2 = prefixes[8 + e / 3];
@@ -12447,7 +11684,7 @@ function formatLocale(locale3) {
   utcFormats.c = newFormat(locale_dateTime, utcFormats);
   function newFormat(specifier, formats2) {
     return function(date2) {
-      var string = [], i = -1, j = 0, n = specifier.length, c2, pad2, format3;
+      var string = [], i = -1, j = 0, n = specifier.length, c2, pad2, format2;
       if (!(date2 instanceof Date))
         date2 = /* @__PURE__ */ new Date(+date2);
       while (++i < n) {
@@ -12457,8 +11694,8 @@ function formatLocale(locale3) {
             c2 = specifier.charAt(++i);
           else
             pad2 = c2 === "e" ? " " : "0";
-          if (format3 = formats2[c2])
-            c2 = format3(date2, pad2);
+          if (format2 = formats2[c2])
+            c2 = format2(date2, pad2);
           string.push(c2);
           j = i + 1;
         }
@@ -12902,9 +12139,9 @@ function date(t) {
 function number3(t) {
   return t instanceof Date ? +t : +/* @__PURE__ */ new Date(+t);
 }
-function calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format3) {
+function calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format2) {
   var scale = continuous(), invert = scale.invert, domain = scale.domain;
-  var formatMillisecond = format3(".%L"), formatSecond = format3(":%S"), formatMinute = format3("%I:%M"), formatHour = format3("%I %p"), formatDay = format3("%a %d"), formatWeek = format3("%b %d"), formatMonth = format3("%B"), formatYear2 = format3("%Y");
+  var formatMillisecond = format2(".%L"), formatSecond = format2(":%S"), formatMinute = format2("%I:%M"), formatHour = format2("%I %p"), formatDay = format2("%a %d"), formatWeek = format2("%b %d"), formatMonth = format2("%B"), formatYear2 = format2("%Y");
   function tickFormat2(date2) {
     return (second2(date2) < date2 ? formatMillisecond : minute(date2) < date2 ? formatSecond : hour(date2) < date2 ? formatMinute : day(date2) < date2 ? formatHour : month(date2) < date2 ? week(date2) < date2 ? formatDay : formatWeek : year(date2) < date2 ? formatMonth : formatYear2)(date2);
   }
@@ -12919,7 +12156,7 @@ function calendar(ticks2, tickInterval, year, month, week, day, hour, minute, se
     return ticks2(d[0], d[d.length - 1], interval == null ? 10 : interval);
   };
   scale.tickFormat = function(count, specifier) {
-    return specifier == null ? tickFormat2 : format3(specifier);
+    return specifier == null ? tickFormat2 : format2(specifier);
   };
   scale.nice = function(interval) {
     var d = domain();
@@ -12928,7 +12165,7 @@ function calendar(ticks2, tickInterval, year, month, week, day, hour, minute, se
     return interval ? domain(nice(d, interval)) : scale;
   };
   scale.copy = function() {
-    return copy(scale, calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format3));
+    return copy(scale, calendar(ticks2, tickInterval, year, month, week, day, hour, minute, second2, format2));
   };
   return scale;
 }
@@ -13101,6 +12338,745 @@ function divergingPow() {
 function divergingSqrt() {
   return divergingPow.apply(null, arguments).exponent(0.5);
 }
+
+// node_modules/recharts/es6/cartesian/Brush.js
+var import_isFunction5 = __toESM(require_isFunction());
+var import_range2 = __toESM(require_range());
+
+// node_modules/recharts/es6/container/Layer.js
+var import_react11 = __toESM(require_react());
+var _excluded6 = ["children", "className"];
+function _extends5() {
+  _extends5 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends5.apply(this, arguments);
+}
+function _objectWithoutProperties5(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose5(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose5(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+var Layer = /* @__PURE__ */ import_react11.default.forwardRef(function(props, ref) {
+  var children = props.children, className = props.className, others = _objectWithoutProperties5(props, _excluded6);
+  var layerClass = clsx_default("recharts-layer", className);
+  return /* @__PURE__ */ import_react11.default.createElement("g", _extends5({
+    className: layerClass
+  }, filterProps(others, true), {
+    ref
+  }), children);
+});
+
+// node_modules/recharts/es6/component/Text.js
+var import_react12 = __toESM(require_react());
+var import_isNil3 = __toESM(require_isNil());
+
+// node_modules/recharts/es6/util/DOMUtils.js
+function _typeof11(o) {
+  "@babel/helpers - typeof";
+  return _typeof11 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof11(o);
+}
+function ownKeys8(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread8(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys8(Object(t), true).forEach(function(r3) {
+      _defineProperty9(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys8(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty9(obj, key, value) {
+  key = _toPropertyKey9(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey9(t) {
+  var i = _toPrimitive9(t, "string");
+  return "symbol" == _typeof11(i) ? i : i + "";
+}
+function _toPrimitive9(t, r2) {
+  if ("object" != _typeof11(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof11(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var stringCache = {
+  widthCache: {},
+  cacheCount: 0
+};
+var MAX_CACHE_NUM = 2e3;
+var SPAN_STYLE = {
+  position: "absolute",
+  top: "-20000px",
+  left: 0,
+  padding: 0,
+  margin: 0,
+  border: "none",
+  whiteSpace: "pre"
+};
+var MEASUREMENT_SPAN_ID = "recharts_measurement_span";
+function removeInvalidKeys(obj) {
+  var copyObj = _objectSpread8({}, obj);
+  Object.keys(copyObj).forEach(function(key) {
+    if (!copyObj[key]) {
+      delete copyObj[key];
+    }
+  });
+  return copyObj;
+}
+var getStringSize = function getStringSize2(text) {
+  var style = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+  if (text === void 0 || text === null || Global.isSsr) {
+    return {
+      width: 0,
+      height: 0
+    };
+  }
+  var copyStyle = removeInvalidKeys(style);
+  var cacheKey = JSON.stringify({
+    text,
+    copyStyle
+  });
+  if (stringCache.widthCache[cacheKey]) {
+    return stringCache.widthCache[cacheKey];
+  }
+  try {
+    var measurementSpan = document.getElementById(MEASUREMENT_SPAN_ID);
+    if (!measurementSpan) {
+      measurementSpan = document.createElement("span");
+      measurementSpan.setAttribute("id", MEASUREMENT_SPAN_ID);
+      measurementSpan.setAttribute("aria-hidden", "true");
+      document.body.appendChild(measurementSpan);
+    }
+    var measurementSpanStyle = _objectSpread8(_objectSpread8({}, SPAN_STYLE), copyStyle);
+    Object.assign(measurementSpan.style, measurementSpanStyle);
+    measurementSpan.textContent = "".concat(text);
+    var rect = measurementSpan.getBoundingClientRect();
+    var result = {
+      width: rect.width,
+      height: rect.height
+    };
+    stringCache.widthCache[cacheKey] = result;
+    if (++stringCache.cacheCount > MAX_CACHE_NUM) {
+      stringCache.cacheCount = 0;
+      stringCache.widthCache = {};
+    }
+    return result;
+  } catch (e) {
+    return {
+      width: 0,
+      height: 0
+    };
+  }
+};
+var getOffset = function getOffset2(rect) {
+  return {
+    top: rect.top + window.scrollY - document.documentElement.clientTop,
+    left: rect.left + window.scrollX - document.documentElement.clientLeft
+  };
+};
+
+// node_modules/recharts/es6/util/ReduceCSSCalc.js
+function _typeof12(o) {
+  "@babel/helpers - typeof";
+  return _typeof12 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof12(o);
+}
+function _slicedToArray3(arr, i) {
+  return _arrayWithHoles3(arr) || _iterableToArrayLimit3(arr, i) || _unsupportedIterableToArray3(arr, i) || _nonIterableRest3();
+}
+function _nonIterableRest3() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray3(o, minLen) {
+  if (!o)
+    return;
+  if (typeof o === "string")
+    return _arrayLikeToArray3(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor)
+    n = o.constructor.name;
+  if (n === "Map" || n === "Set")
+    return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+    return _arrayLikeToArray3(o, minLen);
+}
+function _arrayLikeToArray3(arr, len) {
+  if (len == null || len > arr.length)
+    len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
+function _iterableToArrayLimit3(r2, l) {
+  var t = null == r2 ? null : "undefined" != typeof Symbol && r2[Symbol.iterator] || r2["@@iterator"];
+  if (null != t) {
+    var e, n, i, u, a2 = [], f = true, o = false;
+    try {
+      if (i = (t = t.call(r2)).next, 0 === l) {
+        if (Object(t) !== t)
+          return;
+        f = false;
+      } else
+        for (; !(f = (e = i.call(t)).done) && (a2.push(e.value), a2.length !== l); f = true)
+          ;
+    } catch (r3) {
+      o = true, n = r3;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u))
+          return;
+      } finally {
+        if (o)
+          throw n;
+      }
+    }
+    return a2;
+  }
+}
+function _arrayWithHoles3(arr) {
+  if (Array.isArray(arr))
+    return arr;
+}
+function _classCallCheck5(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _defineProperties5(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor)
+      descriptor.writable = true;
+    Object.defineProperty(target, _toPropertyKey10(descriptor.key), descriptor);
+  }
+}
+function _createClass5(Constructor, protoProps, staticProps) {
+  if (protoProps)
+    _defineProperties5(Constructor.prototype, protoProps);
+  if (staticProps)
+    _defineProperties5(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", { writable: false });
+  return Constructor;
+}
+function _toPropertyKey10(t) {
+  var i = _toPrimitive10(t, "string");
+  return "symbol" == _typeof12(i) ? i : i + "";
+}
+function _toPrimitive10(t, r2) {
+  if ("object" != _typeof12(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof12(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var MULTIPLY_OR_DIVIDE_REGEX = /(-?\d+(?:\.\d+)?[a-zA-Z%]*)([*/])(-?\d+(?:\.\d+)?[a-zA-Z%]*)/;
+var ADD_OR_SUBTRACT_REGEX = /(-?\d+(?:\.\d+)?[a-zA-Z%]*)([+-])(-?\d+(?:\.\d+)?[a-zA-Z%]*)/;
+var CSS_LENGTH_UNIT_REGEX = /^px|cm|vh|vw|em|rem|%|mm|in|pt|pc|ex|ch|vmin|vmax|Q$/;
+var NUM_SPLIT_REGEX = /(-?\d+(?:\.\d+)?)([a-zA-Z%]+)?/;
+var CONVERSION_RATES = {
+  cm: 96 / 2.54,
+  mm: 96 / 25.4,
+  pt: 96 / 72,
+  pc: 96 / 6,
+  "in": 96,
+  Q: 96 / (2.54 * 40),
+  px: 1
+};
+var FIXED_CSS_LENGTH_UNITS = Object.keys(CONVERSION_RATES);
+var STR_NAN = "NaN";
+function convertToPx(value, unit2) {
+  return value * CONVERSION_RATES[unit2];
+}
+var DecimalCSS = /* @__PURE__ */ function() {
+  function DecimalCSS2(num, unit2) {
+    _classCallCheck5(this, DecimalCSS2);
+    this.num = num;
+    this.unit = unit2;
+    this.num = num;
+    this.unit = unit2;
+    if (Number.isNaN(num)) {
+      this.unit = "";
+    }
+    if (unit2 !== "" && !CSS_LENGTH_UNIT_REGEX.test(unit2)) {
+      this.num = NaN;
+      this.unit = "";
+    }
+    if (FIXED_CSS_LENGTH_UNITS.includes(unit2)) {
+      this.num = convertToPx(num, unit2);
+      this.unit = "px";
+    }
+  }
+  return _createClass5(DecimalCSS2, [{
+    key: "add",
+    value: function add(other) {
+      if (this.unit !== other.unit) {
+        return new DecimalCSS2(NaN, "");
+      }
+      return new DecimalCSS2(this.num + other.num, this.unit);
+    }
+  }, {
+    key: "subtract",
+    value: function subtract(other) {
+      if (this.unit !== other.unit) {
+        return new DecimalCSS2(NaN, "");
+      }
+      return new DecimalCSS2(this.num - other.num, this.unit);
+    }
+  }, {
+    key: "multiply",
+    value: function multiply(other) {
+      if (this.unit !== "" && other.unit !== "" && this.unit !== other.unit) {
+        return new DecimalCSS2(NaN, "");
+      }
+      return new DecimalCSS2(this.num * other.num, this.unit || other.unit);
+    }
+  }, {
+    key: "divide",
+    value: function divide(other) {
+      if (this.unit !== "" && other.unit !== "" && this.unit !== other.unit) {
+        return new DecimalCSS2(NaN, "");
+      }
+      return new DecimalCSS2(this.num / other.num, this.unit || other.unit);
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return "".concat(this.num).concat(this.unit);
+    }
+  }, {
+    key: "isNaN",
+    value: function isNaN2() {
+      return Number.isNaN(this.num);
+    }
+  }], [{
+    key: "parse",
+    value: function parse(str) {
+      var _NUM_SPLIT_REGEX$exec;
+      var _ref = (_NUM_SPLIT_REGEX$exec = NUM_SPLIT_REGEX.exec(str)) !== null && _NUM_SPLIT_REGEX$exec !== void 0 ? _NUM_SPLIT_REGEX$exec : [], _ref2 = _slicedToArray3(_ref, 3), numStr = _ref2[1], unit2 = _ref2[2];
+      return new DecimalCSS2(parseFloat(numStr), unit2 !== null && unit2 !== void 0 ? unit2 : "");
+    }
+  }]);
+}();
+function calculateArithmetic(expr) {
+  if (expr.includes(STR_NAN)) {
+    return STR_NAN;
+  }
+  var newExpr = expr;
+  while (newExpr.includes("*") || newExpr.includes("/")) {
+    var _MULTIPLY_OR_DIVIDE_R;
+    var _ref3 = (_MULTIPLY_OR_DIVIDE_R = MULTIPLY_OR_DIVIDE_REGEX.exec(newExpr)) !== null && _MULTIPLY_OR_DIVIDE_R !== void 0 ? _MULTIPLY_OR_DIVIDE_R : [], _ref4 = _slicedToArray3(_ref3, 4), leftOperand = _ref4[1], operator = _ref4[2], rightOperand = _ref4[3];
+    var lTs = DecimalCSS.parse(leftOperand !== null && leftOperand !== void 0 ? leftOperand : "");
+    var rTs = DecimalCSS.parse(rightOperand !== null && rightOperand !== void 0 ? rightOperand : "");
+    var result = operator === "*" ? lTs.multiply(rTs) : lTs.divide(rTs);
+    if (result.isNaN()) {
+      return STR_NAN;
+    }
+    newExpr = newExpr.replace(MULTIPLY_OR_DIVIDE_REGEX, result.toString());
+  }
+  while (newExpr.includes("+") || /.-\d+(?:\.\d+)?/.test(newExpr)) {
+    var _ADD_OR_SUBTRACT_REGE;
+    var _ref5 = (_ADD_OR_SUBTRACT_REGE = ADD_OR_SUBTRACT_REGEX.exec(newExpr)) !== null && _ADD_OR_SUBTRACT_REGE !== void 0 ? _ADD_OR_SUBTRACT_REGE : [], _ref6 = _slicedToArray3(_ref5, 4), _leftOperand = _ref6[1], _operator = _ref6[2], _rightOperand = _ref6[3];
+    var _lTs = DecimalCSS.parse(_leftOperand !== null && _leftOperand !== void 0 ? _leftOperand : "");
+    var _rTs = DecimalCSS.parse(_rightOperand !== null && _rightOperand !== void 0 ? _rightOperand : "");
+    var _result = _operator === "+" ? _lTs.add(_rTs) : _lTs.subtract(_rTs);
+    if (_result.isNaN()) {
+      return STR_NAN;
+    }
+    newExpr = newExpr.replace(ADD_OR_SUBTRACT_REGEX, _result.toString());
+  }
+  return newExpr;
+}
+var PARENTHESES_REGEX = /\(([^()]*)\)/;
+function calculateParentheses(expr) {
+  var newExpr = expr;
+  while (newExpr.includes("(")) {
+    var _PARENTHESES_REGEX$ex = PARENTHESES_REGEX.exec(newExpr), _PARENTHESES_REGEX$ex2 = _slicedToArray3(_PARENTHESES_REGEX$ex, 2), parentheticalExpression = _PARENTHESES_REGEX$ex2[1];
+    newExpr = newExpr.replace(PARENTHESES_REGEX, calculateArithmetic(parentheticalExpression));
+  }
+  return newExpr;
+}
+function evaluateExpression(expression) {
+  var newExpr = expression.replace(/\s+/g, "");
+  newExpr = calculateParentheses(newExpr);
+  newExpr = calculateArithmetic(newExpr);
+  return newExpr;
+}
+function safeEvaluateExpression(expression) {
+  try {
+    return evaluateExpression(expression);
+  } catch (e) {
+    return STR_NAN;
+  }
+}
+function reduceCSSCalc(expression) {
+  var result = safeEvaluateExpression(expression.slice(5, -1));
+  if (result === STR_NAN) {
+    return "";
+  }
+  return result;
+}
+
+// node_modules/recharts/es6/component/Text.js
+var _excluded7 = ["x", "y", "lineHeight", "capHeight", "scaleToFit", "textAnchor", "verticalAnchor", "fill"];
+var _excluded22 = ["dx", "dy", "angle", "className", "breakAll"];
+function _extends6() {
+  _extends6 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends6.apply(this, arguments);
+}
+function _objectWithoutProperties6(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose6(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose6(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _slicedToArray4(arr, i) {
+  return _arrayWithHoles4(arr) || _iterableToArrayLimit4(arr, i) || _unsupportedIterableToArray4(arr, i) || _nonIterableRest4();
+}
+function _nonIterableRest4() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray4(o, minLen) {
+  if (!o)
+    return;
+  if (typeof o === "string")
+    return _arrayLikeToArray4(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor)
+    n = o.constructor.name;
+  if (n === "Map" || n === "Set")
+    return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+    return _arrayLikeToArray4(o, minLen);
+}
+function _arrayLikeToArray4(arr, len) {
+  if (len == null || len > arr.length)
+    len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
+function _iterableToArrayLimit4(r2, l) {
+  var t = null == r2 ? null : "undefined" != typeof Symbol && r2[Symbol.iterator] || r2["@@iterator"];
+  if (null != t) {
+    var e, n, i, u, a2 = [], f = true, o = false;
+    try {
+      if (i = (t = t.call(r2)).next, 0 === l) {
+        if (Object(t) !== t)
+          return;
+        f = false;
+      } else
+        for (; !(f = (e = i.call(t)).done) && (a2.push(e.value), a2.length !== l); f = true)
+          ;
+    } catch (r3) {
+      o = true, n = r3;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u))
+          return;
+      } finally {
+        if (o)
+          throw n;
+      }
+    }
+    return a2;
+  }
+}
+function _arrayWithHoles4(arr) {
+  if (Array.isArray(arr))
+    return arr;
+}
+var BREAKING_SPACES = /[ \f\n\r\t\v\u2028\u2029]+/;
+var calculateWordWidths = function calculateWordWidths2(_ref) {
+  var children = _ref.children, breakAll = _ref.breakAll, style = _ref.style;
+  try {
+    var words = [];
+    if (!(0, import_isNil3.default)(children)) {
+      if (breakAll) {
+        words = children.toString().split("");
+      } else {
+        words = children.toString().split(BREAKING_SPACES);
+      }
+    }
+    var wordsWithComputedWidth = words.map(function(word) {
+      return {
+        word,
+        width: getStringSize(word, style).width
+      };
+    });
+    var spaceWidth = breakAll ? 0 : getStringSize("\xA0", style).width;
+    return {
+      wordsWithComputedWidth,
+      spaceWidth
+    };
+  } catch (e) {
+    return null;
+  }
+};
+var calculateWordsByLines = function calculateWordsByLines2(_ref2, initialWordsWithComputedWith, spaceWidth, lineWidth, scaleToFit) {
+  var maxLines = _ref2.maxLines, children = _ref2.children, style = _ref2.style, breakAll = _ref2.breakAll;
+  var shouldLimitLines = isNumber(maxLines);
+  var text = children;
+  var calculate = function calculate2() {
+    var words = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [];
+    return words.reduce(function(result2, _ref3) {
+      var word = _ref3.word, width = _ref3.width;
+      var currentLine = result2[result2.length - 1];
+      if (currentLine && (lineWidth == null || scaleToFit || currentLine.width + width + spaceWidth < Number(lineWidth))) {
+        currentLine.words.push(word);
+        currentLine.width += width + spaceWidth;
+      } else {
+        var newLine = {
+          words: [word],
+          width
+        };
+        result2.push(newLine);
+      }
+      return result2;
+    }, []);
+  };
+  var originalResult = calculate(initialWordsWithComputedWith);
+  var findLongestLine = function findLongestLine2(words) {
+    return words.reduce(function(a2, b) {
+      return a2.width > b.width ? a2 : b;
+    });
+  };
+  if (!shouldLimitLines) {
+    return originalResult;
+  }
+  var suffix = "\u2026";
+  var checkOverflow = function checkOverflow2(index) {
+    var tempText = text.slice(0, index);
+    var words = calculateWordWidths({
+      breakAll,
+      style,
+      children: tempText + suffix
+    }).wordsWithComputedWidth;
+    var result2 = calculate(words);
+    var doesOverflow = result2.length > maxLines || findLongestLine(result2).width > Number(lineWidth);
+    return [doesOverflow, result2];
+  };
+  var start = 0;
+  var end = text.length - 1;
+  var iterations = 0;
+  var trimmedResult;
+  while (start <= end && iterations <= text.length - 1) {
+    var middle = Math.floor((start + end) / 2);
+    var prev = middle - 1;
+    var _checkOverflow = checkOverflow(prev), _checkOverflow2 = _slicedToArray4(_checkOverflow, 2), doesPrevOverflow = _checkOverflow2[0], result = _checkOverflow2[1];
+    var _checkOverflow3 = checkOverflow(middle), _checkOverflow4 = _slicedToArray4(_checkOverflow3, 1), doesMiddleOverflow = _checkOverflow4[0];
+    if (!doesPrevOverflow && !doesMiddleOverflow) {
+      start = middle + 1;
+    }
+    if (doesPrevOverflow && doesMiddleOverflow) {
+      end = middle - 1;
+    }
+    if (!doesPrevOverflow && doesMiddleOverflow) {
+      trimmedResult = result;
+      break;
+    }
+    iterations++;
+  }
+  return trimmedResult || originalResult;
+};
+var getWordsWithoutCalculate = function getWordsWithoutCalculate2(children) {
+  var words = !(0, import_isNil3.default)(children) ? children.toString().split(BREAKING_SPACES) : [];
+  return [{
+    words
+  }];
+};
+var getWordsByLines = function getWordsByLines2(_ref4) {
+  var width = _ref4.width, scaleToFit = _ref4.scaleToFit, children = _ref4.children, style = _ref4.style, breakAll = _ref4.breakAll, maxLines = _ref4.maxLines;
+  if ((width || scaleToFit) && !Global.isSsr) {
+    var wordsWithComputedWidth, spaceWidth;
+    var wordWidths = calculateWordWidths({
+      breakAll,
+      children,
+      style
+    });
+    if (wordWidths) {
+      var wcw = wordWidths.wordsWithComputedWidth, sw = wordWidths.spaceWidth;
+      wordsWithComputedWidth = wcw;
+      spaceWidth = sw;
+    } else {
+      return getWordsWithoutCalculate(children);
+    }
+    return calculateWordsByLines({
+      breakAll,
+      children,
+      maxLines,
+      style
+    }, wordsWithComputedWidth, spaceWidth, width, scaleToFit);
+  }
+  return getWordsWithoutCalculate(children);
+};
+var DEFAULT_FILL = "#808080";
+var Text = function Text2(_ref5) {
+  var _ref5$x = _ref5.x, propsX = _ref5$x === void 0 ? 0 : _ref5$x, _ref5$y = _ref5.y, propsY = _ref5$y === void 0 ? 0 : _ref5$y, _ref5$lineHeight = _ref5.lineHeight, lineHeight = _ref5$lineHeight === void 0 ? "1em" : _ref5$lineHeight, _ref5$capHeight = _ref5.capHeight, capHeight = _ref5$capHeight === void 0 ? "0.71em" : _ref5$capHeight, _ref5$scaleToFit = _ref5.scaleToFit, scaleToFit = _ref5$scaleToFit === void 0 ? false : _ref5$scaleToFit, _ref5$textAnchor = _ref5.textAnchor, textAnchor = _ref5$textAnchor === void 0 ? "start" : _ref5$textAnchor, _ref5$verticalAnchor = _ref5.verticalAnchor, verticalAnchor = _ref5$verticalAnchor === void 0 ? "end" : _ref5$verticalAnchor, _ref5$fill = _ref5.fill, fill = _ref5$fill === void 0 ? DEFAULT_FILL : _ref5$fill, props = _objectWithoutProperties6(_ref5, _excluded7);
+  var wordsByLines = (0, import_react12.useMemo)(function() {
+    return getWordsByLines({
+      breakAll: props.breakAll,
+      children: props.children,
+      maxLines: props.maxLines,
+      scaleToFit,
+      style: props.style,
+      width: props.width
+    });
+  }, [props.breakAll, props.children, props.maxLines, scaleToFit, props.style, props.width]);
+  var dx = props.dx, dy = props.dy, angle = props.angle, className = props.className, breakAll = props.breakAll, textProps = _objectWithoutProperties6(props, _excluded22);
+  if (!isNumOrStr(propsX) || !isNumOrStr(propsY)) {
+    return null;
+  }
+  var x2 = propsX + (isNumber(dx) ? dx : 0);
+  var y2 = propsY + (isNumber(dy) ? dy : 0);
+  var startDy;
+  switch (verticalAnchor) {
+    case "start":
+      startDy = reduceCSSCalc("calc(".concat(capHeight, ")"));
+      break;
+    case "middle":
+      startDy = reduceCSSCalc("calc(".concat((wordsByLines.length - 1) / 2, " * -").concat(lineHeight, " + (").concat(capHeight, " / 2))"));
+      break;
+    default:
+      startDy = reduceCSSCalc("calc(".concat(wordsByLines.length - 1, " * -").concat(lineHeight, ")"));
+      break;
+  }
+  var transforms = [];
+  if (scaleToFit) {
+    var lineWidth = wordsByLines[0].width;
+    var width = props.width;
+    transforms.push("scale(".concat((isNumber(width) ? width / lineWidth : 1) / lineWidth, ")"));
+  }
+  if (angle) {
+    transforms.push("rotate(".concat(angle, ", ").concat(x2, ", ").concat(y2, ")"));
+  }
+  if (transforms.length) {
+    textProps.transform = transforms.join(" ");
+  }
+  return /* @__PURE__ */ import_react12.default.createElement("text", _extends6({}, filterProps(textProps, true), {
+    x: x2,
+    y: y2,
+    className: clsx_default("recharts-text", className),
+    textAnchor,
+    fill: fill.includes("url") ? DEFAULT_FILL : fill
+  }), wordsByLines.map(function(line, index) {
+    var words = line.words.join(breakAll ? "" : " ");
+    return (
+      // duplicate words will cause duplicate keys
+      // eslint-disable-next-line react/no-array-index-key
+      /* @__PURE__ */ import_react12.default.createElement("tspan", {
+        x: x2,
+        dy: index === 0 ? startDy : lineHeight,
+        key: "".concat(words, "-").concat(index)
+      }, words)
+    );
+  }));
+};
 
 // node_modules/recharts/es6/util/ChartUtils.js
 var import_max2 = __toESM(require_max());
@@ -13349,8 +13325,8 @@ function _iterableToArrayLimit5(arr, i) {
   var _d = false;
   var _e = void 0;
   try {
-    for (var _i = arr[Symbol.iterator](), _s2; !(_n = (_s2 = _i.next()).done); _n = true) {
-      _arr.push(_s2.value);
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
       if (i && _arr.length === i)
         break;
     }
@@ -13515,14 +13491,14 @@ var import_react13 = __toESM(require_react());
 // node_modules/tiny-invariant/dist/esm/tiny-invariant.js
 var isProduction = false;
 var prefix = "Invariant failed";
-function invariant(condition, message2) {
+function invariant(condition, message) {
   if (condition) {
     return;
   }
   if (isProduction) {
     throw new Error(prefix);
   }
-  var provided = typeof message2 === "function" ? message2() : message2;
+  var provided = typeof message === "function" ? message() : message;
   var value = provided ? "".concat(prefix, ": ").concat(provided) : prefix;
   throw new Error(value);
 }
@@ -14834,7 +14810,7 @@ var getTooltipItem = function getTooltipItem2(graphicalItem, payload) {
   });
 };
 
-// node_modules/recharts/es6/util/PolarUtils.js
+// node_modules/recharts/es6/util/CssPrefixUtils.js
 function _typeof16(o) {
   "@babel/helpers - typeof";
   return _typeof16 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -14884,6 +14860,722 @@ function _toPrimitive14(t, r2) {
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
     if ("object" != _typeof16(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var PREFIX_LIST = ["Webkit", "Moz", "O", "ms"];
+var generatePrefixStyle = function generatePrefixStyle2(name, value) {
+  if (!name) {
+    return null;
+  }
+  var camelName = name.replace(/(\w)/, function(v) {
+    return v.toUpperCase();
+  });
+  var result = PREFIX_LIST.reduce(function(res, entry) {
+    return _objectSpread11(_objectSpread11({}, res), {}, _defineProperty13({}, entry + camelName, value));
+  }, {});
+  result[name] = value;
+  return result;
+};
+
+// node_modules/recharts/es6/cartesian/Brush.js
+function _typeof17(o) {
+  "@babel/helpers - typeof";
+  return _typeof17 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof17(o);
+}
+function _extends8() {
+  _extends8 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends8.apply(this, arguments);
+}
+function ownKeys12(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread12(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys12(Object(t), true).forEach(function(r3) {
+      _defineProperty14(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys12(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _classCallCheck7(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _defineProperties7(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor)
+      descriptor.writable = true;
+    Object.defineProperty(target, _toPropertyKey15(descriptor.key), descriptor);
+  }
+}
+function _createClass7(Constructor, protoProps, staticProps) {
+  if (protoProps)
+    _defineProperties7(Constructor.prototype, protoProps);
+  if (staticProps)
+    _defineProperties7(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", { writable: false });
+  return Constructor;
+}
+function _callSuper6(t, o, e) {
+  return o = _getPrototypeOf6(o), _possibleConstructorReturn6(t, _isNativeReflectConstruct6() ? Reflect.construct(o, e || [], _getPrototypeOf6(t).constructor) : o.apply(t, e));
+}
+function _possibleConstructorReturn6(self2, call) {
+  if (call && (_typeof17(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+  return _assertThisInitialized6(self2);
+}
+function _assertThisInitialized6(self2) {
+  if (self2 === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self2;
+}
+function _isNativeReflectConstruct6() {
+  try {
+    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+    }));
+  } catch (t2) {
+  }
+  return (_isNativeReflectConstruct6 = function _isNativeReflectConstruct17() {
+    return !!t;
+  })();
+}
+function _getPrototypeOf6(o) {
+  _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
+    return o2.__proto__ || Object.getPrototypeOf(o2);
+  };
+  return _getPrototypeOf6(o);
+}
+function _inherits6(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+  Object.defineProperty(subClass, "prototype", { writable: false });
+  if (superClass)
+    _setPrototypeOf6(subClass, superClass);
+}
+function _setPrototypeOf6(o, p) {
+  _setPrototypeOf6 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
+    o2.__proto__ = p2;
+    return o2;
+  };
+  return _setPrototypeOf6(o, p);
+}
+function _defineProperty14(obj, key, value) {
+  key = _toPropertyKey15(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey15(t) {
+  var i = _toPrimitive15(t, "string");
+  return "symbol" == _typeof17(i) ? i : i + "";
+}
+function _toPrimitive15(t, r2) {
+  if ("object" != _typeof17(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof17(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var createScale = function createScale2(_ref) {
+  var data = _ref.data, startIndex = _ref.startIndex, endIndex = _ref.endIndex, x2 = _ref.x, width = _ref.width, travellerWidth = _ref.travellerWidth;
+  if (!data || !data.length) {
+    return {};
+  }
+  var len = data.length;
+  var scale = point3().domain((0, import_range2.default)(0, len)).range([x2, x2 + width - travellerWidth]);
+  var scaleValues = scale.domain().map(function(entry) {
+    return scale(entry);
+  });
+  return {
+    isTextActive: false,
+    isSlideMoving: false,
+    isTravellerMoving: false,
+    isTravellerFocused: false,
+    startX: scale(startIndex),
+    endX: scale(endIndex),
+    scale,
+    scaleValues
+  };
+};
+var isTouch = function isTouch2(e) {
+  return e.changedTouches && !!e.changedTouches.length;
+};
+var Brush = /* @__PURE__ */ function(_PureComponent) {
+  function Brush2(props) {
+    var _this;
+    _classCallCheck7(this, Brush2);
+    _this = _callSuper6(this, Brush2, [props]);
+    _defineProperty14(_this, "handleDrag", function(e) {
+      if (_this.leaveTimer) {
+        clearTimeout(_this.leaveTimer);
+        _this.leaveTimer = null;
+      }
+      if (_this.state.isTravellerMoving) {
+        _this.handleTravellerMove(e);
+      } else if (_this.state.isSlideMoving) {
+        _this.handleSlideDrag(e);
+      }
+    });
+    _defineProperty14(_this, "handleTouchMove", function(e) {
+      if (e.changedTouches != null && e.changedTouches.length > 0) {
+        _this.handleDrag(e.changedTouches[0]);
+      }
+    });
+    _defineProperty14(_this, "handleDragEnd", function() {
+      _this.setState({
+        isTravellerMoving: false,
+        isSlideMoving: false
+      }, function() {
+        var _this$props = _this.props, endIndex = _this$props.endIndex, onDragEnd = _this$props.onDragEnd, startIndex = _this$props.startIndex;
+        onDragEnd === null || onDragEnd === void 0 || onDragEnd({
+          endIndex,
+          startIndex
+        });
+      });
+      _this.detachDragEndListener();
+    });
+    _defineProperty14(_this, "handleLeaveWrapper", function() {
+      if (_this.state.isTravellerMoving || _this.state.isSlideMoving) {
+        _this.leaveTimer = window.setTimeout(_this.handleDragEnd, _this.props.leaveTimeOut);
+      }
+    });
+    _defineProperty14(_this, "handleEnterSlideOrTraveller", function() {
+      _this.setState({
+        isTextActive: true
+      });
+    });
+    _defineProperty14(_this, "handleLeaveSlideOrTraveller", function() {
+      _this.setState({
+        isTextActive: false
+      });
+    });
+    _defineProperty14(_this, "handleSlideDragStart", function(e) {
+      var event = isTouch(e) ? e.changedTouches[0] : e;
+      _this.setState({
+        isTravellerMoving: false,
+        isSlideMoving: true,
+        slideMoveStartX: event.pageX
+      });
+      _this.attachDragEndListener();
+    });
+    _this.travellerDragStartHandlers = {
+      startX: _this.handleTravellerDragStart.bind(_this, "startX"),
+      endX: _this.handleTravellerDragStart.bind(_this, "endX")
+    };
+    _this.state = {};
+    return _this;
+  }
+  _inherits6(Brush2, _PureComponent);
+  return _createClass7(Brush2, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      if (this.leaveTimer) {
+        clearTimeout(this.leaveTimer);
+        this.leaveTimer = null;
+      }
+      this.detachDragEndListener();
+    }
+  }, {
+    key: "getIndex",
+    value: function getIndex(_ref2) {
+      var startX = _ref2.startX, endX = _ref2.endX;
+      var scaleValues = this.state.scaleValues;
+      var _this$props2 = this.props, gap = _this$props2.gap, data = _this$props2.data;
+      var lastIndex = data.length - 1;
+      var min3 = Math.min(startX, endX);
+      var max3 = Math.max(startX, endX);
+      var minIndex = Brush2.getIndexInRange(scaleValues, min3);
+      var maxIndex = Brush2.getIndexInRange(scaleValues, max3);
+      return {
+        startIndex: minIndex - minIndex % gap,
+        endIndex: maxIndex === lastIndex ? lastIndex : maxIndex - maxIndex % gap
+      };
+    }
+  }, {
+    key: "getTextOfTick",
+    value: function getTextOfTick(index) {
+      var _this$props3 = this.props, data = _this$props3.data, tickFormatter = _this$props3.tickFormatter, dataKey = _this$props3.dataKey;
+      var text = getValueByDataKey(data[index], dataKey, index);
+      return (0, import_isFunction5.default)(tickFormatter) ? tickFormatter(text, index) : text;
+    }
+  }, {
+    key: "attachDragEndListener",
+    value: function attachDragEndListener() {
+      window.addEventListener("mouseup", this.handleDragEnd, true);
+      window.addEventListener("touchend", this.handleDragEnd, true);
+      window.addEventListener("mousemove", this.handleDrag, true);
+    }
+  }, {
+    key: "detachDragEndListener",
+    value: function detachDragEndListener() {
+      window.removeEventListener("mouseup", this.handleDragEnd, true);
+      window.removeEventListener("touchend", this.handleDragEnd, true);
+      window.removeEventListener("mousemove", this.handleDrag, true);
+    }
+  }, {
+    key: "handleSlideDrag",
+    value: function handleSlideDrag(e) {
+      var _this$state = this.state, slideMoveStartX = _this$state.slideMoveStartX, startX = _this$state.startX, endX = _this$state.endX;
+      var _this$props4 = this.props, x2 = _this$props4.x, width = _this$props4.width, travellerWidth = _this$props4.travellerWidth, startIndex = _this$props4.startIndex, endIndex = _this$props4.endIndex, onChange = _this$props4.onChange;
+      var delta = e.pageX - slideMoveStartX;
+      if (delta > 0) {
+        delta = Math.min(delta, x2 + width - travellerWidth - endX, x2 + width - travellerWidth - startX);
+      } else if (delta < 0) {
+        delta = Math.max(delta, x2 - startX, x2 - endX);
+      }
+      var newIndex = this.getIndex({
+        startX: startX + delta,
+        endX: endX + delta
+      });
+      if ((newIndex.startIndex !== startIndex || newIndex.endIndex !== endIndex) && onChange) {
+        onChange(newIndex);
+      }
+      this.setState({
+        startX: startX + delta,
+        endX: endX + delta,
+        slideMoveStartX: e.pageX
+      });
+    }
+  }, {
+    key: "handleTravellerDragStart",
+    value: function handleTravellerDragStart(id, e) {
+      var event = isTouch(e) ? e.changedTouches[0] : e;
+      this.setState({
+        isSlideMoving: false,
+        isTravellerMoving: true,
+        movingTravellerId: id,
+        brushMoveStartX: event.pageX
+      });
+      this.attachDragEndListener();
+    }
+  }, {
+    key: "handleTravellerMove",
+    value: function handleTravellerMove(e) {
+      var _this$state2 = this.state, brushMoveStartX = _this$state2.brushMoveStartX, movingTravellerId = _this$state2.movingTravellerId, endX = _this$state2.endX, startX = _this$state2.startX;
+      var prevValue = this.state[movingTravellerId];
+      var _this$props5 = this.props, x2 = _this$props5.x, width = _this$props5.width, travellerWidth = _this$props5.travellerWidth, onChange = _this$props5.onChange, gap = _this$props5.gap, data = _this$props5.data;
+      var params = {
+        startX: this.state.startX,
+        endX: this.state.endX
+      };
+      var delta = e.pageX - brushMoveStartX;
+      if (delta > 0) {
+        delta = Math.min(delta, x2 + width - travellerWidth - prevValue);
+      } else if (delta < 0) {
+        delta = Math.max(delta, x2 - prevValue);
+      }
+      params[movingTravellerId] = prevValue + delta;
+      var newIndex = this.getIndex(params);
+      var startIndex = newIndex.startIndex, endIndex = newIndex.endIndex;
+      var isFullGap = function isFullGap2() {
+        var lastIndex = data.length - 1;
+        if (movingTravellerId === "startX" && (endX > startX ? startIndex % gap === 0 : endIndex % gap === 0) || endX < startX && endIndex === lastIndex || movingTravellerId === "endX" && (endX > startX ? endIndex % gap === 0 : startIndex % gap === 0) || endX > startX && endIndex === lastIndex) {
+          return true;
+        }
+        return false;
+      };
+      this.setState(_defineProperty14(_defineProperty14({}, movingTravellerId, prevValue + delta), "brushMoveStartX", e.pageX), function() {
+        if (onChange) {
+          if (isFullGap()) {
+            onChange(newIndex);
+          }
+        }
+      });
+    }
+  }, {
+    key: "handleTravellerMoveKeyboard",
+    value: function handleTravellerMoveKeyboard(direction, id) {
+      var _this2 = this;
+      var _this$state3 = this.state, scaleValues = _this$state3.scaleValues, startX = _this$state3.startX, endX = _this$state3.endX;
+      var currentScaleValue = this.state[id];
+      var currentIndex = scaleValues.indexOf(currentScaleValue);
+      if (currentIndex === -1) {
+        return;
+      }
+      var newIndex = currentIndex + direction;
+      if (newIndex === -1 || newIndex >= scaleValues.length) {
+        return;
+      }
+      var newScaleValue = scaleValues[newIndex];
+      if (id === "startX" && newScaleValue >= endX || id === "endX" && newScaleValue <= startX) {
+        return;
+      }
+      this.setState(_defineProperty14({}, id, newScaleValue), function() {
+        _this2.props.onChange(_this2.getIndex({
+          startX: _this2.state.startX,
+          endX: _this2.state.endX
+        }));
+      });
+    }
+  }, {
+    key: "renderBackground",
+    value: function renderBackground() {
+      var _this$props6 = this.props, x2 = _this$props6.x, y2 = _this$props6.y, width = _this$props6.width, height = _this$props6.height, fill = _this$props6.fill, stroke = _this$props6.stroke;
+      return /* @__PURE__ */ import_react14.default.createElement("rect", {
+        stroke,
+        fill,
+        x: x2,
+        y: y2,
+        width,
+        height
+      });
+    }
+  }, {
+    key: "renderPanorama",
+    value: function renderPanorama() {
+      var _this$props7 = this.props, x2 = _this$props7.x, y2 = _this$props7.y, width = _this$props7.width, height = _this$props7.height, data = _this$props7.data, children = _this$props7.children, padding = _this$props7.padding;
+      var chartElement = import_react14.Children.only(children);
+      if (!chartElement) {
+        return null;
+      }
+      return /* @__PURE__ */ import_react14.default.cloneElement(chartElement, {
+        x: x2,
+        y: y2,
+        width,
+        height,
+        margin: padding,
+        compact: true,
+        data
+      });
+    }
+  }, {
+    key: "renderTravellerLayer",
+    value: function renderTravellerLayer(travellerX, id) {
+      var _data$startIndex, _data$endIndex, _this3 = this;
+      var _this$props8 = this.props, y2 = _this$props8.y, travellerWidth = _this$props8.travellerWidth, height = _this$props8.height, traveller = _this$props8.traveller, ariaLabel = _this$props8.ariaLabel, data = _this$props8.data, startIndex = _this$props8.startIndex, endIndex = _this$props8.endIndex;
+      var x2 = Math.max(travellerX, this.props.x);
+      var travellerProps = _objectSpread12(_objectSpread12({}, filterProps(this.props, false)), {}, {
+        x: x2,
+        y: y2,
+        width: travellerWidth,
+        height
+      });
+      var ariaLabelBrush = ariaLabel || "Min value: ".concat((_data$startIndex = data[startIndex]) === null || _data$startIndex === void 0 ? void 0 : _data$startIndex.name, ", Max value: ").concat((_data$endIndex = data[endIndex]) === null || _data$endIndex === void 0 ? void 0 : _data$endIndex.name);
+      return /* @__PURE__ */ import_react14.default.createElement(Layer, {
+        tabIndex: 0,
+        role: "slider",
+        "aria-label": ariaLabelBrush,
+        "aria-valuenow": travellerX,
+        className: "recharts-brush-traveller",
+        onMouseEnter: this.handleEnterSlideOrTraveller,
+        onMouseLeave: this.handleLeaveSlideOrTraveller,
+        onMouseDown: this.travellerDragStartHandlers[id],
+        onTouchStart: this.travellerDragStartHandlers[id],
+        onKeyDown: function onKeyDown(e) {
+          if (!["ArrowLeft", "ArrowRight"].includes(e.key)) {
+            return;
+          }
+          e.preventDefault();
+          e.stopPropagation();
+          _this3.handleTravellerMoveKeyboard(e.key === "ArrowRight" ? 1 : -1, id);
+        },
+        onFocus: function onFocus() {
+          _this3.setState({
+            isTravellerFocused: true
+          });
+        },
+        onBlur: function onBlur() {
+          _this3.setState({
+            isTravellerFocused: false
+          });
+        },
+        style: {
+          cursor: "col-resize"
+        }
+      }, Brush2.renderTraveller(traveller, travellerProps));
+    }
+  }, {
+    key: "renderSlide",
+    value: function renderSlide(startX, endX) {
+      var _this$props9 = this.props, y2 = _this$props9.y, height = _this$props9.height, stroke = _this$props9.stroke, travellerWidth = _this$props9.travellerWidth;
+      var x2 = Math.min(startX, endX) + travellerWidth;
+      var width = Math.max(Math.abs(endX - startX) - travellerWidth, 0);
+      return /* @__PURE__ */ import_react14.default.createElement("rect", {
+        className: "recharts-brush-slide",
+        onMouseEnter: this.handleEnterSlideOrTraveller,
+        onMouseLeave: this.handleLeaveSlideOrTraveller,
+        onMouseDown: this.handleSlideDragStart,
+        onTouchStart: this.handleSlideDragStart,
+        style: {
+          cursor: "move"
+        },
+        stroke: "none",
+        fill: stroke,
+        fillOpacity: 0.2,
+        x: x2,
+        y: y2,
+        width,
+        height
+      });
+    }
+  }, {
+    key: "renderText",
+    value: function renderText() {
+      var _this$props10 = this.props, startIndex = _this$props10.startIndex, endIndex = _this$props10.endIndex, y2 = _this$props10.y, height = _this$props10.height, travellerWidth = _this$props10.travellerWidth, stroke = _this$props10.stroke;
+      var _this$state4 = this.state, startX = _this$state4.startX, endX = _this$state4.endX;
+      var offset = 5;
+      var attrs = {
+        pointerEvents: "none",
+        fill: stroke
+      };
+      return /* @__PURE__ */ import_react14.default.createElement(Layer, {
+        className: "recharts-brush-texts"
+      }, /* @__PURE__ */ import_react14.default.createElement(Text, _extends8({
+        textAnchor: "end",
+        verticalAnchor: "middle",
+        x: Math.min(startX, endX) - offset,
+        y: y2 + height / 2
+      }, attrs), this.getTextOfTick(startIndex)), /* @__PURE__ */ import_react14.default.createElement(Text, _extends8({
+        textAnchor: "start",
+        verticalAnchor: "middle",
+        x: Math.max(startX, endX) + travellerWidth + offset,
+        y: y2 + height / 2
+      }, attrs), this.getTextOfTick(endIndex)));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props11 = this.props, data = _this$props11.data, className = _this$props11.className, children = _this$props11.children, x2 = _this$props11.x, y2 = _this$props11.y, width = _this$props11.width, height = _this$props11.height, alwaysShowText = _this$props11.alwaysShowText;
+      var _this$state5 = this.state, startX = _this$state5.startX, endX = _this$state5.endX, isTextActive = _this$state5.isTextActive, isSlideMoving = _this$state5.isSlideMoving, isTravellerMoving = _this$state5.isTravellerMoving, isTravellerFocused = _this$state5.isTravellerFocused;
+      if (!data || !data.length || !isNumber(x2) || !isNumber(y2) || !isNumber(width) || !isNumber(height) || width <= 0 || height <= 0) {
+        return null;
+      }
+      var layerClass = clsx_default("recharts-brush", className);
+      var isPanoramic = import_react14.default.Children.count(children) === 1;
+      var style = generatePrefixStyle("userSelect", "none");
+      return /* @__PURE__ */ import_react14.default.createElement(Layer, {
+        className: layerClass,
+        onMouseLeave: this.handleLeaveWrapper,
+        onTouchMove: this.handleTouchMove,
+        style
+      }, this.renderBackground(), isPanoramic && this.renderPanorama(), this.renderSlide(startX, endX), this.renderTravellerLayer(startX, "startX"), this.renderTravellerLayer(endX, "endX"), (isTextActive || isSlideMoving || isTravellerMoving || isTravellerFocused || alwaysShowText) && this.renderText());
+    }
+  }], [{
+    key: "renderDefaultTraveller",
+    value: function renderDefaultTraveller(props) {
+      var x2 = props.x, y2 = props.y, width = props.width, height = props.height, stroke = props.stroke;
+      var lineY = Math.floor(y2 + height / 2) - 1;
+      return /* @__PURE__ */ import_react14.default.createElement(import_react14.default.Fragment, null, /* @__PURE__ */ import_react14.default.createElement("rect", {
+        x: x2,
+        y: y2,
+        width,
+        height,
+        fill: stroke,
+        stroke: "none"
+      }), /* @__PURE__ */ import_react14.default.createElement("line", {
+        x1: x2 + 1,
+        y1: lineY,
+        x2: x2 + width - 1,
+        y2: lineY,
+        fill: "none",
+        stroke: "#fff"
+      }), /* @__PURE__ */ import_react14.default.createElement("line", {
+        x1: x2 + 1,
+        y1: lineY + 2,
+        x2: x2 + width - 1,
+        y2: lineY + 2,
+        fill: "none",
+        stroke: "#fff"
+      }));
+    }
+  }, {
+    key: "renderTraveller",
+    value: function renderTraveller(option, props) {
+      var rectangle;
+      if (/* @__PURE__ */ import_react14.default.isValidElement(option)) {
+        rectangle = /* @__PURE__ */ import_react14.default.cloneElement(option, props);
+      } else if ((0, import_isFunction5.default)(option)) {
+        rectangle = option(props);
+      } else {
+        rectangle = Brush2.renderDefaultTraveller(props);
+      }
+      return rectangle;
+    }
+  }, {
+    key: "getDerivedStateFromProps",
+    value: function getDerivedStateFromProps(nextProps, prevState) {
+      var data = nextProps.data, width = nextProps.width, x2 = nextProps.x, travellerWidth = nextProps.travellerWidth, updateId = nextProps.updateId, startIndex = nextProps.startIndex, endIndex = nextProps.endIndex;
+      if (data !== prevState.prevData || updateId !== prevState.prevUpdateId) {
+        return _objectSpread12({
+          prevData: data,
+          prevTravellerWidth: travellerWidth,
+          prevUpdateId: updateId,
+          prevX: x2,
+          prevWidth: width
+        }, data && data.length ? createScale({
+          data,
+          width,
+          x: x2,
+          travellerWidth,
+          startIndex,
+          endIndex
+        }) : {
+          scale: null,
+          scaleValues: null
+        });
+      }
+      if (prevState.scale && (width !== prevState.prevWidth || x2 !== prevState.prevX || travellerWidth !== prevState.prevTravellerWidth)) {
+        prevState.scale.range([x2, x2 + width - travellerWidth]);
+        var scaleValues = prevState.scale.domain().map(function(entry) {
+          return prevState.scale(entry);
+        });
+        return {
+          prevData: data,
+          prevTravellerWidth: travellerWidth,
+          prevUpdateId: updateId,
+          prevX: x2,
+          prevWidth: width,
+          startX: prevState.scale(nextProps.startIndex),
+          endX: prevState.scale(nextProps.endIndex),
+          scaleValues
+        };
+      }
+      return null;
+    }
+  }, {
+    key: "getIndexInRange",
+    value: function getIndexInRange(valueRange, x2) {
+      var len = valueRange.length;
+      var start = 0;
+      var end = len - 1;
+      while (end - start > 1) {
+        var middle = Math.floor((start + end) / 2);
+        if (valueRange[middle] > x2) {
+          end = middle;
+        } else {
+          start = middle;
+        }
+      }
+      return x2 >= valueRange[end] ? end : start;
+    }
+  }]);
+}(import_react14.PureComponent);
+_defineProperty14(Brush, "displayName", "Brush");
+_defineProperty14(Brush, "defaultProps", {
+  height: 40,
+  travellerWidth: 5,
+  gap: 1,
+  fill: "#fff",
+  stroke: "#666",
+  padding: {
+    top: 1,
+    right: 1,
+    bottom: 1,
+    left: 1
+  },
+  leaveTimeOut: 1e3,
+  alwaysShowText: false
+});
+
+// node_modules/recharts/es6/cartesian/ReferenceLine.js
+var import_react26 = __toESM(require_react());
+var import_isFunction10 = __toESM(require_isFunction());
+var import_some = __toESM(require_some());
+
+// node_modules/recharts/es6/component/Label.js
+var import_react16 = __toESM(require_react());
+var import_isNil6 = __toESM(require_isNil());
+var import_isFunction7 = __toESM(require_isFunction());
+var import_isObject3 = __toESM(require_isObject());
+
+// node_modules/recharts/es6/util/PolarUtils.js
+var import_isNil5 = __toESM(require_isNil());
+var import_react15 = __toESM(require_react());
+var import_isFunction6 = __toESM(require_isFunction());
+function _typeof18(o) {
+  "@babel/helpers - typeof";
+  return _typeof18 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof18(o);
+}
+function ownKeys13(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread13(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys13(Object(t), true).forEach(function(r3) {
+      _defineProperty15(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys13(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty15(obj, key, value) {
+  key = _toPropertyKey16(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey16(t) {
+  var i = _toPrimitive16(t, "string");
+  return "symbol" == _typeof18(i) ? i : i + "";
+}
+function _toPrimitive16(t, r2) {
+  if ("object" != _typeof18(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof18(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -14981,7 +15673,7 @@ var inRangeOfSector = function inRangeOfSector2(_ref5, sector) {
     inRange = formatAngle >= endAngle && formatAngle <= startAngle;
   }
   if (inRange) {
-    return _objectSpread11(_objectSpread11({}, sector), {}, {
+    return _objectSpread13(_objectSpread13({}, sector), {}, {
       radius,
       angle: reverseFormatAngleOfSetor(formatAngle, sector)
     });
@@ -14990,13 +15682,13 @@ var inRangeOfSector = function inRangeOfSector2(_ref5, sector) {
 };
 
 // node_modules/recharts/es6/component/Label.js
-function _typeof17(o) {
+function _typeof19(o) {
   "@babel/helpers - typeof";
-  return _typeof17 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof19 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof17(o);
+  }, _typeof19(o);
 }
 var _excluded9 = ["offset"];
 function _toConsumableArray4(arr) {
@@ -15064,7 +15756,7 @@ function _objectWithoutPropertiesLoose8(source, excluded) {
   }
   return target;
 }
-function ownKeys12(e, r2) {
+function ownKeys14(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -15074,19 +15766,19 @@ function ownKeys12(e, r2) {
   }
   return t;
 }
-function _objectSpread12(e) {
+function _objectSpread14(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys12(Object(t), true).forEach(function(r3) {
-      _defineProperty14(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys12(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys14(Object(t), true).forEach(function(r3) {
+      _defineProperty16(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys14(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty14(obj, key, value) {
-  key = _toPropertyKey15(key);
+function _defineProperty16(obj, key, value) {
+  key = _toPropertyKey17(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -15094,24 +15786,24 @@ function _defineProperty14(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey15(t) {
-  var i = _toPrimitive15(t, "string");
-  return "symbol" == _typeof17(i) ? i : i + "";
+function _toPropertyKey17(t) {
+  var i = _toPrimitive17(t, "string");
+  return "symbol" == _typeof19(i) ? i : i + "";
 }
-function _toPrimitive15(t, r2) {
-  if ("object" != _typeof17(t) || !t)
+function _toPrimitive17(t, r2) {
+  if ("object" != _typeof19(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof17(i))
+    if ("object" != _typeof19(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r2 ? String : Number)(t);
 }
-function _extends8() {
-  _extends8 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends9() {
+  _extends9 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -15122,12 +15814,12 @@ function _extends8() {
     }
     return target;
   };
-  return _extends8.apply(this, arguments);
+  return _extends9.apply(this, arguments);
 }
 var getLabel = function getLabel2(props) {
   var value = props.value, formatter = props.formatter;
   var label = (0, import_isNil6.default)(props.children) ? value : props.children;
-  if ((0, import_isFunction6.default)(formatter)) {
+  if ((0, import_isFunction7.default)(formatter)) {
     return formatter(label);
   }
   return label;
@@ -15159,13 +15851,13 @@ var renderRadialLabel = function renderRadialLabel2(labelProps, label, attrs) {
   var endPoint = polarToCartesian(cx, cy, radius, labelAngle + (direction ? 1 : -1) * 359);
   var path2 = "M".concat(startPoint.x, ",").concat(startPoint.y, "\n    A").concat(radius, ",").concat(radius, ",0,1,").concat(direction ? 0 : 1, ",\n    ").concat(endPoint.x, ",").concat(endPoint.y);
   var id = (0, import_isNil6.default)(labelProps.id) ? uniqueId("recharts-radial-line-") : labelProps.id;
-  return /* @__PURE__ */ import_react15.default.createElement("text", _extends8({}, attrs, {
+  return /* @__PURE__ */ import_react16.default.createElement("text", _extends9({}, attrs, {
     dominantBaseline: "central",
     className: clsx_default("recharts-radial-bar-label", className)
-  }), /* @__PURE__ */ import_react15.default.createElement("defs", null, /* @__PURE__ */ import_react15.default.createElement("path", {
+  }), /* @__PURE__ */ import_react16.default.createElement("defs", null, /* @__PURE__ */ import_react16.default.createElement("path", {
     id,
     d: path2
-  })), /* @__PURE__ */ import_react15.default.createElement("textPath", {
+  })), /* @__PURE__ */ import_react16.default.createElement("textPath", {
     xlinkHref: "#".concat(id)
   }, label));
 };
@@ -15233,7 +15925,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
       textAnchor: "middle",
       verticalAnchor: verticalEnd
     };
-    return _objectSpread12(_objectSpread12({}, attrs), parentViewBox ? {
+    return _objectSpread14(_objectSpread14({}, attrs), parentViewBox ? {
       height: Math.max(y2 - parentViewBox.y, 0),
       width
     } : {});
@@ -15245,7 +15937,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
       textAnchor: "middle",
       verticalAnchor: verticalStart
     };
-    return _objectSpread12(_objectSpread12({}, _attrs), parentViewBox ? {
+    return _objectSpread14(_objectSpread14({}, _attrs), parentViewBox ? {
       height: Math.max(parentViewBox.y + parentViewBox.height - (y2 + height), 0),
       width
     } : {});
@@ -15257,7 +15949,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
       textAnchor: horizontalEnd,
       verticalAnchor: "middle"
     };
-    return _objectSpread12(_objectSpread12({}, _attrs2), parentViewBox ? {
+    return _objectSpread14(_objectSpread14({}, _attrs2), parentViewBox ? {
       width: Math.max(_attrs2.x - parentViewBox.x, 0),
       height
     } : {});
@@ -15269,7 +15961,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
       textAnchor: horizontalStart,
       verticalAnchor: "middle"
     };
-    return _objectSpread12(_objectSpread12({}, _attrs3), parentViewBox ? {
+    return _objectSpread14(_objectSpread14({}, _attrs3), parentViewBox ? {
       width: Math.max(parentViewBox.x + parentViewBox.width - _attrs3.x, 0),
       height
     } : {});
@@ -15279,7 +15971,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     height
   } : {};
   if (position === "insideLeft") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + horizontalOffset,
       y: y2 + height / 2,
       textAnchor: horizontalStart,
@@ -15287,7 +15979,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideRight") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + width - horizontalOffset,
       y: y2 + height / 2,
       textAnchor: horizontalEnd,
@@ -15295,7 +15987,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideTop") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + width / 2,
       y: y2 + verticalOffset,
       textAnchor: "middle",
@@ -15303,7 +15995,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideBottom") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + width / 2,
       y: y2 + height - verticalOffset,
       textAnchor: "middle",
@@ -15311,7 +16003,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideTopLeft") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + horizontalOffset,
       y: y2 + verticalOffset,
       textAnchor: horizontalStart,
@@ -15319,7 +16011,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideTopRight") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + width - horizontalOffset,
       y: y2 + verticalOffset,
       textAnchor: horizontalEnd,
@@ -15327,7 +16019,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideBottomLeft") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + horizontalOffset,
       y: y2 + height - verticalOffset,
       textAnchor: horizontalStart,
@@ -15335,7 +16027,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if (position === "insideBottomRight") {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + width - horizontalOffset,
       y: y2 + height - verticalOffset,
       textAnchor: horizontalEnd,
@@ -15343,14 +16035,14 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel2(props) {
     }, sizeAttrs);
   }
   if ((0, import_isObject3.default)(position) && (isNumber(position.x) || isPercent(position.x)) && (isNumber(position.y) || isPercent(position.y))) {
-    return _objectSpread12({
+    return _objectSpread14({
       x: x2 + getPercentValue(position.x, width),
       y: y2 + getPercentValue(position.y, height),
       textAnchor: "end",
       verticalAnchor: "end"
     }, sizeAttrs);
   }
-  return _objectSpread12({
+  return _objectSpread14({
     x: x2 + width / 2,
     y: y2 + height / 2,
     textAnchor: "middle",
@@ -15362,20 +16054,20 @@ var isPolar = function isPolar2(viewBox) {
 };
 function Label(_ref4) {
   var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties8(_ref4, _excluded9);
-  var props = _objectSpread12({
+  var props = _objectSpread14({
     offset
   }, restProps);
   var viewBox = props.viewBox, position = props.position, value = props.value, children = props.children, content = props.content, _props$className = props.className, className = _props$className === void 0 ? "" : _props$className, textBreakAll = props.textBreakAll;
-  if (!viewBox || (0, import_isNil6.default)(value) && (0, import_isNil6.default)(children) && !/* @__PURE__ */ (0, import_react15.isValidElement)(content) && !(0, import_isFunction6.default)(content)) {
+  if (!viewBox || (0, import_isNil6.default)(value) && (0, import_isNil6.default)(children) && !/* @__PURE__ */ (0, import_react16.isValidElement)(content) && !(0, import_isFunction7.default)(content)) {
     return null;
   }
-  if (/* @__PURE__ */ (0, import_react15.isValidElement)(content)) {
-    return /* @__PURE__ */ (0, import_react15.cloneElement)(content, props);
+  if (/* @__PURE__ */ (0, import_react16.isValidElement)(content)) {
+    return /* @__PURE__ */ (0, import_react16.cloneElement)(content, props);
   }
   var label;
-  if ((0, import_isFunction6.default)(content)) {
-    label = /* @__PURE__ */ (0, import_react15.createElement)(content, props);
-    if (/* @__PURE__ */ (0, import_react15.isValidElement)(label)) {
+  if ((0, import_isFunction7.default)(content)) {
+    label = /* @__PURE__ */ (0, import_react16.createElement)(content, props);
+    if (/* @__PURE__ */ (0, import_react16.isValidElement)(label)) {
       return label;
     }
   } else {
@@ -15387,7 +16079,7 @@ function Label(_ref4) {
     return renderRadialLabel(props, label, attrs);
   }
   var positionAttrs = isPolarLabel ? getAttrsOfPolarLabel(props) : getAttrsOfCartesianLabel(props);
-  return /* @__PURE__ */ import_react15.default.createElement(Text, _extends8({
+  return /* @__PURE__ */ import_react16.default.createElement(Text, _extends9({
     className: clsx_default("recharts-label", className)
   }, attrs, positionAttrs, {
     breakAll: textBreakAll
@@ -15446,40 +16138,40 @@ var parseLabel = function parseLabel2(label, viewBox) {
     return null;
   }
   if (label === true) {
-    return /* @__PURE__ */ import_react15.default.createElement(Label, {
+    return /* @__PURE__ */ import_react16.default.createElement(Label, {
       key: "label-implicit",
       viewBox
     });
   }
   if (isNumOrStr(label)) {
-    return /* @__PURE__ */ import_react15.default.createElement(Label, {
+    return /* @__PURE__ */ import_react16.default.createElement(Label, {
       key: "label-implicit",
       viewBox,
       value: label
     });
   }
-  if (/* @__PURE__ */ (0, import_react15.isValidElement)(label)) {
+  if (/* @__PURE__ */ (0, import_react16.isValidElement)(label)) {
     if (label.type === Label) {
-      return /* @__PURE__ */ (0, import_react15.cloneElement)(label, {
+      return /* @__PURE__ */ (0, import_react16.cloneElement)(label, {
         key: "label-implicit",
         viewBox
       });
     }
-    return /* @__PURE__ */ import_react15.default.createElement(Label, {
+    return /* @__PURE__ */ import_react16.default.createElement(Label, {
       key: "label-implicit",
       content: label,
       viewBox
     });
   }
-  if ((0, import_isFunction6.default)(label)) {
-    return /* @__PURE__ */ import_react15.default.createElement(Label, {
+  if ((0, import_isFunction7.default)(label)) {
+    return /* @__PURE__ */ import_react16.default.createElement(Label, {
       key: "label-implicit",
       content: label,
       viewBox
     });
   }
   if ((0, import_isObject3.default)(label)) {
-    return /* @__PURE__ */ import_react15.default.createElement(Label, _extends8({
+    return /* @__PURE__ */ import_react16.default.createElement(Label, _extends9({
       viewBox
     }, label, {
       key: "label-implicit"
@@ -15495,7 +16187,7 @@ var renderCallByParent = function renderCallByParent2(parentProps, viewBox) {
   var children = parentProps.children;
   var parentViewBox = parseViewBox(parentProps);
   var explicitChildren = findAllByType(children, Label).map(function(child, index) {
-    return /* @__PURE__ */ (0, import_react15.cloneElement)(child, {
+    return /* @__PURE__ */ (0, import_react16.cloneElement)(child, {
       viewBox: viewBox || parentViewBox,
       // eslint-disable-next-line react/no-array-index-key
       key: "label-".concat(index)
@@ -15510,609 +16202,25 @@ var renderCallByParent = function renderCallByParent2(parentProps, viewBox) {
 Label.parseViewBox = parseViewBox;
 Label.renderCallByParent = renderCallByParent;
 
-// node_modules/recharts/es6/component/LabelList.js
-var import_react16 = __toESM(require_react());
-var import_isNil7 = __toESM(require_isNil());
-var import_isObject4 = __toESM(require_isObject());
-var import_isFunction7 = __toESM(require_isFunction());
-var import_last = __toESM(require_last());
-function _typeof18(o) {
-  "@babel/helpers - typeof";
-  return _typeof18 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof18(o);
-}
-var _excluded10 = ["valueAccessor"];
-var _excluded23 = ["data", "dataKey", "clockWise", "id", "textBreakAll"];
-function _toConsumableArray5(arr) {
-  return _arrayWithoutHoles5(arr) || _iterableToArray5(arr) || _unsupportedIterableToArray10(arr) || _nonIterableSpread5();
-}
-function _nonIterableSpread5() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _unsupportedIterableToArray10(o, minLen) {
-  if (!o)
-    return;
-  if (typeof o === "string")
-    return _arrayLikeToArray10(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor)
-    n = o.constructor.name;
-  if (n === "Map" || n === "Set")
-    return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray10(o, minLen);
-}
-function _iterableToArray5(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
-    return Array.from(iter);
-}
-function _arrayWithoutHoles5(arr) {
-  if (Array.isArray(arr))
-    return _arrayLikeToArray10(arr);
-}
-function _arrayLikeToArray10(arr, len) {
-  if (len == null || len > arr.length)
-    len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++)
-    arr2[i] = arr[i];
-  return arr2;
-}
-function _extends9() {
-  _extends9 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends9.apply(this, arguments);
-}
-function ownKeys13(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
+// node_modules/recharts/es6/util/IfOverflowMatches.js
+var ifOverflowMatches = function ifOverflowMatches2(props, value) {
+  var alwaysShow = props.alwaysShow;
+  var ifOverflow = props.ifOverflow;
+  if (alwaysShow) {
+    ifOverflow = "extendDomain";
   }
-  return t;
-}
-function _objectSpread13(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys13(Object(t), true).forEach(function(r3) {
-      _defineProperty15(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys13(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty15(obj, key, value) {
-  key = _toPropertyKey16(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey16(t) {
-  var i = _toPrimitive16(t, "string");
-  return "symbol" == _typeof18(i) ? i : i + "";
-}
-function _toPrimitive16(t, r2) {
-  if ("object" != _typeof18(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof18(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-function _objectWithoutProperties9(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose9(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose9(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-var defaultAccessor = function defaultAccessor2(entry) {
-  return Array.isArray(entry.value) ? (0, import_last.default)(entry.value) : entry.value;
-};
-function LabelList(_ref) {
-  var _ref$valueAccessor = _ref.valueAccessor, valueAccessor = _ref$valueAccessor === void 0 ? defaultAccessor : _ref$valueAccessor, restProps = _objectWithoutProperties9(_ref, _excluded10);
-  var data = restProps.data, dataKey = restProps.dataKey, clockWise = restProps.clockWise, id = restProps.id, textBreakAll = restProps.textBreakAll, others = _objectWithoutProperties9(restProps, _excluded23);
-  if (!data || !data.length) {
-    return null;
-  }
-  return /* @__PURE__ */ import_react16.default.createElement(Layer, {
-    className: "recharts-label-list"
-  }, data.map(function(entry, index) {
-    var value = (0, import_isNil7.default)(dataKey) ? valueAccessor(entry, index) : getValueByDataKey(entry && entry.payload, dataKey);
-    var idProps = (0, import_isNil7.default)(id) ? {} : {
-      id: "".concat(id, "-").concat(index)
-    };
-    return /* @__PURE__ */ import_react16.default.createElement(Label, _extends9({}, filterProps(entry, true), others, idProps, {
-      parentViewBox: entry.parentViewBox,
-      value,
-      textBreakAll,
-      viewBox: Label.parseViewBox((0, import_isNil7.default)(clockWise) ? entry : _objectSpread13(_objectSpread13({}, entry), {}, {
-        clockWise
-      })),
-      key: "label-".concat(index),
-      index
-    }));
-  }));
-}
-LabelList.displayName = "LabelList";
-function parseLabelList(label, data) {
-  if (!label) {
-    return null;
-  }
-  if (label === true) {
-    return /* @__PURE__ */ import_react16.default.createElement(LabelList, {
-      key: "labelList-implicit",
-      data
-    });
-  }
-  if (/* @__PURE__ */ import_react16.default.isValidElement(label) || (0, import_isFunction7.default)(label)) {
-    return /* @__PURE__ */ import_react16.default.createElement(LabelList, {
-      key: "labelList-implicit",
-      data,
-      content: label
-    });
-  }
-  if ((0, import_isObject4.default)(label)) {
-    return /* @__PURE__ */ import_react16.default.createElement(LabelList, _extends9({
-      data
-    }, label, {
-      key: "labelList-implicit"
-    }));
-  }
-  return null;
-}
-function renderCallByParent3(parentProps, data) {
-  var checkPropsLabel = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true;
-  if (!parentProps || !parentProps.children && checkPropsLabel && !parentProps.label) {
-    return null;
-  }
-  var children = parentProps.children;
-  var explicitChildren = findAllByType(children, LabelList).map(function(child, index) {
-    return /* @__PURE__ */ (0, import_react16.cloneElement)(child, {
-      data,
-      // eslint-disable-next-line react/no-array-index-key
-      key: "labelList-".concat(index)
-    });
-  });
-  if (!checkPropsLabel) {
-    return explicitChildren;
-  }
-  var implicitLabelList = parseLabelList(parentProps.label, data);
-  return [implicitLabelList].concat(_toConsumableArray5(explicitChildren));
-}
-LabelList.renderCallByParent = renderCallByParent3;
-
-// node_modules/recharts/es6/shape/Sector.js
-var import_react17 = __toESM(require_react());
-function _typeof19(o) {
-  "@babel/helpers - typeof";
-  return _typeof19 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof19(o);
-}
-function _extends10() {
-  _extends10 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends10.apply(this, arguments);
-}
-function ownKeys14(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread14(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys14(Object(t), true).forEach(function(r3) {
-      _defineProperty16(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys14(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty16(obj, key, value) {
-  key = _toPropertyKey17(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey17(t) {
-  var i = _toPrimitive17(t, "string");
-  return "symbol" == _typeof19(i) ? i : i + "";
-}
-function _toPrimitive17(t, r2) {
-  if ("object" != _typeof19(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof19(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var getDeltaAngle3 = function getDeltaAngle4(startAngle, endAngle) {
-  var sign2 = mathSign(endAngle - startAngle);
-  var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 359.999);
-  return sign2 * deltaAngle;
-};
-var getTangentCircle = function getTangentCircle2(_ref) {
-  var cx = _ref.cx, cy = _ref.cy, radius = _ref.radius, angle = _ref.angle, sign2 = _ref.sign, isExternal = _ref.isExternal, cornerRadius = _ref.cornerRadius, cornerIsExternal = _ref.cornerIsExternal;
-  var centerRadius = cornerRadius * (isExternal ? 1 : -1) + radius;
-  var theta = Math.asin(cornerRadius / centerRadius) / RADIAN2;
-  var centerAngle = cornerIsExternal ? angle : angle + sign2 * theta;
-  var center = polarToCartesian(cx, cy, centerRadius, centerAngle);
-  var circleTangency = polarToCartesian(cx, cy, radius, centerAngle);
-  var lineTangencyAngle = cornerIsExternal ? angle - sign2 * theta : angle;
-  var lineTangency = polarToCartesian(cx, cy, centerRadius * Math.cos(theta * RADIAN2), lineTangencyAngle);
-  return {
-    center,
-    circleTangency,
-    lineTangency,
-    theta
-  };
-};
-var getSectorPath = function getSectorPath2(_ref2) {
-  var cx = _ref2.cx, cy = _ref2.cy, innerRadius = _ref2.innerRadius, outerRadius = _ref2.outerRadius, startAngle = _ref2.startAngle, endAngle = _ref2.endAngle;
-  var angle = getDeltaAngle3(startAngle, endAngle);
-  var tempEndAngle = startAngle + angle;
-  var outerStartPoint = polarToCartesian(cx, cy, outerRadius, startAngle);
-  var outerEndPoint = polarToCartesian(cx, cy, outerRadius, tempEndAngle);
-  var path2 = "M ".concat(outerStartPoint.x, ",").concat(outerStartPoint.y, "\n    A ").concat(outerRadius, ",").concat(outerRadius, ",0,\n    ").concat(+(Math.abs(angle) > 180), ",").concat(+(startAngle > tempEndAngle), ",\n    ").concat(outerEndPoint.x, ",").concat(outerEndPoint.y, "\n  ");
-  if (innerRadius > 0) {
-    var innerStartPoint = polarToCartesian(cx, cy, innerRadius, startAngle);
-    var innerEndPoint = polarToCartesian(cx, cy, innerRadius, tempEndAngle);
-    path2 += "L ".concat(innerEndPoint.x, ",").concat(innerEndPoint.y, "\n            A ").concat(innerRadius, ",").concat(innerRadius, ",0,\n            ").concat(+(Math.abs(angle) > 180), ",").concat(+(startAngle <= tempEndAngle), ",\n            ").concat(innerStartPoint.x, ",").concat(innerStartPoint.y, " Z");
-  } else {
-    path2 += "L ".concat(cx, ",").concat(cy, " Z");
-  }
-  return path2;
-};
-var getSectorWithCorner = function getSectorWithCorner2(_ref3) {
-  var cx = _ref3.cx, cy = _ref3.cy, innerRadius = _ref3.innerRadius, outerRadius = _ref3.outerRadius, cornerRadius = _ref3.cornerRadius, forceCornerRadius = _ref3.forceCornerRadius, cornerIsExternal = _ref3.cornerIsExternal, startAngle = _ref3.startAngle, endAngle = _ref3.endAngle;
-  var sign2 = mathSign(endAngle - startAngle);
-  var _getTangentCircle = getTangentCircle({
-    cx,
-    cy,
-    radius: outerRadius,
-    angle: startAngle,
-    sign: sign2,
-    cornerRadius,
-    cornerIsExternal
-  }), soct = _getTangentCircle.circleTangency, solt = _getTangentCircle.lineTangency, sot = _getTangentCircle.theta;
-  var _getTangentCircle2 = getTangentCircle({
-    cx,
-    cy,
-    radius: outerRadius,
-    angle: endAngle,
-    sign: -sign2,
-    cornerRadius,
-    cornerIsExternal
-  }), eoct = _getTangentCircle2.circleTangency, eolt = _getTangentCircle2.lineTangency, eot = _getTangentCircle2.theta;
-  var outerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sot - eot;
-  if (outerArcAngle < 0) {
-    if (forceCornerRadius) {
-      return "M ".concat(solt.x, ",").concat(solt.y, "\n        a").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,1,").concat(cornerRadius * 2, ",0\n        a").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,1,").concat(-cornerRadius * 2, ",0\n      ");
-    }
-    return getSectorPath({
-      cx,
-      cy,
-      innerRadius,
-      outerRadius,
-      startAngle,
-      endAngle
-    });
-  }
-  var path2 = "M ".concat(solt.x, ",").concat(solt.y, "\n    A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(soct.x, ",").concat(soct.y, "\n    A").concat(outerRadius, ",").concat(outerRadius, ",0,").concat(+(outerArcAngle > 180), ",").concat(+(sign2 < 0), ",").concat(eoct.x, ",").concat(eoct.y, "\n    A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(eolt.x, ",").concat(eolt.y, "\n  ");
-  if (innerRadius > 0) {
-    var _getTangentCircle3 = getTangentCircle({
-      cx,
-      cy,
-      radius: innerRadius,
-      angle: startAngle,
-      sign: sign2,
-      isExternal: true,
-      cornerRadius,
-      cornerIsExternal
-    }), sict = _getTangentCircle3.circleTangency, silt = _getTangentCircle3.lineTangency, sit = _getTangentCircle3.theta;
-    var _getTangentCircle4 = getTangentCircle({
-      cx,
-      cy,
-      radius: innerRadius,
-      angle: endAngle,
-      sign: -sign2,
-      isExternal: true,
-      cornerRadius,
-      cornerIsExternal
-    }), eict = _getTangentCircle4.circleTangency, eilt = _getTangentCircle4.lineTangency, eit = _getTangentCircle4.theta;
-    var innerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sit - eit;
-    if (innerArcAngle < 0 && cornerRadius === 0) {
-      return "".concat(path2, "L").concat(cx, ",").concat(cy, "Z");
-    }
-    path2 += "L".concat(eilt.x, ",").concat(eilt.y, "\n      A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(eict.x, ",").concat(eict.y, "\n      A").concat(innerRadius, ",").concat(innerRadius, ",0,").concat(+(innerArcAngle > 180), ",").concat(+(sign2 > 0), ",").concat(sict.x, ",").concat(sict.y, "\n      A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(silt.x, ",").concat(silt.y, "Z");
-  } else {
-    path2 += "L".concat(cx, ",").concat(cy, "Z");
-  }
-  return path2;
-};
-var defaultProps = {
-  cx: 0,
-  cy: 0,
-  innerRadius: 0,
-  outerRadius: 0,
-  startAngle: 0,
-  endAngle: 0,
-  cornerRadius: 0,
-  forceCornerRadius: false,
-  cornerIsExternal: false
-};
-var Sector = function Sector2(sectorProps) {
-  var props = _objectSpread14(_objectSpread14({}, defaultProps), sectorProps);
-  var cx = props.cx, cy = props.cy, innerRadius = props.innerRadius, outerRadius = props.outerRadius, cornerRadius = props.cornerRadius, forceCornerRadius = props.forceCornerRadius, cornerIsExternal = props.cornerIsExternal, startAngle = props.startAngle, endAngle = props.endAngle, className = props.className;
-  if (outerRadius < innerRadius || startAngle === endAngle) {
-    return null;
-  }
-  var layerClass = clsx_default("recharts-sector", className);
-  var deltaRadius = outerRadius - innerRadius;
-  var cr = getPercentValue(cornerRadius, deltaRadius, 0, true);
-  var path2;
-  if (cr > 0 && Math.abs(startAngle - endAngle) < 360) {
-    path2 = getSectorWithCorner({
-      cx,
-      cy,
-      innerRadius,
-      outerRadius,
-      cornerRadius: Math.min(cr, deltaRadius / 2),
-      forceCornerRadius,
-      cornerIsExternal,
-      startAngle,
-      endAngle
-    });
-  } else {
-    path2 = getSectorPath({
-      cx,
-      cy,
-      innerRadius,
-      outerRadius,
-      startAngle,
-      endAngle
-    });
-  }
-  return /* @__PURE__ */ import_react17.default.createElement("path", _extends10({}, filterProps(props, true), {
-    className: layerClass,
-    d: path2,
-    role: "img"
-  }));
+  return ifOverflow === value;
 };
 
-// node_modules/recharts/es6/shape/Curve.js
-var import_react18 = __toESM(require_react());
-var import_upperFirst3 = __toESM(require_upperFirst());
-var import_isFunction8 = __toESM(require_isFunction());
-function _typeof20(o) {
-  "@babel/helpers - typeof";
-  return _typeof20 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof20(o);
-}
-function _extends11() {
-  _extends11 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends11.apply(this, arguments);
-}
-function ownKeys15(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread15(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys15(Object(t), true).forEach(function(r3) {
-      _defineProperty17(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys15(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty17(obj, key, value) {
-  key = _toPropertyKey18(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey18(t) {
-  var i = _toPrimitive18(t, "string");
-  return "symbol" == _typeof20(i) ? i : i + "";
-}
-function _toPrimitive18(t, r2) {
-  if ("object" != _typeof20(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof20(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var CURVE_FACTORIES = {
-  curveBasisClosed: basisClosed_default,
-  curveBasisOpen: basisOpen_default,
-  curveBasis: basis_default,
-  curveBumpX: bumpX,
-  curveBumpY: bumpY,
-  curveLinearClosed: linearClosed_default,
-  curveLinear: linear_default,
-  curveMonotoneX: monotoneX,
-  curveMonotoneY: monotoneY,
-  curveNatural: natural_default,
-  curveStep: step_default,
-  curveStepAfter: stepAfter,
-  curveStepBefore: stepBefore
-};
-var defined = function defined2(p) {
-  return p.x === +p.x && p.y === +p.y;
-};
-var getX = function getX2(p) {
-  return p.x;
-};
-var getY = function getY2(p) {
-  return p.y;
-};
-var getCurveFactory = function getCurveFactory2(type, layout) {
-  if ((0, import_isFunction8.default)(type)) {
-    return type;
-  }
-  var name = "curve".concat((0, import_upperFirst3.default)(type));
-  if ((name === "curveMonotone" || name === "curveBump") && layout) {
-    return CURVE_FACTORIES["".concat(name).concat(layout === "vertical" ? "Y" : "X")];
-  }
-  return CURVE_FACTORIES[name] || linear_default;
-};
-var getPath = function getPath2(_ref) {
-  var _ref$type = _ref.type, type = _ref$type === void 0 ? "linear" : _ref$type, _ref$points = _ref.points, points = _ref$points === void 0 ? [] : _ref$points, baseLine = _ref.baseLine, layout = _ref.layout, _ref$connectNulls = _ref.connectNulls, connectNulls = _ref$connectNulls === void 0 ? false : _ref$connectNulls;
-  var curveFactory = getCurveFactory(type, layout);
-  var formatPoints = connectNulls ? points.filter(function(entry) {
-    return defined(entry);
-  }) : points;
-  var lineFunction;
-  if (Array.isArray(baseLine)) {
-    var formatBaseLine = connectNulls ? baseLine.filter(function(base) {
-      return defined(base);
-    }) : baseLine;
-    var areaPoints = formatPoints.map(function(entry, index) {
-      return _objectSpread15(_objectSpread15({}, entry), {}, {
-        base: formatBaseLine[index]
-      });
-    });
-    if (layout === "vertical") {
-      lineFunction = area_default().y(getY).x1(getX).x0(function(d) {
-        return d.base.x;
-      });
-    } else {
-      lineFunction = area_default().x(getX).y1(getY).y0(function(d) {
-        return d.base.y;
-      });
-    }
-    lineFunction.defined(defined).curve(curveFactory);
-    return lineFunction(areaPoints);
-  }
-  if (layout === "vertical" && isNumber(baseLine)) {
-    lineFunction = area_default().y(getY).x1(getX).x0(baseLine);
-  } else if (isNumber(baseLine)) {
-    lineFunction = area_default().x(getX).y1(getY).y0(baseLine);
-  } else {
-    lineFunction = line_default().x(getX).y(getY);
-  }
-  lineFunction.defined(defined).curve(curveFactory);
-  return lineFunction(formatPoints);
-};
-var Curve = function Curve2(props) {
-  var className = props.className, points = props.points, path2 = props.path, pathRef = props.pathRef;
-  if ((!points || !points.length) && !path2) {
-    return null;
-  }
-  var realPath = points && points.length ? getPath(props) : path2;
-  return /* @__PURE__ */ import_react18.default.createElement("path", _extends11({}, filterProps(props, false), adaptEventHandlers(props), {
-    className: clsx_default("recharts-curve", className),
-    d: realPath,
-    ref: pathRef
-  }));
-};
+// node_modules/recharts/es6/util/CartesianUtils.js
+var import_mapValues = __toESM(require_mapValues());
+var import_every = __toESM(require_every());
 
-// node_modules/recharts/es6/shape/Rectangle.js
-var import_react20 = __toESM(require_react());
+// node_modules/recharts/es6/cartesian/Bar.js
+var import_react24 = __toESM(require_react());
 
 // node_modules/react-smooth/es6/Animate.js
-var import_react19 = __toESM(require_react());
+var import_react17 = __toESM(require_react());
 var import_prop_types = __toESM(require_prop_types());
 
 // node_modules/fast-equals/dist/esm/index.mjs
@@ -16454,11 +16562,11 @@ function createIsEqual(_a) {
   var circular = _a.circular, comparator = _a.comparator, createState = _a.createState, equals = _a.equals, strict = _a.strict;
   if (createState) {
     return function isEqual5(a2, b) {
-      var _a2 = createState(), _b = _a2.cache, cache = _b === void 0 ? circular ? /* @__PURE__ */ new WeakMap() : void 0 : _b, meta2 = _a2.meta;
+      var _a2 = createState(), _b = _a2.cache, cache = _b === void 0 ? circular ? /* @__PURE__ */ new WeakMap() : void 0 : _b, meta = _a2.meta;
       return comparator(a2, b, {
         cache,
         equals,
-        meta: meta2,
+        meta,
         strict
       });
     };
@@ -16548,41 +16656,41 @@ function setRafTimeout(callback) {
 }
 
 // node_modules/react-smooth/es6/AnimateManager.js
-function _typeof21(o) {
+function _typeof20(o) {
   "@babel/helpers - typeof";
-  return _typeof21 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof20 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof21(o);
+  }, _typeof20(o);
 }
 function _toArray(arr) {
-  return _arrayWithHoles7(arr) || _iterableToArray6(arr) || _unsupportedIterableToArray11(arr) || _nonIterableRest7();
+  return _arrayWithHoles7(arr) || _iterableToArray5(arr) || _unsupportedIterableToArray10(arr) || _nonIterableRest7();
 }
 function _nonIterableRest7() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray11(o, minLen) {
+function _unsupportedIterableToArray10(o, minLen) {
   if (!o)
     return;
   if (typeof o === "string")
-    return _arrayLikeToArray11(o, minLen);
+    return _arrayLikeToArray10(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor)
     n = o.constructor.name;
   if (n === "Map" || n === "Set")
     return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray11(o, minLen);
+    return _arrayLikeToArray10(o, minLen);
 }
-function _arrayLikeToArray11(arr, len) {
+function _arrayLikeToArray10(arr, len) {
   if (len == null || len > arr.length)
     len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
   return arr2;
 }
-function _iterableToArray6(iter) {
+function _iterableToArray5(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
     return Array.from(iter);
 }
@@ -16614,7 +16722,7 @@ function createAnimateManager() {
       setRafTimeout(setStyle2.bind(null, restStyles));
       return;
     }
-    if (_typeof21(_style) === "object") {
+    if (_typeof20(_style) === "object") {
       currStyle = _style;
       handleChange(currStyle);
     }
@@ -16642,15 +16750,15 @@ function createAnimateManager() {
 }
 
 // node_modules/react-smooth/es6/util.js
-function _typeof22(o) {
+function _typeof21(o) {
   "@babel/helpers - typeof";
-  return _typeof22 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof21 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof22(o);
+  }, _typeof21(o);
 }
-function ownKeys16(e, r2) {
+function ownKeys15(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -16660,19 +16768,19 @@ function ownKeys16(e, r2) {
   }
   return t;
 }
-function _objectSpread16(e) {
+function _objectSpread15(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys16(Object(t), true).forEach(function(r3) {
-      _defineProperty18(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys16(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys15(Object(t), true).forEach(function(r3) {
+      _defineProperty17(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys15(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty18(obj, key, value) {
-  key = _toPropertyKey19(key);
+function _defineProperty17(obj, key, value) {
+  key = _toPropertyKey18(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -16680,17 +16788,17 @@ function _defineProperty18(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey19(arg) {
-  var key = _toPrimitive19(arg, "string");
-  return _typeof22(key) === "symbol" ? key : String(key);
+function _toPropertyKey18(arg) {
+  var key = _toPrimitive18(arg, "string");
+  return _typeof21(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive19(input, hint) {
-  if (_typeof22(input) !== "object" || input === null)
+function _toPrimitive18(input, hint) {
+  if (_typeof21(input) !== "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
   if (prim !== void 0) {
     var res = prim.call(input, hint || "default");
-    if (_typeof22(res) !== "object")
+    if (_typeof21(res) !== "object")
       return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -16713,7 +16821,7 @@ var getDashCase = function getDashCase2(name) {
 };
 var mapObject = function mapObject2(fn, obj) {
   return Object.keys(obj).reduce(function(res, key) {
-    return _objectSpread16(_objectSpread16({}, res), {}, _defineProperty18({}, key, fn(key, obj[key])));
+    return _objectSpread15(_objectSpread15({}, res), {}, _defineProperty17({}, key, fn(key, obj[key])));
   }, {});
 };
 var getTransitionVal = function getTransitionVal2(props, duration, easing) {
@@ -16722,18 +16830,18 @@ var getTransitionVal = function getTransitionVal2(props, duration, easing) {
   }).join(",");
 };
 var isDev2 = true;
-var warn3 = function warn4(condition, format3, a2, b, c2, d, e, f) {
+var warn3 = function warn4(condition, format2, a2, b, c2, d, e, f) {
   if (isDev2 && typeof console !== "undefined" && console.warn) {
-    if (format3 === void 0) {
+    if (format2 === void 0) {
       console.warn("LogUtils requires an error message argument");
     }
     if (!condition) {
-      if (format3 === void 0) {
+      if (format2 === void 0) {
         console.warn("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");
       } else {
         var args = [a2, b, c2, d, e, f];
         var argIndex = 0;
-        console.warn(format3.replace(/%s/g, function() {
+        console.warn(format2.replace(/%s/g, function() {
           return args[argIndex++];
         }));
       }
@@ -16743,7 +16851,7 @@ var warn3 = function warn4(condition, format3, a2, b, c2, d, e, f) {
 
 // node_modules/react-smooth/es6/easing.js
 function _slicedToArray7(arr, i) {
-  return _arrayWithHoles8(arr) || _iterableToArrayLimit7(arr, i) || _unsupportedIterableToArray12(arr, i) || _nonIterableRest8();
+  return _arrayWithHoles8(arr) || _iterableToArrayLimit7(arr, i) || _unsupportedIterableToArray11(arr, i) || _nonIterableRest8();
 }
 function _nonIterableRest8() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -16778,34 +16886,34 @@ function _arrayWithHoles8(arr) {
   if (Array.isArray(arr))
     return arr;
 }
-function _toConsumableArray6(arr) {
-  return _arrayWithoutHoles6(arr) || _iterableToArray7(arr) || _unsupportedIterableToArray12(arr) || _nonIterableSpread6();
+function _toConsumableArray5(arr) {
+  return _arrayWithoutHoles5(arr) || _iterableToArray6(arr) || _unsupportedIterableToArray11(arr) || _nonIterableSpread5();
 }
-function _nonIterableSpread6() {
+function _nonIterableSpread5() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray12(o, minLen) {
+function _unsupportedIterableToArray11(o, minLen) {
   if (!o)
     return;
   if (typeof o === "string")
-    return _arrayLikeToArray12(o, minLen);
+    return _arrayLikeToArray11(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor)
     n = o.constructor.name;
   if (n === "Map" || n === "Set")
     return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray12(o, minLen);
+    return _arrayLikeToArray11(o, minLen);
 }
-function _iterableToArray7(iter) {
+function _iterableToArray6(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
     return Array.from(iter);
 }
-function _arrayWithoutHoles6(arr) {
+function _arrayWithoutHoles5(arr) {
   if (Array.isArray(arr))
-    return _arrayLikeToArray12(arr);
+    return _arrayLikeToArray11(arr);
 }
-function _arrayLikeToArray12(arr, len) {
+function _arrayLikeToArray11(arr, len) {
   if (len == null || len > arr.length)
     len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++)
@@ -16832,7 +16940,7 @@ var cubicBezier = function cubicBezier2(c1, c2) {
 var derivativeCubicBezier = function derivativeCubicBezier2(c1, c2) {
   return function(t) {
     var params = cubicBezierFactor(c1, c2);
-    var newParams = [].concat(_toConsumableArray6(params.map(function(param, i) {
+    var newParams = [].concat(_toConsumableArray5(params.map(function(param, i) {
       return param * i;
     }).slice(1)), [0]);
     return multyTime(newParams, t);
@@ -16970,29 +17078,29 @@ var configEasing = function configEasing2() {
 };
 
 // node_modules/react-smooth/es6/configUpdate.js
-function _typeof23(o) {
+function _typeof22(o) {
   "@babel/helpers - typeof";
-  return _typeof23 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof22 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof23(o);
+  }, _typeof22(o);
 }
-function _toConsumableArray7(arr) {
-  return _arrayWithoutHoles7(arr) || _iterableToArray8(arr) || _unsupportedIterableToArray13(arr) || _nonIterableSpread7();
+function _toConsumableArray6(arr) {
+  return _arrayWithoutHoles6(arr) || _iterableToArray7(arr) || _unsupportedIterableToArray12(arr) || _nonIterableSpread6();
 }
-function _nonIterableSpread7() {
+function _nonIterableSpread6() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _iterableToArray8(iter) {
+function _iterableToArray7(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
     return Array.from(iter);
 }
-function _arrayWithoutHoles7(arr) {
+function _arrayWithoutHoles6(arr) {
   if (Array.isArray(arr))
-    return _arrayLikeToArray13(arr);
+    return _arrayLikeToArray12(arr);
 }
-function ownKeys17(e, r2) {
+function ownKeys16(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -17002,19 +17110,19 @@ function ownKeys17(e, r2) {
   }
   return t;
 }
-function _objectSpread17(e) {
+function _objectSpread16(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys17(Object(t), true).forEach(function(r3) {
-      _defineProperty19(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys17(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys16(Object(t), true).forEach(function(r3) {
+      _defineProperty18(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys16(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty19(obj, key, value) {
-  key = _toPropertyKey20(key);
+function _defineProperty18(obj, key, value) {
+  key = _toPropertyKey19(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -17022,42 +17130,42 @@ function _defineProperty19(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey20(arg) {
-  var key = _toPrimitive20(arg, "string");
-  return _typeof23(key) === "symbol" ? key : String(key);
+function _toPropertyKey19(arg) {
+  var key = _toPrimitive19(arg, "string");
+  return _typeof22(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive20(input, hint) {
-  if (_typeof23(input) !== "object" || input === null)
+function _toPrimitive19(input, hint) {
+  if (_typeof22(input) !== "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
   if (prim !== void 0) {
     var res = prim.call(input, hint || "default");
-    if (_typeof23(res) !== "object")
+    if (_typeof22(res) !== "object")
       return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return (hint === "string" ? String : Number)(input);
 }
 function _slicedToArray8(arr, i) {
-  return _arrayWithHoles9(arr) || _iterableToArrayLimit8(arr, i) || _unsupportedIterableToArray13(arr, i) || _nonIterableRest9();
+  return _arrayWithHoles9(arr) || _iterableToArrayLimit8(arr, i) || _unsupportedIterableToArray12(arr, i) || _nonIterableRest9();
 }
 function _nonIterableRest9() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray13(o, minLen) {
+function _unsupportedIterableToArray12(o, minLen) {
   if (!o)
     return;
   if (typeof o === "string")
-    return _arrayLikeToArray13(o, minLen);
+    return _arrayLikeToArray12(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor)
     n = o.constructor.name;
   if (n === "Map" || n === "Set")
     return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray13(o, minLen);
+    return _arrayLikeToArray12(o, minLen);
 }
-function _arrayLikeToArray13(arr, len) {
+function _arrayLikeToArray12(arr, len) {
   if (len == null || len > arr.length)
     len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++)
@@ -17105,7 +17213,7 @@ var calStepperVals = function calStepperVals2(easing, preVals, steps) {
   var nextStepVals = mapObject(function(key, val) {
     if (needContinue(val)) {
       var _easing = easing(val.from, val.to, val.velocity), _easing2 = _slicedToArray8(_easing, 2), newX = _easing2[0], newV = _easing2[1];
-      return _objectSpread17(_objectSpread17({}, val), {}, {
+      return _objectSpread16(_objectSpread16({}, val), {}, {
         from: newX,
         velocity: newV
       });
@@ -17115,7 +17223,7 @@ var calStepperVals = function calStepperVals2(easing, preVals, steps) {
   if (steps < 1) {
     return mapObject(function(key, val) {
       if (needContinue(val)) {
-        return _objectSpread17(_objectSpread17({}, val), {}, {
+        return _objectSpread16(_objectSpread16({}, val), {}, {
           velocity: alpha(val.velocity, nextStepVals[key].velocity, steps),
           from: alpha(val.from, nextStepVals[key].from, steps)
         });
@@ -17128,10 +17236,10 @@ var calStepperVals = function calStepperVals2(easing, preVals, steps) {
 var configUpdate_default = function(from, to, easing, duration, render) {
   var interKeys = getIntersectionKeys(from, to);
   var timingStyle = interKeys.reduce(function(res, key) {
-    return _objectSpread17(_objectSpread17({}, res), {}, _defineProperty19({}, key, [from[key], to[key]]));
+    return _objectSpread16(_objectSpread16({}, res), {}, _defineProperty18({}, key, [from[key], to[key]]));
   }, {});
   var stepperStyle = interKeys.reduce(function(res, key) {
-    return _objectSpread17(_objectSpread17({}, res), {}, _defineProperty19({}, key, {
+    return _objectSpread16(_objectSpread16({}, res), {}, _defineProperty18({}, key, {
       from: from[key],
       velocity: 0,
       to: to[key]
@@ -17158,7 +17266,7 @@ var configUpdate_default = function(from, to, easing, duration, render) {
     var deltaTime = now - preTime;
     var steps = deltaTime / easing.dt;
     stepperStyle = calStepperVals(easing, stepperStyle, steps);
-    render(_objectSpread17(_objectSpread17(_objectSpread17({}, from), to), getCurrStyle(stepperStyle)));
+    render(_objectSpread16(_objectSpread16(_objectSpread16({}, from), to), getCurrStyle(stepperStyle)));
     preTime = now;
     if (!shouldStopAnimation()) {
       cafId = requestAnimationFrame(update);
@@ -17170,16 +17278,16 @@ var configUpdate_default = function(from, to, easing, duration, render) {
     }
     var t = (now - beginTime) / duration;
     var currStyle = mapObject(function(key, val) {
-      return alpha.apply(void 0, _toConsumableArray7(val).concat([easing(t)]));
+      return alpha.apply(void 0, _toConsumableArray6(val).concat([easing(t)]));
     }, timingStyle);
-    render(_objectSpread17(_objectSpread17(_objectSpread17({}, from), to), currStyle));
+    render(_objectSpread16(_objectSpread16(_objectSpread16({}, from), to), currStyle));
     if (t < 1) {
       cafId = requestAnimationFrame(update);
     } else {
       var finalStyle = mapObject(function(key, val) {
-        return alpha.apply(void 0, _toConsumableArray7(val).concat([easing(1)]));
+        return alpha.apply(void 0, _toConsumableArray6(val).concat([easing(1)]));
       }, timingStyle);
-      render(_objectSpread17(_objectSpread17(_objectSpread17({}, from), to), finalStyle));
+      render(_objectSpread16(_objectSpread16(_objectSpread16({}, from), to), finalStyle));
     }
   };
   update = easing.isStepper ? stepperUpdate : timingUpdate;
@@ -17192,19 +17300,19 @@ var configUpdate_default = function(from, to, easing, duration, render) {
 };
 
 // node_modules/react-smooth/es6/Animate.js
-function _typeof24(o) {
+function _typeof23(o) {
   "@babel/helpers - typeof";
-  return _typeof24 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof23 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof24(o);
+  }, _typeof23(o);
 }
-var _excluded11 = ["children", "begin", "duration", "attributeName", "easing", "isActive", "steps", "from", "to", "canBegin", "onAnimationEnd", "shouldReAnimate", "onAnimationReStart"];
-function _objectWithoutProperties10(source, excluded) {
+var _excluded10 = ["children", "begin", "duration", "attributeName", "easing", "isActive", "steps", "from", "to", "canBegin", "onAnimationEnd", "shouldReAnimate", "onAnimationReStart"];
+function _objectWithoutProperties9(source, excluded) {
   if (source == null)
     return {};
-  var target = _objectWithoutPropertiesLoose10(source, excluded);
+  var target = _objectWithoutPropertiesLoose9(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -17219,7 +17327,7 @@ function _objectWithoutProperties10(source, excluded) {
   }
   return target;
 }
-function _objectWithoutPropertiesLoose10(source, excluded) {
+function _objectWithoutPropertiesLoose9(source, excluded) {
   if (source == null)
     return {};
   var target = {};
@@ -17233,41 +17341,41 @@ function _objectWithoutPropertiesLoose10(source, excluded) {
   }
   return target;
 }
-function _toConsumableArray8(arr) {
-  return _arrayWithoutHoles8(arr) || _iterableToArray9(arr) || _unsupportedIterableToArray14(arr) || _nonIterableSpread8();
+function _toConsumableArray7(arr) {
+  return _arrayWithoutHoles7(arr) || _iterableToArray8(arr) || _unsupportedIterableToArray13(arr) || _nonIterableSpread7();
 }
-function _nonIterableSpread8() {
+function _nonIterableSpread7() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
-function _unsupportedIterableToArray14(o, minLen) {
+function _unsupportedIterableToArray13(o, minLen) {
   if (!o)
     return;
   if (typeof o === "string")
-    return _arrayLikeToArray14(o, minLen);
+    return _arrayLikeToArray13(o, minLen);
   var n = Object.prototype.toString.call(o).slice(8, -1);
   if (n === "Object" && o.constructor)
     n = o.constructor.name;
   if (n === "Map" || n === "Set")
     return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-    return _arrayLikeToArray14(o, minLen);
+    return _arrayLikeToArray13(o, minLen);
 }
-function _iterableToArray9(iter) {
+function _iterableToArray8(iter) {
   if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
     return Array.from(iter);
 }
-function _arrayWithoutHoles8(arr) {
+function _arrayWithoutHoles7(arr) {
   if (Array.isArray(arr))
-    return _arrayLikeToArray14(arr);
+    return _arrayLikeToArray13(arr);
 }
-function _arrayLikeToArray14(arr, len) {
+function _arrayLikeToArray13(arr, len) {
   if (len == null || len > arr.length)
     len = arr.length;
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
   return arr2;
 }
-function ownKeys18(e, r2) {
+function ownKeys17(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -17277,19 +17385,19 @@ function ownKeys18(e, r2) {
   }
   return t;
 }
-function _objectSpread18(e) {
+function _objectSpread17(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys18(Object(t), true).forEach(function(r3) {
-      _defineProperty20(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys18(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys17(Object(t), true).forEach(function(r3) {
+      _defineProperty19(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys17(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty20(obj, key, value) {
-  key = _toPropertyKey21(key);
+function _defineProperty19(obj, key, value) {
+  key = _toPropertyKey20(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -17297,89 +17405,89 @@ function _defineProperty20(obj, key, value) {
   }
   return obj;
 }
-function _classCallCheck7(instance, Constructor) {
+function _classCallCheck8(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-function _defineProperties7(target, props) {
+function _defineProperties8(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey21(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey20(descriptor.key), descriptor);
   }
 }
-function _createClass7(Constructor, protoProps, staticProps) {
+function _createClass8(Constructor, protoProps, staticProps) {
   if (protoProps)
-    _defineProperties7(Constructor.prototype, protoProps);
+    _defineProperties8(Constructor.prototype, protoProps);
   if (staticProps)
-    _defineProperties7(Constructor, staticProps);
+    _defineProperties8(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-function _toPropertyKey21(arg) {
-  var key = _toPrimitive21(arg, "string");
-  return _typeof24(key) === "symbol" ? key : String(key);
+function _toPropertyKey20(arg) {
+  var key = _toPrimitive20(arg, "string");
+  return _typeof23(key) === "symbol" ? key : String(key);
 }
-function _toPrimitive21(input, hint) {
-  if (_typeof24(input) !== "object" || input === null)
+function _toPrimitive20(input, hint) {
+  if (_typeof23(input) !== "object" || input === null)
     return input;
   var prim = input[Symbol.toPrimitive];
   if (prim !== void 0) {
     var res = prim.call(input, hint || "default");
-    if (_typeof24(res) !== "object")
+    if (_typeof23(res) !== "object")
       return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return (hint === "string" ? String : Number)(input);
 }
-function _inherits6(subClass, superClass) {
+function _inherits7(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
   Object.defineProperty(subClass, "prototype", { writable: false });
   if (superClass)
-    _setPrototypeOf6(subClass, superClass);
+    _setPrototypeOf7(subClass, superClass);
 }
-function _setPrototypeOf6(o, p) {
-  _setPrototypeOf6 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
+function _setPrototypeOf7(o, p) {
+  _setPrototypeOf7 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
     o2.__proto__ = p2;
     return o2;
   };
-  return _setPrototypeOf6(o, p);
+  return _setPrototypeOf7(o, p);
 }
 function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct6();
+  var hasNativeReflectConstruct = _isNativeReflectConstruct7();
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf6(Derived), result;
+    var Super = _getPrototypeOf7(Derived), result;
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf6(this).constructor;
+      var NewTarget = _getPrototypeOf7(this).constructor;
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-    return _possibleConstructorReturn6(this, result);
+    return _possibleConstructorReturn7(this, result);
   };
 }
-function _possibleConstructorReturn6(self2, call) {
-  if (call && (_typeof24(call) === "object" || typeof call === "function")) {
+function _possibleConstructorReturn7(self2, call) {
+  if (call && (_typeof23(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
   }
-  return _assertThisInitialized6(self2);
+  return _assertThisInitialized7(self2);
 }
-function _assertThisInitialized6(self2) {
+function _assertThisInitialized7(self2) {
   if (self2 === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
   return self2;
 }
-function _isNativeReflectConstruct6() {
+function _isNativeReflectConstruct7() {
   if (typeof Reflect === "undefined" || !Reflect.construct)
     return false;
   if (Reflect.construct.sham)
@@ -17394,22 +17502,22 @@ function _isNativeReflectConstruct6() {
     return false;
   }
 }
-function _getPrototypeOf6(o) {
-  _getPrototypeOf6 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
+function _getPrototypeOf7(o) {
+  _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
     return o2.__proto__ || Object.getPrototypeOf(o2);
   };
-  return _getPrototypeOf6(o);
+  return _getPrototypeOf7(o);
 }
 var Animate = /* @__PURE__ */ function(_PureComponent) {
-  _inherits6(Animate2, _PureComponent);
+  _inherits7(Animate2, _PureComponent);
   var _super = _createSuper(Animate2);
   function Animate2(props, context) {
     var _this;
-    _classCallCheck7(this, Animate2);
+    _classCallCheck8(this, Animate2);
     _this = _super.call(this, props, context);
     var _this$props = _this.props, isActive = _this$props.isActive, attributeName = _this$props.attributeName, from = _this$props.from, to = _this$props.to, steps = _this$props.steps, children = _this$props.children, duration = _this$props.duration;
-    _this.handleStyleChange = _this.handleStyleChange.bind(_assertThisInitialized6(_this));
-    _this.changeStyle = _this.changeStyle.bind(_assertThisInitialized6(_this));
+    _this.handleStyleChange = _this.handleStyleChange.bind(_assertThisInitialized7(_this));
+    _this.changeStyle = _this.changeStyle.bind(_assertThisInitialized7(_this));
     if (!isActive || duration <= 0) {
       _this.state = {
         style: {}
@@ -17419,7 +17527,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
           style: to
         };
       }
-      return _possibleConstructorReturn6(_this);
+      return _possibleConstructorReturn7(_this);
     }
     if (steps && steps.length) {
       _this.state = {
@@ -17430,10 +17538,10 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
         _this.state = {
           style: from
         };
-        return _possibleConstructorReturn6(_this);
+        return _possibleConstructorReturn7(_this);
       }
       _this.state = {
-        style: attributeName ? _defineProperty20({}, attributeName, from) : from
+        style: attributeName ? _defineProperty19({}, attributeName, from) : from
       };
     } else {
       _this.state = {
@@ -17442,7 +17550,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
     }
     return _this;
   }
-  _createClass7(Animate2, [{
+  _createClass8(Animate2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props2 = this.props, isActive = _this$props2.isActive, canBegin = _this$props2.canBegin;
@@ -17462,7 +17570,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
       }
       if (!isActive) {
         var newState = {
-          style: attributeName ? _defineProperty20({}, attributeName, to) : to
+          style: attributeName ? _defineProperty19({}, attributeName, to) : to
         };
         if (this.state && style) {
           if (attributeName && style[attributeName] !== to || !attributeName && style !== to) {
@@ -17484,13 +17592,13 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
       var from = isTriggered || shouldReAnimate ? currentFrom : prevProps.to;
       if (this.state && style) {
         var _newState = {
-          style: attributeName ? _defineProperty20({}, attributeName, from) : from
+          style: attributeName ? _defineProperty19({}, attributeName, from) : from
         };
         if (attributeName && style[attributeName] !== from || !attributeName && style !== from) {
           this.setState(_newState);
         }
       }
-      this.runAnimation(_objectSpread18(_objectSpread18({}, this.props), {}, {
+      this.runAnimation(_objectSpread17(_objectSpread17({}, this.props), {}, {
         from,
         begin: 0
       }));
@@ -17553,7 +17661,7 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
         var preItem = index > 0 ? steps[index - 1] : nextItem;
         var properties = nextProperties || Object.keys(style);
         if (typeof easing === "function" || easing === "spring") {
-          return [].concat(_toConsumableArray8(sequence), [_this3.runJSAnimation.bind(_this3, {
+          return [].concat(_toConsumableArray7(sequence), [_this3.runJSAnimation.bind(_this3, {
             from: preItem.style,
             to: style,
             duration,
@@ -17561,12 +17669,12 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
           }), duration]);
         }
         var transition = getTransitionVal(properties, duration, easing);
-        var newStyle = _objectSpread18(_objectSpread18(_objectSpread18({}, preItem.style), style), {}, {
+        var newStyle = _objectSpread17(_objectSpread17(_objectSpread17({}, preItem.style), style), {}, {
           transition
         });
-        return [].concat(_toConsumableArray8(sequence), [newStyle, duration, onAnimationEnd2]).filter(identity5);
+        return [].concat(_toConsumableArray7(sequence), [newStyle, duration, onAnimationEnd2]).filter(identity5);
       };
-      return this.manager.start([onAnimationStart2].concat(_toConsumableArray8(steps.reduce(addStyle, [initialStyle, Math.max(initialTime, begin)])), [props.onAnimationEnd]));
+      return this.manager.start([onAnimationStart2].concat(_toConsumableArray7(steps.reduce(addStyle, [initialStyle, Math.max(initialTime, begin)])), [props.onAnimationEnd]));
     }
   }, {
     key: "runAnimation",
@@ -17585,17 +17693,17 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
         this.runStepAnimation(props);
         return;
       }
-      var to = attributeName ? _defineProperty20({}, attributeName, propsTo) : propsTo;
+      var to = attributeName ? _defineProperty19({}, attributeName, propsTo) : propsTo;
       var transition = getTransitionVal(Object.keys(to), duration, easing);
-      manager.start([onAnimationStart2, begin, _objectSpread18(_objectSpread18({}, to), {}, {
+      manager.start([onAnimationStart2, begin, _objectSpread17(_objectSpread17({}, to), {}, {
         transition
       }), duration, onAnimationEnd2]);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props4 = this.props, children = _this$props4.children, begin = _this$props4.begin, duration = _this$props4.duration, attributeName = _this$props4.attributeName, easing = _this$props4.easing, isActive = _this$props4.isActive, steps = _this$props4.steps, from = _this$props4.from, to = _this$props4.to, canBegin = _this$props4.canBegin, onAnimationEnd2 = _this$props4.onAnimationEnd, shouldReAnimate = _this$props4.shouldReAnimate, onAnimationReStart = _this$props4.onAnimationReStart, others = _objectWithoutProperties10(_this$props4, _excluded11);
-      var count = import_react19.Children.count(children);
+      var _this$props4 = this.props, children = _this$props4.children, begin = _this$props4.begin, duration = _this$props4.duration, attributeName = _this$props4.attributeName, easing = _this$props4.easing, isActive = _this$props4.isActive, steps = _this$props4.steps, from = _this$props4.from, to = _this$props4.to, canBegin = _this$props4.canBegin, onAnimationEnd2 = _this$props4.onAnimationEnd, shouldReAnimate = _this$props4.shouldReAnimate, onAnimationReStart = _this$props4.onAnimationReStart, others = _objectWithoutProperties9(_this$props4, _excluded10);
+      var count = import_react17.Children.count(children);
       var stateStyle = this.state.style;
       if (typeof children === "function") {
         return children(stateStyle);
@@ -17605,22 +17713,22 @@ var Animate = /* @__PURE__ */ function(_PureComponent) {
       }
       var cloneContainer = function cloneContainer2(container) {
         var _container$props = container.props, _container$props$styl = _container$props.style, style = _container$props$styl === void 0 ? {} : _container$props$styl, className = _container$props.className;
-        var res = /* @__PURE__ */ (0, import_react19.cloneElement)(container, _objectSpread18(_objectSpread18({}, others), {}, {
-          style: _objectSpread18(_objectSpread18({}, style), stateStyle),
+        var res = /* @__PURE__ */ (0, import_react17.cloneElement)(container, _objectSpread17(_objectSpread17({}, others), {}, {
+          style: _objectSpread17(_objectSpread17({}, style), stateStyle),
           className
         }));
         return res;
       };
       if (count === 1) {
-        return cloneContainer(import_react19.Children.only(children));
+        return cloneContainer(import_react17.Children.only(children));
       }
-      return /* @__PURE__ */ import_react19.default.createElement("div", null, import_react19.Children.map(children, function(child) {
+      return /* @__PURE__ */ import_react17.default.createElement("div", null, import_react17.Children.map(children, function(child) {
         return cloneContainer(child);
       }));
     }
   }]);
   return Animate2;
-}(import_react19.PureComponent);
+}(import_react17.PureComponent);
 Animate.displayName = "Animate";
 Animate.defaultProps = {
   begin: 0,
@@ -17667,17 +17775,68 @@ var Animate_default = Animate;
 // node_modules/react-smooth/es6/index.js
 var es6_default = Animate_default;
 
-// node_modules/recharts/es6/shape/Rectangle.js
-function _typeof25(o) {
+// node_modules/recharts/es6/cartesian/Bar.js
+var import_isEqual3 = __toESM(require_isEqual());
+var import_isNil8 = __toESM(require_isNil());
+
+// node_modules/recharts/es6/component/Cell.js
+var Cell = function Cell2(_props) {
+  return null;
+};
+Cell.displayName = "Cell";
+
+// node_modules/recharts/es6/component/LabelList.js
+var import_react18 = __toESM(require_react());
+var import_isNil7 = __toESM(require_isNil());
+var import_isObject4 = __toESM(require_isObject());
+var import_isFunction8 = __toESM(require_isFunction());
+var import_last = __toESM(require_last());
+function _typeof24(o) {
   "@babel/helpers - typeof";
-  return _typeof25 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof24 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof25(o);
+  }, _typeof24(o);
 }
-function _extends12() {
-  _extends12 = Object.assign ? Object.assign.bind() : function(target) {
+var _excluded11 = ["valueAccessor"];
+var _excluded23 = ["data", "dataKey", "clockWise", "id", "textBreakAll"];
+function _toConsumableArray8(arr) {
+  return _arrayWithoutHoles8(arr) || _iterableToArray9(arr) || _unsupportedIterableToArray14(arr) || _nonIterableSpread8();
+}
+function _nonIterableSpread8() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray14(o, minLen) {
+  if (!o)
+    return;
+  if (typeof o === "string")
+    return _arrayLikeToArray14(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor)
+    n = o.constructor.name;
+  if (n === "Map" || n === "Set")
+    return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+    return _arrayLikeToArray14(o, minLen);
+}
+function _iterableToArray9(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null)
+    return Array.from(iter);
+}
+function _arrayWithoutHoles8(arr) {
+  if (Array.isArray(arr))
+    return _arrayLikeToArray14(arr);
+}
+function _arrayLikeToArray14(arr, len) {
+  if (len == null || len > arr.length)
+    len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
+function _extends10() {
+  _extends10 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -17688,7 +17847,194 @@ function _extends12() {
     }
     return target;
   };
-  return _extends12.apply(this, arguments);
+  return _extends10.apply(this, arguments);
+}
+function ownKeys18(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread18(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys18(Object(t), true).forEach(function(r3) {
+      _defineProperty20(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys18(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty20(obj, key, value) {
+  key = _toPropertyKey21(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey21(t) {
+  var i = _toPrimitive21(t, "string");
+  return "symbol" == _typeof24(i) ? i : i + "";
+}
+function _toPrimitive21(t, r2) {
+  if ("object" != _typeof24(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof24(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+function _objectWithoutProperties10(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose10(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose10(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+var defaultAccessor = function defaultAccessor2(entry) {
+  return Array.isArray(entry.value) ? (0, import_last.default)(entry.value) : entry.value;
+};
+function LabelList(_ref) {
+  var _ref$valueAccessor = _ref.valueAccessor, valueAccessor = _ref$valueAccessor === void 0 ? defaultAccessor : _ref$valueAccessor, restProps = _objectWithoutProperties10(_ref, _excluded11);
+  var data = restProps.data, dataKey = restProps.dataKey, clockWise = restProps.clockWise, id = restProps.id, textBreakAll = restProps.textBreakAll, others = _objectWithoutProperties10(restProps, _excluded23);
+  if (!data || !data.length) {
+    return null;
+  }
+  return /* @__PURE__ */ import_react18.default.createElement(Layer, {
+    className: "recharts-label-list"
+  }, data.map(function(entry, index) {
+    var value = (0, import_isNil7.default)(dataKey) ? valueAccessor(entry, index) : getValueByDataKey(entry && entry.payload, dataKey);
+    var idProps = (0, import_isNil7.default)(id) ? {} : {
+      id: "".concat(id, "-").concat(index)
+    };
+    return /* @__PURE__ */ import_react18.default.createElement(Label, _extends10({}, filterProps(entry, true), others, idProps, {
+      parentViewBox: entry.parentViewBox,
+      value,
+      textBreakAll,
+      viewBox: Label.parseViewBox((0, import_isNil7.default)(clockWise) ? entry : _objectSpread18(_objectSpread18({}, entry), {}, {
+        clockWise
+      })),
+      key: "label-".concat(index),
+      index
+    }));
+  }));
+}
+LabelList.displayName = "LabelList";
+function parseLabelList(label, data) {
+  if (!label) {
+    return null;
+  }
+  if (label === true) {
+    return /* @__PURE__ */ import_react18.default.createElement(LabelList, {
+      key: "labelList-implicit",
+      data
+    });
+  }
+  if (/* @__PURE__ */ import_react18.default.isValidElement(label) || (0, import_isFunction8.default)(label)) {
+    return /* @__PURE__ */ import_react18.default.createElement(LabelList, {
+      key: "labelList-implicit",
+      data,
+      content: label
+    });
+  }
+  if ((0, import_isObject4.default)(label)) {
+    return /* @__PURE__ */ import_react18.default.createElement(LabelList, _extends10({
+      data
+    }, label, {
+      key: "labelList-implicit"
+    }));
+  }
+  return null;
+}
+function renderCallByParent3(parentProps, data) {
+  var checkPropsLabel = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : true;
+  if (!parentProps || !parentProps.children && checkPropsLabel && !parentProps.label) {
+    return null;
+  }
+  var children = parentProps.children;
+  var explicitChildren = findAllByType(children, LabelList).map(function(child, index) {
+    return /* @__PURE__ */ (0, import_react18.cloneElement)(child, {
+      data,
+      // eslint-disable-next-line react/no-array-index-key
+      key: "labelList-".concat(index)
+    });
+  });
+  if (!checkPropsLabel) {
+    return explicitChildren;
+  }
+  var implicitLabelList = parseLabelList(parentProps.label, data);
+  return [implicitLabelList].concat(_toConsumableArray8(explicitChildren));
+}
+LabelList.renderCallByParent = renderCallByParent3;
+
+// node_modules/recharts/es6/util/BarUtils.js
+var import_react23 = __toESM(require_react());
+
+// node_modules/recharts/es6/util/ActiveShapeUtils.js
+var import_react22 = __toESM(require_react());
+var import_isFunction9 = __toESM(require_isFunction());
+var import_isPlainObject = __toESM(require_isPlainObject());
+var import_isBoolean = __toESM(require_isBoolean());
+var import_isEqual2 = __toESM(require_isEqual());
+
+// node_modules/recharts/es6/shape/Rectangle.js
+var import_react19 = __toESM(require_react());
+function _typeof25(o) {
+  "@babel/helpers - typeof";
+  return _typeof25 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof25(o);
+}
+function _extends11() {
+  _extends11 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends11.apply(this, arguments);
 }
 function _slicedToArray9(arr, i) {
   return _arrayWithHoles10(arr) || _iterableToArrayLimit9(arr, i) || _unsupportedIterableToArray15(arr, i) || _nonIterableRest10();
@@ -17843,7 +18189,7 @@ var isInRectangle = function isInRectangle2(point4, rect) {
   }
   return false;
 };
-var defaultProps2 = {
+var defaultProps = {
   x: 0,
   y: 0,
   width: 0,
@@ -17859,10 +18205,10 @@ var defaultProps2 = {
   animationEasing: "ease"
 };
 var Rectangle = function Rectangle2(rectangleProps) {
-  var props = _objectSpread19(_objectSpread19({}, defaultProps2), rectangleProps);
-  var pathRef = (0, import_react20.useRef)();
-  var _useState = (0, import_react20.useState)(-1), _useState2 = _slicedToArray9(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
-  (0, import_react20.useEffect)(function() {
+  var props = _objectSpread19(_objectSpread19({}, defaultProps), rectangleProps);
+  var pathRef = (0, import_react19.useRef)();
+  var _useState = (0, import_react19.useState)(-1), _useState2 = _slicedToArray9(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
+  (0, import_react19.useEffect)(function() {
     if (pathRef.current && pathRef.current.getTotalLength) {
       try {
         var pathTotalLength = pathRef.current.getTotalLength();
@@ -17880,12 +18226,12 @@ var Rectangle = function Rectangle2(rectangleProps) {
   }
   var layerClass = clsx_default("recharts-rectangle", className);
   if (!isUpdateAnimationActive) {
-    return /* @__PURE__ */ import_react20.default.createElement("path", _extends12({}, filterProps(props, true), {
+    return /* @__PURE__ */ import_react19.default.createElement("path", _extends11({}, filterProps(props, true), {
       className: layerClass,
       d: getRectanglePath(x2, y2, width, height, radius)
     }));
   }
-  return /* @__PURE__ */ import_react20.default.createElement(es6_default, {
+  return /* @__PURE__ */ import_react19.default.createElement(es6_default, {
     canBegin: totalLength > 0,
     from: {
       width,
@@ -17904,7 +18250,7 @@ var Rectangle = function Rectangle2(rectangleProps) {
     isActive: isUpdateAnimationActive
   }, function(_ref) {
     var currWidth = _ref.width, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
-    return /* @__PURE__ */ import_react20.default.createElement(es6_default, {
+    return /* @__PURE__ */ import_react19.default.createElement(es6_default, {
       canBegin: totalLength > 0,
       from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
       to: "".concat(totalLength, "px 0px"),
@@ -17913,7 +18259,7 @@ var Rectangle = function Rectangle2(rectangleProps) {
       duration: animationDuration,
       isActive: isAnimationActive,
       easing: animationEasing
-    }, /* @__PURE__ */ import_react20.default.createElement("path", _extends12({}, filterProps(props, true), {
+    }, /* @__PURE__ */ import_react19.default.createElement("path", _extends11({}, filterProps(props, true), {
       className: layerClass,
       d: getRectanglePath(currX, currY, currWidth, currHeight, radius),
       ref: pathRef
@@ -17921,38 +18267,8 @@ var Rectangle = function Rectangle2(rectangleProps) {
   });
 };
 
-// node_modules/recharts/es6/shape/Dot.js
-var import_react21 = __toESM(require_react());
-function _extends13() {
-  _extends13 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends13.apply(this, arguments);
-}
-var Dot = function Dot2(props) {
-  var cx = props.cx, cy = props.cy, r2 = props.r, className = props.className;
-  var layerClass = clsx_default("recharts-dot", className);
-  if (cx === +cx && cy === +cy && r2 === +r2) {
-    return /* @__PURE__ */ import_react21.default.createElement("circle", _extends13({}, filterProps(props, false), adaptEventHandlers(props), {
-      className: layerClass,
-      cx,
-      cy,
-      r: r2
-    }));
-  }
-  return null;
-};
-
-// node_modules/recharts/es6/shape/Cross.js
-var import_react22 = __toESM(require_react());
+// node_modules/recharts/es6/shape/Trapezoid.js
+var import_react20 = __toESM(require_react());
 function _typeof26(o) {
   "@babel/helpers - typeof";
   return _typeof26 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -17961,9 +18277,8 @@ function _typeof26(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof26(o);
 }
-var _excluded12 = ["x", "y", "top", "left", "width", "height", "className"];
-function _extends14() {
-  _extends14 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends12() {
+  _extends12 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -17974,137 +18289,7 @@ function _extends14() {
     }
     return target;
   };
-  return _extends14.apply(this, arguments);
-}
-function ownKeys20(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread20(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys20(Object(t), true).forEach(function(r3) {
-      _defineProperty22(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys20(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty22(obj, key, value) {
-  key = _toPropertyKey23(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey23(t) {
-  var i = _toPrimitive23(t, "string");
-  return "symbol" == _typeof26(i) ? i : i + "";
-}
-function _toPrimitive23(t, r2) {
-  if ("object" != _typeof26(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof26(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-function _objectWithoutProperties11(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose11(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose11(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-var getPath3 = function getPath4(x2, y2, width, height, top, left) {
-  return "M".concat(x2, ",").concat(top, "v").concat(height, "M").concat(left, ",").concat(y2, "h").concat(width);
-};
-var Cross = function Cross2(_ref) {
-  var _ref$x = _ref.x, x2 = _ref$x === void 0 ? 0 : _ref$x, _ref$y = _ref.y, y2 = _ref$y === void 0 ? 0 : _ref$y, _ref$top = _ref.top, top = _ref$top === void 0 ? 0 : _ref$top, _ref$left = _ref.left, left = _ref$left === void 0 ? 0 : _ref$left, _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, className = _ref.className, rest = _objectWithoutProperties11(_ref, _excluded12);
-  var props = _objectSpread20({
-    x: x2,
-    y: y2,
-    top,
-    left,
-    width,
-    height
-  }, rest);
-  if (!isNumber(x2) || !isNumber(y2) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) {
-    return null;
-  }
-  return /* @__PURE__ */ import_react22.default.createElement("path", _extends14({}, filterProps(props, true), {
-    className: clsx_default("recharts-cross", className),
-    d: getPath3(x2, y2, width, height, top, left)
-  }));
-};
-
-// node_modules/recharts/es6/util/ActiveShapeUtils.js
-var import_react24 = __toESM(require_react());
-var import_isFunction9 = __toESM(require_isFunction());
-var import_isPlainObject = __toESM(require_isPlainObject());
-var import_isBoolean = __toESM(require_isBoolean());
-var import_isEqual2 = __toESM(require_isEqual());
-
-// node_modules/recharts/es6/shape/Trapezoid.js
-var import_react23 = __toESM(require_react());
-function _typeof27(o) {
-  "@babel/helpers - typeof";
-  return _typeof27 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof27(o);
-}
-function _extends15() {
-  _extends15 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends15.apply(this, arguments);
+  return _extends12.apply(this, arguments);
 }
 function _slicedToArray10(arr, i) {
   return _arrayWithHoles11(arr) || _iterableToArrayLimit10(arr, i) || _unsupportedIterableToArray16(arr, i) || _nonIterableRest11();
@@ -18162,6 +18347,161 @@ function _arrayWithHoles11(arr) {
   if (Array.isArray(arr))
     return arr;
 }
+function ownKeys20(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread20(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys20(Object(t), true).forEach(function(r3) {
+      _defineProperty22(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys20(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty22(obj, key, value) {
+  key = _toPropertyKey23(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey23(t) {
+  var i = _toPrimitive23(t, "string");
+  return "symbol" == _typeof26(i) ? i : i + "";
+}
+function _toPrimitive23(t, r2) {
+  if ("object" != _typeof26(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof26(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var getTrapezoidPath = function getTrapezoidPath2(x2, y2, upperWidth, lowerWidth, height) {
+  var widthGap = upperWidth - lowerWidth;
+  var path2;
+  path2 = "M ".concat(x2, ",").concat(y2);
+  path2 += "L ".concat(x2 + upperWidth, ",").concat(y2);
+  path2 += "L ".concat(x2 + upperWidth - widthGap / 2, ",").concat(y2 + height);
+  path2 += "L ".concat(x2 + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y2 + height);
+  path2 += "L ".concat(x2, ",").concat(y2, " Z");
+  return path2;
+};
+var defaultProps2 = {
+  x: 0,
+  y: 0,
+  upperWidth: 0,
+  lowerWidth: 0,
+  height: 0,
+  isUpdateAnimationActive: false,
+  animationBegin: 0,
+  animationDuration: 1500,
+  animationEasing: "ease"
+};
+var Trapezoid = function Trapezoid2(props) {
+  var trapezoidProps = _objectSpread20(_objectSpread20({}, defaultProps2), props);
+  var pathRef = (0, import_react20.useRef)();
+  var _useState = (0, import_react20.useState)(-1), _useState2 = _slicedToArray10(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
+  (0, import_react20.useEffect)(function() {
+    if (pathRef.current && pathRef.current.getTotalLength) {
+      try {
+        var pathTotalLength = pathRef.current.getTotalLength();
+        if (pathTotalLength) {
+          setTotalLength(pathTotalLength);
+        }
+      } catch (err) {
+      }
+    }
+  }, []);
+  var x2 = trapezoidProps.x, y2 = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
+  var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
+  if (x2 !== +x2 || y2 !== +y2 || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) {
+    return null;
+  }
+  var layerClass = clsx_default("recharts-trapezoid", className);
+  if (!isUpdateAnimationActive) {
+    return /* @__PURE__ */ import_react20.default.createElement("g", null, /* @__PURE__ */ import_react20.default.createElement("path", _extends12({}, filterProps(trapezoidProps, true), {
+      className: layerClass,
+      d: getTrapezoidPath(x2, y2, upperWidth, lowerWidth, height)
+    })));
+  }
+  return /* @__PURE__ */ import_react20.default.createElement(es6_default, {
+    canBegin: totalLength > 0,
+    from: {
+      upperWidth: 0,
+      lowerWidth: 0,
+      height,
+      x: x2,
+      y: y2
+    },
+    to: {
+      upperWidth,
+      lowerWidth,
+      height,
+      x: x2,
+      y: y2
+    },
+    duration: animationDuration,
+    animationEasing,
+    isActive: isUpdateAnimationActive
+  }, function(_ref) {
+    var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
+    return /* @__PURE__ */ import_react20.default.createElement(es6_default, {
+      canBegin: totalLength > 0,
+      from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
+      to: "".concat(totalLength, "px 0px"),
+      attributeName: "strokeDasharray",
+      begin: animationBegin,
+      duration: animationDuration,
+      easing: animationEasing
+    }, /* @__PURE__ */ import_react20.default.createElement("path", _extends12({}, filterProps(trapezoidProps, true), {
+      className: layerClass,
+      d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
+      ref: pathRef
+    })));
+  });
+};
+
+// node_modules/recharts/es6/shape/Sector.js
+var import_react21 = __toESM(require_react());
+function _typeof27(o) {
+  "@babel/helpers - typeof";
+  return _typeof27 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof27(o);
+}
+function _extends13() {
+  _extends13 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends13.apply(this, arguments);
+}
 function ownKeys21(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
@@ -18208,93 +18548,162 @@ function _toPrimitive24(t, r2) {
   }
   return ("string" === r2 ? String : Number)(t);
 }
-var getTrapezoidPath = function getTrapezoidPath2(x2, y2, upperWidth, lowerWidth, height) {
-  var widthGap = upperWidth - lowerWidth;
-  var path2;
-  path2 = "M ".concat(x2, ",").concat(y2);
-  path2 += "L ".concat(x2 + upperWidth, ",").concat(y2);
-  path2 += "L ".concat(x2 + upperWidth - widthGap / 2, ",").concat(y2 + height);
-  path2 += "L ".concat(x2 + upperWidth - widthGap / 2 - lowerWidth, ",").concat(y2 + height);
-  path2 += "L ".concat(x2, ",").concat(y2, " Z");
+var getDeltaAngle3 = function getDeltaAngle4(startAngle, endAngle) {
+  var sign2 = mathSign(endAngle - startAngle);
+  var deltaAngle = Math.min(Math.abs(endAngle - startAngle), 359.999);
+  return sign2 * deltaAngle;
+};
+var getTangentCircle = function getTangentCircle2(_ref) {
+  var cx = _ref.cx, cy = _ref.cy, radius = _ref.radius, angle = _ref.angle, sign2 = _ref.sign, isExternal = _ref.isExternal, cornerRadius = _ref.cornerRadius, cornerIsExternal = _ref.cornerIsExternal;
+  var centerRadius = cornerRadius * (isExternal ? 1 : -1) + radius;
+  var theta = Math.asin(cornerRadius / centerRadius) / RADIAN2;
+  var centerAngle = cornerIsExternal ? angle : angle + sign2 * theta;
+  var center = polarToCartesian(cx, cy, centerRadius, centerAngle);
+  var circleTangency = polarToCartesian(cx, cy, radius, centerAngle);
+  var lineTangencyAngle = cornerIsExternal ? angle - sign2 * theta : angle;
+  var lineTangency = polarToCartesian(cx, cy, centerRadius * Math.cos(theta * RADIAN2), lineTangencyAngle);
+  return {
+    center,
+    circleTangency,
+    lineTangency,
+    theta
+  };
+};
+var getSectorPath = function getSectorPath2(_ref2) {
+  var cx = _ref2.cx, cy = _ref2.cy, innerRadius = _ref2.innerRadius, outerRadius = _ref2.outerRadius, startAngle = _ref2.startAngle, endAngle = _ref2.endAngle;
+  var angle = getDeltaAngle3(startAngle, endAngle);
+  var tempEndAngle = startAngle + angle;
+  var outerStartPoint = polarToCartesian(cx, cy, outerRadius, startAngle);
+  var outerEndPoint = polarToCartesian(cx, cy, outerRadius, tempEndAngle);
+  var path2 = "M ".concat(outerStartPoint.x, ",").concat(outerStartPoint.y, "\n    A ").concat(outerRadius, ",").concat(outerRadius, ",0,\n    ").concat(+(Math.abs(angle) > 180), ",").concat(+(startAngle > tempEndAngle), ",\n    ").concat(outerEndPoint.x, ",").concat(outerEndPoint.y, "\n  ");
+  if (innerRadius > 0) {
+    var innerStartPoint = polarToCartesian(cx, cy, innerRadius, startAngle);
+    var innerEndPoint = polarToCartesian(cx, cy, innerRadius, tempEndAngle);
+    path2 += "L ".concat(innerEndPoint.x, ",").concat(innerEndPoint.y, "\n            A ").concat(innerRadius, ",").concat(innerRadius, ",0,\n            ").concat(+(Math.abs(angle) > 180), ",").concat(+(startAngle <= tempEndAngle), ",\n            ").concat(innerStartPoint.x, ",").concat(innerStartPoint.y, " Z");
+  } else {
+    path2 += "L ".concat(cx, ",").concat(cy, " Z");
+  }
+  return path2;
+};
+var getSectorWithCorner = function getSectorWithCorner2(_ref3) {
+  var cx = _ref3.cx, cy = _ref3.cy, innerRadius = _ref3.innerRadius, outerRadius = _ref3.outerRadius, cornerRadius = _ref3.cornerRadius, forceCornerRadius = _ref3.forceCornerRadius, cornerIsExternal = _ref3.cornerIsExternal, startAngle = _ref3.startAngle, endAngle = _ref3.endAngle;
+  var sign2 = mathSign(endAngle - startAngle);
+  var _getTangentCircle = getTangentCircle({
+    cx,
+    cy,
+    radius: outerRadius,
+    angle: startAngle,
+    sign: sign2,
+    cornerRadius,
+    cornerIsExternal
+  }), soct = _getTangentCircle.circleTangency, solt = _getTangentCircle.lineTangency, sot = _getTangentCircle.theta;
+  var _getTangentCircle2 = getTangentCircle({
+    cx,
+    cy,
+    radius: outerRadius,
+    angle: endAngle,
+    sign: -sign2,
+    cornerRadius,
+    cornerIsExternal
+  }), eoct = _getTangentCircle2.circleTangency, eolt = _getTangentCircle2.lineTangency, eot = _getTangentCircle2.theta;
+  var outerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sot - eot;
+  if (outerArcAngle < 0) {
+    if (forceCornerRadius) {
+      return "M ".concat(solt.x, ",").concat(solt.y, "\n        a").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,1,").concat(cornerRadius * 2, ",0\n        a").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,1,").concat(-cornerRadius * 2, ",0\n      ");
+    }
+    return getSectorPath({
+      cx,
+      cy,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle
+    });
+  }
+  var path2 = "M ".concat(solt.x, ",").concat(solt.y, "\n    A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(soct.x, ",").concat(soct.y, "\n    A").concat(outerRadius, ",").concat(outerRadius, ",0,").concat(+(outerArcAngle > 180), ",").concat(+(sign2 < 0), ",").concat(eoct.x, ",").concat(eoct.y, "\n    A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(eolt.x, ",").concat(eolt.y, "\n  ");
+  if (innerRadius > 0) {
+    var _getTangentCircle3 = getTangentCircle({
+      cx,
+      cy,
+      radius: innerRadius,
+      angle: startAngle,
+      sign: sign2,
+      isExternal: true,
+      cornerRadius,
+      cornerIsExternal
+    }), sict = _getTangentCircle3.circleTangency, silt = _getTangentCircle3.lineTangency, sit = _getTangentCircle3.theta;
+    var _getTangentCircle4 = getTangentCircle({
+      cx,
+      cy,
+      radius: innerRadius,
+      angle: endAngle,
+      sign: -sign2,
+      isExternal: true,
+      cornerRadius,
+      cornerIsExternal
+    }), eict = _getTangentCircle4.circleTangency, eilt = _getTangentCircle4.lineTangency, eit = _getTangentCircle4.theta;
+    var innerArcAngle = cornerIsExternal ? Math.abs(startAngle - endAngle) : Math.abs(startAngle - endAngle) - sit - eit;
+    if (innerArcAngle < 0 && cornerRadius === 0) {
+      return "".concat(path2, "L").concat(cx, ",").concat(cy, "Z");
+    }
+    path2 += "L".concat(eilt.x, ",").concat(eilt.y, "\n      A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(eict.x, ",").concat(eict.y, "\n      A").concat(innerRadius, ",").concat(innerRadius, ",0,").concat(+(innerArcAngle > 180), ",").concat(+(sign2 > 0), ",").concat(sict.x, ",").concat(sict.y, "\n      A").concat(cornerRadius, ",").concat(cornerRadius, ",0,0,").concat(+(sign2 < 0), ",").concat(silt.x, ",").concat(silt.y, "Z");
+  } else {
+    path2 += "L".concat(cx, ",").concat(cy, "Z");
+  }
   return path2;
 };
 var defaultProps3 = {
-  x: 0,
-  y: 0,
-  upperWidth: 0,
-  lowerWidth: 0,
-  height: 0,
-  isUpdateAnimationActive: false,
-  animationBegin: 0,
-  animationDuration: 1500,
-  animationEasing: "ease"
+  cx: 0,
+  cy: 0,
+  innerRadius: 0,
+  outerRadius: 0,
+  startAngle: 0,
+  endAngle: 0,
+  cornerRadius: 0,
+  forceCornerRadius: false,
+  cornerIsExternal: false
 };
-var Trapezoid = function Trapezoid2(props) {
-  var trapezoidProps = _objectSpread21(_objectSpread21({}, defaultProps3), props);
-  var pathRef = (0, import_react23.useRef)();
-  var _useState = (0, import_react23.useState)(-1), _useState2 = _slicedToArray10(_useState, 2), totalLength = _useState2[0], setTotalLength = _useState2[1];
-  (0, import_react23.useEffect)(function() {
-    if (pathRef.current && pathRef.current.getTotalLength) {
-      try {
-        var pathTotalLength = pathRef.current.getTotalLength();
-        if (pathTotalLength) {
-          setTotalLength(pathTotalLength);
-        }
-      } catch (err) {
-      }
-    }
-  }, []);
-  var x2 = trapezoidProps.x, y2 = trapezoidProps.y, upperWidth = trapezoidProps.upperWidth, lowerWidth = trapezoidProps.lowerWidth, height = trapezoidProps.height, className = trapezoidProps.className;
-  var animationEasing = trapezoidProps.animationEasing, animationDuration = trapezoidProps.animationDuration, animationBegin = trapezoidProps.animationBegin, isUpdateAnimationActive = trapezoidProps.isUpdateAnimationActive;
-  if (x2 !== +x2 || y2 !== +y2 || upperWidth !== +upperWidth || lowerWidth !== +lowerWidth || height !== +height || upperWidth === 0 && lowerWidth === 0 || height === 0) {
+var Sector = function Sector2(sectorProps) {
+  var props = _objectSpread21(_objectSpread21({}, defaultProps3), sectorProps);
+  var cx = props.cx, cy = props.cy, innerRadius = props.innerRadius, outerRadius = props.outerRadius, cornerRadius = props.cornerRadius, forceCornerRadius = props.forceCornerRadius, cornerIsExternal = props.cornerIsExternal, startAngle = props.startAngle, endAngle = props.endAngle, className = props.className;
+  if (outerRadius < innerRadius || startAngle === endAngle) {
     return null;
   }
-  var layerClass = clsx_default("recharts-trapezoid", className);
-  if (!isUpdateAnimationActive) {
-    return /* @__PURE__ */ import_react23.default.createElement("g", null, /* @__PURE__ */ import_react23.default.createElement("path", _extends15({}, filterProps(trapezoidProps, true), {
-      className: layerClass,
-      d: getTrapezoidPath(x2, y2, upperWidth, lowerWidth, height)
-    })));
+  var layerClass = clsx_default("recharts-sector", className);
+  var deltaRadius = outerRadius - innerRadius;
+  var cr = getPercentValue(cornerRadius, deltaRadius, 0, true);
+  var path2;
+  if (cr > 0 && Math.abs(startAngle - endAngle) < 360) {
+    path2 = getSectorWithCorner({
+      cx,
+      cy,
+      innerRadius,
+      outerRadius,
+      cornerRadius: Math.min(cr, deltaRadius / 2),
+      forceCornerRadius,
+      cornerIsExternal,
+      startAngle,
+      endAngle
+    });
+  } else {
+    path2 = getSectorPath({
+      cx,
+      cy,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle
+    });
   }
-  return /* @__PURE__ */ import_react23.default.createElement(es6_default, {
-    canBegin: totalLength > 0,
-    from: {
-      upperWidth: 0,
-      lowerWidth: 0,
-      height,
-      x: x2,
-      y: y2
-    },
-    to: {
-      upperWidth,
-      lowerWidth,
-      height,
-      x: x2,
-      y: y2
-    },
-    duration: animationDuration,
-    animationEasing,
-    isActive: isUpdateAnimationActive
-  }, function(_ref) {
-    var currUpperWidth = _ref.upperWidth, currLowerWidth = _ref.lowerWidth, currHeight = _ref.height, currX = _ref.x, currY = _ref.y;
-    return /* @__PURE__ */ import_react23.default.createElement(es6_default, {
-      canBegin: totalLength > 0,
-      from: "0px ".concat(totalLength === -1 ? 1 : totalLength, "px"),
-      to: "".concat(totalLength, "px 0px"),
-      attributeName: "strokeDasharray",
-      begin: animationBegin,
-      duration: animationDuration,
-      easing: animationEasing
-    }, /* @__PURE__ */ import_react23.default.createElement("path", _extends15({}, filterProps(trapezoidProps, true), {
-      className: layerClass,
-      d: getTrapezoidPath(currX, currY, currUpperWidth, currLowerWidth, currHeight),
-      ref: pathRef
-    })));
-  });
+  return /* @__PURE__ */ import_react21.default.createElement("path", _extends13({}, filterProps(props, true), {
+    className: layerClass,
+    d: path2,
+    role: "img"
+  }));
 };
 
 // node_modules/recharts/es6/util/ActiveShapeUtils.js
-var _excluded13 = ["option", "shapeType", "propTransformer", "activeClassName", "isActive"];
+var _excluded12 = ["option", "shapeType", "propTransformer", "activeClassName", "isActive"];
 function _typeof28(o) {
   "@babel/helpers - typeof";
   return _typeof28 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -18303,10 +18712,10 @@ function _typeof28(o) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof28(o);
 }
-function _objectWithoutProperties12(source, excluded) {
+function _objectWithoutProperties11(source, excluded) {
   if (source == null)
     return {};
-  var target = _objectWithoutPropertiesLoose12(source, excluded);
+  var target = _objectWithoutPropertiesLoose11(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -18321,7 +18730,7 @@ function _objectWithoutProperties12(source, excluded) {
   }
   return target;
 }
-function _objectWithoutPropertiesLoose12(source, excluded) {
+function _objectWithoutPropertiesLoose11(source, excluded) {
   if (source == null)
     return {};
   var target = {};
@@ -18390,14 +18799,14 @@ function ShapeSelector(_ref) {
   var shapeType = _ref.shapeType, elementProps = _ref.elementProps;
   switch (shapeType) {
     case "rectangle":
-      return /* @__PURE__ */ import_react24.default.createElement(Rectangle, elementProps);
+      return /* @__PURE__ */ import_react22.default.createElement(Rectangle, elementProps);
     case "trapezoid":
-      return /* @__PURE__ */ import_react24.default.createElement(Trapezoid, elementProps);
+      return /* @__PURE__ */ import_react22.default.createElement(Trapezoid, elementProps);
     case "sector":
-      return /* @__PURE__ */ import_react24.default.createElement(Sector, elementProps);
+      return /* @__PURE__ */ import_react22.default.createElement(Sector, elementProps);
     case "symbols":
       if (isSymbolsProps(shapeType, elementProps)) {
-        return /* @__PURE__ */ import_react24.default.createElement(Symbols, elementProps);
+        return /* @__PURE__ */ import_react22.default.createElement(Symbols, elementProps);
       }
       break;
     default:
@@ -18405,33 +18814,33 @@ function ShapeSelector(_ref) {
   }
 }
 function getPropsFromShapeOption(option) {
-  if (/* @__PURE__ */ (0, import_react24.isValidElement)(option)) {
+  if (/* @__PURE__ */ (0, import_react22.isValidElement)(option)) {
     return option.props;
   }
   return option;
 }
 function Shape(_ref2) {
-  var option = _ref2.option, shapeType = _ref2.shapeType, _ref2$propTransformer = _ref2.propTransformer, propTransformer = _ref2$propTransformer === void 0 ? defaultPropTransformer : _ref2$propTransformer, _ref2$activeClassName = _ref2.activeClassName, activeClassName = _ref2$activeClassName === void 0 ? "recharts-active-shape" : _ref2$activeClassName, isActive = _ref2.isActive, props = _objectWithoutProperties12(_ref2, _excluded13);
+  var option = _ref2.option, shapeType = _ref2.shapeType, _ref2$propTransformer = _ref2.propTransformer, propTransformer = _ref2$propTransformer === void 0 ? defaultPropTransformer : _ref2$propTransformer, _ref2$activeClassName = _ref2.activeClassName, activeClassName = _ref2$activeClassName === void 0 ? "recharts-active-shape" : _ref2$activeClassName, isActive = _ref2.isActive, props = _objectWithoutProperties11(_ref2, _excluded12);
   var shape;
-  if (/* @__PURE__ */ (0, import_react24.isValidElement)(option)) {
-    shape = /* @__PURE__ */ (0, import_react24.cloneElement)(option, _objectSpread22(_objectSpread22({}, props), getPropsFromShapeOption(option)));
+  if (/* @__PURE__ */ (0, import_react22.isValidElement)(option)) {
+    shape = /* @__PURE__ */ (0, import_react22.cloneElement)(option, _objectSpread22(_objectSpread22({}, props), getPropsFromShapeOption(option)));
   } else if ((0, import_isFunction9.default)(option)) {
     shape = option(props);
   } else if ((0, import_isPlainObject.default)(option) && !(0, import_isBoolean.default)(option)) {
     var nextProps = propTransformer(option, props);
-    shape = /* @__PURE__ */ import_react24.default.createElement(ShapeSelector, {
+    shape = /* @__PURE__ */ import_react22.default.createElement(ShapeSelector, {
       shapeType,
       elementProps: nextProps
     });
   } else {
     var elementProps = props;
-    shape = /* @__PURE__ */ import_react24.default.createElement(ShapeSelector, {
+    shape = /* @__PURE__ */ import_react22.default.createElement(ShapeSelector, {
       shapeType,
       elementProps
     });
   }
   if (isActive) {
-    return /* @__PURE__ */ import_react24.default.createElement(Layer, {
+    return /* @__PURE__ */ import_react22.default.createElement(Layer, {
       className: activeClassName
     }, shape);
   }
@@ -18517,12 +18926,8 @@ function getActiveShapeIndexForTooltip(_ref3) {
   return activeIndex;
 }
 
-// node_modules/recharts/es6/cartesian/Brush.js
-var import_react25 = __toESM(require_react());
-var import_isFunction10 = __toESM(require_isFunction());
-var import_range2 = __toESM(require_range());
-
-// node_modules/recharts/es6/util/CssPrefixUtils.js
+// node_modules/recharts/es6/util/BarUtils.js
+var _excluded13 = ["x", "y"];
 function _typeof29(o) {
   "@babel/helpers - typeof";
   return _typeof29 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -18530,6 +18935,20 @@ function _typeof29(o) {
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof29(o);
+}
+function _extends14() {
+  _extends14 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends14.apply(this, arguments);
 }
 function ownKeys23(e, r2) {
   var t = Object.keys(e);
@@ -18577,22 +18996,82 @@ function _toPrimitive26(t, r2) {
   }
   return ("string" === r2 ? String : Number)(t);
 }
-var PREFIX_LIST = ["Webkit", "Moz", "O", "ms"];
-var generatePrefixStyle = function generatePrefixStyle2(name, value) {
-  if (!name) {
-    return null;
+function _objectWithoutProperties12(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose12(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
   }
-  var camelName = name.replace(/(\w)/, function(v) {
-    return v.toUpperCase();
+  return target;
+}
+function _objectWithoutPropertiesLoose12(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function typeguardBarRectangleProps(_ref, props) {
+  var xProp = _ref.x, yProp = _ref.y, option = _objectWithoutProperties12(_ref, _excluded13);
+  var xValue = "".concat(xProp);
+  var x2 = parseInt(xValue, 10);
+  var yValue = "".concat(yProp);
+  var y2 = parseInt(yValue, 10);
+  var heightValue = "".concat(props.height || option.height);
+  var height = parseInt(heightValue, 10);
+  var widthValue = "".concat(props.width || option.width);
+  var width = parseInt(widthValue, 10);
+  return _objectSpread23(_objectSpread23(_objectSpread23(_objectSpread23(_objectSpread23({}, props), option), x2 ? {
+    x: x2
+  } : {}), y2 ? {
+    y: y2
+  } : {}), {}, {
+    height,
+    width,
+    name: props.name,
+    radius: props.radius
   });
-  var result = PREFIX_LIST.reduce(function(res, entry) {
-    return _objectSpread23(_objectSpread23({}, res), {}, _defineProperty25({}, entry + camelName, value));
-  }, {});
-  result[name] = value;
-  return result;
+}
+function BarRectangle(props) {
+  return /* @__PURE__ */ import_react23.default.createElement(Shape, _extends14({
+    shapeType: "rectangle",
+    propTransformer: typeguardBarRectangleProps,
+    activeClassName: "recharts-active-bar"
+  }, props));
+}
+var minPointSizeCallback = function minPointSizeCallback2(minPointSize) {
+  var defaultValue = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
+  return function(value, index) {
+    if (typeof minPointSize === "number")
+      return minPointSize;
+    var isValueNumber = typeof value === "number";
+    if (isValueNumber) {
+      return minPointSize(value, index);
+    }
+    !isValueNumber ? true ? invariant(false, "minPointSize callback function received a value with type of ".concat(_typeof29(value), ". Currently only numbers are supported.")) : invariant(false) : void 0;
+    return defaultValue;
+  };
 };
 
-// node_modules/recharts/es6/cartesian/Brush.js
+// node_modules/recharts/es6/cartesian/Bar.js
+var _excluded14 = ["value", "background"];
+var _Bar;
 function _typeof30(o) {
   "@babel/helpers - typeof";
   return _typeof30 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
@@ -18600,724 +19079,6 @@ function _typeof30(o) {
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
   }, _typeof30(o);
-}
-function _extends16() {
-  _extends16 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends16.apply(this, arguments);
-}
-function ownKeys24(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread24(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys24(Object(t), true).forEach(function(r3) {
-      _defineProperty26(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys24(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _classCallCheck8(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _defineProperties8(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey27(descriptor.key), descriptor);
-  }
-}
-function _createClass8(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties8(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties8(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", { writable: false });
-  return Constructor;
-}
-function _callSuper6(t, o, e) {
-  return o = _getPrototypeOf7(o), _possibleConstructorReturn7(t, _isNativeReflectConstruct7() ? Reflect.construct(o, e || [], _getPrototypeOf7(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn7(self2, call) {
-  if (call && (_typeof30(call) === "object" || typeof call === "function")) {
-    return call;
-  } else if (call !== void 0) {
-    throw new TypeError("Derived constructors may only return object or undefined");
-  }
-  return _assertThisInitialized7(self2);
-}
-function _assertThisInitialized7(self2) {
-  if (self2 === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return self2;
-}
-function _isNativeReflectConstruct7() {
-  try {
-    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    }));
-  } catch (t2) {
-  }
-  return (_isNativeReflectConstruct7 = function _isNativeReflectConstruct17() {
-    return !!t;
-  })();
-}
-function _getPrototypeOf7(o) {
-  _getPrototypeOf7 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
-    return o2.__proto__ || Object.getPrototypeOf(o2);
-  };
-  return _getPrototypeOf7(o);
-}
-function _inherits7(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-  Object.defineProperty(subClass, "prototype", { writable: false });
-  if (superClass)
-    _setPrototypeOf7(subClass, superClass);
-}
-function _setPrototypeOf7(o, p) {
-  _setPrototypeOf7 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
-    o2.__proto__ = p2;
-    return o2;
-  };
-  return _setPrototypeOf7(o, p);
-}
-function _defineProperty26(obj, key, value) {
-  key = _toPropertyKey27(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey27(t) {
-  var i = _toPrimitive27(t, "string");
-  return "symbol" == _typeof30(i) ? i : i + "";
-}
-function _toPrimitive27(t, r2) {
-  if ("object" != _typeof30(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof30(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var createScale = function createScale2(_ref) {
-  var data = _ref.data, startIndex = _ref.startIndex, endIndex = _ref.endIndex, x2 = _ref.x, width = _ref.width, travellerWidth = _ref.travellerWidth;
-  if (!data || !data.length) {
-    return {};
-  }
-  var len = data.length;
-  var scale = point3().domain((0, import_range2.default)(0, len)).range([x2, x2 + width - travellerWidth]);
-  var scaleValues = scale.domain().map(function(entry) {
-    return scale(entry);
-  });
-  return {
-    isTextActive: false,
-    isSlideMoving: false,
-    isTravellerMoving: false,
-    isTravellerFocused: false,
-    startX: scale(startIndex),
-    endX: scale(endIndex),
-    scale,
-    scaleValues
-  };
-};
-var isTouch = function isTouch2(e) {
-  return e.changedTouches && !!e.changedTouches.length;
-};
-var Brush = /* @__PURE__ */ function(_PureComponent) {
-  function Brush2(props) {
-    var _this;
-    _classCallCheck8(this, Brush2);
-    _this = _callSuper6(this, Brush2, [props]);
-    _defineProperty26(_this, "handleDrag", function(e) {
-      if (_this.leaveTimer) {
-        clearTimeout(_this.leaveTimer);
-        _this.leaveTimer = null;
-      }
-      if (_this.state.isTravellerMoving) {
-        _this.handleTravellerMove(e);
-      } else if (_this.state.isSlideMoving) {
-        _this.handleSlideDrag(e);
-      }
-    });
-    _defineProperty26(_this, "handleTouchMove", function(e) {
-      if (e.changedTouches != null && e.changedTouches.length > 0) {
-        _this.handleDrag(e.changedTouches[0]);
-      }
-    });
-    _defineProperty26(_this, "handleDragEnd", function() {
-      _this.setState({
-        isTravellerMoving: false,
-        isSlideMoving: false
-      }, function() {
-        var _this$props = _this.props, endIndex = _this$props.endIndex, onDragEnd = _this$props.onDragEnd, startIndex = _this$props.startIndex;
-        onDragEnd === null || onDragEnd === void 0 || onDragEnd({
-          endIndex,
-          startIndex
-        });
-      });
-      _this.detachDragEndListener();
-    });
-    _defineProperty26(_this, "handleLeaveWrapper", function() {
-      if (_this.state.isTravellerMoving || _this.state.isSlideMoving) {
-        _this.leaveTimer = window.setTimeout(_this.handleDragEnd, _this.props.leaveTimeOut);
-      }
-    });
-    _defineProperty26(_this, "handleEnterSlideOrTraveller", function() {
-      _this.setState({
-        isTextActive: true
-      });
-    });
-    _defineProperty26(_this, "handleLeaveSlideOrTraveller", function() {
-      _this.setState({
-        isTextActive: false
-      });
-    });
-    _defineProperty26(_this, "handleSlideDragStart", function(e) {
-      var event = isTouch(e) ? e.changedTouches[0] : e;
-      _this.setState({
-        isTravellerMoving: false,
-        isSlideMoving: true,
-        slideMoveStartX: event.pageX
-      });
-      _this.attachDragEndListener();
-    });
-    _this.travellerDragStartHandlers = {
-      startX: _this.handleTravellerDragStart.bind(_this, "startX"),
-      endX: _this.handleTravellerDragStart.bind(_this, "endX")
-    };
-    _this.state = {};
-    return _this;
-  }
-  _inherits7(Brush2, _PureComponent);
-  return _createClass8(Brush2, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this.leaveTimer) {
-        clearTimeout(this.leaveTimer);
-        this.leaveTimer = null;
-      }
-      this.detachDragEndListener();
-    }
-  }, {
-    key: "getIndex",
-    value: function getIndex(_ref2) {
-      var startX = _ref2.startX, endX = _ref2.endX;
-      var scaleValues = this.state.scaleValues;
-      var _this$props2 = this.props, gap = _this$props2.gap, data = _this$props2.data;
-      var lastIndex = data.length - 1;
-      var min3 = Math.min(startX, endX);
-      var max3 = Math.max(startX, endX);
-      var minIndex = Brush2.getIndexInRange(scaleValues, min3);
-      var maxIndex = Brush2.getIndexInRange(scaleValues, max3);
-      return {
-        startIndex: minIndex - minIndex % gap,
-        endIndex: maxIndex === lastIndex ? lastIndex : maxIndex - maxIndex % gap
-      };
-    }
-  }, {
-    key: "getTextOfTick",
-    value: function getTextOfTick(index) {
-      var _this$props3 = this.props, data = _this$props3.data, tickFormatter = _this$props3.tickFormatter, dataKey = _this$props3.dataKey;
-      var text = getValueByDataKey(data[index], dataKey, index);
-      return (0, import_isFunction10.default)(tickFormatter) ? tickFormatter(text, index) : text;
-    }
-  }, {
-    key: "attachDragEndListener",
-    value: function attachDragEndListener() {
-      window.addEventListener("mouseup", this.handleDragEnd, true);
-      window.addEventListener("touchend", this.handleDragEnd, true);
-      window.addEventListener("mousemove", this.handleDrag, true);
-    }
-  }, {
-    key: "detachDragEndListener",
-    value: function detachDragEndListener() {
-      window.removeEventListener("mouseup", this.handleDragEnd, true);
-      window.removeEventListener("touchend", this.handleDragEnd, true);
-      window.removeEventListener("mousemove", this.handleDrag, true);
-    }
-  }, {
-    key: "handleSlideDrag",
-    value: function handleSlideDrag(e) {
-      var _this$state = this.state, slideMoveStartX = _this$state.slideMoveStartX, startX = _this$state.startX, endX = _this$state.endX;
-      var _this$props4 = this.props, x2 = _this$props4.x, width = _this$props4.width, travellerWidth = _this$props4.travellerWidth, startIndex = _this$props4.startIndex, endIndex = _this$props4.endIndex, onChange = _this$props4.onChange;
-      var delta = e.pageX - slideMoveStartX;
-      if (delta > 0) {
-        delta = Math.min(delta, x2 + width - travellerWidth - endX, x2 + width - travellerWidth - startX);
-      } else if (delta < 0) {
-        delta = Math.max(delta, x2 - startX, x2 - endX);
-      }
-      var newIndex = this.getIndex({
-        startX: startX + delta,
-        endX: endX + delta
-      });
-      if ((newIndex.startIndex !== startIndex || newIndex.endIndex !== endIndex) && onChange) {
-        onChange(newIndex);
-      }
-      this.setState({
-        startX: startX + delta,
-        endX: endX + delta,
-        slideMoveStartX: e.pageX
-      });
-    }
-  }, {
-    key: "handleTravellerDragStart",
-    value: function handleTravellerDragStart(id, e) {
-      var event = isTouch(e) ? e.changedTouches[0] : e;
-      this.setState({
-        isSlideMoving: false,
-        isTravellerMoving: true,
-        movingTravellerId: id,
-        brushMoveStartX: event.pageX
-      });
-      this.attachDragEndListener();
-    }
-  }, {
-    key: "handleTravellerMove",
-    value: function handleTravellerMove(e) {
-      var _this$state2 = this.state, brushMoveStartX = _this$state2.brushMoveStartX, movingTravellerId = _this$state2.movingTravellerId, endX = _this$state2.endX, startX = _this$state2.startX;
-      var prevValue = this.state[movingTravellerId];
-      var _this$props5 = this.props, x2 = _this$props5.x, width = _this$props5.width, travellerWidth = _this$props5.travellerWidth, onChange = _this$props5.onChange, gap = _this$props5.gap, data = _this$props5.data;
-      var params = {
-        startX: this.state.startX,
-        endX: this.state.endX
-      };
-      var delta = e.pageX - brushMoveStartX;
-      if (delta > 0) {
-        delta = Math.min(delta, x2 + width - travellerWidth - prevValue);
-      } else if (delta < 0) {
-        delta = Math.max(delta, x2 - prevValue);
-      }
-      params[movingTravellerId] = prevValue + delta;
-      var newIndex = this.getIndex(params);
-      var startIndex = newIndex.startIndex, endIndex = newIndex.endIndex;
-      var isFullGap = function isFullGap2() {
-        var lastIndex = data.length - 1;
-        if (movingTravellerId === "startX" && (endX > startX ? startIndex % gap === 0 : endIndex % gap === 0) || endX < startX && endIndex === lastIndex || movingTravellerId === "endX" && (endX > startX ? endIndex % gap === 0 : startIndex % gap === 0) || endX > startX && endIndex === lastIndex) {
-          return true;
-        }
-        return false;
-      };
-      this.setState(_defineProperty26(_defineProperty26({}, movingTravellerId, prevValue + delta), "brushMoveStartX", e.pageX), function() {
-        if (onChange) {
-          if (isFullGap()) {
-            onChange(newIndex);
-          }
-        }
-      });
-    }
-  }, {
-    key: "handleTravellerMoveKeyboard",
-    value: function handleTravellerMoveKeyboard(direction, id) {
-      var _this2 = this;
-      var _this$state3 = this.state, scaleValues = _this$state3.scaleValues, startX = _this$state3.startX, endX = _this$state3.endX;
-      var currentScaleValue = this.state[id];
-      var currentIndex = scaleValues.indexOf(currentScaleValue);
-      if (currentIndex === -1) {
-        return;
-      }
-      var newIndex = currentIndex + direction;
-      if (newIndex === -1 || newIndex >= scaleValues.length) {
-        return;
-      }
-      var newScaleValue = scaleValues[newIndex];
-      if (id === "startX" && newScaleValue >= endX || id === "endX" && newScaleValue <= startX) {
-        return;
-      }
-      this.setState(_defineProperty26({}, id, newScaleValue), function() {
-        _this2.props.onChange(_this2.getIndex({
-          startX: _this2.state.startX,
-          endX: _this2.state.endX
-        }));
-      });
-    }
-  }, {
-    key: "renderBackground",
-    value: function renderBackground() {
-      var _this$props6 = this.props, x2 = _this$props6.x, y2 = _this$props6.y, width = _this$props6.width, height = _this$props6.height, fill = _this$props6.fill, stroke = _this$props6.stroke;
-      return /* @__PURE__ */ import_react25.default.createElement("rect", {
-        stroke,
-        fill,
-        x: x2,
-        y: y2,
-        width,
-        height
-      });
-    }
-  }, {
-    key: "renderPanorama",
-    value: function renderPanorama() {
-      var _this$props7 = this.props, x2 = _this$props7.x, y2 = _this$props7.y, width = _this$props7.width, height = _this$props7.height, data = _this$props7.data, children = _this$props7.children, padding = _this$props7.padding;
-      var chartElement = import_react25.Children.only(children);
-      if (!chartElement) {
-        return null;
-      }
-      return /* @__PURE__ */ import_react25.default.cloneElement(chartElement, {
-        x: x2,
-        y: y2,
-        width,
-        height,
-        margin: padding,
-        compact: true,
-        data
-      });
-    }
-  }, {
-    key: "renderTravellerLayer",
-    value: function renderTravellerLayer(travellerX, id) {
-      var _data$startIndex, _data$endIndex, _this3 = this;
-      var _this$props8 = this.props, y2 = _this$props8.y, travellerWidth = _this$props8.travellerWidth, height = _this$props8.height, traveller = _this$props8.traveller, ariaLabel = _this$props8.ariaLabel, data = _this$props8.data, startIndex = _this$props8.startIndex, endIndex = _this$props8.endIndex;
-      var x2 = Math.max(travellerX, this.props.x);
-      var travellerProps = _objectSpread24(_objectSpread24({}, filterProps(this.props, false)), {}, {
-        x: x2,
-        y: y2,
-        width: travellerWidth,
-        height
-      });
-      var ariaLabelBrush = ariaLabel || "Min value: ".concat((_data$startIndex = data[startIndex]) === null || _data$startIndex === void 0 ? void 0 : _data$startIndex.name, ", Max value: ").concat((_data$endIndex = data[endIndex]) === null || _data$endIndex === void 0 ? void 0 : _data$endIndex.name);
-      return /* @__PURE__ */ import_react25.default.createElement(Layer, {
-        tabIndex: 0,
-        role: "slider",
-        "aria-label": ariaLabelBrush,
-        "aria-valuenow": travellerX,
-        className: "recharts-brush-traveller",
-        onMouseEnter: this.handleEnterSlideOrTraveller,
-        onMouseLeave: this.handleLeaveSlideOrTraveller,
-        onMouseDown: this.travellerDragStartHandlers[id],
-        onTouchStart: this.travellerDragStartHandlers[id],
-        onKeyDown: function onKeyDown(e) {
-          if (!["ArrowLeft", "ArrowRight"].includes(e.key)) {
-            return;
-          }
-          e.preventDefault();
-          e.stopPropagation();
-          _this3.handleTravellerMoveKeyboard(e.key === "ArrowRight" ? 1 : -1, id);
-        },
-        onFocus: function onFocus() {
-          _this3.setState({
-            isTravellerFocused: true
-          });
-        },
-        onBlur: function onBlur() {
-          _this3.setState({
-            isTravellerFocused: false
-          });
-        },
-        style: {
-          cursor: "col-resize"
-        }
-      }, Brush2.renderTraveller(traveller, travellerProps));
-    }
-  }, {
-    key: "renderSlide",
-    value: function renderSlide(startX, endX) {
-      var _this$props9 = this.props, y2 = _this$props9.y, height = _this$props9.height, stroke = _this$props9.stroke, travellerWidth = _this$props9.travellerWidth;
-      var x2 = Math.min(startX, endX) + travellerWidth;
-      var width = Math.max(Math.abs(endX - startX) - travellerWidth, 0);
-      return /* @__PURE__ */ import_react25.default.createElement("rect", {
-        className: "recharts-brush-slide",
-        onMouseEnter: this.handleEnterSlideOrTraveller,
-        onMouseLeave: this.handleLeaveSlideOrTraveller,
-        onMouseDown: this.handleSlideDragStart,
-        onTouchStart: this.handleSlideDragStart,
-        style: {
-          cursor: "move"
-        },
-        stroke: "none",
-        fill: stroke,
-        fillOpacity: 0.2,
-        x: x2,
-        y: y2,
-        width,
-        height
-      });
-    }
-  }, {
-    key: "renderText",
-    value: function renderText() {
-      var _this$props10 = this.props, startIndex = _this$props10.startIndex, endIndex = _this$props10.endIndex, y2 = _this$props10.y, height = _this$props10.height, travellerWidth = _this$props10.travellerWidth, stroke = _this$props10.stroke;
-      var _this$state4 = this.state, startX = _this$state4.startX, endX = _this$state4.endX;
-      var offset = 5;
-      var attrs = {
-        pointerEvents: "none",
-        fill: stroke
-      };
-      return /* @__PURE__ */ import_react25.default.createElement(Layer, {
-        className: "recharts-brush-texts"
-      }, /* @__PURE__ */ import_react25.default.createElement(Text, _extends16({
-        textAnchor: "end",
-        verticalAnchor: "middle",
-        x: Math.min(startX, endX) - offset,
-        y: y2 + height / 2
-      }, attrs), this.getTextOfTick(startIndex)), /* @__PURE__ */ import_react25.default.createElement(Text, _extends16({
-        textAnchor: "start",
-        verticalAnchor: "middle",
-        x: Math.max(startX, endX) + travellerWidth + offset,
-        y: y2 + height / 2
-      }, attrs), this.getTextOfTick(endIndex)));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props11 = this.props, data = _this$props11.data, className = _this$props11.className, children = _this$props11.children, x2 = _this$props11.x, y2 = _this$props11.y, width = _this$props11.width, height = _this$props11.height, alwaysShowText = _this$props11.alwaysShowText;
-      var _this$state5 = this.state, startX = _this$state5.startX, endX = _this$state5.endX, isTextActive = _this$state5.isTextActive, isSlideMoving = _this$state5.isSlideMoving, isTravellerMoving = _this$state5.isTravellerMoving, isTravellerFocused = _this$state5.isTravellerFocused;
-      if (!data || !data.length || !isNumber(x2) || !isNumber(y2) || !isNumber(width) || !isNumber(height) || width <= 0 || height <= 0) {
-        return null;
-      }
-      var layerClass = clsx_default("recharts-brush", className);
-      var isPanoramic = import_react25.default.Children.count(children) === 1;
-      var style = generatePrefixStyle("userSelect", "none");
-      return /* @__PURE__ */ import_react25.default.createElement(Layer, {
-        className: layerClass,
-        onMouseLeave: this.handleLeaveWrapper,
-        onTouchMove: this.handleTouchMove,
-        style
-      }, this.renderBackground(), isPanoramic && this.renderPanorama(), this.renderSlide(startX, endX), this.renderTravellerLayer(startX, "startX"), this.renderTravellerLayer(endX, "endX"), (isTextActive || isSlideMoving || isTravellerMoving || isTravellerFocused || alwaysShowText) && this.renderText());
-    }
-  }], [{
-    key: "renderDefaultTraveller",
-    value: function renderDefaultTraveller(props) {
-      var x2 = props.x, y2 = props.y, width = props.width, height = props.height, stroke = props.stroke;
-      var lineY = Math.floor(y2 + height / 2) - 1;
-      return /* @__PURE__ */ import_react25.default.createElement(import_react25.default.Fragment, null, /* @__PURE__ */ import_react25.default.createElement("rect", {
-        x: x2,
-        y: y2,
-        width,
-        height,
-        fill: stroke,
-        stroke: "none"
-      }), /* @__PURE__ */ import_react25.default.createElement("line", {
-        x1: x2 + 1,
-        y1: lineY,
-        x2: x2 + width - 1,
-        y2: lineY,
-        fill: "none",
-        stroke: "#fff"
-      }), /* @__PURE__ */ import_react25.default.createElement("line", {
-        x1: x2 + 1,
-        y1: lineY + 2,
-        x2: x2 + width - 1,
-        y2: lineY + 2,
-        fill: "none",
-        stroke: "#fff"
-      }));
-    }
-  }, {
-    key: "renderTraveller",
-    value: function renderTraveller(option, props) {
-      var rectangle;
-      if (/* @__PURE__ */ import_react25.default.isValidElement(option)) {
-        rectangle = /* @__PURE__ */ import_react25.default.cloneElement(option, props);
-      } else if ((0, import_isFunction10.default)(option)) {
-        rectangle = option(props);
-      } else {
-        rectangle = Brush2.renderDefaultTraveller(props);
-      }
-      return rectangle;
-    }
-  }, {
-    key: "getDerivedStateFromProps",
-    value: function getDerivedStateFromProps(nextProps, prevState) {
-      var data = nextProps.data, width = nextProps.width, x2 = nextProps.x, travellerWidth = nextProps.travellerWidth, updateId = nextProps.updateId, startIndex = nextProps.startIndex, endIndex = nextProps.endIndex;
-      if (data !== prevState.prevData || updateId !== prevState.prevUpdateId) {
-        return _objectSpread24({
-          prevData: data,
-          prevTravellerWidth: travellerWidth,
-          prevUpdateId: updateId,
-          prevX: x2,
-          prevWidth: width
-        }, data && data.length ? createScale({
-          data,
-          width,
-          x: x2,
-          travellerWidth,
-          startIndex,
-          endIndex
-        }) : {
-          scale: null,
-          scaleValues: null
-        });
-      }
-      if (prevState.scale && (width !== prevState.prevWidth || x2 !== prevState.prevX || travellerWidth !== prevState.prevTravellerWidth)) {
-        prevState.scale.range([x2, x2 + width - travellerWidth]);
-        var scaleValues = prevState.scale.domain().map(function(entry) {
-          return prevState.scale(entry);
-        });
-        return {
-          prevData: data,
-          prevTravellerWidth: travellerWidth,
-          prevUpdateId: updateId,
-          prevX: x2,
-          prevWidth: width,
-          startX: prevState.scale(nextProps.startIndex),
-          endX: prevState.scale(nextProps.endIndex),
-          scaleValues
-        };
-      }
-      return null;
-    }
-  }, {
-    key: "getIndexInRange",
-    value: function getIndexInRange(valueRange, x2) {
-      var len = valueRange.length;
-      var start = 0;
-      var end = len - 1;
-      while (end - start > 1) {
-        var middle = Math.floor((start + end) / 2);
-        if (valueRange[middle] > x2) {
-          end = middle;
-        } else {
-          start = middle;
-        }
-      }
-      return x2 >= valueRange[end] ? end : start;
-    }
-  }]);
-}(import_react25.PureComponent);
-_defineProperty26(Brush, "displayName", "Brush");
-_defineProperty26(Brush, "defaultProps", {
-  height: 40,
-  travellerWidth: 5,
-  gap: 1,
-  fill: "#fff",
-  stroke: "#666",
-  padding: {
-    top: 1,
-    right: 1,
-    bottom: 1,
-    left: 1
-  },
-  leaveTimeOut: 1e3,
-  alwaysShowText: false
-});
-
-// node_modules/recharts/es6/cartesian/ReferenceLine.js
-var import_react29 = __toESM(require_react());
-var import_isFunction11 = __toESM(require_isFunction());
-var import_some = __toESM(require_some());
-
-// node_modules/recharts/es6/util/IfOverflowMatches.js
-var ifOverflowMatches = function ifOverflowMatches2(props, value) {
-  var alwaysShow = props.alwaysShow;
-  var ifOverflow = props.ifOverflow;
-  if (alwaysShow) {
-    ifOverflow = "extendDomain";
-  }
-  return ifOverflow === value;
-};
-
-// node_modules/recharts/es6/util/CartesianUtils.js
-var import_mapValues = __toESM(require_mapValues());
-var import_every = __toESM(require_every());
-
-// node_modules/recharts/es6/cartesian/Bar.js
-var import_react27 = __toESM(require_react());
-var import_isEqual3 = __toESM(require_isEqual());
-var import_isNil8 = __toESM(require_isNil());
-
-// node_modules/recharts/es6/util/BarUtils.js
-var import_react26 = __toESM(require_react());
-var _excluded14 = ["x", "y"];
-function _typeof31(o) {
-  "@babel/helpers - typeof";
-  return _typeof31 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof31(o);
-}
-function _extends17() {
-  _extends17 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends17.apply(this, arguments);
-}
-function ownKeys25(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread25(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys25(Object(t), true).forEach(function(r3) {
-      _defineProperty27(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys25(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _defineProperty27(obj, key, value) {
-  key = _toPropertyKey28(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey28(t) {
-  var i = _toPrimitive28(t, "string");
-  return "symbol" == _typeof31(i) ? i : i + "";
-}
-function _toPrimitive28(t, r2) {
-  if ("object" != _typeof31(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof31(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
 }
 function _objectWithoutProperties13(source, excluded) {
   if (source == null)
@@ -19350,92 +19111,8 @@ function _objectWithoutPropertiesLoose13(source, excluded) {
   }
   return target;
 }
-function typeguardBarRectangleProps(_ref, props) {
-  var xProp = _ref.x, yProp = _ref.y, option = _objectWithoutProperties13(_ref, _excluded14);
-  var xValue = "".concat(xProp);
-  var x2 = parseInt(xValue, 10);
-  var yValue = "".concat(yProp);
-  var y2 = parseInt(yValue, 10);
-  var heightValue = "".concat(props.height || option.height);
-  var height = parseInt(heightValue, 10);
-  var widthValue = "".concat(props.width || option.width);
-  var width = parseInt(widthValue, 10);
-  return _objectSpread25(_objectSpread25(_objectSpread25(_objectSpread25(_objectSpread25({}, props), option), x2 ? {
-    x: x2
-  } : {}), y2 ? {
-    y: y2
-  } : {}), {}, {
-    height,
-    width,
-    name: props.name,
-    radius: props.radius
-  });
-}
-function BarRectangle(props) {
-  return /* @__PURE__ */ import_react26.default.createElement(Shape, _extends17({
-    shapeType: "rectangle",
-    propTransformer: typeguardBarRectangleProps,
-    activeClassName: "recharts-active-bar"
-  }, props));
-}
-var minPointSizeCallback = function minPointSizeCallback2(minPointSize) {
-  var defaultValue = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
-  return function(value, index) {
-    if (typeof minPointSize === "number")
-      return minPointSize;
-    var isValueNumber = typeof value === "number";
-    if (isValueNumber) {
-      return minPointSize(value, index);
-    }
-    !isValueNumber ? true ? invariant(false, "minPointSize callback function received a value with type of ".concat(_typeof31(value), ". Currently only numbers are supported.")) : invariant(false) : void 0;
-    return defaultValue;
-  };
-};
-
-// node_modules/recharts/es6/cartesian/Bar.js
-var _excluded15 = ["value", "background"];
-var _Bar;
-function _typeof32(o) {
-  "@babel/helpers - typeof";
-  return _typeof32 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof32(o);
-}
-function _objectWithoutProperties14(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose14(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose14(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _extends18() {
-  _extends18 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends15() {
+  _extends15 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -19446,9 +19123,9 @@ function _extends18() {
     }
     return target;
   };
-  return _extends18.apply(this, arguments);
+  return _extends15.apply(this, arguments);
 }
-function ownKeys26(e, r2) {
+function ownKeys24(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -19458,12 +19135,12 @@ function ownKeys26(e, r2) {
   }
   return t;
 }
-function _objectSpread26(e) {
+function _objectSpread24(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys26(Object(t), true).forEach(function(r3) {
-      _defineProperty28(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys26(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys24(Object(t), true).forEach(function(r3) {
+      _defineProperty26(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys24(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
@@ -19481,7 +19158,7 @@ function _defineProperties9(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey29(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey27(descriptor.key), descriptor);
   }
 }
 function _createClass9(Constructor, protoProps, staticProps) {
@@ -19496,7 +19173,7 @@ function _callSuper7(t, o, e) {
   return o = _getPrototypeOf8(o), _possibleConstructorReturn8(t, _isNativeReflectConstruct8() ? Reflect.construct(o, e || [], _getPrototypeOf8(t).constructor) : o.apply(t, e));
 }
 function _possibleConstructorReturn8(self2, call) {
-  if (call && (_typeof32(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof30(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -19541,8 +19218,8 @@ function _setPrototypeOf8(o, p) {
   };
   return _setPrototypeOf8(o, p);
 }
-function _defineProperty28(obj, key, value) {
-  key = _toPropertyKey29(key);
+function _defineProperty26(obj, key, value) {
+  key = _toPropertyKey27(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -19550,17 +19227,17 @@ function _defineProperty28(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey29(t) {
-  var i = _toPrimitive29(t, "string");
-  return "symbol" == _typeof32(i) ? i : i + "";
+function _toPropertyKey27(t) {
+  var i = _toPrimitive27(t, "string");
+  return "symbol" == _typeof30(i) ? i : i + "";
 }
-function _toPrimitive29(t, r2) {
-  if ("object" != _typeof32(t) || !t)
+function _toPrimitive27(t, r2) {
+  if ("object" != _typeof30(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof32(i))
+    if ("object" != _typeof30(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -19574,11 +19251,11 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       args[_key] = arguments[_key];
     }
     _this = _callSuper7(this, Bar2, [].concat(args));
-    _defineProperty28(_this, "state", {
+    _defineProperty26(_this, "state", {
       isAnimationFinished: false
     });
-    _defineProperty28(_this, "id", uniqueId("recharts-bar-"));
-    _defineProperty28(_this, "handleAnimationEnd", function() {
+    _defineProperty26(_this, "id", uniqueId("recharts-bar-"));
+    _defineProperty26(_this, "handleAnimationEnd", function() {
       var onAnimationEnd2 = _this.props.onAnimationEnd;
       _this.setState({
         isAnimationFinished: true
@@ -19587,7 +19264,7 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
         onAnimationEnd2();
       }
     });
-    _defineProperty28(_this, "handleAnimationStart", function() {
+    _defineProperty26(_this, "handleAnimationStart", function() {
       var onAnimationStart2 = _this.props.onAnimationStart;
       _this.setState({
         isAnimationFinished: false
@@ -19608,7 +19285,7 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       return data && data.map(function(entry, i) {
         var isActive = i === activeIndex;
         var option = isActive ? activeBar : shape;
-        var props = _objectSpread26(_objectSpread26(_objectSpread26({}, baseProps), entry), {}, {
+        var props = _objectSpread24(_objectSpread24(_objectSpread24({}, baseProps), entry), {}, {
           isActive,
           option,
           index: i,
@@ -19616,11 +19293,11 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
           onAnimationStart: _this2.handleAnimationStart,
           onAnimationEnd: _this2.handleAnimationEnd
         });
-        return /* @__PURE__ */ import_react27.default.createElement(Layer, _extends18({
+        return /* @__PURE__ */ import_react24.default.createElement(Layer, _extends15({
           className: "recharts-bar-rectangle"
         }, adaptEventsOfChild(_this2.props, entry, i), {
           key: "rectangle-".concat(entry === null || entry === void 0 ? void 0 : entry.x, "-").concat(entry === null || entry === void 0 ? void 0 : entry.y, "-").concat(entry === null || entry === void 0 ? void 0 : entry.value)
-        }), /* @__PURE__ */ import_react27.default.createElement(BarRectangle, props));
+        }), /* @__PURE__ */ import_react24.default.createElement(BarRectangle, props));
       });
     }
   }, {
@@ -19629,7 +19306,7 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       var _this3 = this;
       var _this$props2 = this.props, data = _this$props2.data, layout = _this$props2.layout, isAnimationActive = _this$props2.isAnimationActive, animationBegin = _this$props2.animationBegin, animationDuration = _this$props2.animationDuration, animationEasing = _this$props2.animationEasing, animationId = _this$props2.animationId;
       var prevData = this.state.prevData;
-      return /* @__PURE__ */ import_react27.default.createElement(es6_default, {
+      return /* @__PURE__ */ import_react24.default.createElement(es6_default, {
         begin: animationBegin,
         duration: animationDuration,
         isActive: isAnimationActive,
@@ -19652,7 +19329,7 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
             var interpolatorY = interpolateNumber(prev.y, entry.y);
             var interpolatorWidth = interpolateNumber(prev.width, entry.width);
             var interpolatorHeight = interpolateNumber(prev.height, entry.height);
-            return _objectSpread26(_objectSpread26({}, entry), {}, {
+            return _objectSpread24(_objectSpread24({}, entry), {}, {
               x: interpolatorX(t),
               y: interpolatorY(t),
               width: interpolatorWidth(t),
@@ -19662,18 +19339,18 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
           if (layout === "horizontal") {
             var _interpolatorHeight = interpolateNumber(0, entry.height);
             var h = _interpolatorHeight(t);
-            return _objectSpread26(_objectSpread26({}, entry), {}, {
+            return _objectSpread24(_objectSpread24({}, entry), {}, {
               y: entry.y + entry.height - h,
               height: h
             });
           }
           var interpolator = interpolateNumber(0, entry.width);
           var w = interpolator(t);
-          return _objectSpread26(_objectSpread26({}, entry), {}, {
+          return _objectSpread24(_objectSpread24({}, entry), {}, {
             width: w
           });
         });
-        return /* @__PURE__ */ import_react27.default.createElement(Layer, null, _this3.renderRectanglesStatically(stepData));
+        return /* @__PURE__ */ import_react24.default.createElement(Layer, null, _this3.renderRectanglesStatically(stepData));
       });
     }
   }, {
@@ -19693,11 +19370,11 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       var _this$props4 = this.props, data = _this$props4.data, dataKey = _this$props4.dataKey, activeIndex = _this$props4.activeIndex;
       var backgroundProps = filterProps(this.props.background, false);
       return data.map(function(entry, i) {
-        var value = entry.value, background = entry.background, rest = _objectWithoutProperties14(entry, _excluded15);
+        var value = entry.value, background = entry.background, rest = _objectWithoutProperties13(entry, _excluded14);
         if (!background) {
           return null;
         }
-        var props = _objectSpread26(_objectSpread26(_objectSpread26(_objectSpread26(_objectSpread26({}, rest), {}, {
+        var props = _objectSpread24(_objectSpread24(_objectSpread24(_objectSpread24(_objectSpread24({}, rest), {}, {
           fill: "#eee"
         }, background), backgroundProps), adaptEventsOfChild(_this4.props, entry, i)), {}, {
           onAnimationStart: _this4.handleAnimationStart,
@@ -19706,7 +19383,7 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
           index: i,
           className: "recharts-bar-background-rectangle"
         });
-        return /* @__PURE__ */ import_react27.default.createElement(BarRectangle, _extends18({
+        return /* @__PURE__ */ import_react24.default.createElement(BarRectangle, _extends15({
           key: "background-bar-".concat(i),
           option: _this4.props.background,
           isActive: i === activeIndex
@@ -19737,8 +19414,8 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       var errorBarProps = {
         clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
       };
-      return /* @__PURE__ */ import_react27.default.createElement(Layer, errorBarProps, errorBarItems.map(function(item) {
-        return /* @__PURE__ */ import_react27.default.cloneElement(item, {
+      return /* @__PURE__ */ import_react24.default.createElement(Layer, errorBarProps, errorBarItems.map(function(item) {
+        return /* @__PURE__ */ import_react24.default.cloneElement(item, {
           key: "error-bar-".concat(clipPathId, "-").concat(item.props.dataKey),
           data,
           xAxis,
@@ -19762,16 +19439,16 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       var needClipY = yAxis && yAxis.allowDataOverflow;
       var needClip = needClipX || needClipY;
       var clipPathId = (0, import_isNil8.default)(id) ? this.id : id;
-      return /* @__PURE__ */ import_react27.default.createElement(Layer, {
+      return /* @__PURE__ */ import_react24.default.createElement(Layer, {
         className: layerClass
-      }, needClipX || needClipY ? /* @__PURE__ */ import_react27.default.createElement("defs", null, /* @__PURE__ */ import_react27.default.createElement("clipPath", {
+      }, needClipX || needClipY ? /* @__PURE__ */ import_react24.default.createElement("defs", null, /* @__PURE__ */ import_react24.default.createElement("clipPath", {
         id: "clipPath-".concat(clipPathId)
-      }, /* @__PURE__ */ import_react27.default.createElement("rect", {
+      }, /* @__PURE__ */ import_react24.default.createElement("rect", {
         x: needClipX ? left : left - width / 2,
         y: needClipY ? top : top - height / 2,
         width: needClipX ? width : width * 2,
         height: needClipY ? height : height * 2
-      }))) : null, /* @__PURE__ */ import_react27.default.createElement(Layer, {
+      }))) : null, /* @__PURE__ */ import_react24.default.createElement(Layer, {
         className: "recharts-bar-rectangles",
         clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
       }, background ? this.renderBackground() : null, this.renderRectangles()), this.renderErrorBar(needClip, clipPathId), (!isAnimationActive || isAnimationFinished) && LabelList.renderCallByParent(this.props, data));
@@ -19794,10 +19471,10 @@ var Bar = /* @__PURE__ */ function(_PureComponent) {
       return null;
     }
   }]);
-}(import_react27.PureComponent);
+}(import_react24.PureComponent);
 _Bar = Bar;
-_defineProperty28(Bar, "displayName", "Bar");
-_defineProperty28(Bar, "defaultProps", {
+_defineProperty26(Bar, "displayName", "Bar");
+_defineProperty26(Bar, "defaultProps", {
   xAxisId: 0,
   yAxisId: 0,
   legendType: "rect",
@@ -19811,7 +19488,7 @@ _defineProperty28(Bar, "defaultProps", {
   animationDuration: 400,
   animationEasing: "ease"
 });
-_defineProperty28(Bar, "getComposedData", function(_ref2) {
+_defineProperty26(Bar, "getComposedData", function(_ref2) {
   var props = _ref2.props, item = _ref2.item, barPosition = _ref2.barPosition, bandSize = _ref2.bandSize, xAxis = _ref2.xAxis, yAxis = _ref2.yAxis, xAxisTicks = _ref2.xAxisTicks, yAxisTicks = _ref2.yAxisTicks, stackedData = _ref2.stackedData, dataStartIndex = _ref2.dataStartIndex, displayedData = _ref2.displayedData, offset = _ref2.offset;
   var pos = findPositionOfBar(barPosition, item);
   if (!pos) {
@@ -19819,7 +19496,7 @@ _defineProperty28(Bar, "getComposedData", function(_ref2) {
   }
   var layout = props.layout;
   var itemDefaultProps = item.type.defaultProps;
-  var itemProps = itemDefaultProps !== void 0 ? _objectSpread26(_objectSpread26({}, itemDefaultProps), item.props) : item.props;
+  var itemProps = itemDefaultProps !== void 0 ? _objectSpread24(_objectSpread24({}, itemDefaultProps), item.props) : item.props;
   var dataKey = itemProps.dataKey, children = itemProps.children, minPointSizeProp = itemProps.minPointSize;
   var numericAxis = layout === "horizontal" ? yAxis : xAxis;
   var stackedDomain = stackedData ? numericAxis.scale.domain() : null;
@@ -19888,7 +19565,7 @@ _defineProperty28(Bar, "getComposedData", function(_ref2) {
         width += _delta;
       }
     }
-    return _objectSpread26(_objectSpread26(_objectSpread26({}, entry), {}, {
+    return _objectSpread24(_objectSpread24(_objectSpread24({}, entry), {}, {
       x: x2,
       y: y2,
       width,
@@ -19904,20 +19581,20 @@ _defineProperty28(Bar, "getComposedData", function(_ref2) {
       }
     });
   });
-  return _objectSpread26({
+  return _objectSpread24({
     data: rects,
     layout
   }, offset);
 });
 
 // node_modules/recharts/es6/util/CartesianUtils.js
-function _typeof33(o) {
+function _typeof31(o) {
   "@babel/helpers - typeof";
-  return _typeof33 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof31 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof33(o);
+  }, _typeof31(o);
 }
 function _classCallCheck10(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -19931,7 +19608,7 @@ function _defineProperties10(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey30(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey28(descriptor.key), descriptor);
   }
 }
 function _createClass10(Constructor, protoProps, staticProps) {
@@ -19942,7 +19619,7 @@ function _createClass10(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-function ownKeys27(e, r2) {
+function ownKeys25(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -19952,19 +19629,19 @@ function ownKeys27(e, r2) {
   }
   return t;
 }
-function _objectSpread27(e) {
+function _objectSpread25(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys27(Object(t), true).forEach(function(r3) {
-      _defineProperty29(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys27(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys25(Object(t), true).forEach(function(r3) {
+      _defineProperty27(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys25(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty29(obj, key, value) {
-  key = _toPropertyKey30(key);
+function _defineProperty27(obj, key, value) {
+  key = _toPropertyKey28(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -19972,17 +19649,17 @@ function _defineProperty29(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey30(t) {
-  var i = _toPrimitive30(t, "string");
-  return "symbol" == _typeof33(i) ? i : i + "";
+function _toPropertyKey28(t) {
+  var i = _toPrimitive28(t, "string");
+  return "symbol" == _typeof31(i) ? i : i + "";
 }
-function _toPrimitive30(t, r2) {
-  if ("object" != _typeof33(t) || !t)
+function _toPrimitive28(t, r2) {
+  if ("object" != _typeof31(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof33(i))
+    if ("object" != _typeof31(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -20042,7 +19719,7 @@ var formatAxisMap = function formatAxisMap2(props, axisMap, offset, axisType, ch
     var _parseScale = parseScale(axis, chartName, hasBar), scale = _parseScale.scale, realScaleType = _parseScale.realScaleType;
     scale.domain(domain).range(range6);
     checkDomainOfScale(scale);
-    var ticks2 = getTicksOfScale(scale, _objectSpread27(_objectSpread27({}, axis), {}, {
+    var ticks2 = getTicksOfScale(scale, _objectSpread25(_objectSpread25({}, axis), {}, {
       realScaleType
     }));
     if (axisType === "xAxis") {
@@ -20054,7 +19731,7 @@ var formatAxisMap = function formatAxisMap2(props, axisMap, offset, axisType, ch
       x2 = steps[offsetKey] - needSpace * axis.width;
       y2 = offset.top;
     }
-    var finalAxis = _objectSpread27(_objectSpread27(_objectSpread27({}, axis), ticks2), {}, {
+    var finalAxis = _objectSpread25(_objectSpread25(_objectSpread25({}, axis), ticks2), {}, {
       realScaleType,
       x: x2,
       y: y2,
@@ -20068,7 +19745,7 @@ var formatAxisMap = function formatAxisMap2(props, axisMap, offset, axisType, ch
     } else if (!axis.hide) {
       steps[offsetKey] += (needSpace ? -1 : 1) * finalAxis.width;
     }
-    return _objectSpread27(_objectSpread27({}, result), {}, _defineProperty29({}, id, finalAxis));
+    return _objectSpread25(_objectSpread25({}, result), {}, _defineProperty27({}, id, finalAxis));
   }, {});
 };
 var rectWithPoints = function rectWithPoints2(_ref, _ref2) {
@@ -20167,12 +19844,12 @@ var ScaleHelper = /* @__PURE__ */ function() {
     }
   }]);
 }();
-_defineProperty29(ScaleHelper, "EPS", 1e-4);
+_defineProperty27(ScaleHelper, "EPS", 1e-4);
 var createLabeledScales = function createLabeledScales2(options) {
   var scales = Object.keys(options).reduce(function(res, key) {
-    return _objectSpread27(_objectSpread27({}, res), {}, _defineProperty29({}, key, ScaleHelper.create(options[key])));
+    return _objectSpread25(_objectSpread25({}, res), {}, _defineProperty27({}, key, ScaleHelper.create(options[key])));
   }, {});
-  return _objectSpread27(_objectSpread27({}, scales), {}, {
+  return _objectSpread25(_objectSpread25({}, scales), {}, {
     apply: function apply(coord) {
       var _ref5 = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, bandAware = _ref5.bandAware, position = _ref5.position;
       return (0, import_mapValues.default)(coord, function(value, label) {
@@ -20203,7 +19880,7 @@ var getAngledRectangleWidth = function getAngledRectangleWidth2(_ref6) {
 };
 
 // node_modules/recharts/es6/context/chartLayoutContext.js
-var import_react28 = __toESM(require_react());
+var import_react25 = __toESM(require_react());
 var import_find = __toESM(require_find());
 var import_every2 = __toESM(require_every());
 
@@ -20221,42 +19898,42 @@ var calculateViewBox = (0, import_memoize.default)(function(offset) {
 });
 
 // node_modules/recharts/es6/context/chartLayoutContext.js
-function _typeof34(o) {
+function _typeof32(o) {
   "@babel/helpers - typeof";
-  return _typeof34 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof32 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof34(o);
+  }, _typeof32(o);
 }
-var XAxisContext = /* @__PURE__ */ (0, import_react28.createContext)(void 0);
-var YAxisContext = /* @__PURE__ */ (0, import_react28.createContext)(void 0);
-var ViewBoxContext = /* @__PURE__ */ (0, import_react28.createContext)(void 0);
-var OffsetContext = /* @__PURE__ */ (0, import_react28.createContext)({});
-var ClipPathIdContext = /* @__PURE__ */ (0, import_react28.createContext)(void 0);
-var ChartHeightContext = /* @__PURE__ */ (0, import_react28.createContext)(0);
-var ChartWidthContext = /* @__PURE__ */ (0, import_react28.createContext)(0);
+var XAxisContext = /* @__PURE__ */ (0, import_react25.createContext)(void 0);
+var YAxisContext = /* @__PURE__ */ (0, import_react25.createContext)(void 0);
+var ViewBoxContext = /* @__PURE__ */ (0, import_react25.createContext)(void 0);
+var OffsetContext = /* @__PURE__ */ (0, import_react25.createContext)({});
+var ClipPathIdContext = /* @__PURE__ */ (0, import_react25.createContext)(void 0);
+var ChartHeightContext = /* @__PURE__ */ (0, import_react25.createContext)(0);
+var ChartWidthContext = /* @__PURE__ */ (0, import_react25.createContext)(0);
 var ChartLayoutContextProvider = function ChartLayoutContextProvider2(props) {
   var _props$state = props.state, xAxisMap = _props$state.xAxisMap, yAxisMap = _props$state.yAxisMap, offset = _props$state.offset, clipPathId = props.clipPathId, children = props.children, width = props.width, height = props.height;
   var viewBox = calculateViewBox(offset);
-  return /* @__PURE__ */ import_react28.default.createElement(XAxisContext.Provider, {
+  return /* @__PURE__ */ import_react25.default.createElement(XAxisContext.Provider, {
     value: xAxisMap
-  }, /* @__PURE__ */ import_react28.default.createElement(YAxisContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(YAxisContext.Provider, {
     value: yAxisMap
-  }, /* @__PURE__ */ import_react28.default.createElement(OffsetContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(OffsetContext.Provider, {
     value: offset
-  }, /* @__PURE__ */ import_react28.default.createElement(ViewBoxContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(ViewBoxContext.Provider, {
     value: viewBox
-  }, /* @__PURE__ */ import_react28.default.createElement(ClipPathIdContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(ClipPathIdContext.Provider, {
     value: clipPathId
-  }, /* @__PURE__ */ import_react28.default.createElement(ChartHeightContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(ChartHeightContext.Provider, {
     value: height
-  }, /* @__PURE__ */ import_react28.default.createElement(ChartWidthContext.Provider, {
+  }, /* @__PURE__ */ import_react25.default.createElement(ChartWidthContext.Provider, {
     value: width
   }, children)))))));
 };
 var useClipPathId = function useClipPathId2() {
-  return (0, import_react28.useContext)(ClipPathIdContext);
+  return (0, import_react25.useContext)(ClipPathIdContext);
 };
 function getKeysForDebug(object) {
   var keys2 = Object.keys(object);
@@ -20266,52 +19943,52 @@ function getKeysForDebug(object) {
   return "Available ids are: ".concat(keys2, ".");
 }
 var useXAxisOrThrow = function useXAxisOrThrow2(xAxisId) {
-  var xAxisMap = (0, import_react28.useContext)(XAxisContext);
+  var xAxisMap = (0, import_react25.useContext)(XAxisContext);
   !(xAxisMap != null) ? true ? invariant(false, "Could not find Recharts context; are you sure this is rendered inside a Recharts wrapper component?") : invariant(false) : void 0;
   var xAxis = xAxisMap[xAxisId];
-  !(xAxis != null) ? true ? invariant(false, 'Could not find xAxis by id "'.concat(xAxisId, '" [').concat(_typeof34(xAxisId), "]. ").concat(getKeysForDebug(xAxisMap))) : invariant(false) : void 0;
+  !(xAxis != null) ? true ? invariant(false, 'Could not find xAxis by id "'.concat(xAxisId, '" [').concat(_typeof32(xAxisId), "]. ").concat(getKeysForDebug(xAxisMap))) : invariant(false) : void 0;
   return xAxis;
 };
 var useArbitraryXAxis = function useArbitraryXAxis2() {
-  var xAxisMap = (0, import_react28.useContext)(XAxisContext);
+  var xAxisMap = (0, import_react25.useContext)(XAxisContext);
   return getAnyElementOfObject(xAxisMap);
 };
 var useYAxisWithFiniteDomainOrRandom = function useYAxisWithFiniteDomainOrRandom2() {
-  var yAxisMap = (0, import_react28.useContext)(YAxisContext);
+  var yAxisMap = (0, import_react25.useContext)(YAxisContext);
   var yAxisWithFiniteDomain = (0, import_find.default)(yAxisMap, function(axis) {
     return (0, import_every2.default)(axis.domain, Number.isFinite);
   });
   return yAxisWithFiniteDomain || getAnyElementOfObject(yAxisMap);
 };
 var useYAxisOrThrow = function useYAxisOrThrow2(yAxisId) {
-  var yAxisMap = (0, import_react28.useContext)(YAxisContext);
+  var yAxisMap = (0, import_react25.useContext)(YAxisContext);
   !(yAxisMap != null) ? true ? invariant(false, "Could not find Recharts context; are you sure this is rendered inside a Recharts wrapper component?") : invariant(false) : void 0;
   var yAxis = yAxisMap[yAxisId];
-  !(yAxis != null) ? true ? invariant(false, 'Could not find yAxis by id "'.concat(yAxisId, '" [').concat(_typeof34(yAxisId), "]. ").concat(getKeysForDebug(yAxisMap))) : invariant(false) : void 0;
+  !(yAxis != null) ? true ? invariant(false, 'Could not find yAxis by id "'.concat(yAxisId, '" [').concat(_typeof32(yAxisId), "]. ").concat(getKeysForDebug(yAxisMap))) : invariant(false) : void 0;
   return yAxis;
 };
 var useViewBox = function useViewBox2() {
-  var viewBox = (0, import_react28.useContext)(ViewBoxContext);
+  var viewBox = (0, import_react25.useContext)(ViewBoxContext);
   return viewBox;
 };
 var useOffset = function useOffset2() {
-  return (0, import_react28.useContext)(OffsetContext);
+  return (0, import_react25.useContext)(OffsetContext);
 };
 var useChartWidth = function useChartWidth2() {
-  return (0, import_react28.useContext)(ChartWidthContext);
+  return (0, import_react25.useContext)(ChartWidthContext);
 };
 var useChartHeight = function useChartHeight2() {
-  return (0, import_react28.useContext)(ChartHeightContext);
+  return (0, import_react25.useContext)(ChartHeightContext);
 };
 
 // node_modules/recharts/es6/cartesian/ReferenceLine.js
-function _typeof35(o) {
+function _typeof33(o) {
   "@babel/helpers - typeof";
-  return _typeof35 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof33 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof35(o);
+  }, _typeof33(o);
 }
 function _classCallCheck11(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -20325,7 +20002,7 @@ function _defineProperties11(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey31(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey29(descriptor.key), descriptor);
   }
 }
 function _createClass11(Constructor, protoProps, staticProps) {
@@ -20340,7 +20017,7 @@ function _callSuper8(t, o, e) {
   return o = _getPrototypeOf9(o), _possibleConstructorReturn9(t, _isNativeReflectConstruct9() ? Reflect.construct(o, e || [], _getPrototypeOf9(t).constructor) : o.apply(t, e));
 }
 function _possibleConstructorReturn9(self2, call) {
-  if (call && (_typeof35(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof33(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -20385,7 +20062,7 @@ function _setPrototypeOf9(o, p) {
   };
   return _setPrototypeOf9(o, p);
 }
-function ownKeys28(e, r2) {
+function ownKeys26(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -20395,19 +20072,19 @@ function ownKeys28(e, r2) {
   }
   return t;
 }
-function _objectSpread28(e) {
+function _objectSpread26(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys28(Object(t), true).forEach(function(r3) {
-      _defineProperty30(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys28(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys26(Object(t), true).forEach(function(r3) {
+      _defineProperty28(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys26(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty30(obj, key, value) {
-  key = _toPropertyKey31(key);
+function _defineProperty28(obj, key, value) {
+  key = _toPropertyKey29(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -20415,17 +20092,17 @@ function _defineProperty30(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey31(t) {
-  var i = _toPrimitive31(t, "string");
-  return "symbol" == _typeof35(i) ? i : i + "";
+function _toPropertyKey29(t) {
+  var i = _toPrimitive29(t, "string");
+  return "symbol" == _typeof33(i) ? i : i + "";
 }
-function _toPrimitive31(t, r2) {
-  if ("object" != _typeof35(t) || !t)
+function _toPrimitive29(t, r2) {
+  if ("object" != _typeof33(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof35(i))
+    if ("object" != _typeof33(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -20487,8 +20164,8 @@ function _arrayWithHoles12(arr) {
   if (Array.isArray(arr))
     return arr;
 }
-function _extends19() {
-  _extends19 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends16() {
+  _extends16 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -20499,16 +20176,16 @@ function _extends19() {
     }
     return target;
   };
-  return _extends19.apply(this, arguments);
+  return _extends16.apply(this, arguments);
 }
 var renderLine = function renderLine2(option, props) {
   var line;
-  if (/* @__PURE__ */ import_react29.default.isValidElement(option)) {
-    line = /* @__PURE__ */ import_react29.default.cloneElement(option, props);
-  } else if ((0, import_isFunction11.default)(option)) {
+  if (/* @__PURE__ */ import_react26.default.isValidElement(option)) {
+    line = /* @__PURE__ */ import_react26.default.cloneElement(option, props);
+  } else if ((0, import_isFunction10.default)(option)) {
     line = option(props);
   } else {
-    line = /* @__PURE__ */ import_react29.default.createElement("line", _extends19({}, props, {
+    line = /* @__PURE__ */ import_react26.default.createElement("line", _extends16({}, props, {
       className: "recharts-reference-line-line"
     }));
   }
@@ -20589,7 +20266,7 @@ function ReferenceLineImpl(props) {
   }
   var _endPoints = _slicedToArray11(endPoints, 2), _endPoints$ = _endPoints[0], x1 = _endPoints$.x, y1 = _endPoints$.y, _endPoints$2 = _endPoints[1], x2 = _endPoints$2.x, y2 = _endPoints$2.y;
   var clipPath = ifOverflowMatches(props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-  var lineProps = _objectSpread28(_objectSpread28({
+  var lineProps = _objectSpread26(_objectSpread26({
     clipPath
   }, filterProps(props, true)), {}, {
     x1,
@@ -20597,7 +20274,7 @@ function ReferenceLineImpl(props) {
     x2,
     y2
   });
-  return /* @__PURE__ */ import_react29.default.createElement(Layer, {
+  return /* @__PURE__ */ import_react26.default.createElement(Layer, {
     className: clsx_default("recharts-reference-line", className)
   }, renderLine(shape, lineProps), Label.renderCallByParent(props, rectWithCoords({
     x1,
@@ -20615,12 +20292,12 @@ var ReferenceLine = /* @__PURE__ */ function(_React$Component) {
   return _createClass11(ReferenceLine2, [{
     key: "render",
     value: function render() {
-      return /* @__PURE__ */ import_react29.default.createElement(ReferenceLineImpl, this.props);
+      return /* @__PURE__ */ import_react26.default.createElement(ReferenceLineImpl, this.props);
     }
   }]);
-}(import_react29.default.Component);
-_defineProperty30(ReferenceLine, "displayName", "ReferenceLine");
-_defineProperty30(ReferenceLine, "defaultProps", {
+}(import_react26.default.Component);
+_defineProperty28(ReferenceLine, "displayName", "ReferenceLine");
+_defineProperty28(ReferenceLine, "defaultProps", {
   isFront: false,
   ifOverflow: "discard",
   xAxisId: 0,
@@ -20632,11 +20309,11 @@ _defineProperty30(ReferenceLine, "defaultProps", {
   position: "middle"
 });
 
-// node_modules/recharts/es6/cartesian/ReferenceDot.js
-var import_react30 = __toESM(require_react());
-var import_isFunction12 = __toESM(require_isFunction());
-function _extends20() {
-  _extends20 = Object.assign ? Object.assign.bind() : function(target) {
+// node_modules/recharts/es6/cartesian/ReferenceArea.js
+var import_react27 = __toESM(require_react());
+var import_isFunction11 = __toESM(require_isFunction());
+function _extends17() {
+  _extends17 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -20647,17 +20324,17 @@ function _extends20() {
     }
     return target;
   };
-  return _extends20.apply(this, arguments);
+  return _extends17.apply(this, arguments);
 }
-function _typeof36(o) {
+function _typeof34(o) {
   "@babel/helpers - typeof";
-  return _typeof36 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof34 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof36(o);
+  }, _typeof34(o);
 }
-function ownKeys29(e, r2) {
+function ownKeys27(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -20667,12 +20344,12 @@ function ownKeys29(e, r2) {
   }
   return t;
 }
-function _objectSpread29(e) {
+function _objectSpread27(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys29(Object(t), true).forEach(function(r3) {
-      _defineProperty31(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys29(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys27(Object(t), true).forEach(function(r3) {
+      _defineProperty29(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys27(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
@@ -20690,7 +20367,7 @@ function _defineProperties12(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey32(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey30(descriptor.key), descriptor);
   }
 }
 function _createClass12(Constructor, protoProps, staticProps) {
@@ -20705,7 +20382,7 @@ function _callSuper9(t, o, e) {
   return o = _getPrototypeOf10(o), _possibleConstructorReturn10(t, _isNativeReflectConstruct10() ? Reflect.construct(o, e || [], _getPrototypeOf10(t).constructor) : o.apply(t, e));
 }
 function _possibleConstructorReturn10(self2, call) {
-  if (call && (_typeof36(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof34(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -20750,8 +20427,8 @@ function _setPrototypeOf10(o, p) {
   };
   return _setPrototypeOf10(o, p);
 }
-function _defineProperty31(obj, key, value) {
-  key = _toPropertyKey32(key);
+function _defineProperty29(obj, key, value) {
+  key = _toPropertyKey30(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -20759,245 +20436,17 @@ function _defineProperty31(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey32(t) {
-  var i = _toPrimitive32(t, "string");
-  return "symbol" == _typeof36(i) ? i : i + "";
+function _toPropertyKey30(t) {
+  var i = _toPrimitive30(t, "string");
+  return "symbol" == _typeof34(i) ? i : i + "";
 }
-function _toPrimitive32(t, r2) {
-  if ("object" != _typeof36(t) || !t)
+function _toPrimitive30(t, r2) {
+  if ("object" != _typeof34(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof36(i))
-      return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r2 ? String : Number)(t);
-}
-var getCoordinate = function getCoordinate2(props) {
-  var x2 = props.x, y2 = props.y, xAxis = props.xAxis, yAxis = props.yAxis;
-  var scales = createLabeledScales({
-    x: xAxis.scale,
-    y: yAxis.scale
-  });
-  var result = scales.apply({
-    x: x2,
-    y: y2
-  }, {
-    bandAware: true
-  });
-  if (ifOverflowMatches(props, "discard") && !scales.isInRange(result)) {
-    return null;
-  }
-  return result;
-};
-var ReferenceDot = /* @__PURE__ */ function(_React$Component) {
-  function ReferenceDot2() {
-    _classCallCheck12(this, ReferenceDot2);
-    return _callSuper9(this, ReferenceDot2, arguments);
-  }
-  _inherits10(ReferenceDot2, _React$Component);
-  return _createClass12(ReferenceDot2, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props, x2 = _this$props.x, y2 = _this$props.y, r2 = _this$props.r, alwaysShow = _this$props.alwaysShow, clipPathId = _this$props.clipPathId;
-      var isX = isNumOrStr(x2);
-      var isY = isNumOrStr(y2);
-      warn(alwaysShow === void 0, 'The alwaysShow prop is deprecated. Please use ifOverflow="extendDomain" instead.');
-      if (!isX || !isY) {
-        return null;
-      }
-      var coordinate = getCoordinate(this.props);
-      if (!coordinate) {
-        return null;
-      }
-      var cx = coordinate.x, cy = coordinate.y;
-      var _this$props2 = this.props, shape = _this$props2.shape, className = _this$props2.className;
-      var clipPath = ifOverflowMatches(this.props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-      var dotProps = _objectSpread29(_objectSpread29({
-        clipPath
-      }, filterProps(this.props, true)), {}, {
-        cx,
-        cy
-      });
-      return /* @__PURE__ */ import_react30.default.createElement(Layer, {
-        className: clsx_default("recharts-reference-dot", className)
-      }, ReferenceDot2.renderDot(shape, dotProps), Label.renderCallByParent(this.props, {
-        x: cx - r2,
-        y: cy - r2,
-        width: 2 * r2,
-        height: 2 * r2
-      }));
-    }
-  }]);
-}(import_react30.default.Component);
-_defineProperty31(ReferenceDot, "displayName", "ReferenceDot");
-_defineProperty31(ReferenceDot, "defaultProps", {
-  isFront: false,
-  ifOverflow: "discard",
-  xAxisId: 0,
-  yAxisId: 0,
-  r: 10,
-  fill: "#fff",
-  stroke: "#ccc",
-  fillOpacity: 1,
-  strokeWidth: 1
-});
-_defineProperty31(ReferenceDot, "renderDot", function(option, props) {
-  var dot;
-  if (/* @__PURE__ */ import_react30.default.isValidElement(option)) {
-    dot = /* @__PURE__ */ import_react30.default.cloneElement(option, props);
-  } else if ((0, import_isFunction12.default)(option)) {
-    dot = option(props);
-  } else {
-    dot = /* @__PURE__ */ import_react30.default.createElement(Dot, _extends20({}, props, {
-      cx: props.cx,
-      cy: props.cy,
-      className: "recharts-reference-dot-dot"
-    }));
-  }
-  return dot;
-});
-
-// node_modules/recharts/es6/cartesian/ReferenceArea.js
-var import_react31 = __toESM(require_react());
-var import_isFunction13 = __toESM(require_isFunction());
-function _extends21() {
-  _extends21 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends21.apply(this, arguments);
-}
-function _typeof37(o) {
-  "@babel/helpers - typeof";
-  return _typeof37 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof37(o);
-}
-function ownKeys30(e, r2) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r2 && (o = o.filter(function(r3) {
-      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread30(e) {
-  for (var r2 = 1; r2 < arguments.length; r2++) {
-    var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys30(Object(t), true).forEach(function(r3) {
-      _defineProperty32(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys30(Object(t)).forEach(function(r3) {
-      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
-    });
-  }
-  return e;
-}
-function _classCallCheck13(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-function _defineProperties13(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor)
-      descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey33(descriptor.key), descriptor);
-  }
-}
-function _createClass13(Constructor, protoProps, staticProps) {
-  if (protoProps)
-    _defineProperties13(Constructor.prototype, protoProps);
-  if (staticProps)
-    _defineProperties13(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", { writable: false });
-  return Constructor;
-}
-function _callSuper10(t, o, e) {
-  return o = _getPrototypeOf11(o), _possibleConstructorReturn11(t, _isNativeReflectConstruct11() ? Reflect.construct(o, e || [], _getPrototypeOf11(t).constructor) : o.apply(t, e));
-}
-function _possibleConstructorReturn11(self2, call) {
-  if (call && (_typeof37(call) === "object" || typeof call === "function")) {
-    return call;
-  } else if (call !== void 0) {
-    throw new TypeError("Derived constructors may only return object or undefined");
-  }
-  return _assertThisInitialized11(self2);
-}
-function _assertThisInitialized11(self2) {
-  if (self2 === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return self2;
-}
-function _isNativeReflectConstruct11() {
-  try {
-    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    }));
-  } catch (t2) {
-  }
-  return (_isNativeReflectConstruct11 = function _isNativeReflectConstruct17() {
-    return !!t;
-  })();
-}
-function _getPrototypeOf11(o) {
-  _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
-    return o2.__proto__ || Object.getPrototypeOf(o2);
-  };
-  return _getPrototypeOf11(o);
-}
-function _inherits11(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
-  Object.defineProperty(subClass, "prototype", { writable: false });
-  if (superClass)
-    _setPrototypeOf11(subClass, superClass);
-}
-function _setPrototypeOf11(o, p) {
-  _setPrototypeOf11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
-    o2.__proto__ = p2;
-    return o2;
-  };
-  return _setPrototypeOf11(o, p);
-}
-function _defineProperty32(obj, key, value) {
-  key = _toPropertyKey33(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _toPropertyKey33(t) {
-  var i = _toPrimitive33(t, "string");
-  return "symbol" == _typeof37(i) ? i : i + "";
-}
-function _toPrimitive33(t, r2) {
-  if ("object" != _typeof37(t) || !t)
-    return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r2 || "default");
-    if ("object" != _typeof37(i))
+    if ("object" != _typeof34(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -21034,11 +20483,11 @@ var getRect = function getRect2(hasX1, hasX2, hasY1, hasY2, props) {
 };
 var ReferenceArea = /* @__PURE__ */ function(_React$Component) {
   function ReferenceArea2() {
-    _classCallCheck13(this, ReferenceArea2);
-    return _callSuper10(this, ReferenceArea2, arguments);
+    _classCallCheck12(this, ReferenceArea2);
+    return _callSuper9(this, ReferenceArea2, arguments);
   }
-  _inherits11(ReferenceArea2, _React$Component);
-  return _createClass13(ReferenceArea2, [{
+  _inherits10(ReferenceArea2, _React$Component);
+  return _createClass12(ReferenceArea2, [{
     key: "render",
     value: function render() {
       var _this$props = this.props, x1 = _this$props.x1, x2 = _this$props.x2, y1 = _this$props.y1, y2 = _this$props.y2, className = _this$props.className, alwaysShow = _this$props.alwaysShow, clipPathId = _this$props.clipPathId;
@@ -21056,16 +20505,16 @@ var ReferenceArea = /* @__PURE__ */ function(_React$Component) {
         return null;
       }
       var clipPath = ifOverflowMatches(this.props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
-      return /* @__PURE__ */ import_react31.default.createElement(Layer, {
+      return /* @__PURE__ */ import_react27.default.createElement(Layer, {
         className: clsx_default("recharts-reference-area", className)
-      }, ReferenceArea2.renderRect(shape, _objectSpread30(_objectSpread30({
+      }, ReferenceArea2.renderRect(shape, _objectSpread27(_objectSpread27({
         clipPath
       }, filterProps(this.props, true)), rect)), Label.renderCallByParent(this.props, rect));
     }
   }]);
-}(import_react31.default.Component);
-_defineProperty32(ReferenceArea, "displayName", "ReferenceArea");
-_defineProperty32(ReferenceArea, "defaultProps", {
+}(import_react27.default.Component);
+_defineProperty29(ReferenceArea, "displayName", "ReferenceArea");
+_defineProperty29(ReferenceArea, "defaultProps", {
   isFront: false,
   ifOverflow: "discard",
   xAxisId: 0,
@@ -21076,39 +20525,38 @@ _defineProperty32(ReferenceArea, "defaultProps", {
   stroke: "none",
   strokeWidth: 1
 });
-_defineProperty32(ReferenceArea, "renderRect", function(option, props) {
+_defineProperty29(ReferenceArea, "renderRect", function(option, props) {
   var rect;
-  if (/* @__PURE__ */ import_react31.default.isValidElement(option)) {
-    rect = /* @__PURE__ */ import_react31.default.cloneElement(option, props);
-  } else if ((0, import_isFunction13.default)(option)) {
+  if (/* @__PURE__ */ import_react27.default.isValidElement(option)) {
+    rect = /* @__PURE__ */ import_react27.default.cloneElement(option, props);
+  } else if ((0, import_isFunction11.default)(option)) {
     rect = option(props);
   } else {
-    rect = /* @__PURE__ */ import_react31.default.createElement(Rectangle, _extends21({}, props, {
+    rect = /* @__PURE__ */ import_react27.default.createElement(Rectangle, _extends17({}, props, {
       className: "recharts-reference-area-rect"
     }));
   }
   return rect;
 });
 
-// node_modules/recharts/es6/cartesian/CartesianAxis.js
-var import_react32 = __toESM(require_react());
-var import_isFunction15 = __toESM(require_isFunction());
-var import_get4 = __toESM(require_get());
-
-// node_modules/recharts/es6/cartesian/getTicks.js
+// node_modules/recharts/es6/cartesian/CartesianGrid.js
+var import_react29 = __toESM(require_react());
 var import_isFunction14 = __toESM(require_isFunction());
 
+// node_modules/recharts/es6/cartesian/getTicks.js
+var import_isFunction12 = __toESM(require_isFunction());
+
 // node_modules/recharts/es6/util/getEveryNthWithCondition.js
-function getEveryNthWithCondition(array, n, isValid2) {
+function getEveryNthWithCondition(array, n, isValid) {
   if (n < 1) {
     return [];
   }
-  if (n === 1 && isValid2 === void 0) {
+  if (n === 1 && isValid === void 0) {
     return array;
   }
   var result = [];
   for (var i = 0; i < array.length; i += n) {
-    if (isValid2 === void 0 || isValid2(array[i]) === true) {
+    if (isValid === void 0 || isValid(array[i]) === true) {
       result.push(array[i]);
     } else {
       return void 0;
@@ -21193,15 +20641,15 @@ function getEquidistantTicks(sign2, boundaries, getTickSize, ticks2, minTickGap)
 }
 
 // node_modules/recharts/es6/cartesian/getTicks.js
-function _typeof38(o) {
+function _typeof35(o) {
   "@babel/helpers - typeof";
-  return _typeof38 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof35 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof38(o);
+  }, _typeof35(o);
 }
-function ownKeys31(e, r2) {
+function ownKeys28(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -21211,19 +20659,19 @@ function ownKeys31(e, r2) {
   }
   return t;
 }
-function _objectSpread31(e) {
+function _objectSpread28(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys31(Object(t), true).forEach(function(r3) {
-      _defineProperty33(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys31(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys28(Object(t), true).forEach(function(r3) {
+      _defineProperty30(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys28(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty33(obj, key, value) {
-  key = _toPropertyKey34(key);
+function _defineProperty30(obj, key, value) {
+  key = _toPropertyKey31(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -21231,17 +20679,17 @@ function _defineProperty33(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey34(t) {
-  var i = _toPrimitive34(t, "string");
-  return "symbol" == _typeof38(i) ? i : i + "";
+function _toPropertyKey31(t) {
+  var i = _toPrimitive31(t, "string");
+  return "symbol" == _typeof35(i) ? i : i + "";
 }
-function _toPrimitive34(t, r2) {
-  if ("object" != _typeof38(t) || !t)
+function _toPrimitive31(t, r2) {
+  if ("object" != _typeof35(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof38(i))
+    if ("object" != _typeof35(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -21263,18 +20711,18 @@ function getTicksEnd(sign2, boundaries, getTickSize, ticks2, minTickGap) {
     };
     if (i2 === len - 1) {
       var gap = sign2 * (entry.coordinate + sign2 * getSize() / 2 - end);
-      result[i2] = entry = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = entry = _objectSpread28(_objectSpread28({}, entry), {}, {
         tickCoord: gap > 0 ? entry.coordinate - gap * sign2 : entry.coordinate
       });
     } else {
-      result[i2] = entry = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = entry = _objectSpread28(_objectSpread28({}, entry), {}, {
         tickCoord: entry.coordinate
       });
     }
     var isShow = isVisible(sign2, entry.tickCoord, getSize, start, end);
     if (isShow) {
       end = entry.tickCoord - sign2 * (getSize() / 2 + minTickGap);
-      result[i2] = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = _objectSpread28(_objectSpread28({}, entry), {}, {
         isShow: true
       });
     }
@@ -21292,7 +20740,7 @@ function getTicksStart(sign2, boundaries, getTickSize, ticks2, minTickGap, prese
     var tail = ticks2[len - 1];
     var tailSize = getTickSize(tail, len - 1);
     var tailGap = sign2 * (tail.coordinate + sign2 * tailSize / 2 - end);
-    result[len - 1] = tail = _objectSpread31(_objectSpread31({}, tail), {}, {
+    result[len - 1] = tail = _objectSpread28(_objectSpread28({}, tail), {}, {
       tickCoord: tailGap > 0 ? tail.coordinate - tailGap * sign2 : tail.coordinate
     });
     var isTailShow = isVisible(sign2, tail.tickCoord, function() {
@@ -21300,7 +20748,7 @@ function getTicksStart(sign2, boundaries, getTickSize, ticks2, minTickGap, prese
     }, start, end);
     if (isTailShow) {
       end = tail.tickCoord - sign2 * (tailSize / 2 + minTickGap);
-      result[len - 1] = _objectSpread31(_objectSpread31({}, tail), {}, {
+      result[len - 1] = _objectSpread28(_objectSpread28({}, tail), {}, {
         isShow: true
       });
     }
@@ -21317,18 +20765,18 @@ function getTicksStart(sign2, boundaries, getTickSize, ticks2, minTickGap, prese
     };
     if (i2 === 0) {
       var gap = sign2 * (entry.coordinate - sign2 * getSize() / 2 - start);
-      result[i2] = entry = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = entry = _objectSpread28(_objectSpread28({}, entry), {}, {
         tickCoord: gap < 0 ? entry.coordinate - gap * sign2 : entry.coordinate
       });
     } else {
-      result[i2] = entry = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = entry = _objectSpread28(_objectSpread28({}, entry), {}, {
         tickCoord: entry.coordinate
       });
     }
     var isShow = isVisible(sign2, entry.tickCoord, getSize, start, end);
     if (isShow) {
       start = entry.tickCoord + sign2 * (getSize() / 2 + minTickGap);
-      result[i2] = _objectSpread31(_objectSpread31({}, entry), {}, {
+      result[i2] = _objectSpread28(_objectSpread28({}, entry), {}, {
         isShow: true
       });
     }
@@ -21356,7 +20804,7 @@ function getTicks(props, fontSize, letterSpacing) {
     height: 0
   };
   var getTickSize = function getTickSize2(content, index) {
-    var value = (0, import_isFunction14.default)(tickFormatter) ? tickFormatter(content.value, index) : content.value;
+    var value = (0, import_isFunction12.default)(tickFormatter) ? tickFormatter(content.value, index) : content.value;
     return sizeKey === "width" ? getAngledTickWidth(getStringSize(value, {
       fontSize,
       letterSpacing
@@ -21381,19 +20829,22 @@ function getTicks(props, fontSize, letterSpacing) {
 }
 
 // node_modules/recharts/es6/cartesian/CartesianAxis.js
-var _excluded16 = ["viewBox"];
+var import_react28 = __toESM(require_react());
+var import_isFunction13 = __toESM(require_isFunction());
+var import_get4 = __toESM(require_get());
+var _excluded15 = ["viewBox"];
 var _excluded24 = ["viewBox"];
 var _excluded32 = ["ticks"];
-function _typeof39(o) {
+function _typeof36(o) {
   "@babel/helpers - typeof";
-  return _typeof39 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof36 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof39(o);
+  }, _typeof36(o);
 }
-function _extends22() {
-  _extends22 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends18() {
+  _extends18 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -21404,9 +20855,9 @@ function _extends22() {
     }
     return target;
   };
-  return _extends22.apply(this, arguments);
+  return _extends18.apply(this, arguments);
 }
-function ownKeys32(e, r2) {
+function ownKeys29(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -21416,21 +20867,21 @@ function ownKeys32(e, r2) {
   }
   return t;
 }
-function _objectSpread32(e) {
+function _objectSpread29(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys32(Object(t), true).forEach(function(r3) {
-      _defineProperty34(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys32(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys29(Object(t), true).forEach(function(r3) {
+      _defineProperty31(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys29(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _objectWithoutProperties15(source, excluded) {
+function _objectWithoutProperties14(source, excluded) {
   if (source == null)
     return {};
-  var target = _objectWithoutPropertiesLoose15(source, excluded);
+  var target = _objectWithoutPropertiesLoose14(source, excluded);
   var key, i;
   if (Object.getOwnPropertySymbols) {
     var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
@@ -21445,7 +20896,7 @@ function _objectWithoutProperties15(source, excluded) {
   }
   return target;
 }
-function _objectWithoutPropertiesLoose15(source, excluded) {
+function _objectWithoutPropertiesLoose14(source, excluded) {
   if (source == null)
     return {};
   var target = {};
@@ -21458,80 +20909,80 @@ function _objectWithoutPropertiesLoose15(source, excluded) {
   }
   return target;
 }
-function _classCallCheck14(instance, Constructor) {
+function _classCallCheck13(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-function _defineProperties14(target, props) {
+function _defineProperties13(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey35(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey32(descriptor.key), descriptor);
   }
 }
-function _createClass14(Constructor, protoProps, staticProps) {
+function _createClass13(Constructor, protoProps, staticProps) {
   if (protoProps)
-    _defineProperties14(Constructor.prototype, protoProps);
+    _defineProperties13(Constructor.prototype, protoProps);
   if (staticProps)
-    _defineProperties14(Constructor, staticProps);
+    _defineProperties13(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-function _callSuper11(t, o, e) {
-  return o = _getPrototypeOf12(o), _possibleConstructorReturn12(t, _isNativeReflectConstruct12() ? Reflect.construct(o, e || [], _getPrototypeOf12(t).constructor) : o.apply(t, e));
+function _callSuper10(t, o, e) {
+  return o = _getPrototypeOf11(o), _possibleConstructorReturn11(t, _isNativeReflectConstruct11() ? Reflect.construct(o, e || [], _getPrototypeOf11(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn12(self2, call) {
-  if (call && (_typeof39(call) === "object" || typeof call === "function")) {
+function _possibleConstructorReturn11(self2, call) {
+  if (call && (_typeof36(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
   }
-  return _assertThisInitialized12(self2);
+  return _assertThisInitialized11(self2);
 }
-function _assertThisInitialized12(self2) {
+function _assertThisInitialized11(self2) {
   if (self2 === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
   return self2;
 }
-function _isNativeReflectConstruct12() {
+function _isNativeReflectConstruct11() {
   try {
     var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
     }));
   } catch (t2) {
   }
-  return (_isNativeReflectConstruct12 = function _isNativeReflectConstruct17() {
+  return (_isNativeReflectConstruct11 = function _isNativeReflectConstruct17() {
     return !!t;
   })();
 }
-function _getPrototypeOf12(o) {
-  _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
+function _getPrototypeOf11(o) {
+  _getPrototypeOf11 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
     return o2.__proto__ || Object.getPrototypeOf(o2);
   };
-  return _getPrototypeOf12(o);
+  return _getPrototypeOf11(o);
 }
-function _inherits12(subClass, superClass) {
+function _inherits11(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
   Object.defineProperty(subClass, "prototype", { writable: false });
   if (superClass)
-    _setPrototypeOf12(subClass, superClass);
+    _setPrototypeOf11(subClass, superClass);
 }
-function _setPrototypeOf12(o, p) {
-  _setPrototypeOf12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
+function _setPrototypeOf11(o, p) {
+  _setPrototypeOf11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
     o2.__proto__ = p2;
     return o2;
   };
-  return _setPrototypeOf12(o, p);
+  return _setPrototypeOf11(o, p);
 }
-function _defineProperty34(obj, key, value) {
-  key = _toPropertyKey35(key);
+function _defineProperty31(obj, key, value) {
+  key = _toPropertyKey32(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -21539,17 +20990,17 @@ function _defineProperty34(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey35(t) {
-  var i = _toPrimitive35(t, "string");
-  return "symbol" == _typeof39(i) ? i : i + "";
+function _toPropertyKey32(t) {
+  var i = _toPrimitive32(t, "string");
+  return "symbol" == _typeof36(i) ? i : i + "";
 }
-function _toPrimitive35(t, r2) {
-  if ("object" != _typeof39(t) || !t)
+function _toPrimitive32(t, r2) {
+  if ("object" != _typeof36(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof39(i))
+    if ("object" != _typeof36(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -21558,20 +21009,20 @@ function _toPrimitive35(t, r2) {
 var CartesianAxis = /* @__PURE__ */ function(_Component) {
   function CartesianAxis2(props) {
     var _this;
-    _classCallCheck14(this, CartesianAxis2);
-    _this = _callSuper11(this, CartesianAxis2, [props]);
+    _classCallCheck13(this, CartesianAxis2);
+    _this = _callSuper10(this, CartesianAxis2, [props]);
     _this.state = {
       fontSize: "",
       letterSpacing: ""
     };
     return _this;
   }
-  _inherits12(CartesianAxis2, _Component);
-  return _createClass14(CartesianAxis2, [{
+  _inherits11(CartesianAxis2, _Component);
+  return _createClass13(CartesianAxis2, [{
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(_ref, nextState) {
-      var viewBox = _ref.viewBox, restProps = _objectWithoutProperties15(_ref, _excluded16);
-      var _this$props = this.props, viewBoxOld = _this$props.viewBox, restPropsOld = _objectWithoutProperties15(_this$props, _excluded24);
+      var viewBox = _ref.viewBox, restProps = _objectWithoutProperties14(_ref, _excluded15);
+      var _this$props = this.props, viewBoxOld = _this$props.viewBox, restPropsOld = _objectWithoutProperties14(_this$props, _excluded24);
       return !shallowEqual(viewBox, viewBoxOld) || !shallowEqual(restProps, restPropsOld) || !shallowEqual(nextState, this.state);
     }
   }, {
@@ -21686,12 +21137,12 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
     key: "renderAxisLine",
     value: function renderAxisLine() {
       var _this$props5 = this.props, x2 = _this$props5.x, y2 = _this$props5.y, width = _this$props5.width, height = _this$props5.height, orientation = _this$props5.orientation, mirror = _this$props5.mirror, axisLine = _this$props5.axisLine;
-      var props = _objectSpread32(_objectSpread32(_objectSpread32({}, filterProps(this.props, false)), filterProps(axisLine, false)), {}, {
+      var props = _objectSpread29(_objectSpread29(_objectSpread29({}, filterProps(this.props, false)), filterProps(axisLine, false)), {}, {
         fill: "none"
       });
       if (orientation === "top" || orientation === "bottom") {
         var needHeight = +(orientation === "top" && !mirror || orientation === "bottom" && mirror);
-        props = _objectSpread32(_objectSpread32({}, props), {}, {
+        props = _objectSpread29(_objectSpread29({}, props), {}, {
           x1: x2,
           y1: y2 + needHeight * height,
           x2: x2 + width,
@@ -21699,14 +21150,14 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
         });
       } else {
         var needWidth = +(orientation === "left" && !mirror || orientation === "right" && mirror);
-        props = _objectSpread32(_objectSpread32({}, props), {}, {
+        props = _objectSpread29(_objectSpread29({}, props), {}, {
           x1: x2 + needWidth * width,
           y1: y2,
           x2: x2 + needWidth * width,
           y2: y2 + height
         });
       }
-      return /* @__PURE__ */ import_react32.default.createElement("line", _extends22({}, props, {
+      return /* @__PURE__ */ import_react28.default.createElement("line", _extends18({}, props, {
         className: clsx_default("recharts-cartesian-axis-line", (0, import_get4.default)(axisLine, "className"))
       }));
     }
@@ -21723,19 +21174,19 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
       function renderTicks(ticks2, fontSize, letterSpacing) {
         var _this2 = this;
         var _this$props6 = this.props, tickLine = _this$props6.tickLine, stroke = _this$props6.stroke, tick = _this$props6.tick, tickFormatter = _this$props6.tickFormatter, unit2 = _this$props6.unit;
-        var finalTicks = getTicks(_objectSpread32(_objectSpread32({}, this.props), {}, {
+        var finalTicks = getTicks(_objectSpread29(_objectSpread29({}, this.props), {}, {
           ticks: ticks2
         }), fontSize, letterSpacing);
         var textAnchor = this.getTickTextAnchor();
         var verticalAnchor = this.getTickVerticalAnchor();
         var axisProps = filterProps(this.props, false);
         var customTickProps = filterProps(tick, false);
-        var tickLineProps = _objectSpread32(_objectSpread32({}, axisProps), {}, {
+        var tickLineProps = _objectSpread29(_objectSpread29({}, axisProps), {}, {
           fill: "none"
         }, filterProps(tickLine, false));
         var items = finalTicks.map(function(entry, i) {
           var _this2$getTickLineCoo = _this2.getTickLineCoord(entry), lineCoord = _this2$getTickLineCoo.line, tickCoord = _this2$getTickLineCoo.tick;
-          var tickProps = _objectSpread32(_objectSpread32(_objectSpread32(_objectSpread32({
+          var tickProps = _objectSpread29(_objectSpread29(_objectSpread29(_objectSpread29({
             textAnchor,
             verticalAnchor
           }, axisProps), {}, {
@@ -21747,14 +21198,14 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
             visibleTicksCount: finalTicks.length,
             tickFormatter
           });
-          return /* @__PURE__ */ import_react32.default.createElement(Layer, _extends22({
+          return /* @__PURE__ */ import_react28.default.createElement(Layer, _extends18({
             className: "recharts-cartesian-axis-tick",
             key: "tick-".concat(entry.value, "-").concat(entry.coordinate, "-").concat(entry.tickCoord)
-          }, adaptEventsOfChild(_this2.props, entry, i)), tickLine && /* @__PURE__ */ import_react32.default.createElement("line", _extends22({}, tickLineProps, lineCoord, {
+          }, adaptEventsOfChild(_this2.props, entry, i)), tickLine && /* @__PURE__ */ import_react28.default.createElement("line", _extends18({}, tickLineProps, lineCoord, {
             className: clsx_default("recharts-cartesian-axis-tick-line", (0, import_get4.default)(tickLine, "className"))
-          })), tick && CartesianAxis2.renderTickItem(tick, tickProps, "".concat((0, import_isFunction15.default)(tickFormatter) ? tickFormatter(entry.value, i) : entry.value).concat(unit2 || "")));
+          })), tick && CartesianAxis2.renderTickItem(tick, tickProps, "".concat((0, import_isFunction13.default)(tickFormatter) ? tickFormatter(entry.value, i) : entry.value).concat(unit2 || "")));
         });
-        return /* @__PURE__ */ import_react32.default.createElement("g", {
+        return /* @__PURE__ */ import_react28.default.createElement("g", {
           className: "recharts-cartesian-axis-ticks"
         }, items);
       }
@@ -21767,15 +21218,15 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
       if (hide) {
         return null;
       }
-      var _this$props8 = this.props, ticks2 = _this$props8.ticks, noTicksProps = _objectWithoutProperties15(_this$props8, _excluded32);
+      var _this$props8 = this.props, ticks2 = _this$props8.ticks, noTicksProps = _objectWithoutProperties14(_this$props8, _excluded32);
       var finalTicks = ticks2;
-      if ((0, import_isFunction15.default)(ticksGenerator)) {
+      if ((0, import_isFunction13.default)(ticksGenerator)) {
         finalTicks = ticks2 && ticks2.length > 0 ? ticksGenerator(this.props) : ticksGenerator(noTicksProps);
       }
       if (width <= 0 || height <= 0 || !finalTicks || !finalTicks.length) {
         return null;
       }
-      return /* @__PURE__ */ import_react32.default.createElement(Layer, {
+      return /* @__PURE__ */ import_react28.default.createElement(Layer, {
         className: clsx_default("recharts-cartesian-axis", className),
         ref: function ref(_ref2) {
           _this3.layerReference = _ref2;
@@ -21786,21 +21237,21 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
     key: "renderTickItem",
     value: function renderTickItem(option, props, value) {
       var tickItem;
-      if (/* @__PURE__ */ import_react32.default.isValidElement(option)) {
-        tickItem = /* @__PURE__ */ import_react32.default.cloneElement(option, props);
-      } else if ((0, import_isFunction15.default)(option)) {
+      if (/* @__PURE__ */ import_react28.default.isValidElement(option)) {
+        tickItem = /* @__PURE__ */ import_react28.default.cloneElement(option, props);
+      } else if ((0, import_isFunction13.default)(option)) {
         tickItem = option(props);
       } else {
-        tickItem = /* @__PURE__ */ import_react32.default.createElement(Text, _extends22({}, props, {
+        tickItem = /* @__PURE__ */ import_react28.default.createElement(Text, _extends18({}, props, {
           className: "recharts-cartesian-axis-tick-value"
         }), value);
       }
       return tickItem;
     }
   }]);
-}(import_react32.Component);
-_defineProperty34(CartesianAxis, "displayName", "CartesianAxis");
-_defineProperty34(CartesianAxis, "defaultProps", {
+}(import_react28.Component);
+_defineProperty31(CartesianAxis, "displayName", "CartesianAxis");
+_defineProperty31(CartesianAxis, "defaultProps", {
   x: 0,
   y: 0,
   width: 0,
@@ -21828,19 +21279,17 @@ _defineProperty34(CartesianAxis, "defaultProps", {
 });
 
 // node_modules/recharts/es6/cartesian/CartesianGrid.js
-var import_react33 = __toESM(require_react());
-var import_isFunction16 = __toESM(require_isFunction());
-var _excluded17 = ["x1", "y1", "x2", "y2", "key"];
+var _excluded16 = ["x1", "y1", "x2", "y2", "key"];
 var _excluded25 = ["offset"];
-function _typeof40(o) {
+function _typeof37(o) {
   "@babel/helpers - typeof";
-  return _typeof40 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof37 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof40(o);
+  }, _typeof37(o);
 }
-function ownKeys33(e, r2) {
+function ownKeys30(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -21850,19 +21299,19 @@ function ownKeys33(e, r2) {
   }
   return t;
 }
-function _objectSpread33(e) {
+function _objectSpread30(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys33(Object(t), true).forEach(function(r3) {
-      _defineProperty35(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys33(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys30(Object(t), true).forEach(function(r3) {
+      _defineProperty32(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys30(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
   return e;
 }
-function _defineProperty35(obj, key, value) {
-  key = _toPropertyKey36(key);
+function _defineProperty32(obj, key, value) {
+  key = _toPropertyKey33(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -21870,24 +21319,24 @@ function _defineProperty35(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey36(t) {
-  var i = _toPrimitive36(t, "string");
-  return "symbol" == _typeof40(i) ? i : i + "";
+function _toPropertyKey33(t) {
+  var i = _toPrimitive33(t, "string");
+  return "symbol" == _typeof37(i) ? i : i + "";
 }
-function _toPrimitive36(t, r2) {
-  if ("object" != _typeof40(t) || !t)
+function _toPrimitive33(t, r2) {
+  if ("object" != _typeof37(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof40(i))
+    if ("object" != _typeof37(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r2 ? String : Number)(t);
 }
-function _extends23() {
-  _extends23 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends19() {
+  _extends19 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -21898,7 +21347,513 @@ function _extends23() {
     }
     return target;
   };
-  return _extends23.apply(this, arguments);
+  return _extends19.apply(this, arguments);
+}
+function _objectWithoutProperties15(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose15(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose15(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+var Background = function Background2(props) {
+  var fill = props.fill;
+  if (!fill || fill === "none") {
+    return null;
+  }
+  var fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, ry = props.ry;
+  return /* @__PURE__ */ import_react29.default.createElement("rect", {
+    x: x2,
+    y: y2,
+    ry,
+    width,
+    height,
+    stroke: "none",
+    fill,
+    fillOpacity,
+    className: "recharts-cartesian-grid-bg"
+  });
+};
+function renderLineItem(option, props) {
+  var lineItem;
+  if (/* @__PURE__ */ import_react29.default.isValidElement(option)) {
+    lineItem = /* @__PURE__ */ import_react29.default.cloneElement(option, props);
+  } else if ((0, import_isFunction14.default)(option)) {
+    lineItem = option(props);
+  } else {
+    var x1 = props.x1, y1 = props.y1, x2 = props.x2, y2 = props.y2, key = props.key, others = _objectWithoutProperties15(props, _excluded16);
+    var _filterProps = filterProps(others, false), __ = _filterProps.offset, restOfFilteredProps = _objectWithoutProperties15(_filterProps, _excluded25);
+    lineItem = /* @__PURE__ */ import_react29.default.createElement("line", _extends19({}, restOfFilteredProps, {
+      x1,
+      y1,
+      x2,
+      y2,
+      fill: "none",
+      key
+    }));
+  }
+  return lineItem;
+}
+function HorizontalGridLines(props) {
+  var x2 = props.x, width = props.width, _props$horizontal = props.horizontal, horizontal = _props$horizontal === void 0 ? true : _props$horizontal, horizontalPoints = props.horizontalPoints;
+  if (!horizontal || !horizontalPoints || !horizontalPoints.length) {
+    return null;
+  }
+  var items = horizontalPoints.map(function(entry, i) {
+    var lineItemProps = _objectSpread30(_objectSpread30({}, props), {}, {
+      x1: x2,
+      y1: entry,
+      x2: x2 + width,
+      y2: entry,
+      key: "line-".concat(i),
+      index: i
+    });
+    return renderLineItem(horizontal, lineItemProps);
+  });
+  return /* @__PURE__ */ import_react29.default.createElement("g", {
+    className: "recharts-cartesian-grid-horizontal"
+  }, items);
+}
+function VerticalGridLines(props) {
+  var y2 = props.y, height = props.height, _props$vertical = props.vertical, vertical = _props$vertical === void 0 ? true : _props$vertical, verticalPoints = props.verticalPoints;
+  if (!vertical || !verticalPoints || !verticalPoints.length) {
+    return null;
+  }
+  var items = verticalPoints.map(function(entry, i) {
+    var lineItemProps = _objectSpread30(_objectSpread30({}, props), {}, {
+      x1: entry,
+      y1: y2,
+      x2: entry,
+      y2: y2 + height,
+      key: "line-".concat(i),
+      index: i
+    });
+    return renderLineItem(vertical, lineItemProps);
+  });
+  return /* @__PURE__ */ import_react29.default.createElement("g", {
+    className: "recharts-cartesian-grid-vertical"
+  }, items);
+}
+function HorizontalStripes(props) {
+  var horizontalFill = props.horizontalFill, fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, horizontalPoints = props.horizontalPoints, _props$horizontal2 = props.horizontal, horizontal = _props$horizontal2 === void 0 ? true : _props$horizontal2;
+  if (!horizontal || !horizontalFill || !horizontalFill.length) {
+    return null;
+  }
+  var roundedSortedHorizontalPoints = horizontalPoints.map(function(e) {
+    return Math.round(e + y2 - y2);
+  }).sort(function(a2, b) {
+    return a2 - b;
+  });
+  if (y2 !== roundedSortedHorizontalPoints[0]) {
+    roundedSortedHorizontalPoints.unshift(0);
+  }
+  var items = roundedSortedHorizontalPoints.map(function(entry, i) {
+    var lastStripe = !roundedSortedHorizontalPoints[i + 1];
+    var lineHeight = lastStripe ? y2 + height - entry : roundedSortedHorizontalPoints[i + 1] - entry;
+    if (lineHeight <= 0) {
+      return null;
+    }
+    var colorIndex = i % horizontalFill.length;
+    return /* @__PURE__ */ import_react29.default.createElement("rect", {
+      key: "react-".concat(i),
+      y: entry,
+      x: x2,
+      height: lineHeight,
+      width,
+      stroke: "none",
+      fill: horizontalFill[colorIndex],
+      fillOpacity,
+      className: "recharts-cartesian-grid-bg"
+    });
+  });
+  return /* @__PURE__ */ import_react29.default.createElement("g", {
+    className: "recharts-cartesian-gridstripes-horizontal"
+  }, items);
+}
+function VerticalStripes(props) {
+  var _props$vertical2 = props.vertical, vertical = _props$vertical2 === void 0 ? true : _props$vertical2, verticalFill = props.verticalFill, fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, verticalPoints = props.verticalPoints;
+  if (!vertical || !verticalFill || !verticalFill.length) {
+    return null;
+  }
+  var roundedSortedVerticalPoints = verticalPoints.map(function(e) {
+    return Math.round(e + x2 - x2);
+  }).sort(function(a2, b) {
+    return a2 - b;
+  });
+  if (x2 !== roundedSortedVerticalPoints[0]) {
+    roundedSortedVerticalPoints.unshift(0);
+  }
+  var items = roundedSortedVerticalPoints.map(function(entry, i) {
+    var lastStripe = !roundedSortedVerticalPoints[i + 1];
+    var lineWidth = lastStripe ? x2 + width - entry : roundedSortedVerticalPoints[i + 1] - entry;
+    if (lineWidth <= 0) {
+      return null;
+    }
+    var colorIndex = i % verticalFill.length;
+    return /* @__PURE__ */ import_react29.default.createElement("rect", {
+      key: "react-".concat(i),
+      x: entry,
+      y: y2,
+      width: lineWidth,
+      height,
+      stroke: "none",
+      fill: verticalFill[colorIndex],
+      fillOpacity,
+      className: "recharts-cartesian-grid-bg"
+    });
+  });
+  return /* @__PURE__ */ import_react29.default.createElement("g", {
+    className: "recharts-cartesian-gridstripes-vertical"
+  }, items);
+}
+var defaultVerticalCoordinatesGenerator = function defaultVerticalCoordinatesGenerator2(_ref, syncWithTicks) {
+  var xAxis = _ref.xAxis, width = _ref.width, height = _ref.height, offset = _ref.offset;
+  return getCoordinatesOfGrid(getTicks(_objectSpread30(_objectSpread30(_objectSpread30({}, CartesianAxis.defaultProps), xAxis), {}, {
+    ticks: getTicksOfAxis(xAxis, true),
+    viewBox: {
+      x: 0,
+      y: 0,
+      width,
+      height
+    }
+  })), offset.left, offset.left + offset.width, syncWithTicks);
+};
+var defaultHorizontalCoordinatesGenerator = function defaultHorizontalCoordinatesGenerator2(_ref2, syncWithTicks) {
+  var yAxis = _ref2.yAxis, width = _ref2.width, height = _ref2.height, offset = _ref2.offset;
+  return getCoordinatesOfGrid(getTicks(_objectSpread30(_objectSpread30(_objectSpread30({}, CartesianAxis.defaultProps), yAxis), {}, {
+    ticks: getTicksOfAxis(yAxis, true),
+    viewBox: {
+      x: 0,
+      y: 0,
+      width,
+      height
+    }
+  })), offset.top, offset.top + offset.height, syncWithTicks);
+};
+var defaultProps4 = {
+  horizontal: true,
+  vertical: true,
+  // The ordinates of horizontal grid lines
+  horizontalPoints: [],
+  // The abscissas of vertical grid lines
+  verticalPoints: [],
+  stroke: "#ccc",
+  fill: "none",
+  // The fill of colors of grid lines
+  verticalFill: [],
+  horizontalFill: []
+};
+function CartesianGrid(props) {
+  var _props$stroke, _props$fill, _props$horizontal3, _props$horizontalFill, _props$vertical3, _props$verticalFill;
+  var chartWidth = useChartWidth();
+  var chartHeight = useChartHeight();
+  var offset = useOffset();
+  var propsIncludingDefaults = _objectSpread30(_objectSpread30({}, props), {}, {
+    stroke: (_props$stroke = props.stroke) !== null && _props$stroke !== void 0 ? _props$stroke : defaultProps4.stroke,
+    fill: (_props$fill = props.fill) !== null && _props$fill !== void 0 ? _props$fill : defaultProps4.fill,
+    horizontal: (_props$horizontal3 = props.horizontal) !== null && _props$horizontal3 !== void 0 ? _props$horizontal3 : defaultProps4.horizontal,
+    horizontalFill: (_props$horizontalFill = props.horizontalFill) !== null && _props$horizontalFill !== void 0 ? _props$horizontalFill : defaultProps4.horizontalFill,
+    vertical: (_props$vertical3 = props.vertical) !== null && _props$vertical3 !== void 0 ? _props$vertical3 : defaultProps4.vertical,
+    verticalFill: (_props$verticalFill = props.verticalFill) !== null && _props$verticalFill !== void 0 ? _props$verticalFill : defaultProps4.verticalFill,
+    x: isNumber(props.x) ? props.x : offset.left,
+    y: isNumber(props.y) ? props.y : offset.top,
+    width: isNumber(props.width) ? props.width : offset.width,
+    height: isNumber(props.height) ? props.height : offset.height
+  });
+  var x2 = propsIncludingDefaults.x, y2 = propsIncludingDefaults.y, width = propsIncludingDefaults.width, height = propsIncludingDefaults.height, syncWithTicks = propsIncludingDefaults.syncWithTicks, horizontalValues = propsIncludingDefaults.horizontalValues, verticalValues = propsIncludingDefaults.verticalValues;
+  var xAxis = useArbitraryXAxis();
+  var yAxis = useYAxisWithFiniteDomainOrRandom();
+  if (!isNumber(width) || width <= 0 || !isNumber(height) || height <= 0 || !isNumber(x2) || x2 !== +x2 || !isNumber(y2) || y2 !== +y2) {
+    return null;
+  }
+  var verticalCoordinatesGenerator = propsIncludingDefaults.verticalCoordinatesGenerator || defaultVerticalCoordinatesGenerator;
+  var horizontalCoordinatesGenerator = propsIncludingDefaults.horizontalCoordinatesGenerator || defaultHorizontalCoordinatesGenerator;
+  var horizontalPoints = propsIncludingDefaults.horizontalPoints, verticalPoints = propsIncludingDefaults.verticalPoints;
+  if ((!horizontalPoints || !horizontalPoints.length) && (0, import_isFunction14.default)(horizontalCoordinatesGenerator)) {
+    var isHorizontalValues = horizontalValues && horizontalValues.length;
+    var generatorResult = horizontalCoordinatesGenerator({
+      yAxis: yAxis ? _objectSpread30(_objectSpread30({}, yAxis), {}, {
+        ticks: isHorizontalValues ? horizontalValues : yAxis.ticks
+      }) : void 0,
+      width: chartWidth,
+      height: chartHeight,
+      offset
+    }, isHorizontalValues ? true : syncWithTicks);
+    warn(Array.isArray(generatorResult), "horizontalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof37(generatorResult), "]"));
+    if (Array.isArray(generatorResult)) {
+      horizontalPoints = generatorResult;
+    }
+  }
+  if ((!verticalPoints || !verticalPoints.length) && (0, import_isFunction14.default)(verticalCoordinatesGenerator)) {
+    var isVerticalValues = verticalValues && verticalValues.length;
+    var _generatorResult = verticalCoordinatesGenerator({
+      xAxis: xAxis ? _objectSpread30(_objectSpread30({}, xAxis), {}, {
+        ticks: isVerticalValues ? verticalValues : xAxis.ticks
+      }) : void 0,
+      width: chartWidth,
+      height: chartHeight,
+      offset
+    }, isVerticalValues ? true : syncWithTicks);
+    warn(Array.isArray(_generatorResult), "verticalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof37(_generatorResult), "]"));
+    if (Array.isArray(_generatorResult)) {
+      verticalPoints = _generatorResult;
+    }
+  }
+  return /* @__PURE__ */ import_react29.default.createElement("g", {
+    className: "recharts-cartesian-grid"
+  }, /* @__PURE__ */ import_react29.default.createElement(Background, {
+    fill: propsIncludingDefaults.fill,
+    fillOpacity: propsIncludingDefaults.fillOpacity,
+    x: propsIncludingDefaults.x,
+    y: propsIncludingDefaults.y,
+    width: propsIncludingDefaults.width,
+    height: propsIncludingDefaults.height,
+    ry: propsIncludingDefaults.ry
+  }), /* @__PURE__ */ import_react29.default.createElement(HorizontalGridLines, _extends19({}, propsIncludingDefaults, {
+    offset,
+    horizontalPoints,
+    xAxis,
+    yAxis
+  })), /* @__PURE__ */ import_react29.default.createElement(VerticalGridLines, _extends19({}, propsIncludingDefaults, {
+    offset,
+    verticalPoints,
+    xAxis,
+    yAxis
+  })), /* @__PURE__ */ import_react29.default.createElement(HorizontalStripes, _extends19({}, propsIncludingDefaults, {
+    horizontalPoints
+  })), /* @__PURE__ */ import_react29.default.createElement(VerticalStripes, _extends19({}, propsIncludingDefaults, {
+    verticalPoints
+  })));
+}
+CartesianGrid.displayName = "CartesianGrid";
+
+// node_modules/recharts/es6/cartesian/Line.js
+var import_react32 = __toESM(require_react());
+var import_isFunction16 = __toESM(require_isFunction());
+var import_isNil9 = __toESM(require_isNil());
+var import_isEqual4 = __toESM(require_isEqual());
+
+// node_modules/recharts/es6/shape/Curve.js
+var import_react30 = __toESM(require_react());
+var import_upperFirst3 = __toESM(require_upperFirst());
+var import_isFunction15 = __toESM(require_isFunction());
+function _typeof38(o) {
+  "@babel/helpers - typeof";
+  return _typeof38 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof38(o);
+}
+function _extends20() {
+  _extends20 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends20.apply(this, arguments);
+}
+function ownKeys31(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread31(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys31(Object(t), true).forEach(function(r3) {
+      _defineProperty33(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys31(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty33(obj, key, value) {
+  key = _toPropertyKey34(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey34(t) {
+  var i = _toPrimitive34(t, "string");
+  return "symbol" == _typeof38(i) ? i : i + "";
+}
+function _toPrimitive34(t, r2) {
+  if ("object" != _typeof38(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof38(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+var CURVE_FACTORIES = {
+  curveBasisClosed: basisClosed_default,
+  curveBasisOpen: basisOpen_default,
+  curveBasis: basis_default,
+  curveBumpX: bumpX,
+  curveBumpY: bumpY,
+  curveLinearClosed: linearClosed_default,
+  curveLinear: linear_default,
+  curveMonotoneX: monotoneX,
+  curveMonotoneY: monotoneY,
+  curveNatural: natural_default,
+  curveStep: step_default,
+  curveStepAfter: stepAfter,
+  curveStepBefore: stepBefore
+};
+var defined = function defined2(p) {
+  return p.x === +p.x && p.y === +p.y;
+};
+var getX = function getX2(p) {
+  return p.x;
+};
+var getY = function getY2(p) {
+  return p.y;
+};
+var getCurveFactory = function getCurveFactory2(type, layout) {
+  if ((0, import_isFunction15.default)(type)) {
+    return type;
+  }
+  var name = "curve".concat((0, import_upperFirst3.default)(type));
+  if ((name === "curveMonotone" || name === "curveBump") && layout) {
+    return CURVE_FACTORIES["".concat(name).concat(layout === "vertical" ? "Y" : "X")];
+  }
+  return CURVE_FACTORIES[name] || linear_default;
+};
+var getPath = function getPath2(_ref) {
+  var _ref$type = _ref.type, type = _ref$type === void 0 ? "linear" : _ref$type, _ref$points = _ref.points, points = _ref$points === void 0 ? [] : _ref$points, baseLine = _ref.baseLine, layout = _ref.layout, _ref$connectNulls = _ref.connectNulls, connectNulls = _ref$connectNulls === void 0 ? false : _ref$connectNulls;
+  var curveFactory = getCurveFactory(type, layout);
+  var formatPoints = connectNulls ? points.filter(function(entry) {
+    return defined(entry);
+  }) : points;
+  var lineFunction;
+  if (Array.isArray(baseLine)) {
+    var formatBaseLine = connectNulls ? baseLine.filter(function(base) {
+      return defined(base);
+    }) : baseLine;
+    var areaPoints = formatPoints.map(function(entry, index) {
+      return _objectSpread31(_objectSpread31({}, entry), {}, {
+        base: formatBaseLine[index]
+      });
+    });
+    if (layout === "vertical") {
+      lineFunction = area_default().y(getY).x1(getX).x0(function(d) {
+        return d.base.x;
+      });
+    } else {
+      lineFunction = area_default().x(getX).y1(getY).y0(function(d) {
+        return d.base.y;
+      });
+    }
+    lineFunction.defined(defined).curve(curveFactory);
+    return lineFunction(areaPoints);
+  }
+  if (layout === "vertical" && isNumber(baseLine)) {
+    lineFunction = area_default().y(getY).x1(getX).x0(baseLine);
+  } else if (isNumber(baseLine)) {
+    lineFunction = area_default().x(getX).y1(getY).y0(baseLine);
+  } else {
+    lineFunction = line_default().x(getX).y(getY);
+  }
+  lineFunction.defined(defined).curve(curveFactory);
+  return lineFunction(formatPoints);
+};
+var Curve = function Curve2(props) {
+  var className = props.className, points = props.points, path2 = props.path, pathRef = props.pathRef;
+  if ((!points || !points.length) && !path2) {
+    return null;
+  }
+  var realPath = points && points.length ? getPath(props) : path2;
+  return /* @__PURE__ */ import_react30.default.createElement("path", _extends20({}, filterProps(props, false), adaptEventHandlers(props), {
+    className: clsx_default("recharts-curve", className),
+    d: realPath,
+    ref: pathRef
+  }));
+};
+
+// node_modules/recharts/es6/shape/Dot.js
+var import_react31 = __toESM(require_react());
+function _extends21() {
+  _extends21 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends21.apply(this, arguments);
+}
+var Dot = function Dot2(props) {
+  var cx = props.cx, cy = props.cy, r2 = props.r, className = props.className;
+  var layerClass = clsx_default("recharts-dot", className);
+  if (cx === +cx && cy === +cy && r2 === +r2) {
+    return /* @__PURE__ */ import_react31.default.createElement("circle", _extends21({}, filterProps(props, false), adaptEventHandlers(props), {
+      className: layerClass,
+      cx,
+      cy,
+      r: r2
+    }));
+  }
+  return null;
+};
+
+// node_modules/recharts/es6/cartesian/Line.js
+var _excluded17 = ["type", "layout", "connectNulls", "ref"];
+var _excluded26 = ["key"];
+function _typeof39(o) {
+  "@babel/helpers - typeof";
+  return _typeof39 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof39(o);
 }
 function _objectWithoutProperties16(source, excluded) {
   if (source == null)
@@ -21931,325 +21886,8 @@ function _objectWithoutPropertiesLoose16(source, excluded) {
   }
   return target;
 }
-var Background = function Background2(props) {
-  var fill = props.fill;
-  if (!fill || fill === "none") {
-    return null;
-  }
-  var fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, ry = props.ry;
-  return /* @__PURE__ */ import_react33.default.createElement("rect", {
-    x: x2,
-    y: y2,
-    ry,
-    width,
-    height,
-    stroke: "none",
-    fill,
-    fillOpacity,
-    className: "recharts-cartesian-grid-bg"
-  });
-};
-function renderLineItem(option, props) {
-  var lineItem;
-  if (/* @__PURE__ */ import_react33.default.isValidElement(option)) {
-    lineItem = /* @__PURE__ */ import_react33.default.cloneElement(option, props);
-  } else if ((0, import_isFunction16.default)(option)) {
-    lineItem = option(props);
-  } else {
-    var x1 = props.x1, y1 = props.y1, x2 = props.x2, y2 = props.y2, key = props.key, others = _objectWithoutProperties16(props, _excluded17);
-    var _filterProps = filterProps(others, false), __ = _filterProps.offset, restOfFilteredProps = _objectWithoutProperties16(_filterProps, _excluded25);
-    lineItem = /* @__PURE__ */ import_react33.default.createElement("line", _extends23({}, restOfFilteredProps, {
-      x1,
-      y1,
-      x2,
-      y2,
-      fill: "none",
-      key
-    }));
-  }
-  return lineItem;
-}
-function HorizontalGridLines(props) {
-  var x2 = props.x, width = props.width, _props$horizontal = props.horizontal, horizontal = _props$horizontal === void 0 ? true : _props$horizontal, horizontalPoints = props.horizontalPoints;
-  if (!horizontal || !horizontalPoints || !horizontalPoints.length) {
-    return null;
-  }
-  var items = horizontalPoints.map(function(entry, i) {
-    var lineItemProps = _objectSpread33(_objectSpread33({}, props), {}, {
-      x1: x2,
-      y1: entry,
-      x2: x2 + width,
-      y2: entry,
-      key: "line-".concat(i),
-      index: i
-    });
-    return renderLineItem(horizontal, lineItemProps);
-  });
-  return /* @__PURE__ */ import_react33.default.createElement("g", {
-    className: "recharts-cartesian-grid-horizontal"
-  }, items);
-}
-function VerticalGridLines(props) {
-  var y2 = props.y, height = props.height, _props$vertical = props.vertical, vertical = _props$vertical === void 0 ? true : _props$vertical, verticalPoints = props.verticalPoints;
-  if (!vertical || !verticalPoints || !verticalPoints.length) {
-    return null;
-  }
-  var items = verticalPoints.map(function(entry, i) {
-    var lineItemProps = _objectSpread33(_objectSpread33({}, props), {}, {
-      x1: entry,
-      y1: y2,
-      x2: entry,
-      y2: y2 + height,
-      key: "line-".concat(i),
-      index: i
-    });
-    return renderLineItem(vertical, lineItemProps);
-  });
-  return /* @__PURE__ */ import_react33.default.createElement("g", {
-    className: "recharts-cartesian-grid-vertical"
-  }, items);
-}
-function HorizontalStripes(props) {
-  var horizontalFill = props.horizontalFill, fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, horizontalPoints = props.horizontalPoints, _props$horizontal2 = props.horizontal, horizontal = _props$horizontal2 === void 0 ? true : _props$horizontal2;
-  if (!horizontal || !horizontalFill || !horizontalFill.length) {
-    return null;
-  }
-  var roundedSortedHorizontalPoints = horizontalPoints.map(function(e) {
-    return Math.round(e + y2 - y2);
-  }).sort(function(a2, b) {
-    return a2 - b;
-  });
-  if (y2 !== roundedSortedHorizontalPoints[0]) {
-    roundedSortedHorizontalPoints.unshift(0);
-  }
-  var items = roundedSortedHorizontalPoints.map(function(entry, i) {
-    var lastStripe = !roundedSortedHorizontalPoints[i + 1];
-    var lineHeight = lastStripe ? y2 + height - entry : roundedSortedHorizontalPoints[i + 1] - entry;
-    if (lineHeight <= 0) {
-      return null;
-    }
-    var colorIndex = i % horizontalFill.length;
-    return /* @__PURE__ */ import_react33.default.createElement("rect", {
-      key: "react-".concat(i),
-      y: entry,
-      x: x2,
-      height: lineHeight,
-      width,
-      stroke: "none",
-      fill: horizontalFill[colorIndex],
-      fillOpacity,
-      className: "recharts-cartesian-grid-bg"
-    });
-  });
-  return /* @__PURE__ */ import_react33.default.createElement("g", {
-    className: "recharts-cartesian-gridstripes-horizontal"
-  }, items);
-}
-function VerticalStripes(props) {
-  var _props$vertical2 = props.vertical, vertical = _props$vertical2 === void 0 ? true : _props$vertical2, verticalFill = props.verticalFill, fillOpacity = props.fillOpacity, x2 = props.x, y2 = props.y, width = props.width, height = props.height, verticalPoints = props.verticalPoints;
-  if (!vertical || !verticalFill || !verticalFill.length) {
-    return null;
-  }
-  var roundedSortedVerticalPoints = verticalPoints.map(function(e) {
-    return Math.round(e + x2 - x2);
-  }).sort(function(a2, b) {
-    return a2 - b;
-  });
-  if (x2 !== roundedSortedVerticalPoints[0]) {
-    roundedSortedVerticalPoints.unshift(0);
-  }
-  var items = roundedSortedVerticalPoints.map(function(entry, i) {
-    var lastStripe = !roundedSortedVerticalPoints[i + 1];
-    var lineWidth = lastStripe ? x2 + width - entry : roundedSortedVerticalPoints[i + 1] - entry;
-    if (lineWidth <= 0) {
-      return null;
-    }
-    var colorIndex = i % verticalFill.length;
-    return /* @__PURE__ */ import_react33.default.createElement("rect", {
-      key: "react-".concat(i),
-      x: entry,
-      y: y2,
-      width: lineWidth,
-      height,
-      stroke: "none",
-      fill: verticalFill[colorIndex],
-      fillOpacity,
-      className: "recharts-cartesian-grid-bg"
-    });
-  });
-  return /* @__PURE__ */ import_react33.default.createElement("g", {
-    className: "recharts-cartesian-gridstripes-vertical"
-  }, items);
-}
-var defaultVerticalCoordinatesGenerator = function defaultVerticalCoordinatesGenerator2(_ref, syncWithTicks) {
-  var xAxis = _ref.xAxis, width = _ref.width, height = _ref.height, offset = _ref.offset;
-  return getCoordinatesOfGrid(getTicks(_objectSpread33(_objectSpread33(_objectSpread33({}, CartesianAxis.defaultProps), xAxis), {}, {
-    ticks: getTicksOfAxis(xAxis, true),
-    viewBox: {
-      x: 0,
-      y: 0,
-      width,
-      height
-    }
-  })), offset.left, offset.left + offset.width, syncWithTicks);
-};
-var defaultHorizontalCoordinatesGenerator = function defaultHorizontalCoordinatesGenerator2(_ref2, syncWithTicks) {
-  var yAxis = _ref2.yAxis, width = _ref2.width, height = _ref2.height, offset = _ref2.offset;
-  return getCoordinatesOfGrid(getTicks(_objectSpread33(_objectSpread33(_objectSpread33({}, CartesianAxis.defaultProps), yAxis), {}, {
-    ticks: getTicksOfAxis(yAxis, true),
-    viewBox: {
-      x: 0,
-      y: 0,
-      width,
-      height
-    }
-  })), offset.top, offset.top + offset.height, syncWithTicks);
-};
-var defaultProps4 = {
-  horizontal: true,
-  vertical: true,
-  // The ordinates of horizontal grid lines
-  horizontalPoints: [],
-  // The abscissas of vertical grid lines
-  verticalPoints: [],
-  stroke: "#ccc",
-  fill: "none",
-  // The fill of colors of grid lines
-  verticalFill: [],
-  horizontalFill: []
-};
-function CartesianGrid(props) {
-  var _props$stroke, _props$fill, _props$horizontal3, _props$horizontalFill, _props$vertical3, _props$verticalFill;
-  var chartWidth = useChartWidth();
-  var chartHeight = useChartHeight();
-  var offset = useOffset();
-  var propsIncludingDefaults = _objectSpread33(_objectSpread33({}, props), {}, {
-    stroke: (_props$stroke = props.stroke) !== null && _props$stroke !== void 0 ? _props$stroke : defaultProps4.stroke,
-    fill: (_props$fill = props.fill) !== null && _props$fill !== void 0 ? _props$fill : defaultProps4.fill,
-    horizontal: (_props$horizontal3 = props.horizontal) !== null && _props$horizontal3 !== void 0 ? _props$horizontal3 : defaultProps4.horizontal,
-    horizontalFill: (_props$horizontalFill = props.horizontalFill) !== null && _props$horizontalFill !== void 0 ? _props$horizontalFill : defaultProps4.horizontalFill,
-    vertical: (_props$vertical3 = props.vertical) !== null && _props$vertical3 !== void 0 ? _props$vertical3 : defaultProps4.vertical,
-    verticalFill: (_props$verticalFill = props.verticalFill) !== null && _props$verticalFill !== void 0 ? _props$verticalFill : defaultProps4.verticalFill,
-    x: isNumber(props.x) ? props.x : offset.left,
-    y: isNumber(props.y) ? props.y : offset.top,
-    width: isNumber(props.width) ? props.width : offset.width,
-    height: isNumber(props.height) ? props.height : offset.height
-  });
-  var x2 = propsIncludingDefaults.x, y2 = propsIncludingDefaults.y, width = propsIncludingDefaults.width, height = propsIncludingDefaults.height, syncWithTicks = propsIncludingDefaults.syncWithTicks, horizontalValues = propsIncludingDefaults.horizontalValues, verticalValues = propsIncludingDefaults.verticalValues;
-  var xAxis = useArbitraryXAxis();
-  var yAxis = useYAxisWithFiniteDomainOrRandom();
-  if (!isNumber(width) || width <= 0 || !isNumber(height) || height <= 0 || !isNumber(x2) || x2 !== +x2 || !isNumber(y2) || y2 !== +y2) {
-    return null;
-  }
-  var verticalCoordinatesGenerator = propsIncludingDefaults.verticalCoordinatesGenerator || defaultVerticalCoordinatesGenerator;
-  var horizontalCoordinatesGenerator = propsIncludingDefaults.horizontalCoordinatesGenerator || defaultHorizontalCoordinatesGenerator;
-  var horizontalPoints = propsIncludingDefaults.horizontalPoints, verticalPoints = propsIncludingDefaults.verticalPoints;
-  if ((!horizontalPoints || !horizontalPoints.length) && (0, import_isFunction16.default)(horizontalCoordinatesGenerator)) {
-    var isHorizontalValues = horizontalValues && horizontalValues.length;
-    var generatorResult = horizontalCoordinatesGenerator({
-      yAxis: yAxis ? _objectSpread33(_objectSpread33({}, yAxis), {}, {
-        ticks: isHorizontalValues ? horizontalValues : yAxis.ticks
-      }) : void 0,
-      width: chartWidth,
-      height: chartHeight,
-      offset
-    }, isHorizontalValues ? true : syncWithTicks);
-    warn(Array.isArray(generatorResult), "horizontalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof40(generatorResult), "]"));
-    if (Array.isArray(generatorResult)) {
-      horizontalPoints = generatorResult;
-    }
-  }
-  if ((!verticalPoints || !verticalPoints.length) && (0, import_isFunction16.default)(verticalCoordinatesGenerator)) {
-    var isVerticalValues = verticalValues && verticalValues.length;
-    var _generatorResult = verticalCoordinatesGenerator({
-      xAxis: xAxis ? _objectSpread33(_objectSpread33({}, xAxis), {}, {
-        ticks: isVerticalValues ? verticalValues : xAxis.ticks
-      }) : void 0,
-      width: chartWidth,
-      height: chartHeight,
-      offset
-    }, isVerticalValues ? true : syncWithTicks);
-    warn(Array.isArray(_generatorResult), "verticalCoordinatesGenerator should return Array but instead it returned [".concat(_typeof40(_generatorResult), "]"));
-    if (Array.isArray(_generatorResult)) {
-      verticalPoints = _generatorResult;
-    }
-  }
-  return /* @__PURE__ */ import_react33.default.createElement("g", {
-    className: "recharts-cartesian-grid"
-  }, /* @__PURE__ */ import_react33.default.createElement(Background, {
-    fill: propsIncludingDefaults.fill,
-    fillOpacity: propsIncludingDefaults.fillOpacity,
-    x: propsIncludingDefaults.x,
-    y: propsIncludingDefaults.y,
-    width: propsIncludingDefaults.width,
-    height: propsIncludingDefaults.height,
-    ry: propsIncludingDefaults.ry
-  }), /* @__PURE__ */ import_react33.default.createElement(HorizontalGridLines, _extends23({}, propsIncludingDefaults, {
-    offset,
-    horizontalPoints,
-    xAxis,
-    yAxis
-  })), /* @__PURE__ */ import_react33.default.createElement(VerticalGridLines, _extends23({}, propsIncludingDefaults, {
-    offset,
-    verticalPoints,
-    xAxis,
-    yAxis
-  })), /* @__PURE__ */ import_react33.default.createElement(HorizontalStripes, _extends23({}, propsIncludingDefaults, {
-    horizontalPoints
-  })), /* @__PURE__ */ import_react33.default.createElement(VerticalStripes, _extends23({}, propsIncludingDefaults, {
-    verticalPoints
-  })));
-}
-CartesianGrid.displayName = "CartesianGrid";
-
-// node_modules/recharts/es6/cartesian/Line.js
-var import_react34 = __toESM(require_react());
-var import_isFunction17 = __toESM(require_isFunction());
-var import_isNil9 = __toESM(require_isNil());
-var import_isEqual4 = __toESM(require_isEqual());
-var _excluded18 = ["type", "layout", "connectNulls", "ref"];
-var _excluded26 = ["key"];
-function _typeof41(o) {
-  "@babel/helpers - typeof";
-  return _typeof41 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
-    return typeof o2;
-  } : function(o2) {
-    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof41(o);
-}
-function _objectWithoutProperties17(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose17(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose17(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _extends24() {
-  _extends24 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends22() {
+  _extends22 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -22260,9 +21898,9 @@ function _extends24() {
     }
     return target;
   };
-  return _extends24.apply(this, arguments);
+  return _extends22.apply(this, arguments);
 }
-function ownKeys34(e, r2) {
+function ownKeys32(e, r2) {
   var t = Object.keys(e);
   if (Object.getOwnPropertySymbols) {
     var o = Object.getOwnPropertySymbols(e);
@@ -22272,12 +21910,12 @@ function ownKeys34(e, r2) {
   }
   return t;
 }
-function _objectSpread34(e) {
+function _objectSpread32(e) {
   for (var r2 = 1; r2 < arguments.length; r2++) {
     var t = null != arguments[r2] ? arguments[r2] : {};
-    r2 % 2 ? ownKeys34(Object(t), true).forEach(function(r3) {
-      _defineProperty36(e, r3, t[r3]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys34(Object(t)).forEach(function(r3) {
+    r2 % 2 ? ownKeys32(Object(t), true).forEach(function(r3) {
+      _defineProperty34(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys32(Object(t)).forEach(function(r3) {
       Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
     });
   }
@@ -22317,80 +21955,80 @@ function _arrayLikeToArray18(arr, len) {
     arr2[i] = arr[i];
   return arr2;
 }
-function _classCallCheck15(instance, Constructor) {
+function _classCallCheck14(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
-function _defineProperties15(target, props) {
+function _defineProperties14(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey37(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey35(descriptor.key), descriptor);
   }
 }
-function _createClass15(Constructor, protoProps, staticProps) {
+function _createClass14(Constructor, protoProps, staticProps) {
   if (protoProps)
-    _defineProperties15(Constructor.prototype, protoProps);
+    _defineProperties14(Constructor.prototype, protoProps);
   if (staticProps)
-    _defineProperties15(Constructor, staticProps);
+    _defineProperties14(Constructor, staticProps);
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-function _callSuper12(t, o, e) {
-  return o = _getPrototypeOf13(o), _possibleConstructorReturn13(t, _isNativeReflectConstruct13() ? Reflect.construct(o, e || [], _getPrototypeOf13(t).constructor) : o.apply(t, e));
+function _callSuper11(t, o, e) {
+  return o = _getPrototypeOf12(o), _possibleConstructorReturn12(t, _isNativeReflectConstruct12() ? Reflect.construct(o, e || [], _getPrototypeOf12(t).constructor) : o.apply(t, e));
 }
-function _possibleConstructorReturn13(self2, call) {
-  if (call && (_typeof41(call) === "object" || typeof call === "function")) {
+function _possibleConstructorReturn12(self2, call) {
+  if (call && (_typeof39(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
   }
-  return _assertThisInitialized13(self2);
+  return _assertThisInitialized12(self2);
 }
-function _assertThisInitialized13(self2) {
+function _assertThisInitialized12(self2) {
   if (self2 === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
   return self2;
 }
-function _isNativeReflectConstruct13() {
+function _isNativeReflectConstruct12() {
   try {
     var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
     }));
   } catch (t2) {
   }
-  return (_isNativeReflectConstruct13 = function _isNativeReflectConstruct17() {
+  return (_isNativeReflectConstruct12 = function _isNativeReflectConstruct17() {
     return !!t;
   })();
 }
-function _getPrototypeOf13(o) {
-  _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
+function _getPrototypeOf12(o) {
+  _getPrototypeOf12 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
     return o2.__proto__ || Object.getPrototypeOf(o2);
   };
-  return _getPrototypeOf13(o);
+  return _getPrototypeOf12(o);
 }
-function _inherits13(subClass, superClass) {
+function _inherits12(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
   Object.defineProperty(subClass, "prototype", { writable: false });
   if (superClass)
-    _setPrototypeOf13(subClass, superClass);
+    _setPrototypeOf12(subClass, superClass);
 }
-function _setPrototypeOf13(o, p) {
-  _setPrototypeOf13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
+function _setPrototypeOf12(o, p) {
+  _setPrototypeOf12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
     o2.__proto__ = p2;
     return o2;
   };
-  return _setPrototypeOf13(o, p);
+  return _setPrototypeOf12(o, p);
 }
-function _defineProperty36(obj, key, value) {
-  key = _toPropertyKey37(key);
+function _defineProperty34(obj, key, value) {
+  key = _toPropertyKey35(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -22398,17 +22036,17 @@ function _defineProperty36(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey37(t) {
-  var i = _toPrimitive37(t, "string");
-  return "symbol" == _typeof41(i) ? i : i + "";
+function _toPropertyKey35(t) {
+  var i = _toPrimitive35(t, "string");
+  return "symbol" == _typeof39(i) ? i : i + "";
 }
-function _toPrimitive37(t, r2) {
-  if ("object" != _typeof41(t) || !t)
+function _toPrimitive35(t, r2) {
+  if ("object" != _typeof39(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof41(i))
+    if ("object" != _typeof39(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -22417,19 +22055,19 @@ function _toPrimitive37(t, r2) {
 var Line = /* @__PURE__ */ function(_PureComponent) {
   function Line2() {
     var _this;
-    _classCallCheck15(this, Line2);
+    _classCallCheck14(this, Line2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
-    _this = _callSuper12(this, Line2, [].concat(args));
-    _defineProperty36(_this, "state", {
+    _this = _callSuper11(this, Line2, [].concat(args));
+    _defineProperty34(_this, "state", {
       isAnimationFinished: true,
       totalLength: 0
     });
-    _defineProperty36(_this, "generateSimpleStrokeDasharray", function(totalLength, length) {
+    _defineProperty34(_this, "generateSimpleStrokeDasharray", function(totalLength, length) {
       return "".concat(length, "px ").concat(totalLength - length, "px");
     });
-    _defineProperty36(_this, "getStrokeDasharray", function(length, totalLength, lines) {
+    _defineProperty34(_this, "getStrokeDasharray", function(length, totalLength, lines) {
       var lineLength = lines.reduce(function(pre, next) {
         return pre + next;
       });
@@ -22451,11 +22089,11 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         return "".concat(line, "px");
       }).join(", ");
     });
-    _defineProperty36(_this, "id", uniqueId("recharts-line-"));
-    _defineProperty36(_this, "pathRef", function(node) {
+    _defineProperty34(_this, "id", uniqueId("recharts-line-"));
+    _defineProperty34(_this, "pathRef", function(node) {
       _this.mainCurve = node;
     });
-    _defineProperty36(_this, "handleAnimationEnd", function() {
+    _defineProperty34(_this, "handleAnimationEnd", function() {
       _this.setState({
         isAnimationFinished: true
       });
@@ -22463,7 +22101,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         _this.props.onAnimationEnd();
       }
     });
-    _defineProperty36(_this, "handleAnimationStart", function() {
+    _defineProperty34(_this, "handleAnimationStart", function() {
       _this.setState({
         isAnimationFinished: false
       });
@@ -22473,8 +22111,8 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
     });
     return _this;
   }
-  _inherits13(Line2, _PureComponent);
-  return _createClass15(Line2, [{
+  _inherits12(Line2, _PureComponent);
+  return _createClass14(Line2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       if (!this.props.isAnimationActive) {
@@ -22530,8 +22168,8 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       var errorBarProps = {
         clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null
       };
-      return /* @__PURE__ */ import_react34.default.createElement(Layer, errorBarProps, errorBarItems.map(function(item) {
-        return /* @__PURE__ */ import_react34.default.cloneElement(item, {
+      return /* @__PURE__ */ import_react32.default.createElement(Layer, errorBarProps, errorBarItems.map(function(item) {
+        return /* @__PURE__ */ import_react32.default.cloneElement(item, {
           key: "bar-".concat(item.props.dataKey),
           data: points,
           xAxis,
@@ -22552,7 +22190,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       var lineProps = filterProps(this.props, false);
       var customDotProps = filterProps(dot, true);
       var dots = points.map(function(entry, i) {
-        var dotProps = _objectSpread34(_objectSpread34(_objectSpread34({
+        var dotProps = _objectSpread32(_objectSpread32(_objectSpread32({
           key: "dot-".concat(i),
           r: 3
         }, lineProps), customDotProps), {}, {
@@ -22568,7 +22206,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       var dotsProps = {
         clipPath: needClip ? "url(#clipPath-".concat(clipDot ? "" : "dots-").concat(clipPathId, ")") : null
       };
-      return /* @__PURE__ */ import_react34.default.createElement(Layer, _extends24({
+      return /* @__PURE__ */ import_react32.default.createElement(Layer, _extends22({
         className: "recharts-line-dots",
         key: "dots"
       }, dotsProps), dots);
@@ -22576,8 +22214,8 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
   }, {
     key: "renderCurveStatically",
     value: function renderCurveStatically(points, needClip, clipPathId, props) {
-      var _this$props3 = this.props, type = _this$props3.type, layout = _this$props3.layout, connectNulls = _this$props3.connectNulls, ref = _this$props3.ref, others = _objectWithoutProperties17(_this$props3, _excluded18);
-      var curveProps = _objectSpread34(_objectSpread34(_objectSpread34({}, filterProps(others, true)), {}, {
+      var _this$props3 = this.props, type = _this$props3.type, layout = _this$props3.layout, connectNulls = _this$props3.connectNulls, ref = _this$props3.ref, others = _objectWithoutProperties16(_this$props3, _excluded17);
+      var curveProps = _objectSpread32(_objectSpread32(_objectSpread32({}, filterProps(others, true)), {}, {
         fill: "none",
         className: "recharts-line-curve",
         clipPath: needClip ? "url(#clipPath-".concat(clipPathId, ")") : null,
@@ -22587,7 +22225,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
         layout,
         connectNulls
       });
-      return /* @__PURE__ */ import_react34.default.createElement(Curve, _extends24({}, curveProps, {
+      return /* @__PURE__ */ import_react32.default.createElement(Curve, _extends22({}, curveProps, {
         pathRef: this.pathRef
       }));
     }
@@ -22597,7 +22235,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       var _this2 = this;
       var _this$props4 = this.props, points = _this$props4.points, strokeDasharray = _this$props4.strokeDasharray, isAnimationActive = _this$props4.isAnimationActive, animationBegin = _this$props4.animationBegin, animationDuration = _this$props4.animationDuration, animationEasing = _this$props4.animationEasing, animationId = _this$props4.animationId, animateNewValues = _this$props4.animateNewValues, width = _this$props4.width, height = _this$props4.height;
       var _this$state = this.state, prevPoints = _this$state.prevPoints, totalLength = _this$state.totalLength;
-      return /* @__PURE__ */ import_react34.default.createElement(es6_default, {
+      return /* @__PURE__ */ import_react32.default.createElement(es6_default, {
         begin: animationBegin,
         duration: animationDuration,
         isActive: isAnimationActive,
@@ -22621,7 +22259,7 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
               var prev = prevPoints[prevPointIndex];
               var interpolatorX = interpolateNumber(prev.x, entry.x);
               var interpolatorY = interpolateNumber(prev.y, entry.y);
-              return _objectSpread34(_objectSpread34({}, entry), {}, {
+              return _objectSpread32(_objectSpread32({}, entry), {}, {
                 x: interpolatorX(t),
                 y: interpolatorY(t)
               });
@@ -22629,12 +22267,12 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
             if (animateNewValues) {
               var _interpolatorX = interpolateNumber(width * 2, entry.x);
               var _interpolatorY = interpolateNumber(height / 2, entry.y);
-              return _objectSpread34(_objectSpread34({}, entry), {}, {
+              return _objectSpread32(_objectSpread32({}, entry), {}, {
                 x: _interpolatorX(t),
                 y: _interpolatorY(t)
               });
             }
-            return _objectSpread34(_objectSpread34({}, entry), {}, {
+            return _objectSpread32(_objectSpread32({}, entry), {}, {
               x: entry.x,
               y: entry.y
             });
@@ -22688,18 +22326,18 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       }, _ref2$r = _ref2.r, r2 = _ref2$r === void 0 ? 3 : _ref2$r, _ref2$strokeWidth = _ref2.strokeWidth, strokeWidth = _ref2$strokeWidth === void 0 ? 2 : _ref2$strokeWidth;
       var _ref3 = hasClipDot(dot) ? dot : {}, _ref3$clipDot = _ref3.clipDot, clipDot = _ref3$clipDot === void 0 ? true : _ref3$clipDot;
       var dotSize = r2 * 2 + strokeWidth;
-      return /* @__PURE__ */ import_react34.default.createElement(Layer, {
+      return /* @__PURE__ */ import_react32.default.createElement(Layer, {
         className: layerClass
-      }, needClipX || needClipY ? /* @__PURE__ */ import_react34.default.createElement("defs", null, /* @__PURE__ */ import_react34.default.createElement("clipPath", {
+      }, needClipX || needClipY ? /* @__PURE__ */ import_react32.default.createElement("defs", null, /* @__PURE__ */ import_react32.default.createElement("clipPath", {
         id: "clipPath-".concat(clipPathId)
-      }, /* @__PURE__ */ import_react34.default.createElement("rect", {
+      }, /* @__PURE__ */ import_react32.default.createElement("rect", {
         x: needClipX ? left : left - width / 2,
         y: needClipY ? top : top - height / 2,
         width: needClipX ? width : width * 2,
         height: needClipY ? height : height * 2
-      })), !clipDot && /* @__PURE__ */ import_react34.default.createElement("clipPath", {
+      })), !clipDot && /* @__PURE__ */ import_react32.default.createElement("clipPath", {
         id: "clipPath-dots-".concat(clipPathId)
-      }, /* @__PURE__ */ import_react34.default.createElement("rect", {
+      }, /* @__PURE__ */ import_react32.default.createElement("rect", {
         x: left - dotSize / 2,
         y: top - dotSize / 2,
         width: width + dotSize,
@@ -22737,14 +22375,14 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
     key: "renderDotItem",
     value: function renderDotItem(option, props) {
       var dotItem;
-      if (/* @__PURE__ */ import_react34.default.isValidElement(option)) {
-        dotItem = /* @__PURE__ */ import_react34.default.cloneElement(option, props);
-      } else if ((0, import_isFunction17.default)(option)) {
+      if (/* @__PURE__ */ import_react32.default.isValidElement(option)) {
+        dotItem = /* @__PURE__ */ import_react32.default.cloneElement(option, props);
+      } else if ((0, import_isFunction16.default)(option)) {
         dotItem = option(props);
       } else {
-        var key = props.key, dotProps = _objectWithoutProperties17(props, _excluded26);
+        var key = props.key, dotProps = _objectWithoutProperties16(props, _excluded26);
         var className = clsx_default("recharts-line-dot", typeof option !== "boolean" ? option.className : "");
-        dotItem = /* @__PURE__ */ import_react34.default.createElement(Dot, _extends24({
+        dotItem = /* @__PURE__ */ import_react32.default.createElement(Dot, _extends22({
           key
         }, dotProps, {
           className
@@ -22753,9 +22391,9 @@ var Line = /* @__PURE__ */ function(_PureComponent) {
       return dotItem;
     }
   }]);
-}(import_react34.PureComponent);
-_defineProperty36(Line, "displayName", "Line");
-_defineProperty36(Line, "defaultProps", {
+}(import_react32.PureComponent);
+_defineProperty34(Line, "displayName", "Line");
+_defineProperty34(Line, "defaultProps", {
   xAxisId: 0,
   yAxisId: 0,
   connectNulls: false,
@@ -22774,7 +22412,7 @@ _defineProperty36(Line, "defaultProps", {
   hide: false,
   label: false
 });
-_defineProperty36(Line, "getComposedData", function(_ref4) {
+_defineProperty34(Line, "getComposedData", function(_ref4) {
   var props = _ref4.props, xAxis = _ref4.xAxis, yAxis = _ref4.yAxis, xAxisTicks = _ref4.xAxisTicks, yAxisTicks = _ref4.yAxisTicks, dataKey = _ref4.dataKey, bandSize = _ref4.bandSize, displayedData = _ref4.displayedData, offset = _ref4.offset;
   var layout = props.layout;
   var points = displayedData.map(function(entry, index) {
@@ -22806,21 +22444,200 @@ _defineProperty36(Line, "getComposedData", function(_ref4) {
       payload: entry
     };
   });
-  return _objectSpread34({
+  return _objectSpread32({
     points,
     layout
   }, offset);
 });
 
 // node_modules/recharts/es6/cartesian/XAxis.js
-var import_react35 = __toESM(require_react());
-function _typeof42(o) {
+var import_react33 = __toESM(require_react());
+function _typeof40(o) {
   "@babel/helpers - typeof";
-  return _typeof42 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof40 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof42(o);
+  }, _typeof40(o);
+}
+function _classCallCheck15(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _defineProperties15(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor)
+      descriptor.writable = true;
+    Object.defineProperty(target, _toPropertyKey36(descriptor.key), descriptor);
+  }
+}
+function _createClass15(Constructor, protoProps, staticProps) {
+  if (protoProps)
+    _defineProperties15(Constructor.prototype, protoProps);
+  if (staticProps)
+    _defineProperties15(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", { writable: false });
+  return Constructor;
+}
+function _callSuper12(t, o, e) {
+  return o = _getPrototypeOf13(o), _possibleConstructorReturn13(t, _isNativeReflectConstruct13() ? Reflect.construct(o, e || [], _getPrototypeOf13(t).constructor) : o.apply(t, e));
+}
+function _possibleConstructorReturn13(self2, call) {
+  if (call && (_typeof40(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+  return _assertThisInitialized13(self2);
+}
+function _assertThisInitialized13(self2) {
+  if (self2 === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self2;
+}
+function _isNativeReflectConstruct13() {
+  try {
+    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
+    }));
+  } catch (t2) {
+  }
+  return (_isNativeReflectConstruct13 = function _isNativeReflectConstruct17() {
+    return !!t;
+  })();
+}
+function _getPrototypeOf13(o) {
+  _getPrototypeOf13 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf17(o2) {
+    return o2.__proto__ || Object.getPrototypeOf(o2);
+  };
+  return _getPrototypeOf13(o);
+}
+function _inherits13(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } });
+  Object.defineProperty(subClass, "prototype", { writable: false });
+  if (superClass)
+    _setPrototypeOf13(subClass, superClass);
+}
+function _setPrototypeOf13(o, p) {
+  _setPrototypeOf13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf17(o2, p2) {
+    o2.__proto__ = p2;
+    return o2;
+  };
+  return _setPrototypeOf13(o, p);
+}
+function _defineProperty35(obj, key, value) {
+  key = _toPropertyKey36(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey36(t) {
+  var i = _toPrimitive36(t, "string");
+  return "symbol" == _typeof40(i) ? i : i + "";
+}
+function _toPrimitive36(t, r2) {
+  if ("object" != _typeof40(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof40(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+function _extends23() {
+  _extends23 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends23.apply(this, arguments);
+}
+function XAxisImpl(_ref) {
+  var xAxisId = _ref.xAxisId;
+  var width = useChartWidth();
+  var height = useChartHeight();
+  var axisOptions = useXAxisOrThrow(xAxisId);
+  if (axisOptions == null) {
+    return null;
+  }
+  return (
+    // @ts-expect-error the axisOptions type is not exactly what CartesianAxis is expecting.
+    /* @__PURE__ */ import_react33.default.createElement(CartesianAxis, _extends23({}, axisOptions, {
+      className: clsx_default("recharts-".concat(axisOptions.axisType, " ").concat(axisOptions.axisType), axisOptions.className),
+      viewBox: {
+        x: 0,
+        y: 0,
+        width,
+        height
+      },
+      ticksGenerator: function ticksGenerator(axis) {
+        return getTicksOfAxis(axis, true);
+      }
+    }))
+  );
+}
+var XAxis = /* @__PURE__ */ function(_React$Component) {
+  function XAxis2() {
+    _classCallCheck15(this, XAxis2);
+    return _callSuper12(this, XAxis2, arguments);
+  }
+  _inherits13(XAxis2, _React$Component);
+  return _createClass15(XAxis2, [{
+    key: "render",
+    value: function render() {
+      return /* @__PURE__ */ import_react33.default.createElement(XAxisImpl, this.props);
+    }
+  }]);
+}(import_react33.default.Component);
+_defineProperty35(XAxis, "displayName", "XAxis");
+_defineProperty35(XAxis, "defaultProps", {
+  allowDecimals: true,
+  hide: false,
+  orientation: "bottom",
+  width: 0,
+  height: 30,
+  mirror: false,
+  xAxisId: 0,
+  tickCount: 5,
+  type: "category",
+  padding: {
+    left: 0,
+    right: 0
+  },
+  allowDataOverflow: false,
+  scale: "auto",
+  reversed: false,
+  allowDuplicatedCategory: true
+});
+
+// node_modules/recharts/es6/cartesian/YAxis.js
+var import_react34 = __toESM(require_react());
+function _typeof41(o) {
+  "@babel/helpers - typeof";
+  return _typeof41 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof41(o);
 }
 function _classCallCheck16(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -22834,7 +22651,7 @@ function _defineProperties16(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey38(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey37(descriptor.key), descriptor);
   }
 }
 function _createClass16(Constructor, protoProps, staticProps) {
@@ -22849,7 +22666,7 @@ function _callSuper13(t, o, e) {
   return o = _getPrototypeOf14(o), _possibleConstructorReturn14(t, _isNativeReflectConstruct14() ? Reflect.construct(o, e || [], _getPrototypeOf14(t).constructor) : o.apply(t, e));
 }
 function _possibleConstructorReturn14(self2, call) {
-  if (call && (_typeof42(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof41(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -22894,8 +22711,8 @@ function _setPrototypeOf14(o, p) {
   };
   return _setPrototypeOf14(o, p);
 }
-function _defineProperty37(obj, key, value) {
-  key = _toPropertyKey38(key);
+function _defineProperty36(obj, key, value) {
+  key = _toPropertyKey37(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -22903,22 +22720,106 @@ function _defineProperty37(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey38(t) {
-  var i = _toPrimitive38(t, "string");
-  return "symbol" == _typeof42(i) ? i : i + "";
+function _toPropertyKey37(t) {
+  var i = _toPrimitive37(t, "string");
+  return "symbol" == _typeof41(i) ? i : i + "";
 }
-function _toPrimitive38(t, r2) {
-  if ("object" != _typeof42(t) || !t)
+function _toPrimitive37(t, r2) {
+  if ("object" != _typeof41(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof42(i))
+    if ("object" != _typeof41(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r2 ? String : Number)(t);
 }
+function _extends24() {
+  _extends24 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends24.apply(this, arguments);
+}
+var YAxisImpl = function YAxisImpl2(_ref) {
+  var yAxisId = _ref.yAxisId;
+  var width = useChartWidth();
+  var height = useChartHeight();
+  var axisOptions = useYAxisOrThrow(yAxisId);
+  if (axisOptions == null) {
+    return null;
+  }
+  return (
+    // @ts-expect-error the axisOptions type is not exactly what CartesianAxis is expecting.
+    /* @__PURE__ */ import_react34.default.createElement(CartesianAxis, _extends24({}, axisOptions, {
+      className: clsx_default("recharts-".concat(axisOptions.axisType, " ").concat(axisOptions.axisType), axisOptions.className),
+      viewBox: {
+        x: 0,
+        y: 0,
+        width,
+        height
+      },
+      ticksGenerator: function ticksGenerator(axis) {
+        return getTicksOfAxis(axis, true);
+      }
+    }))
+  );
+};
+var YAxis = /* @__PURE__ */ function(_React$Component) {
+  function YAxis2() {
+    _classCallCheck16(this, YAxis2);
+    return _callSuper13(this, YAxis2, arguments);
+  }
+  _inherits14(YAxis2, _React$Component);
+  return _createClass16(YAxis2, [{
+    key: "render",
+    value: function render() {
+      return /* @__PURE__ */ import_react34.default.createElement(YAxisImpl, this.props);
+    }
+  }]);
+}(import_react34.default.Component);
+_defineProperty36(YAxis, "displayName", "YAxis");
+_defineProperty36(YAxis, "defaultProps", {
+  allowDuplicatedCategory: true,
+  allowDecimals: true,
+  hide: false,
+  orientation: "left",
+  width: 60,
+  height: 0,
+  mirror: false,
+  yAxisId: 0,
+  tickCount: 5,
+  type: "number",
+  padding: {
+    top: 0,
+    bottom: 0
+  },
+  allowDataOverflow: false,
+  scale: "auto",
+  reversed: false
+});
+
+// node_modules/recharts/es6/chart/generateCategoricalChart.js
+var import_react38 = __toESM(require_react());
+var import_isNil10 = __toESM(require_isNil());
+var import_isFunction18 = __toESM(require_isFunction());
+var import_range3 = __toESM(require_range());
+var import_get5 = __toESM(require_get());
+var import_sortBy3 = __toESM(require_sortBy());
+var import_throttle2 = __toESM(require_throttle());
+
+// node_modules/recharts/es6/cartesian/ReferenceDot.js
+var import_react35 = __toESM(require_react());
+var import_isFunction17 = __toESM(require_isFunction());
 function _extends25() {
   _extends25 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -22933,73 +22834,34 @@ function _extends25() {
   };
   return _extends25.apply(this, arguments);
 }
-function XAxisImpl(_ref) {
-  var xAxisId = _ref.xAxisId;
-  var width = useChartWidth();
-  var height = useChartHeight();
-  var axisOptions = useXAxisOrThrow(xAxisId);
-  if (axisOptions == null) {
-    return null;
-  }
-  return (
-    // @ts-expect-error the axisOptions type is not exactly what CartesianAxis is expecting.
-    /* @__PURE__ */ import_react35.default.createElement(CartesianAxis, _extends25({}, axisOptions, {
-      className: clsx_default("recharts-".concat(axisOptions.axisType, " ").concat(axisOptions.axisType), axisOptions.className),
-      viewBox: {
-        x: 0,
-        y: 0,
-        width,
-        height
-      },
-      ticksGenerator: function ticksGenerator(axis) {
-        return getTicksOfAxis(axis, true);
-      }
-    }))
-  );
-}
-var XAxis = /* @__PURE__ */ function(_React$Component) {
-  function XAxis2() {
-    _classCallCheck16(this, XAxis2);
-    return _callSuper13(this, XAxis2, arguments);
-  }
-  _inherits14(XAxis2, _React$Component);
-  return _createClass16(XAxis2, [{
-    key: "render",
-    value: function render() {
-      return /* @__PURE__ */ import_react35.default.createElement(XAxisImpl, this.props);
-    }
-  }]);
-}(import_react35.default.Component);
-_defineProperty37(XAxis, "displayName", "XAxis");
-_defineProperty37(XAxis, "defaultProps", {
-  allowDecimals: true,
-  hide: false,
-  orientation: "bottom",
-  width: 0,
-  height: 30,
-  mirror: false,
-  xAxisId: 0,
-  tickCount: 5,
-  type: "category",
-  padding: {
-    left: 0,
-    right: 0
-  },
-  allowDataOverflow: false,
-  scale: "auto",
-  reversed: false,
-  allowDuplicatedCategory: true
-});
-
-// node_modules/recharts/es6/cartesian/YAxis.js
-var import_react36 = __toESM(require_react());
-function _typeof43(o) {
+function _typeof42(o) {
   "@babel/helpers - typeof";
-  return _typeof43 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof42 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof43(o);
+  }, _typeof42(o);
+}
+function ownKeys33(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread33(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys33(Object(t), true).forEach(function(r3) {
+      _defineProperty37(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys33(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
 }
 function _classCallCheck17(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -23013,7 +22875,7 @@ function _defineProperties17(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey39(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey38(descriptor.key), descriptor);
   }
 }
 function _createClass17(Constructor, protoProps, staticProps) {
@@ -23028,7 +22890,7 @@ function _callSuper14(t, o, e) {
   return o = _getPrototypeOf15(o), _possibleConstructorReturn15(t, _isNativeReflectConstruct15() ? Reflect.construct(o, e || [], _getPrototypeOf15(t).constructor) : o.apply(t, e));
 }
 function _possibleConstructorReturn15(self2, call) {
-  if (call && (_typeof43(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof42(call) === "object" || typeof call === "function")) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError("Derived constructors may only return object or undefined");
@@ -23073,8 +22935,8 @@ function _setPrototypeOf15(o, p) {
   };
   return _setPrototypeOf15(o, p);
 }
-function _defineProperty38(obj, key, value) {
-  key = _toPropertyKey39(key);
+function _defineProperty37(obj, key, value) {
+  key = _toPropertyKey38(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -23082,102 +22944,106 @@ function _defineProperty38(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey39(t) {
-  var i = _toPrimitive39(t, "string");
-  return "symbol" == _typeof43(i) ? i : i + "";
+function _toPropertyKey38(t) {
+  var i = _toPrimitive38(t, "string");
+  return "symbol" == _typeof42(i) ? i : i + "";
 }
-function _toPrimitive39(t, r2) {
-  if ("object" != _typeof43(t) || !t)
+function _toPrimitive38(t, r2) {
+  if ("object" != _typeof42(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof43(i))
+    if ("object" != _typeof42(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return ("string" === r2 ? String : Number)(t);
 }
-function _extends26() {
-  _extends26 = Object.assign ? Object.assign.bind() : function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends26.apply(this, arguments);
-}
-var YAxisImpl = function YAxisImpl2(_ref) {
-  var yAxisId = _ref.yAxisId;
-  var width = useChartWidth();
-  var height = useChartHeight();
-  var axisOptions = useYAxisOrThrow(yAxisId);
-  if (axisOptions == null) {
+var getCoordinate = function getCoordinate2(props) {
+  var x2 = props.x, y2 = props.y, xAxis = props.xAxis, yAxis = props.yAxis;
+  var scales = createLabeledScales({
+    x: xAxis.scale,
+    y: yAxis.scale
+  });
+  var result = scales.apply({
+    x: x2,
+    y: y2
+  }, {
+    bandAware: true
+  });
+  if (ifOverflowMatches(props, "discard") && !scales.isInRange(result)) {
     return null;
   }
-  return (
-    // @ts-expect-error the axisOptions type is not exactly what CartesianAxis is expecting.
-    /* @__PURE__ */ import_react36.default.createElement(CartesianAxis, _extends26({}, axisOptions, {
-      className: clsx_default("recharts-".concat(axisOptions.axisType, " ").concat(axisOptions.axisType), axisOptions.className),
-      viewBox: {
-        x: 0,
-        y: 0,
-        width,
-        height
-      },
-      ticksGenerator: function ticksGenerator(axis) {
-        return getTicksOfAxis(axis, true);
-      }
-    }))
-  );
+  return result;
 };
-var YAxis = /* @__PURE__ */ function(_React$Component) {
-  function YAxis2() {
-    _classCallCheck17(this, YAxis2);
-    return _callSuper14(this, YAxis2, arguments);
+var ReferenceDot = /* @__PURE__ */ function(_React$Component) {
+  function ReferenceDot2() {
+    _classCallCheck17(this, ReferenceDot2);
+    return _callSuper14(this, ReferenceDot2, arguments);
   }
-  _inherits15(YAxis2, _React$Component);
-  return _createClass17(YAxis2, [{
+  _inherits15(ReferenceDot2, _React$Component);
+  return _createClass17(ReferenceDot2, [{
     key: "render",
     value: function render() {
-      return /* @__PURE__ */ import_react36.default.createElement(YAxisImpl, this.props);
+      var _this$props = this.props, x2 = _this$props.x, y2 = _this$props.y, r2 = _this$props.r, alwaysShow = _this$props.alwaysShow, clipPathId = _this$props.clipPathId;
+      var isX = isNumOrStr(x2);
+      var isY = isNumOrStr(y2);
+      warn(alwaysShow === void 0, 'The alwaysShow prop is deprecated. Please use ifOverflow="extendDomain" instead.');
+      if (!isX || !isY) {
+        return null;
+      }
+      var coordinate = getCoordinate(this.props);
+      if (!coordinate) {
+        return null;
+      }
+      var cx = coordinate.x, cy = coordinate.y;
+      var _this$props2 = this.props, shape = _this$props2.shape, className = _this$props2.className;
+      var clipPath = ifOverflowMatches(this.props, "hidden") ? "url(#".concat(clipPathId, ")") : void 0;
+      var dotProps = _objectSpread33(_objectSpread33({
+        clipPath
+      }, filterProps(this.props, true)), {}, {
+        cx,
+        cy
+      });
+      return /* @__PURE__ */ import_react35.default.createElement(Layer, {
+        className: clsx_default("recharts-reference-dot", className)
+      }, ReferenceDot2.renderDot(shape, dotProps), Label.renderCallByParent(this.props, {
+        x: cx - r2,
+        y: cy - r2,
+        width: 2 * r2,
+        height: 2 * r2
+      }));
     }
   }]);
-}(import_react36.default.Component);
-_defineProperty38(YAxis, "displayName", "YAxis");
-_defineProperty38(YAxis, "defaultProps", {
-  allowDuplicatedCategory: true,
-  allowDecimals: true,
-  hide: false,
-  orientation: "left",
-  width: 60,
-  height: 0,
-  mirror: false,
+}(import_react35.default.Component);
+_defineProperty37(ReferenceDot, "displayName", "ReferenceDot");
+_defineProperty37(ReferenceDot, "defaultProps", {
+  isFront: false,
+  ifOverflow: "discard",
+  xAxisId: 0,
   yAxisId: 0,
-  tickCount: 5,
-  type: "number",
-  padding: {
-    top: 0,
-    bottom: 0
-  },
-  allowDataOverflow: false,
-  scale: "auto",
-  reversed: false
+  r: 10,
+  fill: "#fff",
+  stroke: "#ccc",
+  fillOpacity: 1,
+  strokeWidth: 1
 });
-
-// node_modules/recharts/es6/chart/generateCategoricalChart.js
-var import_react38 = __toESM(require_react());
-var import_isNil10 = __toESM(require_isNil());
-var import_isFunction18 = __toESM(require_isFunction());
-var import_range3 = __toESM(require_range());
-var import_get5 = __toESM(require_get());
-var import_sortBy3 = __toESM(require_sortBy());
-var import_throttle2 = __toESM(require_throttle());
+_defineProperty37(ReferenceDot, "renderDot", function(option, props) {
+  var dot;
+  if (/* @__PURE__ */ import_react35.default.isValidElement(option)) {
+    dot = /* @__PURE__ */ import_react35.default.cloneElement(option, props);
+  } else if ((0, import_isFunction17.default)(option)) {
+    dot = option(props);
+  } else {
+    dot = /* @__PURE__ */ import_react35.default.createElement(Dot, _extends25({}, props, {
+      cx: props.cx,
+      cy: props.cy,
+      className: "recharts-reference-dot-dot"
+    }));
+  }
+  return dot;
+});
 
 // node_modules/recharts/es6/util/DetectReferenceElementsDomain.js
 function _toConsumableArray10(arr) {
@@ -23260,13 +23126,13 @@ var eventCenter = new import_eventemitter3.default();
 var SYNC_EVENT = "recharts.syncMouseEvents";
 
 // node_modules/recharts/es6/chart/AccessibilityManager.js
-function _typeof44(o) {
+function _typeof43(o) {
   "@babel/helpers - typeof";
-  return _typeof44 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+  return _typeof43 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
     return typeof o2;
   } : function(o2) {
     return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
-  }, _typeof44(o);
+  }, _typeof43(o);
 }
 function _classCallCheck18(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -23280,7 +23146,7 @@ function _defineProperties18(target, props) {
     descriptor.configurable = true;
     if ("value" in descriptor)
       descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey40(descriptor.key), descriptor);
+    Object.defineProperty(target, _toPropertyKey39(descriptor.key), descriptor);
   }
 }
 function _createClass18(Constructor, protoProps, staticProps) {
@@ -23291,8 +23157,8 @@ function _createClass18(Constructor, protoProps, staticProps) {
   Object.defineProperty(Constructor, "prototype", { writable: false });
   return Constructor;
 }
-function _defineProperty39(obj, key, value) {
-  key = _toPropertyKey40(key);
+function _defineProperty38(obj, key, value) {
+  key = _toPropertyKey39(key);
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -23300,17 +23166,17 @@ function _defineProperty39(obj, key, value) {
   }
   return obj;
 }
-function _toPropertyKey40(t) {
-  var i = _toPrimitive40(t, "string");
-  return "symbol" == _typeof44(i) ? i : i + "";
+function _toPropertyKey39(t) {
+  var i = _toPrimitive39(t, "string");
+  return "symbol" == _typeof43(i) ? i : i + "";
 }
-function _toPrimitive40(t, r2) {
-  if ("object" != _typeof44(t) || !t)
+function _toPrimitive39(t, r2) {
+  if ("object" != _typeof43(t) || !t)
     return t;
   var e = t[Symbol.toPrimitive];
   if (void 0 !== e) {
     var i = e.call(t, r2 || "default");
-    if ("object" != _typeof44(i))
+    if ("object" != _typeof43(i))
       return i;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
@@ -23319,9 +23185,9 @@ function _toPrimitive40(t, r2) {
 var AccessibilityManager = /* @__PURE__ */ function() {
   function AccessibilityManager2() {
     _classCallCheck18(this, AccessibilityManager2);
-    _defineProperty39(this, "activeIndex", 0);
-    _defineProperty39(this, "coordinateList", []);
-    _defineProperty39(this, "layout", "horizontal");
+    _defineProperty38(this, "activeIndex", 0);
+    _defineProperty38(this, "coordinateList", []);
+    _defineProperty38(this, "layout", "horizontal");
   }
   return _createClass18(AccessibilityManager2, [{
     key: "setDetails",
@@ -23411,6 +23277,130 @@ function isDomainSpecifiedByUser(domain, allowDataOverflow, axisType) {
 
 // node_modules/recharts/es6/component/Cursor.js
 var import_react37 = __toESM(require_react());
+
+// node_modules/recharts/es6/shape/Cross.js
+var import_react36 = __toESM(require_react());
+function _typeof44(o) {
+  "@babel/helpers - typeof";
+  return _typeof44 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o2) {
+    return typeof o2;
+  } : function(o2) {
+    return o2 && "function" == typeof Symbol && o2.constructor === Symbol && o2 !== Symbol.prototype ? "symbol" : typeof o2;
+  }, _typeof44(o);
+}
+var _excluded18 = ["x", "y", "top", "left", "width", "height", "className"];
+function _extends26() {
+  _extends26 = Object.assign ? Object.assign.bind() : function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends26.apply(this, arguments);
+}
+function ownKeys34(e, r2) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r2 && (o = o.filter(function(r3) {
+      return Object.getOwnPropertyDescriptor(e, r3).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread34(e) {
+  for (var r2 = 1; r2 < arguments.length; r2++) {
+    var t = null != arguments[r2] ? arguments[r2] : {};
+    r2 % 2 ? ownKeys34(Object(t), true).forEach(function(r3) {
+      _defineProperty39(e, r3, t[r3]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys34(Object(t)).forEach(function(r3) {
+      Object.defineProperty(e, r3, Object.getOwnPropertyDescriptor(t, r3));
+    });
+  }
+  return e;
+}
+function _defineProperty39(obj, key, value) {
+  key = _toPropertyKey40(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _toPropertyKey40(t) {
+  var i = _toPrimitive40(t, "string");
+  return "symbol" == _typeof44(i) ? i : i + "";
+}
+function _toPrimitive40(t, r2) {
+  if ("object" != _typeof44(t) || !t)
+    return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r2 || "default");
+    if ("object" != _typeof44(i))
+      return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r2 ? String : Number)(t);
+}
+function _objectWithoutProperties17(source, excluded) {
+  if (source == null)
+    return {};
+  var target = _objectWithoutPropertiesLoose17(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key))
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+function _objectWithoutPropertiesLoose17(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  for (var key in source) {
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      if (excluded.indexOf(key) >= 0)
+        continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+var getPath3 = function getPath4(x2, y2, width, height, top, left) {
+  return "M".concat(x2, ",").concat(top, "v").concat(height, "M").concat(left, ",").concat(y2, "h").concat(width);
+};
+var Cross = function Cross2(_ref) {
+  var _ref$x = _ref.x, x2 = _ref$x === void 0 ? 0 : _ref$x, _ref$y = _ref.y, y2 = _ref$y === void 0 ? 0 : _ref$y, _ref$top = _ref.top, top = _ref$top === void 0 ? 0 : _ref$top, _ref$left = _ref.left, left = _ref$left === void 0 ? 0 : _ref$left, _ref$width = _ref.width, width = _ref$width === void 0 ? 0 : _ref$width, _ref$height = _ref.height, height = _ref$height === void 0 ? 0 : _ref$height, className = _ref.className, rest = _objectWithoutProperties17(_ref, _excluded18);
+  var props = _objectSpread34({
+    x: x2,
+    y: y2,
+    top,
+    left,
+    width,
+    height
+  }, rest);
+  if (!isNumber(x2) || !isNumber(y2) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) {
+    return null;
+  }
+  return /* @__PURE__ */ import_react36.default.createElement("path", _extends26({}, filterProps(props, true), {
+    className: clsx_default("recharts-cross", className),
+    d: getPath3(x2, y2, width, height, top, left)
+  }));
+};
 
 // node_modules/recharts/es6/util/cursor/getCursorRectangle.js
 function getCursorRectangle(layout, activeCoordinate, offset, tooltipAxisBandSize) {
@@ -25444,3511 +25434,37 @@ var LineChart = generateCategoricalChart({
   formatAxisMap
 });
 
-// node_modules/date-fns/constants.js
-var daysInYear = 365.2425;
-var maxTime = Math.pow(10, 8) * 24 * 60 * 60 * 1e3;
-var minTime = -maxTime;
-var millisecondsInWeek = 6048e5;
-var millisecondsInDay = 864e5;
-var millisecondsInMinute = 6e4;
-var millisecondsInHour = 36e5;
-var secondsInHour = 3600;
-var secondsInDay = secondsInHour * 24;
-var secondsInWeek = secondsInDay * 7;
-var secondsInYear = secondsInDay * daysInYear;
-var secondsInMonth = secondsInYear / 12;
-var secondsInQuarter = secondsInMonth * 3;
-var constructFromSymbol = Symbol.for("constructDateFrom");
-
-// node_modules/date-fns/constructFrom.js
-function constructFrom(date2, value) {
-  if (typeof date2 === "function")
-    return date2(value);
-  if (date2 && typeof date2 === "object" && constructFromSymbol in date2)
-    return date2[constructFromSymbol](value);
-  if (date2 instanceof Date)
-    return new date2.constructor(value);
-  return new Date(value);
-}
-
-// node_modules/date-fns/toDate.js
-function toDate(argument, context) {
-  return constructFrom(context || argument, argument);
-}
-
-// node_modules/date-fns/_lib/defaultOptions.js
-var defaultOptions = {};
-function getDefaultOptions() {
-  return defaultOptions;
-}
-
-// node_modules/date-fns/startOfWeek.js
-function startOfWeek(date2, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions2.weekStartsOn ?? defaultOptions2.locale?.options?.weekStartsOn ?? 0;
-  const _date = toDate(date2, options?.in);
-  const day = _date.getDay();
-  const diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  _date.setDate(_date.getDate() - diff);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-
-// node_modules/date-fns/startOfISOWeek.js
-function startOfISOWeek(date2, options) {
-  return startOfWeek(date2, { ...options, weekStartsOn: 1 });
-}
-
-// node_modules/date-fns/getISOWeekYear.js
-function getISOWeekYear(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const year = _date.getFullYear();
-  const fourthOfJanuaryOfNextYear = constructFrom(_date, 0);
-  fourthOfJanuaryOfNextYear.setFullYear(year + 1, 0, 4);
-  fourthOfJanuaryOfNextYear.setHours(0, 0, 0, 0);
-  const startOfNextYear = startOfISOWeek(fourthOfJanuaryOfNextYear);
-  const fourthOfJanuaryOfThisYear = constructFrom(_date, 0);
-  fourthOfJanuaryOfThisYear.setFullYear(year, 0, 4);
-  fourthOfJanuaryOfThisYear.setHours(0, 0, 0, 0);
-  const startOfThisYear = startOfISOWeek(fourthOfJanuaryOfThisYear);
-  if (_date.getTime() >= startOfNextYear.getTime()) {
-    return year + 1;
-  } else if (_date.getTime() >= startOfThisYear.getTime()) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-
-// node_modules/date-fns/_lib/getTimezoneOffsetInMilliseconds.js
-function getTimezoneOffsetInMilliseconds(date2) {
-  const _date = toDate(date2);
-  const utcDate2 = new Date(
-    Date.UTC(
-      _date.getFullYear(),
-      _date.getMonth(),
-      _date.getDate(),
-      _date.getHours(),
-      _date.getMinutes(),
-      _date.getSeconds(),
-      _date.getMilliseconds()
-    )
-  );
-  utcDate2.setUTCFullYear(_date.getFullYear());
-  return +date2 - +utcDate2;
-}
-
-// node_modules/date-fns/_lib/normalizeDates.js
-function normalizeDates(context, ...dates) {
-  const normalize2 = constructFrom.bind(
-    null,
-    context || dates.find((date2) => typeof date2 === "object")
-  );
-  return dates.map(normalize2);
-}
-
-// node_modules/date-fns/startOfDay.js
-function startOfDay(date2, options) {
-  const _date = toDate(date2, options?.in);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-
-// node_modules/date-fns/differenceInCalendarDays.js
-function differenceInCalendarDays(laterDate, earlierDate, options) {
-  const [laterDate_, earlierDate_] = normalizeDates(
-    options?.in,
-    laterDate,
-    earlierDate
-  );
-  const laterStartOfDay = startOfDay(laterDate_);
-  const earlierStartOfDay = startOfDay(earlierDate_);
-  const laterTimestamp = +laterStartOfDay - getTimezoneOffsetInMilliseconds(laterStartOfDay);
-  const earlierTimestamp = +earlierStartOfDay - getTimezoneOffsetInMilliseconds(earlierStartOfDay);
-  return Math.round((laterTimestamp - earlierTimestamp) / millisecondsInDay);
-}
-
-// node_modules/date-fns/startOfISOWeekYear.js
-function startOfISOWeekYear(date2, options) {
-  const year = getISOWeekYear(date2, options);
-  const fourthOfJanuary = constructFrom(options?.in || date2, 0);
-  fourthOfJanuary.setFullYear(year, 0, 4);
-  fourthOfJanuary.setHours(0, 0, 0, 0);
-  return startOfISOWeek(fourthOfJanuary);
-}
-
-// node_modules/date-fns/isSameDay.js
-function isSameDay(laterDate, earlierDate, options) {
-  const [dateLeft_, dateRight_] = normalizeDates(
-    options?.in,
-    laterDate,
-    earlierDate
-  );
-  return +startOfDay(dateLeft_) === +startOfDay(dateRight_);
-}
-
-// node_modules/date-fns/isDate.js
-function isDate(value) {
-  return value instanceof Date || typeof value === "object" && Object.prototype.toString.call(value) === "[object Date]";
-}
-
-// node_modules/date-fns/isValid.js
-function isValid(date2) {
-  return !(!isDate(date2) && typeof date2 !== "number" || isNaN(+toDate(date2)));
-}
-
-// node_modules/date-fns/startOfQuarter.js
-function startOfQuarter(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const currentMonth = _date.getMonth();
-  const month = currentMonth - currentMonth % 3;
-  _date.setMonth(month, 1);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-
-// node_modules/date-fns/startOfMonth.js
-function startOfMonth(date2, options) {
-  const _date = toDate(date2, options?.in);
-  _date.setDate(1);
-  _date.setHours(0, 0, 0, 0);
-  return _date;
-}
-
-// node_modules/date-fns/startOfYear.js
-function startOfYear(date2, options) {
-  const date_ = toDate(date2, options?.in);
-  date_.setFullYear(date_.getFullYear(), 0, 1);
-  date_.setHours(0, 0, 0, 0);
-  return date_;
-}
-
-// node_modules/date-fns/locale/en-US/_lib/formatDistance.js
-var formatDistanceLocale = {
-  lessThanXSeconds: {
-    one: "less than a second",
-    other: "less than {{count}} seconds"
-  },
-  xSeconds: {
-    one: "1 second",
-    other: "{{count}} seconds"
-  },
-  halfAMinute: "half a minute",
-  lessThanXMinutes: {
-    one: "less than a minute",
-    other: "less than {{count}} minutes"
-  },
-  xMinutes: {
-    one: "1 minute",
-    other: "{{count}} minutes"
-  },
-  aboutXHours: {
-    one: "about 1 hour",
-    other: "about {{count}} hours"
-  },
-  xHours: {
-    one: "1 hour",
-    other: "{{count}} hours"
-  },
-  xDays: {
-    one: "1 day",
-    other: "{{count}} days"
-  },
-  aboutXWeeks: {
-    one: "about 1 week",
-    other: "about {{count}} weeks"
-  },
-  xWeeks: {
-    one: "1 week",
-    other: "{{count}} weeks"
-  },
-  aboutXMonths: {
-    one: "about 1 month",
-    other: "about {{count}} months"
-  },
-  xMonths: {
-    one: "1 month",
-    other: "{{count}} months"
-  },
-  aboutXYears: {
-    one: "about 1 year",
-    other: "about {{count}} years"
-  },
-  xYears: {
-    one: "1 year",
-    other: "{{count}} years"
-  },
-  overXYears: {
-    one: "over 1 year",
-    other: "over {{count}} years"
-  },
-  almostXYears: {
-    one: "almost 1 year",
-    other: "almost {{count}} years"
-  }
-};
-var formatDistance = (token, count, options) => {
-  let result;
-  const tokenValue = formatDistanceLocale[token];
-  if (typeof tokenValue === "string") {
-    result = tokenValue;
-  } else if (count === 1) {
-    result = tokenValue.one;
-  } else {
-    result = tokenValue.other.replace("{{count}}", count.toString());
-  }
-  if (options?.addSuffix) {
-    if (options.comparison && options.comparison > 0) {
-      return "in " + result;
-    } else {
-      return result + " ago";
-    }
-  }
-  return result;
-};
-
-// node_modules/date-fns/locale/_lib/buildFormatLongFn.js
-function buildFormatLongFn(args) {
-  return (options = {}) => {
-    const width = options.width ? String(options.width) : args.defaultWidth;
-    const format3 = args.formats[width] || args.formats[args.defaultWidth];
-    return format3;
-  };
-}
-
-// node_modules/date-fns/locale/en-US/_lib/formatLong.js
-var dateFormats = {
-  full: "EEEE, MMMM do, y",
-  long: "MMMM do, y",
-  medium: "MMM d, y",
-  short: "MM/dd/yyyy"
-};
-var timeFormats = {
-  full: "h:mm:ss a zzzz",
-  long: "h:mm:ss a z",
-  medium: "h:mm:ss a",
-  short: "h:mm a"
-};
-var dateTimeFormats = {
-  full: "{{date}} 'at' {{time}}",
-  long: "{{date}} 'at' {{time}}",
-  medium: "{{date}}, {{time}}",
-  short: "{{date}}, {{time}}"
-};
-var formatLong = {
-  date: buildFormatLongFn({
-    formats: dateFormats,
-    defaultWidth: "full"
-  }),
-  time: buildFormatLongFn({
-    formats: timeFormats,
-    defaultWidth: "full"
-  }),
-  dateTime: buildFormatLongFn({
-    formats: dateTimeFormats,
-    defaultWidth: "full"
-  })
-};
-
-// node_modules/date-fns/locale/en-US/_lib/formatRelative.js
-var formatRelativeLocale = {
-  lastWeek: "'last' eeee 'at' p",
-  yesterday: "'yesterday at' p",
-  today: "'today at' p",
-  tomorrow: "'tomorrow at' p",
-  nextWeek: "eeee 'at' p",
-  other: "P"
-};
-var formatRelative = (token, _date, _baseDate, _options) => formatRelativeLocale[token];
-
-// node_modules/date-fns/locale/_lib/buildLocalizeFn.js
-function buildLocalizeFn(args) {
-  return (value, options) => {
-    const context = options?.context ? String(options.context) : "standalone";
-    let valuesArray;
-    if (context === "formatting" && args.formattingValues) {
-      const defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
-      const width = options?.width ? String(options.width) : defaultWidth;
-      valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
-    } else {
-      const defaultWidth = args.defaultWidth;
-      const width = options?.width ? String(options.width) : args.defaultWidth;
-      valuesArray = args.values[width] || args.values[defaultWidth];
-    }
-    const index = args.argumentCallback ? args.argumentCallback(value) : value;
-    return valuesArray[index];
-  };
-}
-
-// node_modules/date-fns/locale/en-US/_lib/localize.js
-var eraValues = {
-  narrow: ["B", "A"],
-  abbreviated: ["BC", "AD"],
-  wide: ["Before Christ", "Anno Domini"]
-};
-var quarterValues = {
-  narrow: ["1", "2", "3", "4"],
-  abbreviated: ["Q1", "Q2", "Q3", "Q4"],
-  wide: ["1st quarter", "2nd quarter", "3rd quarter", "4th quarter"]
-};
-var monthValues = {
-  narrow: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
-  abbreviated: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ],
-  wide: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ]
-};
-var dayValues = {
-  narrow: ["S", "M", "T", "W", "T", "F", "S"],
-  short: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-  abbreviated: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  wide: [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ]
-};
-var dayPeriodValues = {
-  narrow: {
-    am: "a",
-    pm: "p",
-    midnight: "mi",
-    noon: "n",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  },
-  abbreviated: {
-    am: "AM",
-    pm: "PM",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  },
-  wide: {
-    am: "a.m.",
-    pm: "p.m.",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "morning",
-    afternoon: "afternoon",
-    evening: "evening",
-    night: "night"
-  }
-};
-var formattingDayPeriodValues = {
-  narrow: {
-    am: "a",
-    pm: "p",
-    midnight: "mi",
-    noon: "n",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  },
-  abbreviated: {
-    am: "AM",
-    pm: "PM",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  },
-  wide: {
-    am: "a.m.",
-    pm: "p.m.",
-    midnight: "midnight",
-    noon: "noon",
-    morning: "in the morning",
-    afternoon: "in the afternoon",
-    evening: "in the evening",
-    night: "at night"
-  }
-};
-var ordinalNumber = (dirtyNumber, _options) => {
-  const number4 = Number(dirtyNumber);
-  const rem100 = number4 % 100;
-  if (rem100 > 20 || rem100 < 10) {
-    switch (rem100 % 10) {
-      case 1:
-        return number4 + "st";
-      case 2:
-        return number4 + "nd";
-      case 3:
-        return number4 + "rd";
-    }
-  }
-  return number4 + "th";
-};
-var localize = {
-  ordinalNumber,
-  era: buildLocalizeFn({
-    values: eraValues,
-    defaultWidth: "wide"
-  }),
-  quarter: buildLocalizeFn({
-    values: quarterValues,
-    defaultWidth: "wide",
-    argumentCallback: (quarter) => quarter - 1
-  }),
-  month: buildLocalizeFn({
-    values: monthValues,
-    defaultWidth: "wide"
-  }),
-  day: buildLocalizeFn({
-    values: dayValues,
-    defaultWidth: "wide"
-  }),
-  dayPeriod: buildLocalizeFn({
-    values: dayPeriodValues,
-    defaultWidth: "wide",
-    formattingValues: formattingDayPeriodValues,
-    defaultFormattingWidth: "wide"
-  })
-};
-
-// node_modules/date-fns/locale/_lib/buildMatchFn.js
-function buildMatchFn(args) {
-  return (string, options = {}) => {
-    const width = options.width;
-    const matchPattern = width && args.matchPatterns[width] || args.matchPatterns[args.defaultMatchWidth];
-    const matchResult = string.match(matchPattern);
-    if (!matchResult) {
-      return null;
-    }
-    const matchedString = matchResult[0];
-    const parsePatterns = width && args.parsePatterns[width] || args.parsePatterns[args.defaultParseWidth];
-    const key = Array.isArray(parsePatterns) ? findIndex(parsePatterns, (pattern) => pattern.test(matchedString)) : (
-      // [TODO] -- I challenge you to fix the type
-      findKey(parsePatterns, (pattern) => pattern.test(matchedString))
-    );
-    let value;
-    value = args.valueCallback ? args.valueCallback(key) : key;
-    value = options.valueCallback ? (
-      // [TODO] -- I challenge you to fix the type
-      options.valueCallback(value)
-    ) : value;
-    const rest = string.slice(matchedString.length);
-    return { value, rest };
-  };
-}
-function findKey(object, predicate) {
-  for (const key in object) {
-    if (Object.prototype.hasOwnProperty.call(object, key) && predicate(object[key])) {
-      return key;
-    }
-  }
-  return void 0;
-}
-function findIndex(array, predicate) {
-  for (let key = 0; key < array.length; key++) {
-    if (predicate(array[key])) {
-      return key;
-    }
-  }
-  return void 0;
-}
-
-// node_modules/date-fns/locale/_lib/buildMatchPatternFn.js
-function buildMatchPatternFn(args) {
-  return (string, options = {}) => {
-    const matchResult = string.match(args.matchPattern);
-    if (!matchResult)
-      return null;
-    const matchedString = matchResult[0];
-    const parseResult = string.match(args.parsePattern);
-    if (!parseResult)
-      return null;
-    let value = args.valueCallback ? args.valueCallback(parseResult[0]) : parseResult[0];
-    value = options.valueCallback ? options.valueCallback(value) : value;
-    const rest = string.slice(matchedString.length);
-    return { value, rest };
-  };
-}
-
-// node_modules/date-fns/locale/en-US/_lib/match.js
-var matchOrdinalNumberPattern = /^(\d+)(th|st|nd|rd)?/i;
-var parseOrdinalNumberPattern = /\d+/i;
-var matchEraPatterns = {
-  narrow: /^(b|a)/i,
-  abbreviated: /^(b\.?\s?c\.?|b\.?\s?c\.?\s?e\.?|a\.?\s?d\.?|c\.?\s?e\.?)/i,
-  wide: /^(before christ|before common era|anno domini|common era)/i
-};
-var parseEraPatterns = {
-  any: [/^b/i, /^(a|c)/i]
-};
-var matchQuarterPatterns = {
-  narrow: /^[1234]/i,
-  abbreviated: /^q[1234]/i,
-  wide: /^[1234](th|st|nd|rd)? quarter/i
-};
-var parseQuarterPatterns = {
-  any: [/1/i, /2/i, /3/i, /4/i]
-};
-var matchMonthPatterns = {
-  narrow: /^[jfmasond]/i,
-  abbreviated: /^(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i,
-  wide: /^(january|february|march|april|may|june|july|august|september|october|november|december)/i
-};
-var parseMonthPatterns = {
-  narrow: [
-    /^j/i,
-    /^f/i,
-    /^m/i,
-    /^a/i,
-    /^m/i,
-    /^j/i,
-    /^j/i,
-    /^a/i,
-    /^s/i,
-    /^o/i,
-    /^n/i,
-    /^d/i
-  ],
-  any: [
-    /^ja/i,
-    /^f/i,
-    /^mar/i,
-    /^ap/i,
-    /^may/i,
-    /^jun/i,
-    /^jul/i,
-    /^au/i,
-    /^s/i,
-    /^o/i,
-    /^n/i,
-    /^d/i
-  ]
-};
-var matchDayPatterns = {
-  narrow: /^[smtwf]/i,
-  short: /^(su|mo|tu|we|th|fr|sa)/i,
-  abbreviated: /^(sun|mon|tue|wed|thu|fri|sat)/i,
-  wide: /^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)/i
-};
-var parseDayPatterns = {
-  narrow: [/^s/i, /^m/i, /^t/i, /^w/i, /^t/i, /^f/i, /^s/i],
-  any: [/^su/i, /^m/i, /^tu/i, /^w/i, /^th/i, /^f/i, /^sa/i]
-};
-var matchDayPeriodPatterns = {
-  narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
-  any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
-};
-var parseDayPeriodPatterns = {
-  any: {
-    am: /^a/i,
-    pm: /^p/i,
-    midnight: /^mi/i,
-    noon: /^no/i,
-    morning: /morning/i,
-    afternoon: /afternoon/i,
-    evening: /evening/i,
-    night: /night/i
-  }
-};
-var match = {
-  ordinalNumber: buildMatchPatternFn({
-    matchPattern: matchOrdinalNumberPattern,
-    parsePattern: parseOrdinalNumberPattern,
-    valueCallback: (value) => parseInt(value, 10)
-  }),
-  era: buildMatchFn({
-    matchPatterns: matchEraPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseEraPatterns,
-    defaultParseWidth: "any"
-  }),
-  quarter: buildMatchFn({
-    matchPatterns: matchQuarterPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseQuarterPatterns,
-    defaultParseWidth: "any",
-    valueCallback: (index) => index + 1
-  }),
-  month: buildMatchFn({
-    matchPatterns: matchMonthPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseMonthPatterns,
-    defaultParseWidth: "any"
-  }),
-  day: buildMatchFn({
-    matchPatterns: matchDayPatterns,
-    defaultMatchWidth: "wide",
-    parsePatterns: parseDayPatterns,
-    defaultParseWidth: "any"
-  }),
-  dayPeriod: buildMatchFn({
-    matchPatterns: matchDayPeriodPatterns,
-    defaultMatchWidth: "any",
-    parsePatterns: parseDayPeriodPatterns,
-    defaultParseWidth: "any"
-  })
-};
-
-// node_modules/date-fns/locale/en-US.js
-var enUS = {
-  code: "en-US",
-  formatDistance,
-  formatLong,
-  formatRelative,
-  localize,
-  match,
-  options: {
-    weekStartsOn: 0,
-    firstWeekContainsDate: 1
-  }
-};
-
-// node_modules/date-fns/getDayOfYear.js
-function getDayOfYear(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const diff = differenceInCalendarDays(_date, startOfYear(_date));
-  const dayOfYear = diff + 1;
-  return dayOfYear;
-}
-
-// node_modules/date-fns/getISOWeek.js
-function getISOWeek(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const diff = +startOfISOWeek(_date) - +startOfISOWeekYear(_date);
-  return Math.round(diff / millisecondsInWeek) + 1;
-}
-
-// node_modules/date-fns/getWeekYear.js
-function getWeekYear(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const year = _date.getFullYear();
-  const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const firstWeekOfNextYear = constructFrom(options?.in || date2, 0);
-  firstWeekOfNextYear.setFullYear(year + 1, 0, firstWeekContainsDate);
-  firstWeekOfNextYear.setHours(0, 0, 0, 0);
-  const startOfNextYear = startOfWeek(firstWeekOfNextYear, options);
-  const firstWeekOfThisYear = constructFrom(options?.in || date2, 0);
-  firstWeekOfThisYear.setFullYear(year, 0, firstWeekContainsDate);
-  firstWeekOfThisYear.setHours(0, 0, 0, 0);
-  const startOfThisYear = startOfWeek(firstWeekOfThisYear, options);
-  if (+_date >= +startOfNextYear) {
-    return year + 1;
-  } else if (+_date >= +startOfThisYear) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-
-// node_modules/date-fns/startOfWeekYear.js
-function startOfWeekYear(date2, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const year = getWeekYear(date2, options);
-  const firstWeek = constructFrom(options?.in || date2, 0);
-  firstWeek.setFullYear(year, 0, firstWeekContainsDate);
-  firstWeek.setHours(0, 0, 0, 0);
-  const _date = startOfWeek(firstWeek, options);
-  return _date;
-}
-
-// node_modules/date-fns/getWeek.js
-function getWeek(date2, options) {
-  const _date = toDate(date2, options?.in);
-  const diff = +startOfWeek(_date, options) - +startOfWeekYear(_date, options);
-  return Math.round(diff / millisecondsInWeek) + 1;
-}
-
-// node_modules/date-fns/_lib/addLeadingZeros.js
-function addLeadingZeros(number4, targetLength) {
-  const sign2 = number4 < 0 ? "-" : "";
-  const output = Math.abs(number4).toString().padStart(targetLength, "0");
-  return sign2 + output;
-}
-
-// node_modules/date-fns/_lib/format/lightFormatters.js
-var lightFormatters = {
-  // Year
-  y(date2, token) {
-    const signedYear = date2.getFullYear();
-    const year = signedYear > 0 ? signedYear : 1 - signedYear;
-    return addLeadingZeros(token === "yy" ? year % 100 : year, token.length);
-  },
-  // Month
-  M(date2, token) {
-    const month = date2.getMonth();
-    return token === "M" ? String(month + 1) : addLeadingZeros(month + 1, 2);
-  },
-  // Day of the month
-  d(date2, token) {
-    return addLeadingZeros(date2.getDate(), token.length);
-  },
-  // AM or PM
-  a(date2, token) {
-    const dayPeriodEnumValue = date2.getHours() / 12 >= 1 ? "pm" : "am";
-    switch (token) {
-      case "a":
-      case "aa":
-        return dayPeriodEnumValue.toUpperCase();
-      case "aaa":
-        return dayPeriodEnumValue;
-      case "aaaaa":
-        return dayPeriodEnumValue[0];
-      case "aaaa":
-      default:
-        return dayPeriodEnumValue === "am" ? "a.m." : "p.m.";
-    }
-  },
-  // Hour [1-12]
-  h(date2, token) {
-    return addLeadingZeros(date2.getHours() % 12 || 12, token.length);
-  },
-  // Hour [0-23]
-  H(date2, token) {
-    return addLeadingZeros(date2.getHours(), token.length);
-  },
-  // Minute
-  m(date2, token) {
-    return addLeadingZeros(date2.getMinutes(), token.length);
-  },
-  // Second
-  s(date2, token) {
-    return addLeadingZeros(date2.getSeconds(), token.length);
-  },
-  // Fraction of second
-  S(date2, token) {
-    const numberOfDigits = token.length;
-    const milliseconds2 = date2.getMilliseconds();
-    const fractionalSeconds = Math.trunc(
-      milliseconds2 * Math.pow(10, numberOfDigits - 3)
-    );
-    return addLeadingZeros(fractionalSeconds, token.length);
-  }
-};
-
-// node_modules/date-fns/_lib/format/formatters.js
-var dayPeriodEnum = {
-  am: "am",
-  pm: "pm",
-  midnight: "midnight",
-  noon: "noon",
-  morning: "morning",
-  afternoon: "afternoon",
-  evening: "evening",
-  night: "night"
-};
-var formatters = {
-  // Era
-  G: function(date2, token, localize2) {
-    const era = date2.getFullYear() > 0 ? 1 : 0;
-    switch (token) {
-      case "G":
-      case "GG":
-      case "GGG":
-        return localize2.era(era, { width: "abbreviated" });
-      case "GGGGG":
-        return localize2.era(era, { width: "narrow" });
-      case "GGGG":
-      default:
-        return localize2.era(era, { width: "wide" });
-    }
-  },
-  // Year
-  y: function(date2, token, localize2) {
-    if (token === "yo") {
-      const signedYear = date2.getFullYear();
-      const year = signedYear > 0 ? signedYear : 1 - signedYear;
-      return localize2.ordinalNumber(year, { unit: "year" });
-    }
-    return lightFormatters.y(date2, token);
-  },
-  // Local week-numbering year
-  Y: function(date2, token, localize2, options) {
-    const signedWeekYear = getWeekYear(date2, options);
-    const weekYear = signedWeekYear > 0 ? signedWeekYear : 1 - signedWeekYear;
-    if (token === "YY") {
-      const twoDigitYear = weekYear % 100;
-      return addLeadingZeros(twoDigitYear, 2);
-    }
-    if (token === "Yo") {
-      return localize2.ordinalNumber(weekYear, { unit: "year" });
-    }
-    return addLeadingZeros(weekYear, token.length);
-  },
-  // ISO week-numbering year
-  R: function(date2, token) {
-    const isoWeekYear = getISOWeekYear(date2);
-    return addLeadingZeros(isoWeekYear, token.length);
-  },
-  // Extended year. This is a single number designating the year of this calendar system.
-  // The main difference between `y` and `u` localizers are B.C. years:
-  // | Year | `y` | `u` |
-  // |------|-----|-----|
-  // | AC 1 |   1 |   1 |
-  // | BC 1 |   1 |   0 |
-  // | BC 2 |   2 |  -1 |
-  // Also `yy` always returns the last two digits of a year,
-  // while `uu` pads single digit years to 2 characters and returns other years unchanged.
-  u: function(date2, token) {
-    const year = date2.getFullYear();
-    return addLeadingZeros(year, token.length);
-  },
-  // Quarter
-  Q: function(date2, token, localize2) {
-    const quarter = Math.ceil((date2.getMonth() + 1) / 3);
-    switch (token) {
-      case "Q":
-        return String(quarter);
-      case "QQ":
-        return addLeadingZeros(quarter, 2);
-      case "Qo":
-        return localize2.ordinalNumber(quarter, { unit: "quarter" });
-      case "QQQ":
-        return localize2.quarter(quarter, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "QQQQQ":
-        return localize2.quarter(quarter, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "QQQQ":
-      default:
-        return localize2.quarter(quarter, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Stand-alone quarter
-  q: function(date2, token, localize2) {
-    const quarter = Math.ceil((date2.getMonth() + 1) / 3);
-    switch (token) {
-      case "q":
-        return String(quarter);
-      case "qq":
-        return addLeadingZeros(quarter, 2);
-      case "qo":
-        return localize2.ordinalNumber(quarter, { unit: "quarter" });
-      case "qqq":
-        return localize2.quarter(quarter, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      case "qqqqq":
-        return localize2.quarter(quarter, {
-          width: "narrow",
-          context: "standalone"
-        });
-      case "qqqq":
-      default:
-        return localize2.quarter(quarter, {
-          width: "wide",
-          context: "standalone"
-        });
-    }
-  },
-  // Month
-  M: function(date2, token, localize2) {
-    const month = date2.getMonth();
-    switch (token) {
-      case "M":
-      case "MM":
-        return lightFormatters.M(date2, token);
-      case "Mo":
-        return localize2.ordinalNumber(month + 1, { unit: "month" });
-      case "MMM":
-        return localize2.month(month, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "MMMMM":
-        return localize2.month(month, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "MMMM":
-      default:
-        return localize2.month(month, { width: "wide", context: "formatting" });
-    }
-  },
-  // Stand-alone month
-  L: function(date2, token, localize2) {
-    const month = date2.getMonth();
-    switch (token) {
-      case "L":
-        return String(month + 1);
-      case "LL":
-        return addLeadingZeros(month + 1, 2);
-      case "Lo":
-        return localize2.ordinalNumber(month + 1, { unit: "month" });
-      case "LLL":
-        return localize2.month(month, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      case "LLLLL":
-        return localize2.month(month, {
-          width: "narrow",
-          context: "standalone"
-        });
-      case "LLLL":
-      default:
-        return localize2.month(month, { width: "wide", context: "standalone" });
-    }
-  },
-  // Local week of year
-  w: function(date2, token, localize2, options) {
-    const week = getWeek(date2, options);
-    if (token === "wo") {
-      return localize2.ordinalNumber(week, { unit: "week" });
-    }
-    return addLeadingZeros(week, token.length);
-  },
-  // ISO week of year
-  I: function(date2, token, localize2) {
-    const isoWeek = getISOWeek(date2);
-    if (token === "Io") {
-      return localize2.ordinalNumber(isoWeek, { unit: "week" });
-    }
-    return addLeadingZeros(isoWeek, token.length);
-  },
-  // Day of the month
-  d: function(date2, token, localize2) {
-    if (token === "do") {
-      return localize2.ordinalNumber(date2.getDate(), { unit: "date" });
-    }
-    return lightFormatters.d(date2, token);
-  },
-  // Day of year
-  D: function(date2, token, localize2) {
-    const dayOfYear = getDayOfYear(date2);
-    if (token === "Do") {
-      return localize2.ordinalNumber(dayOfYear, { unit: "dayOfYear" });
-    }
-    return addLeadingZeros(dayOfYear, token.length);
-  },
-  // Day of week
-  E: function(date2, token, localize2) {
-    const dayOfWeek = date2.getDay();
-    switch (token) {
-      case "E":
-      case "EE":
-      case "EEE":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "EEEEE":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "EEEEEE":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      case "EEEE":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Local day of week
-  e: function(date2, token, localize2, options) {
-    const dayOfWeek = date2.getDay();
-    const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-    switch (token) {
-      case "e":
-        return String(localDayOfWeek);
-      case "ee":
-        return addLeadingZeros(localDayOfWeek, 2);
-      case "eo":
-        return localize2.ordinalNumber(localDayOfWeek, { unit: "day" });
-      case "eee":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "eeeee":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "eeeeee":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      case "eeee":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Stand-alone local day of week
-  c: function(date2, token, localize2, options) {
-    const dayOfWeek = date2.getDay();
-    const localDayOfWeek = (dayOfWeek - options.weekStartsOn + 8) % 7 || 7;
-    switch (token) {
-      case "c":
-        return String(localDayOfWeek);
-      case "cc":
-        return addLeadingZeros(localDayOfWeek, token.length);
-      case "co":
-        return localize2.ordinalNumber(localDayOfWeek, { unit: "day" });
-      case "ccc":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "standalone"
-        });
-      case "ccccc":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "standalone"
-        });
-      case "cccccc":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "standalone"
-        });
-      case "cccc":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "standalone"
-        });
-    }
-  },
-  // ISO day of week
-  i: function(date2, token, localize2) {
-    const dayOfWeek = date2.getDay();
-    const isoDayOfWeek = dayOfWeek === 0 ? 7 : dayOfWeek;
-    switch (token) {
-      case "i":
-        return String(isoDayOfWeek);
-      case "ii":
-        return addLeadingZeros(isoDayOfWeek, token.length);
-      case "io":
-        return localize2.ordinalNumber(isoDayOfWeek, { unit: "day" });
-      case "iii":
-        return localize2.day(dayOfWeek, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "iiiii":
-        return localize2.day(dayOfWeek, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "iiiiii":
-        return localize2.day(dayOfWeek, {
-          width: "short",
-          context: "formatting"
-        });
-      case "iiii":
-      default:
-        return localize2.day(dayOfWeek, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // AM or PM
-  a: function(date2, token, localize2) {
-    const hours = date2.getHours();
-    const dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-    switch (token) {
-      case "a":
-      case "aa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "aaa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        }).toLowerCase();
-      case "aaaaa":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "aaaa":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // AM, PM, midnight, noon
-  b: function(date2, token, localize2) {
-    const hours = date2.getHours();
-    let dayPeriodEnumValue;
-    if (hours === 12) {
-      dayPeriodEnumValue = dayPeriodEnum.noon;
-    } else if (hours === 0) {
-      dayPeriodEnumValue = dayPeriodEnum.midnight;
-    } else {
-      dayPeriodEnumValue = hours / 12 >= 1 ? "pm" : "am";
-    }
-    switch (token) {
-      case "b":
-      case "bb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "bbb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        }).toLowerCase();
-      case "bbbbb":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "bbbb":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // in the morning, in the afternoon, in the evening, at night
-  B: function(date2, token, localize2) {
-    const hours = date2.getHours();
-    let dayPeriodEnumValue;
-    if (hours >= 17) {
-      dayPeriodEnumValue = dayPeriodEnum.evening;
-    } else if (hours >= 12) {
-      dayPeriodEnumValue = dayPeriodEnum.afternoon;
-    } else if (hours >= 4) {
-      dayPeriodEnumValue = dayPeriodEnum.morning;
-    } else {
-      dayPeriodEnumValue = dayPeriodEnum.night;
-    }
-    switch (token) {
-      case "B":
-      case "BB":
-      case "BBB":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "abbreviated",
-          context: "formatting"
-        });
-      case "BBBBB":
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "narrow",
-          context: "formatting"
-        });
-      case "BBBB":
-      default:
-        return localize2.dayPeriod(dayPeriodEnumValue, {
-          width: "wide",
-          context: "formatting"
-        });
-    }
-  },
-  // Hour [1-12]
-  h: function(date2, token, localize2) {
-    if (token === "ho") {
-      let hours = date2.getHours() % 12;
-      if (hours === 0)
-        hours = 12;
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return lightFormatters.h(date2, token);
-  },
-  // Hour [0-23]
-  H: function(date2, token, localize2) {
-    if (token === "Ho") {
-      return localize2.ordinalNumber(date2.getHours(), { unit: "hour" });
-    }
-    return lightFormatters.H(date2, token);
-  },
-  // Hour [0-11]
-  K: function(date2, token, localize2) {
-    const hours = date2.getHours() % 12;
-    if (token === "Ko") {
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return addLeadingZeros(hours, token.length);
-  },
-  // Hour [1-24]
-  k: function(date2, token, localize2) {
-    let hours = date2.getHours();
-    if (hours === 0)
-      hours = 24;
-    if (token === "ko") {
-      return localize2.ordinalNumber(hours, { unit: "hour" });
-    }
-    return addLeadingZeros(hours, token.length);
-  },
-  // Minute
-  m: function(date2, token, localize2) {
-    if (token === "mo") {
-      return localize2.ordinalNumber(date2.getMinutes(), { unit: "minute" });
-    }
-    return lightFormatters.m(date2, token);
-  },
-  // Second
-  s: function(date2, token, localize2) {
-    if (token === "so") {
-      return localize2.ordinalNumber(date2.getSeconds(), { unit: "second" });
-    }
-    return lightFormatters.s(date2, token);
-  },
-  // Fraction of second
-  S: function(date2, token) {
-    return lightFormatters.S(date2, token);
-  },
-  // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
-  X: function(date2, token, _localize) {
-    const timezoneOffset = date2.getTimezoneOffset();
-    if (timezoneOffset === 0) {
-      return "Z";
-    }
-    switch (token) {
-      case "X":
-        return formatTimezoneWithOptionalMinutes(timezoneOffset);
-      case "XXXX":
-      case "XX":
-        return formatTimezone(timezoneOffset);
-      case "XXXXX":
-      case "XXX":
-      default:
-        return formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (ISO-8601. If offset is 0, output is `'+00:00'` or equivalent)
-  x: function(date2, token, _localize) {
-    const timezoneOffset = date2.getTimezoneOffset();
-    switch (token) {
-      case "x":
-        return formatTimezoneWithOptionalMinutes(timezoneOffset);
-      case "xxxx":
-      case "xx":
-        return formatTimezone(timezoneOffset);
-      case "xxxxx":
-      case "xxx":
-      default:
-        return formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (GMT)
-  O: function(date2, token, _localize) {
-    const timezoneOffset = date2.getTimezoneOffset();
-    switch (token) {
-      case "O":
-      case "OO":
-      case "OOO":
-        return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-      case "OOOO":
-      default:
-        return "GMT" + formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Timezone (specific non-location)
-  z: function(date2, token, _localize) {
-    const timezoneOffset = date2.getTimezoneOffset();
-    switch (token) {
-      case "z":
-      case "zz":
-      case "zzz":
-        return "GMT" + formatTimezoneShort(timezoneOffset, ":");
-      case "zzzz":
-      default:
-        return "GMT" + formatTimezone(timezoneOffset, ":");
-    }
-  },
-  // Seconds timestamp
-  t: function(date2, token, _localize) {
-    const timestamp = Math.trunc(+date2 / 1e3);
-    return addLeadingZeros(timestamp, token.length);
-  },
-  // Milliseconds timestamp
-  T: function(date2, token, _localize) {
-    return addLeadingZeros(+date2, token.length);
-  }
-};
-function formatTimezoneShort(offset, delimiter = "") {
-  const sign2 = offset > 0 ? "-" : "+";
-  const absOffset = Math.abs(offset);
-  const hours = Math.trunc(absOffset / 60);
-  const minutes = absOffset % 60;
-  if (minutes === 0) {
-    return sign2 + String(hours);
-  }
-  return sign2 + String(hours) + delimiter + addLeadingZeros(minutes, 2);
-}
-function formatTimezoneWithOptionalMinutes(offset, delimiter) {
-  if (offset % 60 === 0) {
-    const sign2 = offset > 0 ? "-" : "+";
-    return sign2 + addLeadingZeros(Math.abs(offset) / 60, 2);
-  }
-  return formatTimezone(offset, delimiter);
-}
-function formatTimezone(offset, delimiter = "") {
-  const sign2 = offset > 0 ? "-" : "+";
-  const absOffset = Math.abs(offset);
-  const hours = addLeadingZeros(Math.trunc(absOffset / 60), 2);
-  const minutes = addLeadingZeros(absOffset % 60, 2);
-  return sign2 + hours + delimiter + minutes;
-}
-
-// node_modules/date-fns/_lib/format/longFormatters.js
-var dateLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
-    case "P":
-      return formatLong2.date({ width: "short" });
-    case "PP":
-      return formatLong2.date({ width: "medium" });
-    case "PPP":
-      return formatLong2.date({ width: "long" });
-    case "PPPP":
-    default:
-      return formatLong2.date({ width: "full" });
-  }
-};
-var timeLongFormatter = (pattern, formatLong2) => {
-  switch (pattern) {
-    case "p":
-      return formatLong2.time({ width: "short" });
-    case "pp":
-      return formatLong2.time({ width: "medium" });
-    case "ppp":
-      return formatLong2.time({ width: "long" });
-    case "pppp":
-    default:
-      return formatLong2.time({ width: "full" });
-  }
-};
-var dateTimeLongFormatter = (pattern, formatLong2) => {
-  const matchResult = pattern.match(/(P+)(p+)?/) || [];
-  const datePattern = matchResult[1];
-  const timePattern = matchResult[2];
-  if (!timePattern) {
-    return dateLongFormatter(pattern, formatLong2);
-  }
-  let dateTimeFormat;
-  switch (datePattern) {
-    case "P":
-      dateTimeFormat = formatLong2.dateTime({ width: "short" });
-      break;
-    case "PP":
-      dateTimeFormat = formatLong2.dateTime({ width: "medium" });
-      break;
-    case "PPP":
-      dateTimeFormat = formatLong2.dateTime({ width: "long" });
-      break;
-    case "PPPP":
-    default:
-      dateTimeFormat = formatLong2.dateTime({ width: "full" });
-      break;
-  }
-  return dateTimeFormat.replace("{{date}}", dateLongFormatter(datePattern, formatLong2)).replace("{{time}}", timeLongFormatter(timePattern, formatLong2));
-};
-var longFormatters = {
-  p: timeLongFormatter,
-  P: dateTimeLongFormatter
-};
-
-// node_modules/date-fns/_lib/protectedTokens.js
-var dayOfYearTokenRE = /^D+$/;
-var weekYearTokenRE = /^Y+$/;
-var throwTokens = ["D", "DD", "YY", "YYYY"];
-function isProtectedDayOfYearToken(token) {
-  return dayOfYearTokenRE.test(token);
-}
-function isProtectedWeekYearToken(token) {
-  return weekYearTokenRE.test(token);
-}
-function warnOrThrowProtectedError(token, format3, input) {
-  const _message = message(token, format3, input);
-  console.warn(_message);
-  if (throwTokens.includes(token))
-    throw new RangeError(_message);
-}
-function message(token, format3, input) {
-  const subject = token[0] === "Y" ? "years" : "days of the month";
-  return `Use \`${token.toLowerCase()}\` instead of \`${token}\` (in \`${format3}\`) for formatting ${subject} to the input \`${input}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
-}
-
-// node_modules/date-fns/format.js
-var formattingTokensRegExp = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g;
-var longFormattingTokensRegExp = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g;
-var escapedStringRegExp = /^'([^]*?)'?$/;
-var doubleQuoteRegExp = /''/g;
-var unescapedLatinCharacterRegExp = /[a-zA-Z]/;
-function format2(date2, formatStr, options) {
-  const defaultOptions2 = getDefaultOptions();
-  const locale3 = options?.locale ?? defaultOptions2.locale ?? enUS;
-  const firstWeekContainsDate = options?.firstWeekContainsDate ?? options?.locale?.options?.firstWeekContainsDate ?? defaultOptions2.firstWeekContainsDate ?? defaultOptions2.locale?.options?.firstWeekContainsDate ?? 1;
-  const weekStartsOn = options?.weekStartsOn ?? options?.locale?.options?.weekStartsOn ?? defaultOptions2.weekStartsOn ?? defaultOptions2.locale?.options?.weekStartsOn ?? 0;
-  const originalDate = toDate(date2, options?.in);
-  if (!isValid(originalDate)) {
-    throw new RangeError("Invalid time value");
-  }
-  let parts = formatStr.match(longFormattingTokensRegExp).map((substring) => {
-    const firstCharacter = substring[0];
-    if (firstCharacter === "p" || firstCharacter === "P") {
-      const longFormatter = longFormatters[firstCharacter];
-      return longFormatter(substring, locale3.formatLong);
-    }
-    return substring;
-  }).join("").match(formattingTokensRegExp).map((substring) => {
-    if (substring === "''") {
-      return { isToken: false, value: "'" };
-    }
-    const firstCharacter = substring[0];
-    if (firstCharacter === "'") {
-      return { isToken: false, value: cleanEscapedString(substring) };
-    }
-    if (formatters[firstCharacter]) {
-      return { isToken: true, value: substring };
-    }
-    if (firstCharacter.match(unescapedLatinCharacterRegExp)) {
-      throw new RangeError(
-        "Format string contains an unescaped latin alphabet character `" + firstCharacter + "`"
-      );
-    }
-    return { isToken: false, value: substring };
-  });
-  if (locale3.localize.preprocessor) {
-    parts = locale3.localize.preprocessor(originalDate, parts);
-  }
-  const formatterOptions = {
-    firstWeekContainsDate,
-    weekStartsOn,
-    locale: locale3
-  };
-  return parts.map((part) => {
-    if (!part.isToken)
-      return part.value;
-    const token = part.value;
-    if (!options?.useAdditionalWeekYearTokens && isProtectedWeekYearToken(token) || !options?.useAdditionalDayOfYearTokens && isProtectedDayOfYearToken(token)) {
-      warnOrThrowProtectedError(token, formatStr, String(date2));
-    }
-    const formatter = formatters[token[0]];
-    return formatter(originalDate, token, locale3.localize, formatterOptions);
-  }).join("");
-}
-function cleanEscapedString(input) {
-  const matched = input.match(escapedStringRegExp);
-  if (!matched) {
-    return input;
-  }
-  return matched[1].replace(doubleQuoteRegExp, "'");
-}
-
-// node_modules/date-fns/isSameWeek.js
-function isSameWeek(laterDate, earlierDate, options) {
-  const [laterDate_, earlierDate_] = normalizeDates(
-    options?.in,
-    laterDate,
-    earlierDate
-  );
-  return +startOfWeek(laterDate_, options) === +startOfWeek(earlierDate_, options);
-}
-
-// node_modules/date-fns/isSameMonth.js
-function isSameMonth(laterDate, earlierDate, options) {
-  const [laterDate_, earlierDate_] = normalizeDates(
-    options?.in,
-    laterDate,
-    earlierDate
-  );
-  return laterDate_.getFullYear() === earlierDate_.getFullYear() && laterDate_.getMonth() === earlierDate_.getMonth();
-}
-
-// node_modules/date-fns/isSameQuarter.js
-function isSameQuarter(laterDate, earlierDate, options) {
-  const [dateLeft_, dateRight_] = normalizeDates(
-    options?.in,
-    laterDate,
-    earlierDate
-  );
-  return +startOfQuarter(dateLeft_) === +startOfQuarter(dateRight_);
-}
-
-// node_modules/date-fns/parseISO.js
-function parseISO(argument, options) {
-  const invalidDate = () => constructFrom(options?.in, NaN);
-  const additionalDigits = options?.additionalDigits ?? 2;
-  const dateStrings = splitDateString(argument);
-  let date2;
-  if (dateStrings.date) {
-    const parseYearResult = parseYear2(dateStrings.date, additionalDigits);
-    date2 = parseDate(parseYearResult.restDateString, parseYearResult.year);
-  }
-  if (!date2 || isNaN(+date2))
-    return invalidDate();
-  const timestamp = +date2;
-  let time2 = 0;
-  let offset;
-  if (dateStrings.time) {
-    time2 = parseTime(dateStrings.time);
-    if (isNaN(time2))
-      return invalidDate();
-  }
-  if (dateStrings.timezone) {
-    offset = parseTimezone(dateStrings.timezone);
-    if (isNaN(offset))
-      return invalidDate();
-  } else {
-    const tmpDate = new Date(timestamp + time2);
-    const result = toDate(0, options?.in);
-    result.setFullYear(
-      tmpDate.getUTCFullYear(),
-      tmpDate.getUTCMonth(),
-      tmpDate.getUTCDate()
-    );
-    result.setHours(
-      tmpDate.getUTCHours(),
-      tmpDate.getUTCMinutes(),
-      tmpDate.getUTCSeconds(),
-      tmpDate.getUTCMilliseconds()
-    );
-    return result;
-  }
-  return toDate(timestamp + time2 + offset, options?.in);
-}
-var patterns = {
-  dateTimeDelimiter: /[T ]/,
-  timeZoneDelimiter: /[Z ]/i,
-  timezone: /([Z+-].*)$/
-};
-var dateRegex = /^-?(?:(\d{3})|(\d{2})(?:-?(\d{2}))?|W(\d{2})(?:-?(\d{1}))?|)$/;
-var timeRegex = /^(\d{2}(?:[.,]\d*)?)(?::?(\d{2}(?:[.,]\d*)?))?(?::?(\d{2}(?:[.,]\d*)?))?$/;
-var timezoneRegex = /^([+-])(\d{2})(?::?(\d{2}))?$/;
-function splitDateString(dateString) {
-  const dateStrings = {};
-  const array = dateString.split(patterns.dateTimeDelimiter);
-  let timeString;
-  if (array.length > 2) {
-    return dateStrings;
-  }
-  if (/:/.test(array[0])) {
-    timeString = array[0];
-  } else {
-    dateStrings.date = array[0];
-    timeString = array[1];
-    if (patterns.timeZoneDelimiter.test(dateStrings.date)) {
-      dateStrings.date = dateString.split(patterns.timeZoneDelimiter)[0];
-      timeString = dateString.substr(
-        dateStrings.date.length,
-        dateString.length
-      );
-    }
-  }
-  if (timeString) {
-    const token = patterns.timezone.exec(timeString);
-    if (token) {
-      dateStrings.time = timeString.replace(token[1], "");
-      dateStrings.timezone = token[1];
-    } else {
-      dateStrings.time = timeString;
-    }
-  }
-  return dateStrings;
-}
-function parseYear2(dateString, additionalDigits) {
-  const regex = new RegExp(
-    "^(?:(\\d{4}|[+-]\\d{" + (4 + additionalDigits) + "})|(\\d{2}|[+-]\\d{" + (2 + additionalDigits) + "})$)"
-  );
-  const captures = dateString.match(regex);
-  if (!captures)
-    return { year: NaN, restDateString: "" };
-  const year = captures[1] ? parseInt(captures[1]) : null;
-  const century = captures[2] ? parseInt(captures[2]) : null;
-  return {
-    year: century === null ? year : century * 100,
-    restDateString: dateString.slice((captures[1] || captures[2]).length)
-  };
-}
-function parseDate(dateString, year) {
-  if (year === null)
-    return /* @__PURE__ */ new Date(NaN);
-  const captures = dateString.match(dateRegex);
-  if (!captures)
-    return /* @__PURE__ */ new Date(NaN);
-  const isWeekDate = !!captures[4];
-  const dayOfYear = parseDateUnit(captures[1]);
-  const month = parseDateUnit(captures[2]) - 1;
-  const day = parseDateUnit(captures[3]);
-  const week = parseDateUnit(captures[4]);
-  const dayOfWeek = parseDateUnit(captures[5]) - 1;
-  if (isWeekDate) {
-    if (!validateWeekDate(year, week, dayOfWeek)) {
-      return /* @__PURE__ */ new Date(NaN);
-    }
-    return dayOfISOWeekYear(year, week, dayOfWeek);
-  } else {
-    const date2 = /* @__PURE__ */ new Date(0);
-    if (!validateDate(year, month, day) || !validateDayOfYearDate(year, dayOfYear)) {
-      return /* @__PURE__ */ new Date(NaN);
-    }
-    date2.setUTCFullYear(year, month, Math.max(dayOfYear, day));
-    return date2;
-  }
-}
-function parseDateUnit(value) {
-  return value ? parseInt(value) : 1;
-}
-function parseTime(timeString) {
-  const captures = timeString.match(timeRegex);
-  if (!captures)
-    return NaN;
-  const hours = parseTimeUnit(captures[1]);
-  const minutes = parseTimeUnit(captures[2]);
-  const seconds2 = parseTimeUnit(captures[3]);
-  if (!validateTime(hours, minutes, seconds2)) {
-    return NaN;
-  }
-  return hours * millisecondsInHour + minutes * millisecondsInMinute + seconds2 * 1e3;
-}
-function parseTimeUnit(value) {
-  return value && parseFloat(value.replace(",", ".")) || 0;
-}
-function parseTimezone(timezoneString) {
-  if (timezoneString === "Z")
-    return 0;
-  const captures = timezoneString.match(timezoneRegex);
-  if (!captures)
-    return 0;
-  const sign2 = captures[1] === "+" ? -1 : 1;
-  const hours = parseInt(captures[2]);
-  const minutes = captures[3] && parseInt(captures[3]) || 0;
-  if (!validateTimezone(hours, minutes)) {
-    return NaN;
-  }
-  return sign2 * (hours * millisecondsInHour + minutes * millisecondsInMinute);
-}
-function dayOfISOWeekYear(isoWeekYear, week, day) {
-  const date2 = /* @__PURE__ */ new Date(0);
-  date2.setUTCFullYear(isoWeekYear, 0, 4);
-  const fourthOfJanuaryDay = date2.getUTCDay() || 7;
-  const diff = (week - 1) * 7 + day + 1 - fourthOfJanuaryDay;
-  date2.setUTCDate(date2.getUTCDate() + diff);
-  return date2;
-}
-var daysInMonths = [31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-function isLeapYearIndex(year) {
-  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
-}
-function validateDate(year, month, date2) {
-  return month >= 0 && month <= 11 && date2 >= 1 && date2 <= (daysInMonths[month] || (isLeapYearIndex(year) ? 29 : 28));
-}
-function validateDayOfYearDate(year, dayOfYear) {
-  return dayOfYear >= 1 && dayOfYear <= (isLeapYearIndex(year) ? 366 : 365);
-}
-function validateWeekDate(_year, week, day) {
-  return week >= 1 && week <= 53 && day >= 0 && day <= 6;
-}
-function validateTime(hours, minutes, seconds2) {
-  if (hours === 24) {
-    return minutes === 0 && seconds2 === 0;
-  }
-  return seconds2 >= 0 && seconds2 < 60 && minutes >= 0 && minutes < 60 && hours >= 0 && hours < 25;
-}
-function validateTimezone(_hours, minutes) {
-  return minutes >= 0 && minutes <= 59;
-}
-
-// app/routes/_index.tsx
-var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
-if (!window.$RefreshReg$ || !window.$RefreshSig$ || !window.$RefreshRuntime$) {
-  console.warn("remix:hmr: React Fast Refresh only works when the Remix compiler is running in development mode.");
-} else {
-  prevRefreshReg = window.$RefreshReg$;
-  prevRefreshSig = window.$RefreshSig$;
-  window.$RefreshReg$ = (type, id) => {
-    window.$RefreshRuntime$.register(type, '"app/routes/_index.tsx"' + id);
-  };
-  window.$RefreshSig$ = window.$RefreshRuntime$.createSignatureFunctionForTransform;
-}
-var prevRefreshReg;
-var prevRefreshSig;
-var _s = $RefreshSig$();
-if (import.meta) {
-  import.meta.hot = createHotContext(
-    //@ts-expect-error
-    "app/routes/_index.tsx"
-  );
-  import.meta.hot.lastModified = "1740989123776.9739";
-}
-function InsightItem({
-  change,
-  appReleases
-}) {
-  const getMetricLabel = (metric) => {
-    switch (metric) {
-      case "positive":
-        return "positive sentiment";
-      case "negative":
-        return "negative sentiment";
-      case "total":
-        return "comment volume";
-      case "featureRequests":
-        return "feature requests";
-      case "bugReports":
-        return "bug reports";
-    }
-  };
-  const changeText = change.isIncrease ? "increase" : "decrease";
-  const changeValue = Math.abs(change.change);
-  const formattedChange = change.metric === "positive" || change.metric === "negative" ? `${(changeValue * 100).toFixed(1)}%` : `${(changeValue * 100).toFixed(1)}%`;
-  const isNearRelease = appReleases.some((release) => {
-    const releaseDate = new Date(release.date);
-    const periodDate = new Date(change.period);
-    const diffTime = Math.abs(periodDate.getTime() - releaseDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1e3 * 60 * 60 * 24));
-    return diffDays <= 14;
-  });
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-2", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: `flex-shrink-0 w-4 h-4 mt-0.5 rounded-full ${change.isIncrease ? change.metric === "negative" || change.metric === "bugReports" ? "bg-red-500" : "bg-green-500" : change.metric === "negative" || change.metric === "bugReports" ? "bg-green-500" : "bg-red-500"}` }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 58,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "font-medium", children: [
-        formattedChange,
-        " ",
-        changeText
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 60,
-        columnNumber: 9
-      }, this),
-      " in ",
-      getMetricLabel(change.metric),
-      " during ",
-      change.period,
-      ".",
-      isNearRelease && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "ml-1 text-blue-600 dark:text-blue-400", children: "May be related to recent app update." }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 61,
-        columnNumber: 27
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 59,
-      columnNumber: 7
-    }, this)
-  ] }, void 0, true, {
-    fileName: "app/routes/_index.tsx",
-    lineNumber: 57,
-    columnNumber: 10
-  }, this);
-}
-_c = InsightItem;
-var meta = () => {
-  return [{
-    title: "Play Store Comment Analyzer"
+// node_modules/recharts/es6/chart/BarChart.js
+var BarChart = generateCategoricalChart({
+  chartName: "BarChart",
+  GraphicalChild: Bar,
+  defaultTooltipEventType: "axis",
+  validateTooltipEventTypes: ["axis", "item"],
+  axisComponents: [{
+    axisType: "xAxis",
+    AxisComp: XAxis
   }, {
-    name: "description",
-    content: "Analyze Play Store comments with ease"
-  }];
-};
-function Index() {
-  _s();
-  const [url, setUrl] = (0, import_react39.useState)("");
-  const [year, setYear] = (0, import_react39.useState)("all");
-  const [searchTerm, setSearchTerm] = (0, import_react39.useState)("");
-  const [modalSearchTerm, setModalSearchTerm] = (0, import_react39.useState)("");
-  const [showAllComments, setShowAllComments] = (0, import_react39.useState)(false);
-  const [sentimentFilter, setSentimentFilter] = (0, import_react39.useState)("all");
-  const [ratingFilter, setRatingFilter] = (0, import_react39.useState)("all");
-  const [showExportDropdown, setShowExportDropdown] = (0, import_react39.useState)(false);
-  const [isExporting, setIsExporting] = (0, import_react39.useState)(false);
-  const [exportNotification, setExportNotification] = (0, import_react39.useState)({
-    show: false,
-    message: ""
-  });
-  const [timeGranularity, setTimeGranularity] = (0, import_react39.useState)("weekly");
-  const [dateRange, setDateRange] = (0, import_react39.useState)({
-    start: null,
-    end: null
-  });
-  const [showAllTime, setShowAllTime] = (0, import_react39.useState)(true);
-  const [visibleMetrics, setVisibleMetrics] = (0, import_react39.useState)({
-    positive: true,
-    negative: true,
-    neutral: true,
-    total: true,
-    featureRequests: true,
-    bugReports: true
-  });
-  const [appReleases, setAppReleases] = (0, import_react39.useState)([
-    // Example releases - in a real app, these would be fetched from an API
-    {
-      date: "2023-12-15",
-      version: "2.1.0",
-      notes: "Major UI redesign"
-    },
-    {
-      date: "2024-01-30",
-      version: "2.2.0",
-      notes: "New features added"
-    },
-    {
-      date: "2024-03-10",
-      version: "2.3.0",
-      notes: "Bug fixes and performance improvements"
-    }
-  ]);
-  const exportDropdownRef = (0, import_react39.useRef)(null);
-  const exportButtonRef = (0, import_react39.useRef)(null);
-  const fetcher = useFetcher();
-  const isLoading = fetcher.state !== "idle";
-  const hasData = fetcher.data && !("error" in fetcher.data) && fetcher.data.comments;
-  const error = fetcher.data?.error || fetcher.data?.message;
-  const timeframeOptions = (0, import_react39.useMemo)(() => [{
-    label: "Daily",
-    value: "daily",
-    groupingFn: startOfDay,
-    formatFn: (date2) => format2(date2, "MMM d, yyyy"),
-    isSamePeriodFn: isSameDay
-  }, {
-    label: "Weekly",
-    value: "weekly",
-    groupingFn: startOfWeek,
-    formatFn: (date2) => `Week of ${format2(date2, "MMM d, yyyy")}`,
-    isSamePeriodFn: isSameWeek
-  }, {
-    label: "Monthly",
-    value: "monthly",
-    groupingFn: startOfMonth,
-    formatFn: (date2) => format2(date2, "MMMM yyyy"),
-    isSamePeriodFn: isSameMonth
-  }, {
-    label: "Quarterly",
-    value: "quarterly",
-    groupingFn: startOfQuarter,
-    formatFn: (date2) => `Q${Math.floor(date2.getMonth() / 3) + 1} ${date2.getFullYear()}`,
-    isSamePeriodFn: isSameQuarter
-  }], []);
-  const currentTimeframe = (0, import_react39.useMemo)(() => timeframeOptions.find((t) => t.value === timeGranularity) || timeframeOptions[1], [timeGranularity, timeframeOptions]);
-  const trendData = (0, import_react39.useMemo)(() => {
-    if (!hasData || !fetcher.data?.comments)
-      return [];
-    const comments = fetcher.data.comments;
-    const intentions = fetcher.data.intentions;
-    const groupedData = /* @__PURE__ */ new Map();
-    comments.forEach((comment) => {
-      const commentDate = parseISO(comment.date);
-      const periodStart = currentTimeframe.groupingFn(commentDate);
-      const periodKey = format2(periodStart, "yyyy-MM-dd");
-      if (!groupedData.has(periodKey)) {
-        groupedData.set(periodKey, {
-          date: currentTimeframe.formatFn(periodStart),
-          positive: 0,
-          negative: 0,
-          neutral: 0,
-          total: 0,
-          featureRequests: 0,
-          bugReports: 0
-        });
-      }
-      const dataPoint = groupedData.get(periodKey);
-      dataPoint.total += 1;
-      if (comment.sentiment === "positive")
-        dataPoint.positive += 1;
-      else if (comment.sentiment === "negative")
-        dataPoint.negative += 1;
-      else
-        dataPoint.neutral += 1;
-      if (intentions?.feature_request.some((c2) => c2.id === comment.id)) {
-        dataPoint.featureRequests += 1;
-      }
-      if (intentions?.bug_report.some((c2) => c2.id === comment.id)) {
-        dataPoint.bugReports += 1;
-      }
-    });
-    return Array.from(groupedData.entries()).map(([key, value]) => ({
-      ...value,
-      rawDate: key
-      // Keep the raw date for sorting
-    })).sort((a2, b) => a2.rawDate.localeCompare(b.rawDate)).map(({
-      rawDate,
-      ...rest
-    }) => rest);
-  }, [hasData, fetcher.data, currentTimeframe]);
-  const significantChanges = (0, import_react39.useMemo)(() => {
-    if (trendData.length < 2)
-      return [];
-    const changes = [];
-    const thresholds = {
-      positive: 0.2,
-      // 20% change
-      negative: 0.2,
-      total: 0.3,
-      // 30% change in volume
-      featureRequests: 0.5,
-      // 50% change
-      bugReports: 0.5
-    };
-    for (let i = 1; i < trendData.length; i++) {
-      const current = trendData[i];
-      const previous = trendData[i - 1];
-      if (previous.total < 5)
-        continue;
-      const metrics = ["positive", "negative", "total", "featureRequests", "bugReports"];
-      for (const metric of metrics) {
-        if (metric === "positive" || metric === "negative") {
-          const currentPct = current[metric] / current.total;
-          const previousPct = previous[metric] / previous.total;
-          if (Math.abs(currentPct - previousPct) >= thresholds[metric]) {
-            changes.push({
-              period: current.date,
-              metric,
-              change: currentPct - previousPct,
-              isIncrease: currentPct > previousPct
-            });
-          }
-        } else {
-          if (previous[metric] === 0)
-            continue;
-          const relativeChange = (current[metric] - previous[metric]) / previous[metric];
-          if (Math.abs(relativeChange) >= thresholds[metric]) {
-            changes.push({
-              period: current.date,
-              metric,
-              change: relativeChange,
-              isIncrease: relativeChange > 0
-            });
-          }
-        }
-      }
-    }
-    return changes;
-  }, [trendData]);
-  (0, import_react39.useEffect)(() => {
-    if (exportNotification.show) {
-      const timer = setTimeout(() => {
-        setExportNotification({
-          show: false,
-          message: ""
-        });
-      }, 3e3);
-      return () => clearTimeout(timer);
-    }
-  }, [exportNotification.show]);
-  (0, import_react39.useEffect)(() => {
-    const handleClickOutside = (event) => {
-      if (showExportDropdown && exportDropdownRef.current && exportButtonRef.current && !exportDropdownRef.current.contains(event.target) && !exportButtonRef.current.contains(event.target)) {
-        setShowExportDropdown(false);
-      }
-    };
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape" && showExportDropdown) {
-        setShowExportDropdown(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [showExportDropdown]);
-  const getFilteredComments = () => {
-    if (!fetcher.data?.comments)
-      return [];
-    return fetcher.data.comments.filter((comment) => {
-      const matchesSentiment = sentimentFilter === "all" || comment.sentiment === sentimentFilter;
-      const matchesRating = ratingFilter === "all" || comment.score === parseInt(ratingFilter);
-      const matchesSearch = !modalSearchTerm || comment.content.toLowerCase().includes(modalSearchTerm.toLowerCase()) || comment.userName.toLowerCase().includes(modalSearchTerm.toLowerCase());
-      return matchesSentiment && matchesRating && matchesSearch;
-    });
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      console.log("Submitting form with URL:", url, "year:", year, "searchTerm:", searchTerm);
-      const urlObj = new URL(url);
-      if (!urlObj.hostname.includes("play.google.com")) {
-        throw new Error("Please enter a valid Play Store URL");
-      }
-      const formData = new FormData();
-      formData.append("url", url);
-      formData.append("year", year);
-      formData.append("searchTerm", searchTerm);
-      console.log("Submitting to API...");
-      fetcher.submit(formData, {
-        method: "POST",
-        action: "/api/comments"
-      });
-    } catch (error2) {
-      console.error("Form submission error:", error2);
-      if (error2 instanceof Error) {
-        fetcher.data = {
-          error: error2.message
-        };
-      }
-    }
-  };
-  const handleExport = (format3, dataType) => {
-    if (!fetcher.data?.comments)
-      return;
-    setIsExporting(true);
-    try {
-      const dataToExport = dataType === "filtered" ? getFilteredComments() : fetcher.data.comments;
-      const appNameMatch = url.split("id=")[1]?.split("&")[0] || "play-store-comments";
-      const date2 = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
-      const fileName = `${appNameMatch}-${date2}.${format3}`;
-      let content = "";
-      if (format3 === "json") {
-        const exportData = {
-          comments: dataToExport,
-          sentiment: fetcher.data.sentiment,
-          keywords: fetcher.data.keywords,
-          intentions: fetcher.data.intentions ? {
-            feature_request: dataType === "filtered" && fetcher.data.intentions ? fetcher.data.intentions.feature_request.filter((comment) => dataToExport.some((c2) => c2.id === comment.id)) : fetcher.data.intentions?.feature_request || [],
-            bug_report: dataType === "filtered" && fetcher.data.intentions ? fetcher.data.intentions.bug_report.filter((comment) => dataToExport.some((c2) => c2.id === comment.id)) : fetcher.data.intentions?.bug_report || [],
-            praise: dataType === "filtered" && fetcher.data.intentions ? fetcher.data.intentions.praise.filter((comment) => dataToExport.some((c2) => c2.id === comment.id)) : fetcher.data.intentions?.praise || [],
-            complaint: dataType === "filtered" && fetcher.data.intentions ? fetcher.data.intentions.complaint.filter((comment) => dataToExport.some((c2) => c2.id === comment.id)) : fetcher.data.intentions?.complaint || []
-          } : {}
-        };
-        content = JSON.stringify(exportData, null, 2);
-      } else if (format3 === "csv") {
-        const headers = ["ID", "User Name", "Content", "Score", "Thumbs Up", "Date", "Year", "Sentiment", "Category"];
-        const commentCategories = /* @__PURE__ */ new Map();
-        if (fetcher.data.intentions) {
-          Object.entries(fetcher.data.intentions).forEach(([category, comments]) => {
-            comments.forEach((comment) => {
-              commentCategories.set(comment.id, category);
-            });
-          });
-        }
-        content = headers.join(",") + "\n";
-        dataToExport.forEach((comment) => {
-          const category = commentCategories.get(comment.id) || "uncategorized";
-          const row = [comment.id, `"${comment.userName.replace(/"/g, '""')}"`, `"${comment.content.replace(/"/g, '""')}"`, comment.score, comment.thumbsUp, comment.date, comment.year, comment.sentiment, category];
-          content += row.join(",") + "\n";
-        });
-      }
-      const blob = new Blob([content], {
-        type: format3 === "json" ? "application/json" : "text/csv"
-      });
-      const downloadUrl = URL.createObjectURL(blob);
-      const a2 = document.createElement("a");
-      a2.href = downloadUrl;
-      a2.download = fileName;
-      document.body.appendChild(a2);
-      a2.click();
-      document.body.removeChild(a2);
-      URL.revokeObjectURL(downloadUrl);
-      setShowExportDropdown(false);
-      setExportNotification({
-        show: true,
-        message: `Export complete! ${fileName} has been downloaded.`
-      });
-    } catch (error2) {
-      console.error("Export error:", error2);
-      setExportNotification({
-        show: true,
-        message: `Export failed: ${error2 instanceof Error ? error2.message : "Unknown error"}`
-      });
-    } finally {
-      setIsExporting(false);
-    }
-  };
-  console.log("Fetcher state:", fetcher.state);
-  console.log("Fetcher data:", fetcher.data);
-  const totalComments = fetcher.data?.comments?.length ?? 0;
-  const positiveCount = fetcher.data?.sentiment?.positive ?? 0;
-  const neutralCount = fetcher.data?.sentiment?.neutral ?? 0;
-  const negativeCount = fetcher.data?.sentiment?.negative ?? 0;
-  const featureRequestCount = fetcher.data?.intentions?.feature_request?.length ?? 0;
-  const bugReportCount = fetcher.data?.intentions?.bug_report?.length ?? 0;
-  const positivePercentage = totalComments > 0 ? (positiveCount / totalComments * 100).toFixed(1) : "0.0";
-  return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex min-h-screen bg-gray-100 dark:bg-gray-900", children: [
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("aside", { className: "fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg z-30", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-col h-full", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-4", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-2 mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-8 h-8 text-blue-600", viewBox: "0 0 24 24", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 433,
-          columnNumber: 17
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 432,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xl font-bold text-gray-800 dark:text-white", children: "Comment Analyzer" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 435,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 431,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("nav", { className: "space-y-2", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("a", { href: "#", className: "flex items-center space-x-2 p-2 rounded-lg bg-blue-50 dark:bg-blue-900 text-blue-700 dark:text-blue-200", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 440,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 439,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "Dashboard" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 442,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 438,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("a", { href: "#", className: "flex items-center space-x-2 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 446,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 445,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "History" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 448,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 444,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("a", { href: "#", className: "flex items-center space-x-2 p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 452,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M15 12a3 3 0 11-6 0 3 3 0 016 0z" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 453,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 451,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { children: "Settings" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 455,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 450,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 437,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 430,
-      columnNumber: 11
-    }, this) }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 429,
-      columnNumber: 9
-    }, this) }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 428,
-      columnNumber: 7
-    }, this),
-    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("main", { className: "flex-1 ml-64", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-8", children: [
-      exportNotification.show && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "fixed top-4 right-4 z-50 max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center p-4", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-6 w-6 text-green-500", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M5 13l4 4L19 7" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 470,
-          columnNumber: 21
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 469,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 468,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "ml-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm font-medium text-gray-900 dark:text-white", children: exportNotification.message }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 474,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 473,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "ml-auto pl-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setExportNotification({
-          show: false,
-          message: ""
-        }), className: "inline-flex text-gray-400 hover:text-gray-500 focus:outline-none", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-5 w-5", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", clipRule: "evenodd" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 484,
-          columnNumber: 23
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 483,
-          columnNumber: 21
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 479,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 478,
-          columnNumber: 17
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 467,
-        columnNumber: 15
-      }, this) }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 466,
-        columnNumber: 39
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: "Overview" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 494,
-            columnNumber: 15
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-gray-600 dark:text-gray-400", children: "Analyze app reviews and get insights" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 495,
-            columnNumber: 15
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 493,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "search", className: "w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "Search in comments...", value: searchTerm, onChange: (e) => {
-              setSearchTerm(e.target.value);
-              if (fetcher.data && url) {
-                const formData = new FormData();
-                formData.append("url", url);
-                formData.append("year", year);
-                formData.append("searchTerm", e.target.value);
-                fetcher.submit(formData, {
-                  method: "POST",
-                  action: "/api/comments"
-                });
-              }
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 499,
-              columnNumber: 17
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-5 h-5 text-gray-500 absolute left-3 top-2.5", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { d: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 514,
-              columnNumber: 19
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 513,
-              columnNumber: 17
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 498,
-            columnNumber: 15
-          }, this),
-          hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "relative", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { ref: exportButtonRef, onClick: () => setShowExportDropdown(!showExportDropdown), disabled: isExporting, className: "px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center", children: isExporting ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "animate-spin -ml-1 mr-2 h-4 w-4 text-white", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 523,
-                  columnNumber: 27
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 524,
-                  columnNumber: 27
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 522,
-                columnNumber: 25
-              }, this),
-              "Exporting..."
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 521,
-              columnNumber: 36
-            }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-4 h-4 mr-2", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 101.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z", clipRule: "evenodd" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 529,
-                columnNumber: 27
-              }, this) }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 528,
-                columnNumber: 25
-              }, this),
-              "Export"
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 527,
-              columnNumber: 29
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 520,
-              columnNumber: 19
-            }, this),
-            showExportDropdown && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { ref: exportDropdownRef, className: "absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "py-1", role: "menu", "aria-orientation": "vertical", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "px-4 py-2 text-sm text-gray-700 dark:text-gray-200 font-medium border-b border-gray-200 dark:border-gray-700", children: "Export Format" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 538,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("csv", "all"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "CSV - All Data" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 541,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("csv", "filtered"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "CSV - Filtered Data" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 544,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("json", "all"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "JSON - All Data" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 547,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => handleExport("json", "filtered"), className: "block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700", role: "menuitem", children: "JSON - Filtered Data" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 550,
-                columnNumber: 25
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 537,
-              columnNumber: 23
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 536,
-              columnNumber: 42
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 519,
-            columnNumber: 27
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 497,
-          columnNumber: 13
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 492,
-        columnNumber: 11
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("form", { onSubmit: handleSubmit, className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid md:grid-cols-3 gap-6", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "col-span-2", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2", children: "Play Store URL" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 563,
-              columnNumber: 17
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "url", className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "https://play.google.com/store/apps/details?id=...", required: true, value: url, onChange: (e) => setUrl(e.target.value) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 566,
-              columnNumber: 17
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 562,
-            columnNumber: 15
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", { className: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2", children: "Filter by Year" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 569,
-              columnNumber: 17
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: year, onChange: (e) => setYear(e.target.value), children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Years" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 573,
-                columnNumber: 19
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2024", children: "2024" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 574,
-                columnNumber: 19
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2023", children: "2023" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 575,
-                columnNumber: 19
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2022", children: "2022" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 576,
-                columnNumber: 19
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2021", children: "2021" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 577,
-                columnNumber: 19
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 572,
-              columnNumber: 17
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 568,
-            columnNumber: 15
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 561,
-          columnNumber: 13
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "mt-6", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { type: "submit", disabled: isLoading, className: "px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center", children: isLoading ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "animate-spin -ml-1 mr-3 h-5 w-5 text-white", xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("circle", { className: "opacity-25", cx: "12", cy: "12", r: "10", stroke: "currentColor", strokeWidth: "4" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 585,
-              columnNumber: 23
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { className: "opacity-75", fill: "currentColor", d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 586,
-              columnNumber: 23
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 584,
-            columnNumber: 21
-          }, this),
-          "Processing..."
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 583,
-          columnNumber: 30
-        }, this) : "Analyze Comments" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 582,
-          columnNumber: 15
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 581,
-          columnNumber: 13
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 560,
-        columnNumber: 11
-      }, this),
-      error && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-red-50 dark:bg-red-900/50 text-red-800 dark:text-red-200 p-4 rounded-lg mb-8", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "h-5 w-5 text-red-400 mr-2", viewBox: "0 0 20 20", fill: "currentColor", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { fillRule: "evenodd", d: "M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z", clipRule: "evenodd" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 597,
-          columnNumber: 19
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 596,
-          columnNumber: 17
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "font-medium", children: "Error!" }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 599,
-          columnNumber: 17
-        }, this),
-        "\xA0",
-        error
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 595,
-        columnNumber: 15
-      }, this) }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 594,
-        columnNumber: 21
-      }, this),
-      hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid md:grid-cols-4 gap-6", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Total Comments" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 608,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "Since last week" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 609,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 607,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: totalComments }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 614,
-              columnNumber: 21
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 613,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 606,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Positive Sentiment" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 622,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-green-600 bg-green-100 dark:bg-green-900 dark:text-green-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: [
-                positivePercentage,
-                "%"
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 623,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 621,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: positiveCount }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 628,
-              columnNumber: 21
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 627,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 620,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Feature Requests" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 636,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-purple-600 bg-purple-100 dark:bg-purple-900 dark:text-purple-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "New" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 637,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 635,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: featureRequestCount }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 642,
-              columnNumber: 21
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 641,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 634,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-500 dark:text-gray-400", children: "Bug Reports" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 650,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-red-600 bg-red-100 dark:bg-red-900 dark:text-red-200 text-xs font-medium px-2.5 py-0.5 rounded-full", children: "Critical" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 651,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 649,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-baseline", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-2xl font-bold text-gray-900 dark:text-white", children: bugReportCount }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 656,
-              columnNumber: 21
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 655,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 648,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 605,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid md:grid-cols-2 gap-6", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white mb-4", children: "Top Keywords" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 666,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-wrap gap-2", children: fetcher.data?.keywords?.map(({
-              word,
-              count
-            }) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full dark:bg-blue-900 dark:text-blue-200", children: [
-              word,
-              " (",
-              count,
-              ")"
-            ] }, word, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 671,
-              columnNumber: 23
-            }, this)) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 667,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 665,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white mb-4", children: "Sentiment Distribution" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 678,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "grid grid-cols-3 gap-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-green-600", children: positiveCount }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 681,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Positive" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 684,
-                  columnNumber: 23
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 680,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-yellow-600", children: neutralCount }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 689,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Neutral" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 692,
-                  columnNumber: 23
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 688,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-center", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-2xl font-bold text-red-600", children: negativeCount }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 697,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "text-sm text-gray-500 dark:text-gray-400", children: "Negative" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 700,
-                  columnNumber: 23
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 696,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 679,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 677,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 664,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-6", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white", children: "Trend Analysis" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 711,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm", value: timeGranularity, onChange: (e) => setTimeGranularity(e.target.value), children: timeframeOptions.map((option) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: option.value, children: option.label }, option.value, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 716,
-                columnNumber: 57
-              }, this)) }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 715,
-                columnNumber: 23
-              }, this) }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 714,
-                columnNumber: 21
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-2", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "date", className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm", value: dateRange.start || "", onChange: (e) => {
-                  setDateRange((prev) => ({
-                    ...prev,
-                    start: e.target.value
-                  }));
-                  setShowAllTime(false);
-                }, disabled: showAllTime }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 724,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-gray-500 dark:text-gray-400", children: "to" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 731,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "date", className: "px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm", value: dateRange.end || "", onChange: (e) => {
-                  setDateRange((prev) => ({
-                    ...prev,
-                    end: e.target.value
-                  }));
-                  setShowAllTime(false);
-                }, disabled: showAllTime }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 732,
-                  columnNumber: 23
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-2 rounded-lg text-sm ${showAllTime ? "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"}`, onClick: () => setShowAllTime(!showAllTime), children: "All Time" }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 739,
-                  columnNumber: 23
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 723,
-                columnNumber: 21
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 712,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 710,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex flex-wrap gap-2 mb-4", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.positive ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              positive: !prev.positive
-            })), children: "Positive Sentiment" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 748,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.negative ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              negative: !prev.negative
-            })), children: "Negative Sentiment" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 754,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.neutral ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              neutral: !prev.neutral
-            })), children: "Neutral Sentiment" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 760,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.total ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              total: !prev.total
-            })), children: "Total Comments" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 766,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.featureRequests ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              featureRequests: !prev.featureRequests
-            })), children: "Feature Requests" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 772,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { className: `px-3 py-1 rounded-full text-xs font-medium ${visibleMetrics.bugReports ? "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200" : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"}`, onClick: () => setVisibleMetrics((prev) => ({
-              ...prev,
-              bugReports: !prev.bugReports
-            })), children: "Bug Reports" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 778,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 747,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "h-80 mt-6", children: trendData.length > 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ResponsiveContainer, { width: "100%", height: "100%", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(LineChart, { data: trendData, margin: {
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }, children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CartesianGrid, { strokeDasharray: "3 3", stroke: "#374151", opacity: 0.1 }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 795,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(XAxis, { dataKey: "date", stroke: "#6B7280", tick: {
-              fill: "#6B7280"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 796,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(YAxis, { stroke: "#6B7280", tick: {
-              fill: "#6B7280"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 799,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Tooltip, { contentStyle: {
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
-              borderColor: "#E5E7EB",
-              borderRadius: "0.5rem",
-              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-            }, formatter: (value, name) => {
-              const formattedName = {
-                positive: "Positive Sentiment",
-                negative: "Negative Sentiment",
-                neutral: "Neutral Sentiment",
-                total: "Total Comments",
-                featureRequests: "Feature Requests",
-                bugReports: "Bug Reports"
-              }[name] || name;
-              return [value, formattedName];
-            }, labelFormatter: (label) => `Period: ${label}` }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 802,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Legend, { formatter: (value) => {
-              const formattedValue = {
-                positive: "Positive Sentiment",
-                negative: "Negative Sentiment",
-                neutral: "Neutral Sentiment",
-                total: "Total Comments",
-                featureRequests: "Feature Requests",
-                bugReports: "Bug Reports"
-              }[value] || value;
-              return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { style: {
-                color: "#6B7280"
-              }, children: formattedValue }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 827,
-                columnNumber: 28
-              }, this);
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 818,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Brush, { dataKey: "date", height: 30, stroke: "#8884d8", fill: "rgba(136, 132, 216, 0.1)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 831,
-              columnNumber: 25
-            }, this),
-            appReleases.map((release, index) => {
-              const releaseDate = parseISO(release.date);
-              let closestPoint = null;
-              let minDiff = Infinity;
-              for (const point4 of trendData) {
-                const pointDate = new Date(point4.date);
-                const diff = Math.abs(pointDate.getTime() - releaseDate.getTime());
-                if (diff < minDiff) {
-                  minDiff = diff;
-                  closestPoint = point4;
-                }
-              }
-              if (!closestPoint)
-                return null;
-              return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ReferenceLine, { x: closestPoint.date, stroke: "#10B981", strokeDasharray: "3 3", label: {
-                value: `v${release.version}`,
-                position: "insideTopRight",
-                fill: "#10B981",
-                fontSize: 12
-              } }, index, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 849,
-                columnNumber: 28
-              }, this);
-            }),
-            significantChanges.map((change, index) => {
-              const point4 = trendData.find((p) => p.date === change.period);
-              if (!point4)
-                return null;
-              let color2;
-              if (change.metric === "positive") {
-                color2 = change.isIncrease ? "#10B981" : "#EF4444";
-              } else if (change.metric === "negative") {
-                color2 = change.isIncrease ? "#EF4444" : "#10B981";
-              } else if (change.metric === "total") {
-                color2 = "#3B82F6";
-              } else if (change.metric === "featureRequests") {
-                color2 = "#8B5CF6";
-              } else if (change.metric === "bugReports") {
-                color2 = "#F97316";
-              }
-              return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ReferenceArea, { x1: point4.date, x2: point4.date, strokeOpacity: 0.3, fill: color2, fillOpacity: 0.2 }, `${change.period}-${change.metric}-${index}`, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 876,
-                columnNumber: 28
-              }, this);
-            }),
-            visibleMetrics.positive && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "positive", stroke: "#10B981", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#10B981"
-            }, activeDot: {
-              r: 6,
-              fill: "#10B981"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 880,
-              columnNumber: 53
-            }, this),
-            visibleMetrics.negative && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "negative", stroke: "#EF4444", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#EF4444"
-            }, activeDot: {
-              r: 6,
-              fill: "#EF4444"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 887,
-              columnNumber: 53
-            }, this),
-            visibleMetrics.neutral && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "neutral", stroke: "#F59E0B", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#F59E0B"
-            }, activeDot: {
-              r: 6,
-              fill: "#F59E0B"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 894,
-              columnNumber: 52
-            }, this),
-            visibleMetrics.total && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "total", stroke: "#3B82F6", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#3B82F6"
-            }, activeDot: {
-              r: 6,
-              fill: "#3B82F6"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 901,
-              columnNumber: 50
-            }, this),
-            visibleMetrics.featureRequests && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "featureRequests", stroke: "#8B5CF6", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#8B5CF6"
-            }, activeDot: {
-              r: 6,
-              fill: "#8B5CF6"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 908,
-              columnNumber: 60
-            }, this),
-            visibleMetrics.bugReports && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Line, { type: "monotone", dataKey: "bugReports", stroke: "#F97316", strokeWidth: 2, dot: {
-              r: 4,
-              fill: "#F97316"
-            }, activeDot: {
-              r: 6,
-              fill: "#F97316"
-            } }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 915,
-              columnNumber: 55
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 789,
-            columnNumber: 23
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 788,
-            columnNumber: 43
-          }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "h-full flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-gray-500 dark:text-gray-400", children: hasData ? "Not enough data to display trends. Try analyzing more comments." : "Analyze comments to see trend data." }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 924,
-            columnNumber: 23
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 923,
-            columnNumber: 46
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 787,
-            columnNumber: 17
-          }, this),
-          trendData.length > 0 && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "mt-6 bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-700 dark:text-gray-300 mb-3", children: "Key Insights" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 932,
-              columnNumber: 21
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-2", children: significantChanges.length > 0 ? significantChanges.slice(0, 3).map((change, index) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(InsightItem, { change, appReleases }, index, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 936,
-              columnNumber: 110
-            }, this)) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-400", children: "No significant changes detected in the current time period." }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 936,
-              columnNumber: 183
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 935,
-              columnNumber: 21
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 931,
-            columnNumber: 42
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 709,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-6", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-lg font-semibold text-gray-900 dark:text-white", children: "Recent Comments" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 946,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setShowAllComments(true), className: "text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400", children: "View all" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 947,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 945,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-4", children: fetcher.data?.comments?.slice(0, 5).map((comment) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 dark:text-blue-200 font-medium", children: comment.userName.charAt(0) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 955,
-              columnNumber: 27
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 954,
-              columnNumber: 25
-            }, this) }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 953,
-              columnNumber: 23
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1 min-w-0", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-1", children: [
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-900 dark:text-white", children: comment.userName }, void 0, false, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 962,
-                  columnNumber: 27
-                }, this),
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center", children: [
-                  /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-yellow-400 mr-1", children: "\u2605" }, void 0, false, {
-                    fileName: "app/routes/_index.tsx",
-                    lineNumber: 966,
-                    columnNumber: 29
-                  }, this),
-                  /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: comment.score }, void 0, false, {
-                    fileName: "app/routes/_index.tsx",
-                    lineNumber: 967,
-                    columnNumber: 29
-                  }, this)
-                ] }, void 0, true, {
-                  fileName: "app/routes/_index.tsx",
-                  lineNumber: 965,
-                  columnNumber: 27
-                }, this)
-              ] }, void 0, true, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 961,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300 mb-1", children: comment.content }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 972,
-                columnNumber: 25
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: new Date(comment.date).toLocaleDateString() }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 975,
-                columnNumber: 25
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 960,
-              columnNumber: 23
-            }, this)
-          ] }, comment.id, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 952,
-            columnNumber: 71
-          }, this)) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 951,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 944,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 603,
-        columnNumber: 23
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 464,
-      columnNumber: 9
-    }, this) }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 463,
-      columnNumber: 7
-    }, this),
-    showAllComments && hasData && /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-white dark:bg-gray-800 rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col", children: [
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-6 border-b border-gray-200 dark:border-gray-700", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex justify-between items-center mb-4", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", { className: "text-xl font-semibold text-gray-900 dark:text-white", children: "All Comments" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 991,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", { onClick: () => setShowAllComments(false), className: "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("svg", { className: "w-6 h-6", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M6 18L18 6M6 6l12 12" }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 994,
-            columnNumber: 21
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 993,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 992,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 990,
-          columnNumber: 15
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center space-x-4", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", { type: "search", className: "w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", placeholder: "Search in comments...", value: modalSearchTerm, onChange: (e) => setModalSearchTerm(e.target.value) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1e3,
-            columnNumber: 19
-          }, this) }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 999,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: sentimentFilter, onChange: (e) => setSentimentFilter(e.target.value), children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Sentiments" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1003,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "positive", children: "Positive" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1004,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "neutral", children: "Neutral" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1005,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "negative", children: "Negative" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1006,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1002,
-            columnNumber: 17
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("select", { className: "px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white", value: ratingFilter, onChange: (e) => setRatingFilter(e.target.value), children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "all", children: "All Ratings" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1009,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "5", children: "\u2B50\u2B50\u2B50\u2B50\u2B50 (5)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1010,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "4", children: "\u2B50\u2B50\u2B50\u2B50 (4)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1011,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "3", children: "\u2B50\u2B50\u2B50 (3)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1012,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2", children: "\u2B50\u2B50 (2)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1013,
-              columnNumber: 19
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "1", children: "\u2B50 (1)" }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1014,
-              columnNumber: 19
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1008,
-            columnNumber: 17
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 998,
-          columnNumber: 15
-        }, this)
-      ] }, void 0, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 989,
-        columnNumber: 13
-      }, this),
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "p-6 overflow-y-auto flex-1", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "space-y-4", children: getFilteredComments().map((comment) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-shrink-0", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-blue-600 dark:text-blue-200 font-medium", children: comment.userName.charAt(0) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 1023,
-          columnNumber: 25
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 1022,
-          columnNumber: 23
-        }, this) }, void 0, false, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 1021,
-          columnNumber: 21
-        }, this),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex-1 min-w-0", children: [
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between mb-1", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", { className: "text-sm font-medium text-gray-900 dark:text-white", children: comment.userName }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1030,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center", children: [
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-yellow-400 mr-1", children: "\u2605" }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 1034,
-                columnNumber: 27
-              }, this),
-              /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-sm text-gray-600 dark:text-gray-400", children: comment.score }, void 0, false, {
-                fileName: "app/routes/_index.tsx",
-                lineNumber: 1035,
-                columnNumber: 27
-              }, this)
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1033,
-              columnNumber: 25
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1029,
-            columnNumber: 23
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-sm text-gray-600 dark:text-gray-300 mb-1", children: comment.content }, void 0, false, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1040,
-            columnNumber: 23
-          }, this),
-          /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between", children: [
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: new Date(comment.date).toLocaleDateString() }, void 0, false, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1044,
-              columnNumber: 25
-            }, this),
-            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "text-xs text-gray-500 dark:text-gray-400", children: [
-              "\u{1F44D} ",
-              comment.thumbsUp
-            ] }, void 0, true, {
-              fileName: "app/routes/_index.tsx",
-              lineNumber: 1047,
-              columnNumber: 25
-            }, this)
-          ] }, void 0, true, {
-            fileName: "app/routes/_index.tsx",
-            lineNumber: 1043,
-            columnNumber: 23
-          }, this)
-        ] }, void 0, true, {
-          fileName: "app/routes/_index.tsx",
-          lineNumber: 1028,
-          columnNumber: 21
-        }, this)
-      ] }, comment.id, true, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 1020,
-        columnNumber: 55
-      }, this)) }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 1019,
-        columnNumber: 15
-      }, this) }, void 0, false, {
-        fileName: "app/routes/_index.tsx",
-        lineNumber: 1018,
-        columnNumber: 13
-      }, this)
-    ] }, void 0, true, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 988,
-      columnNumber: 11
-    }, this) }, void 0, false, {
-      fileName: "app/routes/_index.tsx",
-      lineNumber: 987,
-      columnNumber: 38
-    }, this)
-  ] }, void 0, true, {
-    fileName: "app/routes/_index.tsx",
-    lineNumber: 426,
-    columnNumber: 10
-  }, this);
-}
-_s(Index, "qJ4awn2anpQi8v0N33C8IFKqspI=", false, function() {
-  return [useFetcher];
+    axisType: "yAxis",
+    AxisComp: YAxis
+  }],
+  formatAxisMap
 });
-_c2 = Index;
-var _c;
-var _c2;
-$RefreshReg$(_c, "InsightItem");
-$RefreshReg$(_c2, "Index");
-window.$RefreshReg$ = prevRefreshReg;
-window.$RefreshSig$ = prevRefreshSig;
+
 export {
-  Index as default,
-  meta
+  Legend,
+  Tooltip,
+  ResponsiveContainer,
+  Cell,
+  Brush,
+  Bar,
+  ReferenceLine,
+  ReferenceArea,
+  CartesianGrid,
+  Line,
+  XAxis,
+  YAxis,
+  LineChart,
+  BarChart
 };
 /*! Bundled license information:
 
@@ -28983,4 +25499,4 @@ object-assign/index.js:
   @license MIT
   *)
 */
-//# sourceMappingURL=/build/routes/_index-K5CM3XMQ.js.map
+//# sourceMappingURL=/build/_shared/chunk-HGR44WP5.js.map
