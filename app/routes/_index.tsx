@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFetcher } from "@remix-run/react";
 import natural from "natural";
 
@@ -50,10 +50,55 @@ export default function Index() {
   const [showAllComments, setShowAllComments] = useState(false);
   const [sentimentFilter, setSentimentFilter] = useState("all");
   const [ratingFilter, setRatingFilter] = useState("all");
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportNotification, setExportNotification] = useState<{show: boolean, message: string}>({show: false, message: ''});
+  const exportDropdownRef = useRef<HTMLDivElement>(null);
+  const exportButtonRef = useRef<HTMLButtonElement>(null);
   const fetcher = useFetcher<AnalysisResult>();
   const isLoading = fetcher.state !== "idle";
   const hasData = fetcher.data && !('error' in fetcher.data) && fetcher.data.comments;
   const error = fetcher.data?.error || fetcher.data?.message;
+
+  // Hide export notification after 3 seconds
+  useEffect(() => {
+    if (exportNotification.show) {
+      const timer = setTimeout(() => {
+        setExportNotification({show: false, message: ''});
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [exportNotification.show]);
+
+  // Add click outside handler for export dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showExportDropdown &&
+        exportDropdownRef.current &&
+        exportButtonRef.current &&
+        !exportDropdownRef.current.contains(event.target as Node) &&
+        !exportButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowExportDropdown(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && showExportDropdown) {
+        setShowExportDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showExportDropdown]);
 
   // Update the getFilteredComments function to include all filters
   const getFilteredComments = () => {
@@ -97,6 +142,113 @@ export default function Index() {
       if (error instanceof Error) {
         fetcher.data = { error: error.message } as AnalysisResult;
       }
+    }
+  };
+
+  // Function to handle data export
+  const handleExport = (format: 'csv' | 'json', dataType: 'all' | 'filtered') => {
+    if (!fetcher.data?.comments) return;
+    
+    setIsExporting(true);
+    
+    try {
+      // Get the data to export based on the selected option
+      const dataToExport = dataType === 'filtered' ? getFilteredComments() : fetcher.data.comments;
+      
+      // Get app name from URL
+      const appNameMatch = url.split('id=')[1]?.split('&')[0] || 'play-store-comments';
+      const date = new Date().toISOString().split('T')[0];
+      const fileName = `${appNameMatch}-${date}.${format}`;
+      
+      let content = '';
+      
+      if (format === 'json') {
+        // For JSON export, include all data including sentiment analysis and categorization
+        const exportData = {
+          comments: dataToExport,
+          sentiment: fetcher.data.sentiment,
+          keywords: fetcher.data.keywords,
+          intentions: fetcher.data.intentions ? {
+            feature_request: dataType === 'filtered' && fetcher.data.intentions
+              ? fetcher.data.intentions.feature_request.filter(comment => 
+                  dataToExport.some(c => c.id === comment.id))
+              : fetcher.data.intentions?.feature_request || [],
+            bug_report: dataType === 'filtered' && fetcher.data.intentions
+              ? fetcher.data.intentions.bug_report.filter(comment => 
+                  dataToExport.some(c => c.id === comment.id))
+              : fetcher.data.intentions?.bug_report || [],
+            praise: dataType === 'filtered' && fetcher.data.intentions
+              ? fetcher.data.intentions.praise.filter(comment => 
+                  dataToExport.some(c => c.id === comment.id))
+              : fetcher.data.intentions?.praise || [],
+            complaint: dataType === 'filtered' && fetcher.data.intentions
+              ? fetcher.data.intentions.complaint.filter(comment => 
+                  dataToExport.some(c => c.id === comment.id))
+              : fetcher.data.intentions?.complaint || []
+          } : {}
+        };
+        
+        content = JSON.stringify(exportData, null, 2);
+      } else if (format === 'csv') {
+        // For CSV export, create a header row and then add data rows
+        const headers = ['ID', 'User Name', 'Content', 'Score', 'Thumbs Up', 'Date', 'Year', 'Sentiment', 'Category'];
+        
+        // Create a map of comment IDs to their categories
+        const commentCategories = new Map();
+        
+        if (fetcher.data.intentions) {
+          Object.entries(fetcher.data.intentions).forEach(([category, comments]) => {
+            (comments as Comment[]).forEach(comment => {
+              commentCategories.set(comment.id, category);
+            });
+          });
+        }
+        
+        // Add header row
+        content = headers.join(',') + '\n';
+        
+        // Add data rows
+        dataToExport.forEach(comment => {
+          const category = commentCategories.get(comment.id) || 'uncategorized';
+          const row = [
+            comment.id,
+            `"${comment.userName.replace(/"/g, '""')}"`,
+            `"${comment.content.replace(/"/g, '""')}"`,
+            comment.score,
+            comment.thumbsUp,
+            comment.date,
+            comment.year,
+            comment.sentiment,
+            category
+          ];
+          content += row.join(',') + '\n';
+        });
+      }
+      
+      // Create a blob and download the file
+      const blob = new Blob([content], { type: format === 'json' ? 'application/json' : 'text/csv' });
+      const downloadUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(downloadUrl);
+      
+      setShowExportDropdown(false);
+      setExportNotification({
+        show: true, 
+        message: `Export complete! ${fileName} has been downloaded.`
+      });
+    } catch (error) {
+      console.error('Export error:', error);
+      setExportNotification({
+        show: true, 
+        message: `Export failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -155,6 +307,34 @@ export default function Index() {
       {/* Main Content */}
       <main className="flex-1 ml-64">
         <div className="p-8">
+          {/* Export Notification Toast */}
+          {exportNotification.show && (
+            <div className="fixed top-4 right-4 z-50 max-w-sm bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+              <div className="flex items-center p-4">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {exportNotification.message}
+                  </p>
+                </div>
+                <div className="ml-auto pl-3">
+                  <button
+                    onClick={() => setExportNotification({show: false, message: ''})}
+                    className="inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
+                  >
+                    <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -187,6 +367,77 @@ export default function Index() {
                   <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                 </svg>
               </div>
+              
+              {/* Export Button */}
+              {hasData && (
+                <div className="relative">
+                  <button
+                    ref={exportButtonRef}
+                    onClick={() => setShowExportDropdown(!showExportDropdown)}
+                    disabled={isExporting}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
+                  >
+                    {isExporting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Exporting...
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 101.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                        Export
+                      </>
+                    )}
+                  </button>
+                  
+                  {/* Export Dropdown */}
+                  {showExportDropdown && (
+                    <div 
+                      ref={exportDropdownRef}
+                      className="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50"
+                    >
+                      <div className="py-1" role="menu" aria-orientation="vertical">
+                        <div className="px-4 py-2 text-sm text-gray-700 dark:text-gray-200 font-medium border-b border-gray-200 dark:border-gray-700">
+                          Export Format
+                        </div>
+                        <button
+                          onClick={() => handleExport('csv', 'all')}
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          role="menuitem"
+                        >
+                          CSV - All Data
+                        </button>
+                        <button
+                          onClick={() => handleExport('csv', 'filtered')}
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          role="menuitem"
+                        >
+                          CSV - Filtered Data
+                        </button>
+                        <button
+                          onClick={() => handleExport('json', 'all')}
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          role="menuitem"
+                        >
+                          JSON - All Data
+                        </button>
+                        <button
+                          onClick={() => handleExport('json', 'filtered')}
+                          className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          role="menuitem"
+                        >
+                          JSON - Filtered Data
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
