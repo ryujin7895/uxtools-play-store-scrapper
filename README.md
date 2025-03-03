@@ -18,8 +18,8 @@ This tool helps product managers, UX researchers, and developers gather valuable
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/playstore-comment.git
-   cd playstore-comment/my-remix-app
+   git clone https://github.com/ryujin7895/uxtools-play-store-scrapper.git
+   cd uxtools-play-store-scrapper
    ```
 
 2. Install dependencies:
