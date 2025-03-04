@@ -1,72 +1,95 @@
 import { Card, Badge } from "flowbite-react";
-import { AppData } from './ComparisonDashboard';
+import { AppData } from "./ComparisonDashboard";
+import { useMemo } from "react";
 
 interface RecentCommentsProps {
   apps: AppData[];
 }
 
 export default function RecentComments({ apps }: RecentCommentsProps) {
+  // Combine and sort comments from all apps
+  const sortedComments = useMemo(() => {
+    return apps
+      .flatMap(app => 
+        app.comments.map(comment => ({
+          ...comment,
+          appName: app.name,
+          appIcon: app.icon
+        }))
+      )
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 10); // Show only the 10 most recent comments
+  }, [apps]);
+
+  if (!apps?.length || !sortedComments.length) {
+    return null;
+  }
+
+  const getSentimentColor = (sentiment: 'positive' | 'negative' | 'neutral') => {
+    switch (sentiment) {
+      case 'positive':
+        return 'success';
+      case 'negative':
+        return 'failure';
+      default:
+        return 'gray';
+    }
+  };
+
   return (
     <Card>
-      <div className="space-y-4">
-        <div>
-          <h3 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Recent Comments
-          </h3>
-          <p className="text-gray-500 dark:text-gray-400">
-            Latest user reviews from each app
-          </p>
-        </div>
+      <div>
+        <h3 className="text-lg font-medium mb-1 text-gray-900">
+          Recent Comments
+        </h3>
+        <p className="text-sm text-gray-500 mb-6">
+          Latest comments from all apps
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {apps.map((app) => (
-            <div key={app.id} className="space-y-4">
-              <div className="flex items-center gap-2">
-                <img
-                  src={app.icon}
-                  alt={`${app.name} icon`}
-                  className="w-6 h-6 rounded"
-                />
-                <h4 className="font-medium text-gray-900 dark:text-white">
-                  {app.name}
-                </h4>
-              </div>
-
-              <div className="space-y-4">
-                {app.comments.slice(0, 5).map((comment) => (
-                  <div
-                    key={comment.id}
-                    className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg space-y-2"
-                  >
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center gap-2">
-                        <span className="font-medium text-sm text-gray-900 dark:text-white">
-                          {comment.userName}
-                        </span>
-                        <Badge
-                          color={
-                            comment.sentiment === 'positive'
-                              ? 'success'
-                              : comment.sentiment === 'negative'
-                              ? 'failure'
-                              : 'gray'
-                          }
-                          size="sm"
-                        >
-                          {comment.score}/5
-                        </Badge>
-                      </div>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {new Date(comment.date).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
-                      {comment.content}
-                    </p>
+        <div className="space-y-4">
+          {sortedComments.map((comment) => (
+            <Card key={comment.id} className="bg-gray-50">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={comment.appIcon}
+                      alt={`${comment.appName} icon`}
+                      className="w-6 h-6 rounded"
+                    />
+                    <span className="text-sm font-medium text-gray-900">
+                      {comment.appName}
+                    </span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-3">
+                    <Badge color={getSentimentColor(comment.sentiment)}>
+                      {comment.sentiment}
+                    </Badge>
+                    <span className="text-sm text-gray-500">
+                      {new Date(comment.date).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">
+                    {comment.content}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-gray-500">
+                    {comment.userName}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm font-medium text-gray-900">
+                      {comment.score.toFixed(1)}
+                    </span>
+                    <span className="text-sm text-gray-500">★</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

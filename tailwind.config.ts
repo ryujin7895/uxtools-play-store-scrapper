@@ -1,11 +1,12 @@
 import type { Config } from "tailwindcss";
+import flowbite from "flowbite/plugin";
 
 export default {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"
   ],
-  darkMode: ["media", "class"],
+  darkMode: "class",
   theme: {
   	extend: {
   		borderRadius: {
@@ -57,8 +58,5 @@ export default {
   		}
   	}
   },
-  plugins: [
-    require("flowbite/plugin"),
-      require("tailwindcss-animate")
-],
+  plugins: [flowbite],
 } satisfies Config;

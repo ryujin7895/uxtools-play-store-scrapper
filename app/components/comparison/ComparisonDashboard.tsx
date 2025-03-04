@@ -16,11 +16,11 @@ export interface AppData {
   metrics: {
     averageRating: number;
     totalReviews: number;
-    sentimentDistribution: {
-      positive: number;
-      neutral: number;
-      negative: number;
-    };
+  };
+  sentiments: {
+    positive: number;
+    neutral: number;
+    negative: number;
   };
   keywords: Array<{
     word: string;
@@ -87,11 +87,11 @@ export default function ComparisonDashboard() {
         metrics: {
           averageRating: result.comments?.reduce((acc: number, c: any) => acc + c.score, 0) / (result.comments?.length || 1) || 0,
           totalReviews: result.comments?.length || 0,
-          sentimentDistribution: {
-            positive: result.sentiment?.positive || 0,
-            neutral: result.sentiment?.neutral || 0,
-            negative: result.sentiment?.negative || 0
-          }
+        },
+        sentiments: {
+          positive: result.sentiment?.positive || 0,
+          neutral: result.sentiment?.neutral || 0,
+          negative: result.sentiment?.negative || 0
         },
         keywords: result.keywords || [],
         comments: result.comments || [],
@@ -124,44 +124,66 @@ export default function ComparisonDashboard() {
 
   return (
     <div className="space-y-6">
-      <Card>
-        <div className="flex justify-between items-center mb-4">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Compare Apps
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400">
-              Enter Play Store URLs to compare apps
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Form Card */}
+        <Card className="lg:col-span-2">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-4">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+                Compare Apps
+              </h2>
+              <p className="text-base text-gray-500">
+                Enter Play Store URLs to compare apps
+              </p>
+            </div>
+            {apps.length > 0 && <ExportButton data={{ apps, sharedKeywords }} />}
           </div>
-          {apps.length > 0 && <ExportButton data={{ apps, sharedKeywords }} />}
-        </div>
-        <AppComparisonForm onSubmit={handleAddApps} />
-      </Card>
+          <AppComparisonForm onSubmit={handleAddApps} />
+        </Card>
 
-      {error && (
-        <Alert color="failure" icon={InformationCircleIcon}>
-          {error}
-        </Alert>
-      )}
+        {error && (
+          <Alert color="failure" icon={InformationCircleIcon} className="lg:col-span-2">
+            {error}
+          </Alert>
+        )}
 
-      {isLoading ? (
-        <div className="flex justify-center py-12">
-          <Spinner size="xl" />
-        </div>
-      ) : apps.length > 0 ? (
-        <div className="space-y-6">
-          <MetricsComparison apps={apps} onRemoveApp={handleRemoveApp} />
-          <KeywordsComparison apps={apps} sharedKeywords={sharedKeywords} />
-          <SentimentDistribution apps={apps} />
-          <TrendAnalysis apps={apps} />
-          <RecentComments apps={apps} />
-        </div>
-      ) : (
-        <Alert color="info" icon={InformationCircleIcon}>
-          Add app URLs to start comparing. You can find app URLs in their Play Store pages.
-        </Alert>
-      )}
+        {isLoading ? (
+          <div className="flex justify-center py-12 lg:col-span-2">
+            <Spinner size="xl" />
+          </div>
+        ) : apps.length > 0 ? (
+          <>
+            {/* Metrics Overview */}
+            <Card className="lg:col-span-2">
+              <MetricsComparison apps={apps} onRemoveApp={handleRemoveApp} />
+            </Card>
+
+            {/* Trend Analysis */}
+            <Card>
+              <TrendAnalysis apps={apps} />
+            </Card>
+
+            {/* Sentiment Distribution */}
+            <Card>
+              <SentimentDistribution apps={apps} />
+            </Card>
+
+            {/* Keywords Comparison */}
+            <Card className="lg:col-span-2">
+              <KeywordsComparison apps={apps} sharedKeywords={sharedKeywords} />
+            </Card>
+
+            {/* Recent Comments */}
+            <Card className="lg:col-span-2">
+              <RecentComments apps={apps} />
+            </Card>
+          </>
+        ) : (
+          <Alert color="info" icon={InformationCircleIcon} className="lg:col-span-2">
+            Add app URLs to start comparing. You can find app URLs in their Play Store pages.
+          </Alert>
+        )}
+      </div>
     </div>
   );
 }

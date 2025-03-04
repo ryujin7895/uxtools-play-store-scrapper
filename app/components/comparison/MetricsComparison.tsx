@@ -4,7 +4,7 @@ import {
   LineChart, Line
 } from "recharts";
 import { Card, Button } from "flowbite-react";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { XMarkIcon, StarIcon } from "@heroicons/react/24/solid";
 import type { AppData } from "./ComparisonDashboard";
 import SentimentDistributionCard from "./SentimentDistributionCard";
 
@@ -24,9 +24,9 @@ export default function MetricsComparison({ apps, onRemoveApp }: MetricsComparis
       return {
         averageRating: ((app.metrics.averageRating - primaryApp.metrics.averageRating) / primaryApp.metrics.averageRating) * 100,
         totalReviews: ((app.metrics.totalReviews - primaryApp.metrics.totalReviews) / primaryApp.metrics.totalReviews) * 100,
-        sentimentPositive: ((app.metrics.sentimentDistribution.positive - primaryApp.metrics.sentimentDistribution.positive) / primaryApp.metrics.sentimentDistribution.positive) * 100,
-        sentimentNeutral: ((app.metrics.sentimentDistribution.neutral - primaryApp.metrics.sentimentDistribution.neutral) / primaryApp.metrics.sentimentDistribution.neutral) * 100,
-        sentimentNegative: ((app.metrics.sentimentDistribution.negative - primaryApp.metrics.sentimentDistribution.negative) / primaryApp.metrics.sentimentDistribution.negative) * 100
+        sentimentPositive: ((app.sentiments.positive - primaryApp.sentiments.positive) / primaryApp.sentiments.positive) * 100,
+        sentimentNeutral: ((app.sentiments.neutral - primaryApp.sentiments.neutral) / primaryApp.sentiments.neutral) * 100,
+        sentimentNegative: ((app.sentiments.negative - primaryApp.sentiments.negative) / primaryApp.sentiments.negative) * 100
       };
     });
   }, [apps, primaryApp]);
@@ -44,7 +44,7 @@ export default function MetricsComparison({ apps, onRemoveApp }: MetricsComparis
     const isPositive = diff > 0;
     const isGood = isNegativeGood ? !isPositive : isPositive;
     
-    return isGood ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400';
+    return isGood ? 'text-green-600' : 'text-red-600';
   };
 
   // Prepare data for charts
