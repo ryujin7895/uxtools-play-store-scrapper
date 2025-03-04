@@ -16,7 +16,7 @@ This powerful tool revolutionizes how product teams understand user feedback by 
 
 ## ✨ Key Features
 
-- **🤖 AI-Powered Analysis**
+- **🤖 Automatic Analysis**
   - Sentiment analysis of comments
   - Automatic feature request detection
   - Bug report categorization
@@ -31,14 +31,12 @@ This powerful tool revolutionizes how product teams understand user feedback by 
 - **📊 Rich Visualizations**
   - Interactive dashboards
   - Sentiment trends over time
-  - Word clouds and topic maps
   - Custom report generation
 
 - **🛠 Power Tools**
   - Advanced filtering and search
   - Data export (CSV, JSON, Excel)
   - API access for integration
-  - Customizable alerts
 
 ## 🏃‍♂️ Quick Start
 
