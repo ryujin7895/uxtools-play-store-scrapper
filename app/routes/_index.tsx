@@ -10,7 +10,7 @@ import { format, parseISO, startOfDay, startOfWeek, startOfMonth, startOfQuarter
 import ComparisonDashboard from "~/components/ComparisonDashboard";
 import Sidebar from "~/components/common/Sidebar";
 
-interface Comment {
+export interface Comment {
   id: string;
   userName: string;
   content: string;
@@ -22,17 +22,14 @@ interface Comment {
 }
 
 export interface AnalysisResult {
-  comments?: Comment[];
-  sentiment?: {
+  comments: Comment[];
+  sentiment: {
     positive: number;
     negative: number;
     neutral: number;
   };
-  keywords?: {
-    word: string;
-    count: number;
-  }[];
-  intentions?: {
+  keywords: { word: string; count: number }[];
+  intentions: {
     feature_request: Comment[];
     bug_report: Comment[];
     praise: Comment[];
