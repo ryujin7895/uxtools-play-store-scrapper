@@ -138,6 +138,9 @@ export default function Index() {
   const [showExportDropdown, setShowExportDropdown] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [exportNotification, setExportNotification] = useState<{show: boolean, message: string}>({show: false, message: ''});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
+  const [searchResultsCount, setSearchResultsCount] = useState(0);
   
   // Trend analysis state
   const [timeGranularity, setTimeGranularity] = useState<'daily' | 'weekly' | 'monthly' | 'quarterly'>('weekly');
@@ -360,11 +363,11 @@ export default function Index() {
     };
   }, [showExportDropdown]);
 
-  // Update the getFilteredComments function to include all filters
+  // Update getFilteredComments to return both filtered comments and total count
   const getFilteredComments = () => {
-    if (!fetcher.data?.comments) return [];
+    if (!fetcher.data?.comments) return { filteredComments: [], totalFiltered: 0 };
     
-    return fetcher.data.comments.filter(comment => {
+    const filtered = fetcher.data.comments.filter(comment => {
       const matchesSentiment = sentimentFilter === "all" || comment.sentiment === sentimentFilter;
       const matchesRating = ratingFilter === "all" || comment.score === parseInt(ratingFilter);
       const matchesSearch = !modalSearchTerm || 
@@ -372,6 +375,49 @@ export default function Index() {
         comment.userName.toLowerCase().includes(modalSearchTerm.toLowerCase());
       return matchesSentiment && matchesRating && matchesSearch;
     });
+    
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    return {
+      filteredComments: filtered.slice(indexOfFirstItem, indexOfLastItem),
+      totalFiltered: filtered.length
+    };
+  };
+
+  // Add useEffect to update search results count
+  useEffect(() => {
+    const { totalFiltered } = getFilteredComments();
+    setSearchResultsCount(totalFiltered);
+  }, [fetcher.data, modalSearchTerm, sentimentFilter, ratingFilter]);
+
+  // Handle page changes
+  const handlePageChange = (pageNumber: number, e: React.MouseEvent) => {
+    e.preventDefault();
+    setCurrentPage(pageNumber);
+  };
+
+  // Calculate total pages
+  const totalPages = Math.ceil(searchResultsCount / itemsPerPage);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  // Add this pagination utility function after the imports
+  const getPageRange = (currentPage: number, totalPages: number) => {
+    const delta = 2; // Number of pages to show before and after current page
+    const range: (number | string)[] = [];
+    
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 || // First page
+        i === totalPages || // Last page
+        (i >= currentPage - delta && i <= currentPage + delta) // Pages around current
+      ) {
+        range.push(i);
+      } else if (range[range.length - 1] !== '...') {
+        range.push('...');
+      }
+    }
+    
+    return range;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -413,7 +459,7 @@ export default function Index() {
     
     try {
       // Get the data to export based on the selected option
-      const dataToExport = dataType === 'filtered' ? getFilteredComments() : fetcher.data.comments;
+      const dataToExport = dataType === 'filtered' ? getFilteredComments().filteredComments : fetcher.data.comments;
       
       // Get app name from URL
       const appNameMatch = url.split('id=')[1]?.split('&')[0] || 'play-store-comments';
@@ -543,31 +589,6 @@ export default function Index() {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="relative">
-                <input
-                  type="search"
-                  className="w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                  placeholder="Search in comments..."
-                  value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    if (fetcher.data && url) {
-                      // Resubmit the form with the new search term
-                      const formData = new FormData();
-                      formData.append("url", url);
-                      formData.append("year", year);
-                      formData.append("searchTerm", e.target.value);
-                      fetcher.submit(formData, {
-                        method: "POST",
-                        action: "/api/comments",
-                      });
-                    }
-                  }}
-                />
-                <svg className="w-5 h-5 text-gray-500 absolute left-3 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-              </div>
               
               {/* Export Button */}
               {hasData && (
@@ -1167,49 +1188,209 @@ export default function Index() {
 
                   {/* Recent Comments */}
                   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
-                    <div className="flex justify-between items-center mb-6">
-                      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Comments</h2>
-                      <button 
-                        onClick={() => setShowAllComments(true)}
-                        className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                      >
-                        View all
-                      </button>
-                    </div>
-                    <div className="space-y-4">
-                      {fetcher.data?.comments?.slice(0, 5).map((comment) => (
-                        <div
-                          key={comment.id}
-                          className="flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50"
-                        >
-                          <div className="flex-shrink-0">
-                            <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                              <span className="text-blue-600 dark:text-blue-200 font-medium">
-                                {comment.userName.charAt(0)}
-                              </span>
+                    <div className="flex flex-col space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Recent Comments</h2>
+                      </div>
+                      
+                      {/* Search and Filters */}
+                      <div className="flex flex-col md:flex-row gap-4">
+                        <div className="flex-1">
+                          <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>   
+                            <label htmlFor="comment-search" className="sr-only">Search</label>
+                            <div className="relative w-full">
+                              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                </svg>
+                              </div>
+                              <input 
+                                type="text" 
+                                id="comment-search" 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                placeholder="Search in comments..." 
+                                value={modalSearchTerm}
+                                onChange={(e) => {
+                                  setModalSearchTerm(e.target.value);
+                                  setCurrentPage(1); // Reset to first page on search
+                                }}
+                              />
                             </div>
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center justify-between mb-1">
-                              <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                                {comment.userName}
-                              </h3>
-                              <div className="flex items-center">
-                                <span className="text-yellow-400 mr-1">★</span>
-                                <span className="text-sm text-gray-600 dark:text-gray-400">
-                                  {comment.score}
-                                </span>
+                          </form>
+                          {modalSearchTerm && (
+                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                              Found {searchResultsCount} {searchResultsCount === 1 ? 'result' : 'results'}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex gap-4">
+                          <select
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-[42px] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={sentimentFilter}
+                            onChange={(e) => {
+                              setSentimentFilter(e.target.value);
+                              setCurrentPage(1); // Reset to first page on filter change
+                            }}
+                          >
+                            <option value="all">All Sentiments</option>
+                            <option value="positive">Positive</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="negative">Negative</option>
+                          </select>
+                          <select
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 h-[42px] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={ratingFilter}
+                            onChange={(e) => {
+                              setRatingFilter(e.target.value);
+                              setCurrentPage(1); // Reset to first page on filter change
+                            }}
+                          >
+                            <option value="all">All Ratings</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                            <option value="4">⭐⭐⭐⭐ (4)</option>
+                            <option value="3">⭐⭐⭐ (3)</option>
+                            <option value="2">⭐⭐ (2)</option>
+                            <option value="1">⭐ (1)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* Comments List with fixed height and sticky pagination */}
+                      <div className="relative min-h-[600px] flex flex-col">
+                        <div className="space-y-4 flex-1 overflow-y-auto pb-16">
+                          {getFilteredComments().filteredComments.map((comment) => (
+                            <div
+                              key={comment.id}
+                              className="flex flex-col p-6 rounded-lg bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all border border-gray-100 dark:border-gray-700"
+                            >
+                              <div className="flex items-start space-x-4">
+                                <div className="flex-shrink-0">
+                                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 flex items-center justify-center shadow-sm">
+                                    <span className="text-lg font-semibold text-white">
+                                      {comment.userName.charAt(0).toUpperCase()}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-start justify-between">
+                                    <div>
+                                      <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">
+                                        {comment.userName}
+                                      </h3>
+                                      <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                                        <time dateTime={comment.date}>
+                                          {new Date(comment.date).toLocaleDateString(undefined, { 
+                                            year: 'numeric', 
+                                            month: 'short', 
+                                            day: 'numeric' 
+                                          })}
+                                        </time>
+                                        <span>•</span>
+                                        <span className="flex items-center">
+                                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                                          </svg>
+                                          {comment.thumbsUp}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="flex items-center">
+                                      {[...Array(5)].map((_, index) => (
+                                        <svg 
+                                          key={index}
+                                          className={`w-5 h-5 ${index < comment.score ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`}
+                                          aria-hidden="true"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          fill="currentColor"
+                                          viewBox="0 0 22 20"
+                                        >
+                                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                        </svg>
+                                      ))}
+                                    </div>
+                                  </div>
+                                  <div className="mt-4 pl-0">
+                                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap text-[15px]">
+                                      {comment.content}
+                                    </p>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
-                              {comment.content}
-                            </p>
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              {new Date(comment.date).toLocaleDateString()}
-                            </span>
-                          </div>
+                          ))}
+                          {getFilteredComments().filteredComments.length === 0 && (
+                            <div className="flex items-center justify-center h-32 text-gray-500 dark:text-gray-400">
+                              No comments found matching your criteria
+                            </div>
+                          )}
                         </div>
-                      ))}
+
+                        {/* Sticky Pagination */}
+                        {searchResultsCount > itemsPerPage && (
+                          <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4">
+                            <nav className="flex justify-center" aria-label="Comments pagination">
+                              <ul className="inline-flex items-center -space-x-px">
+                                <li>
+                                  <button
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      if (currentPage > 1) handlePageChange(currentPage - 1, e);
+                                    }}
+                                    disabled={currentPage === 1}
+                                    className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                    aria-label="Previous page"
+                                  >
+                                    <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
+                                    </svg>
+                                    <span className="sr-only">Previous</span>
+                                  </button>
+                                </li>
+                                
+                                {getPageRange(currentPage, totalPages).map((pageNum, index) => (
+                                  <li key={index}>
+                                    {pageNum === '...' ? (
+                                      <span className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
+                                        ...
+                                      </span>
+                                    ) : (
+                                      <button
+                                        onClick={(e) => handlePageChange(pageNum as number, e)}
+                                        aria-current={currentPage === pageNum ? 'page' : undefined}
+                                        className={`flex items-center justify-center px-3 h-8 leading-tight ${
+                                          currentPage === pageNum
+                                            ? 'z-10 text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white'
+                                            : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                                        }`}
+                                        aria-label={`Page ${pageNum}`}
+                                      >
+                                        {pageNum}
+                                      </button>
+                                    )}
+                                  </li>
+                                ))}
+                                
+                                <li>
+                                  <button
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      if (currentPage < totalPages) handlePageChange(currentPage + 1, e);
+                                    }}
+                                    disabled={currentPage === totalPages}
+                                    className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                    aria-label="Next page"
+                                  >
+                                    <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+                                    </svg>
+                                    <span className="sr-only">Next</span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </nav>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1241,13 +1422,6 @@ export default function Index() {
               </div>
               <div className="flex items-center space-x-4">
                 <div className="flex-1">
-                  <input
-                    type="search"
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                    placeholder="Search in comments..."
-                    value={modalSearchTerm}
-                    onChange={(e) => setModalSearchTerm(e.target.value)}
-                  />
                 </div>
                 <select
                   className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -1275,7 +1449,7 @@ export default function Index() {
             </div>
             <div className="p-6 overflow-y-auto flex-1">
               <div className="space-y-4">
-                {getFilteredComments().map((comment) => (
+                {getFilteredComments().filteredComments.map((comment) => (
                   <div
                     key={comment.id}
                     className="flex items-start space-x-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50"
@@ -1299,7 +1473,7 @@ export default function Index() {
                           </span>
                         </div>
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                         {comment.content}
                       </p>
                       <div className="flex items-center justify-between">

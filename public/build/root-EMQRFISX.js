@@ -166,7 +166,7 @@ var theme = {
 };
 
 // app/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-VSECGV4A.css";
+var tailwind_default = "/build/_assets/tailwind-YXLR4I5T.css";
 
 // app/root.tsx
 var import_jsx_dev_runtime2 = __toESM(require_jsx_dev_runtime(), 1);
@@ -347,4 +347,4 @@ export {
   App as default,
   links
 };
-//# sourceMappingURL=/build/root-6ZCN5HCV.js.map
+//# sourceMappingURL=/build/root-EMQRFISX.js.map
