@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { Analytics } from "@vercel/analytics/react";
 import { Flowbite } from "flowbite-react";
 import Navbar from "./components/common/Navbar";
 import { theme } from "./lib/theme";
@@ -63,6 +64,7 @@ export default function App() {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
+          <Analytics />
         </Flowbite>
       </body>
     </html>

@@ -19,7 +19,9 @@ import "/build/_shared/chunk-OPGM6WIO.js";
 import {
   require_jsx_dev_runtime
 } from "/build/_shared/chunk-WWEL7QKW.js";
-import "/build/_shared/chunk-2AFRYLX2.js";
+import {
+  require_react
+} from "/build/_shared/chunk-2AFRYLX2.js";
 import "/build/_shared/chunk-N4FG5RPV.js";
 import {
   __toESM
@@ -27,6 +29,134 @@ import {
 
 // css-bundle-plugin-ns:@remix-run/css-bundle
 var cssBundleHref = void 0;
+
+// node_modules/@vercel/analytics/dist/react/index.mjs
+var import_react = __toESM(require_react(), 1);
+"use client";
+var name = "@vercel/analytics";
+var version = "1.5.0";
+var initQueue = () => {
+  if (window.va)
+    return;
+  window.va = function a(...params) {
+    (window.vaq = window.vaq || []).push(params);
+  };
+};
+function isBrowser() {
+  return typeof window !== "undefined";
+}
+function detectEnvironment() {
+  try {
+    const env = "development";
+    if (env === "development" || env === "test") {
+      return "development";
+    }
+  } catch (e) {
+  }
+  return "production";
+}
+function setMode(mode = "auto") {
+  if (mode === "auto") {
+    window.vam = detectEnvironment();
+    return;
+  }
+  window.vam = mode;
+}
+function getMode() {
+  const mode = isBrowser() ? window.vam : detectEnvironment();
+  return mode || "production";
+}
+function isDevelopment() {
+  return getMode() === "development";
+}
+function getScriptSrc(props) {
+  if (props.scriptSrc) {
+    return props.scriptSrc;
+  }
+  if (isDevelopment()) {
+    return "https://va.vercel-scripts.com/v1/script.debug.js";
+  }
+  if (props.basePath) {
+    return `${props.basePath}/insights/script.js`;
+  }
+  return "/_vercel/insights/script.js";
+}
+function inject(props = {
+  debug: true
+}) {
+  var _a;
+  if (!isBrowser())
+    return;
+  setMode(props.mode);
+  initQueue();
+  if (props.beforeSend) {
+    (_a = window.va) == null ? void 0 : _a.call(window, "beforeSend", props.beforeSend);
+  }
+  const src = getScriptSrc(props);
+  if (document.head.querySelector(`script[src*="${src}"]`))
+    return;
+  const script = document.createElement("script");
+  script.src = src;
+  script.defer = true;
+  script.dataset.sdkn = name + (props.framework ? `/${props.framework}` : "");
+  script.dataset.sdkv = version;
+  if (props.disableAutoTrack) {
+    script.dataset.disableAutoTrack = "1";
+  }
+  if (props.endpoint) {
+    script.dataset.endpoint = props.endpoint;
+  } else if (props.basePath) {
+    script.dataset.endpoint = `${props.basePath}/insights`;
+  }
+  if (props.dsn) {
+    script.dataset.dsn = props.dsn;
+  }
+  script.onerror = () => {
+    const errorMessage = isDevelopment() ? "Please check if any ad blockers are enabled and try again." : "Be sure to enable Web Analytics for your project and deploy again. See https://vercel.com/docs/analytics/quickstart for more information.";
+    console.log(
+      `[Vercel Web Analytics] Failed to load script from ${src}. ${errorMessage}`
+    );
+  };
+  if (isDevelopment() && props.debug === false) {
+    script.dataset.debug = "false";
+  }
+  document.head.appendChild(script);
+}
+function pageview({
+  route,
+  path
+}) {
+  var _a;
+  (_a = window.va) == null ? void 0 : _a.call(window, "pageview", { route, path });
+}
+function getBasePath() {
+  if (typeof process === "undefined" || typeof process.env === "undefined") {
+    return void 0;
+  }
+  return process.env.REACT_APP_VERCEL_OBSERVABILITY_BASEPATH;
+}
+function Analytics(props) {
+  (0, import_react.useEffect)(() => {
+    var _a;
+    if (props.beforeSend) {
+      (_a = window.va) == null ? void 0 : _a.call(window, "beforeSend", props.beforeSend);
+    }
+  }, [props.beforeSend]);
+  (0, import_react.useEffect)(() => {
+    inject({
+      framework: props.framework || "react",
+      basePath: props.basePath ?? getBasePath(),
+      ...props.route !== void 0 && { disableAutoTrack: true },
+      ...props
+    });
+  }, []);
+  (0, import_react.useEffect)(() => {
+    if (props.route && props.path) {
+      pageview({ route: props.route, path: props.path });
+    }
+  }, [props.route, props.path]);
+  return null;
+}
 
 // app/components/common/Navbar.tsx
 var import_jsx_dev_runtime = __toESM(require_jsx_dev_runtime(), 1);
@@ -212,54 +342,54 @@ function Layout({
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("head", { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("meta", { charSet: "utf-8" }, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 48,
+        lineNumber: 49,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("meta", { name: "viewport", content: "width=device-width, initial-scale=1" }, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 49,
+        lineNumber: 50,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Meta, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 50,
+        lineNumber: 51,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Links, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 51,
+        lineNumber: 52,
         columnNumber: 9
       }, this)
     ] }, void 0, true, {
       fileName: "app/root.tsx",
-      lineNumber: 47,
+      lineNumber: 48,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("body", { children: [
       children,
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ScrollRestoration, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 55,
+        lineNumber: 56,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Scripts, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 56,
+        lineNumber: 57,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(LiveReload, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 57,
+        lineNumber: 58,
         columnNumber: 9
       }, this)
     ] }, void 0, true, {
       fileName: "app/root.tsx",
-      lineNumber: 53,
+      lineNumber: 54,
       columnNumber: 7
     }, this)
   ] }, void 0, true, {
     fileName: "app/root.tsx",
-    lineNumber: 46,
+    lineNumber: 47,
     columnNumber: 10
   }, this);
 }
@@ -269,27 +399,27 @@ function App() {
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("head", { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("meta", { charSet: "utf-8" }, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 65,
+        lineNumber: 66,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("meta", { name: "viewport", content: "width=device-width, initial-scale=1" }, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 66,
+        lineNumber: 67,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Meta, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 67,
+        lineNumber: 68,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Links, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 68,
+        lineNumber: 69,
         columnNumber: 9
       }, this)
     ] }, void 0, true, {
       fileName: "app/root.tsx",
-      lineNumber: 64,
+      lineNumber: 65,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)("body", { className: "h-full bg-gray-50 dark:bg-gray-900", children: /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Flowbite, { theme: {
@@ -297,41 +427,46 @@ function App() {
     }, children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Navbar, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 74,
+        lineNumber: 75,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Outlet, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 75,
+        lineNumber: 76,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(ScrollRestoration, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 76,
+        lineNumber: 77,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Scripts, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 77,
+        lineNumber: 78,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(LiveReload, {}, void 0, false, {
         fileName: "app/root.tsx",
-        lineNumber: 78,
+        lineNumber: 79,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ (0, import_jsx_dev_runtime2.jsxDEV)(Analytics, {}, void 0, false, {
+        fileName: "app/root.tsx",
+        lineNumber: 80,
         columnNumber: 11
       }, this)
     ] }, void 0, true, {
       fileName: "app/root.tsx",
-      lineNumber: 71,
+      lineNumber: 72,
       columnNumber: 9
     }, this) }, void 0, false, {
       fileName: "app/root.tsx",
-      lineNumber: 70,
+      lineNumber: 71,
       columnNumber: 7
     }, this)
   ] }, void 0, true, {
     fileName: "app/root.tsx",
-    lineNumber: 63,
+    lineNumber: 64,
     columnNumber: 10
   }, this);
 }
@@ -347,4 +482,4 @@ export {
   App as default,
   links
 };
-//# sourceMappingURL=/build/root-EMQRFISX.js.map
+//# sourceMappingURL=/build/root-BFUMWCPS.js.map
