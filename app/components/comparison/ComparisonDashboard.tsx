@@ -179,8 +179,24 @@ export default function ComparisonDashboard() {
             </Card>
           </>
         ) : (
-          <Alert color="info" icon={InformationCircleIcon} className="lg:col-span-2">
-            Add app URLs to start comparing. You can find app URLs in their Play Store pages.
+          <Alert 
+            color="info" 
+            icon={InformationCircleIcon}
+            className="lg:col-span-2"
+            theme={{
+              color: {
+                info: "border border-blue-500 bg-blue-50 text-blue-900 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+              }
+            }}
+          >
+            <div className="flex flex-col gap-2">
+              <h3 className="text-lg font-medium">
+                Add app URLs to start comparing
+              </h3>
+              <p className="text-sm">
+                You can find app URLs by visiting their Play Store pages and copying the URL from your browser's address bar.
+              </p>
+            </div>
           </Alert>
         )}
       </div>

@@ -1,73 +1,38 @@
 import { Link, useLocation } from "@remix-run/react";
-import { Sidebar as FlowbiteSidebar } from "flowbite-react";
-import {
-  ChartBarIcon,
-  HomeIcon,
-  DocumentChartBarIcon,
-  ChatBubbleLeftRightIcon,
-  CogIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 
 export default function Sidebar() {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <FlowbiteSidebar aria-label="Application sidebar" className="fixed inset-y-0 left-0 z-20 w-64 h-full">
-      <FlowbiteSidebar.Logo href="/" img="/logo.png" imgAlt="App logo">
-        UX Tools
-      </FlowbiteSidebar.Logo>
-      
-      <FlowbiteSidebar.Items>
-        <FlowbiteSidebar.ItemGroup>
-          <FlowbiteSidebar.Item
-            as={Link}
-            to="/"
-            icon={HomeIcon}
-            active={isActive("/")}
-          >
-            Dashboard
-          </FlowbiteSidebar.Item>
-          
-          <FlowbiteSidebar.Item
-            as={Link}
-            to="/comparison"
-            icon={ChartBarIcon}
-            active={isActive("/comparison")}
-          >
-            App Comparison
-          </FlowbiteSidebar.Item>
-          
-          <FlowbiteSidebar.Item
-            as={Link}
-            to="/analysis"
-            icon={DocumentChartBarIcon}
-            active={isActive("/analysis")}
-          >
-            Sentiment Analysis
-          </FlowbiteSidebar.Item>
-          
-          <FlowbiteSidebar.Item
-            as={Link}
-            to="/comments"
-            icon={ChatBubbleLeftRightIcon}
-            active={isActive("/comments")}
-          >
-            Comments
-          </FlowbiteSidebar.Item>
-        </FlowbiteSidebar.ItemGroup>
-
-        <FlowbiteSidebar.ItemGroup>
-          <FlowbiteSidebar.Item
-            as={Link}
-            to="/settings"
-            icon={CogIcon}
-            active={isActive("/settings")}
-          >
-            Settings
-          </FlowbiteSidebar.Item>
-        </FlowbiteSidebar.ItemGroup>
-      </FlowbiteSidebar.Items>
-    </FlowbiteSidebar>
+    <aside 
+      id="logo-sidebar" 
+      className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" 
+      aria-label="Sidebar"
+    >
+      <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <ul className="space-y-2 font-medium">
+          {[
+            { path: "/", icon: HomeIcon, label: "Dashboard" },
+            { path: "/comparison", icon: ChartBarIcon, label: "App Comparison" }
+          ].map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white ${
+                  isActive(item.path)
+                    ? "bg-gray-100 dark:bg-gray-700"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                } group`}
+              >
+                <item.icon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ms-3">{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
   );
 }

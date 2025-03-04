@@ -9,6 +9,7 @@ import {
 import { format, parseISO, startOfDay, startOfWeek, startOfMonth, startOfQuarter, isSameDay, isSameWeek, isSameMonth, isSameQuarter } from "date-fns";
 import ComparisonDashboard from "~/components/ComparisonDashboard";
 import Sidebar from "~/components/common/Sidebar";
+import { Label, TextInput, Select, Button } from "flowbite-react";
 
 export interface Comment {
   id: string;
@@ -529,8 +530,8 @@ export default function Index() {
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
       <Sidebar />
-      <main className="ml-64 flex-1 min-h-screen bg-gray-100 dark:bg-gray-900">
-        <div className="container mx-auto px-6 py-8">
+      <main className="p-4 sm:ml-64">
+        <div className="container mx-auto px-4 py-4 mt-14">
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <div>
@@ -648,24 +649,26 @@ export default function Index() {
               <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 mb-8">
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <Label htmlFor="playstore-url" className="mb-2">
                       Play Store URL
-                    </label>
-                    <input
+                    </Label>
+                    <TextInput
+                      id="playstore-url"
                       type="url"
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                       placeholder="https://play.google.com/store/apps/details?id=..."
                       required
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
+                      color="gray"
+                      helperText="Enter your app's Play Store URL to analyze comments"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <Label htmlFor="year" className="mb-2">
                       Filter by Year
-                    </label>
-                    <select
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    </Label>
+                    <Select
+                      id="year"
                       value={year}
                       onChange={(e) => setYear(e.target.value)}
                     >
@@ -674,14 +677,15 @@ export default function Index() {
                       <option value="2023">2023</option>
                       <option value="2022">2022</option>
                       <option value="2021">2021</option>
-                    </select>
+                    </Select>
                   </div>
                 </div>
                 <div className="mt-6">
-                  <button
+                  <Button
                     type="submit"
                     disabled={isLoading}
-                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg inline-flex items-center"
+                    color="blue"
+                    className="h-[42px]"
                   >
                     {isLoading ? (
                       <>
@@ -694,7 +698,7 @@ export default function Index() {
                     ) : (
                       'Analyze Comments'
                     )}
-                  </button>
+                  </Button>
                 </div>
               </form>
 

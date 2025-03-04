@@ -43,6 +43,8 @@ export default function AppComparisonForm({ onSubmit }: AppComparisonFormProps) 
                 setCompetitorUrls(newUrls);
               }}
               required={index === 0}
+              color="gray"
+              helperText={index === 0 ? "Enter your app's Play Store URL" : "Enter competitor's Play Store URL"}
             />
           </div>
         ))}
@@ -51,20 +53,21 @@ export default function AppComparisonForm({ onSubmit }: AppComparisonFormProps) 
       <div className="grid grid-cols-2 gap-4">
         <div>
           <div className="mb-2">
-            <Label htmlFor="year">Analysis Year</Label>
+            <Label htmlFor="year">Filter by Year</Label>
           </div>
           <Select
             id="year"
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
           >
-            <option value={new Date().getFullYear()}>Current Year</option>
-            <option value={new Date().getFullYear() - 1}>Last Year</option>
-            <option value={new Date().getFullYear() - 2}>2 Years Ago</option>
+            <option value={2024}>2024</option>
+            <option value={2023}>2023</option>
+            <option value={2022}>2022</option>
+            <option value={2021}>2021</option>
           </Select>
         </div>
         <div className="flex items-end">
-          <Button type="submit" color="blue">
+          <Button type="submit" color="blue" className="h-[42px]">
             Compare Apps
           </Button>
         </div>

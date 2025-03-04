@@ -8,8 +8,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import { Flowbite } from "flowbite-react";
+import Navbar from "./components/common/Navbar";
+import { theme } from "./lib/theme";
 import styles from "./tailwind.css";
-import { Flowbite } from 'flowbite-react';
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -22,7 +24,7 @@ export const links: LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
   },
 ];
 
@@ -47,20 +49,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="h-full">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-50">
-        <Flowbite>
+      <body className="h-full bg-gray-50 dark:bg-gray-900">
+        <Flowbite theme={{ theme }}>
+          <Navbar />
           <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
         </Flowbite>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
