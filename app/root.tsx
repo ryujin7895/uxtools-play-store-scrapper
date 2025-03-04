@@ -13,6 +13,7 @@ import { Flowbite } from "flowbite-react";
 import Navbar from "./components/common/Navbar";
 import { theme } from "./lib/theme";
 import styles from "./tailwind.css";
+import { Analytics } from '@vercel/analytics/react';
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
