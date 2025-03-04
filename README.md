@@ -111,6 +111,6 @@ MIT License - feel free to use in your projects!
 **[Report Bug](https://github.com/ryujin7895/uxtools-play-store-scrapper/issues)** | 
 **[Request Feature](https://github.com/ryujin7895/uxtools-play-store-scrapper/issues)**
 
-Made with 🔥 by developers who care about UX
+Made with good vibe 🔥 by designer who care about UX and sometimes code. 
 
 </div>
