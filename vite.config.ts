@@ -23,4 +23,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  ssr: {
+    noExternal: ["@vercel/remix", "@remix-run/*"]
+  }
 });

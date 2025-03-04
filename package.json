@@ -4,7 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "npx remix build",
+    "build": "npx remix build --sourcemap",
+    "vercel-build": "remix build",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc"
@@ -15,6 +16,7 @@
     "@remix-run/node": "^2.7.2",
     "@remix-run/react": "^2.7.2",
     "@remix-run/serve": "^2.7.2",
+    "@remix-run/dev": "^2.7.2",
     "@types/recharts": "^1.8.29",
     "@vercel/analytics": "^1.5.0",
     "@vercel/remix": "^2.7.2",
@@ -31,10 +33,10 @@
     "react-dom": "^18.2.0",
     "recharts": "^2.15.1",
     "tailwindcss": "^3.4.17",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.7.2",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
@@ -43,8 +45,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.33.2",
     "postcss": "^8.4.35",
-    "typescript": "^5.1.6",
-    "vite-tsconfig-paths": "^5.1.4"
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": "^18.0.0 || ^20.0.0"
