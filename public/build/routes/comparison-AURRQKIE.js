@@ -14578,7 +14578,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/comparison/ComparisonDashboard.tsx"
   );
-  import.meta.hot.lastModified = "1741069936859.8308";
+  import.meta.hot.lastModified = "1741070162520.3655";
 }
 function ComparisonDashboard() {
   _s5();
@@ -14806,7 +14806,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/routes/comparison.tsx"
   );
-  import.meta.hot.lastModified = "1741070330757.1187";
+  import.meta.hot.lastModified = "1741070355397.8503";
 }
 var meta = () => {
   return [{
@@ -14899,4 +14899,4 @@ chart.js/dist/chart.js:
    * Released under the MIT License
    *)
 */
-//# sourceMappingURL=/build/routes/comparison-5SGRGTKY.js.map
+//# sourceMappingURL=/build/routes/comparison-AURRQKIE.js.map

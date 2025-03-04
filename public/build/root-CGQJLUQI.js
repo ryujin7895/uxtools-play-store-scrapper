@@ -177,7 +177,7 @@ if (import.meta) {
     //@ts-expect-error
     "app/components/common/Navbar.tsx"
   );
-  import.meta.hot.lastModified = "1741070256738.0022";
+  import.meta.hot.lastModified = "1741070355397.5718";
 }
 function Navbar() {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("nav", { className: "fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "px-3 py-3 lg:px-5 lg:pl-3", children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "flex items-center justify-between", children: [
@@ -482,4 +482,4 @@ export {
   App as default,
   links
 };
-//# sourceMappingURL=/build/root-BFUMWCPS.js.map
+//# sourceMappingURL=/build/root-CGQJLUQI.js.map
