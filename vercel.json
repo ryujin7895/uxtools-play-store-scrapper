@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.js" }
+    { "source": "/(.*)", "destination": "/" }
   ],
   "headers": [
     {
