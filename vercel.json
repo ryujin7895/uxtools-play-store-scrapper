@@ -1,11 +1,11 @@
 {
-  "buildCommand": "remix build",
-  "devCommand": "remix dev",
+  "buildCommand": "npm run vercel-build",
+  "devCommand": "npm run dev",
   "framework": "remix",
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/api/index.js"
     }
   ]
 }
