@@ -4,9 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "npx remix build --sourcemap",
-    "vercel-build": "remix build",
-    "dev": "remix dev --manual",
+    "build": "remix build",
+    "dev": "remix dev",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc"
   },
