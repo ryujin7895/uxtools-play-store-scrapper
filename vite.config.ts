@@ -2,6 +2,9 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { vercelPreset } from '@vercel/remix/vite';
+import { installGlobals } from "@remix-run/node";
+
+installGlobals();
 
 declare module "@remix-run/node" {
   interface Future {
@@ -24,6 +27,6 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   ssr: {
-    noExternal: ["@vercel/remix", "@remix-run/*"]
+    noExternal: ["@vercel/remix", "@remix-run/*", "natural"]
   }
 });
