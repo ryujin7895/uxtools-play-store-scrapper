@@ -2,6 +2,7 @@
   "buildCommand": "npm run vercel-build",
   "devCommand": "npm run dev",
   "framework": "remix",
+  "outputDirectory": ".vercel/output",
   "rewrites": [
     {
       "source": "/(.*)",
