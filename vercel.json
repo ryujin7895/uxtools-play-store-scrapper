@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "functions": {
-    "api/index.js": {
+    "index": {
       "memory": 1024,
       "maxDuration": 10
     }
@@ -11,7 +11,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/"
     }
   ]
 }
