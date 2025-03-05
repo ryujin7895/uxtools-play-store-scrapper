@@ -7,7 +7,7 @@ export default {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
-  serverBuildPath: "build/index.js",
+  serverBuildPath: "build/server/index.js",
   serverPlatform: "node",
   tailwind: true,
   postcss: true,
