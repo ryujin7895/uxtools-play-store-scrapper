@@ -7,7 +7,7 @@ export default {
   appDirectory: "app",
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
-  serverBuildPath: ".vercel/output/functions/index.func/index.js",
+  serverBuildPath: "build/index.js",
   serverPlatform: "node",
   tailwind: true,
   postcss: true,

@@ -1,17 +1,19 @@
 {
   "framework": "remix",
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "functions": {
-    "index": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
+  "buildCommand": "remix build",
+  "devCommand": "remix dev",
   "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ],
+  "headers": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/build/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
